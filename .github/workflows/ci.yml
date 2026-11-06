@@ -13,19 +13,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: make check
-      - run: make test TESTFLAGS="--environment ci-native --report reports/ci-native.json"
-      - run: make clean && make STATIC=1
-      - run: sh scripts/package.sh build/cincta
+      - run: make test-all TEST_LABEL=ci-native
+      - run: make BUILD=build-static STATIC=1
+      - run: sh scripts/package.sh build-static/cincta
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: native-${{ matrix.runner }}
           path: |
-            reports/*.json
+            reports/
             dist/*
   docker:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - run: docker build --target test -t cincta-test .
-      - run: docker run --rm --cap-drop ALL --security-opt no-new-privileges cincta-test
+      - name: Default-security Docker acceptance
+        run: |
+          docker run --name cincta-ci --cap-drop ALL --security-opt no-new-privileges cincta-test
+      - name: Collect Docker reports
+        if: always()
+        run: |
+          mkdir -p reports
+          docker cp cincta-ci:/src/reports/. reports/
+          docker inspect cincta-ci --format '{"image":"{{.Image}}","user":"{{.Config.User}}","privileged":{{.HostConfig.Privileged}},"cap_drop":{{json .HostConfig.CapDrop}},"security_opt":{{json .HostConfig.SecurityOpt}},"apparmor":"{{.AppArmorProfile}}","exit_code":{{.State.ExitCode}}}' > reports/docker-security.json
+          docker rm -f cincta-ci
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: docker-default-security
+          path: reports/

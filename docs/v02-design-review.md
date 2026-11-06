@@ -62,7 +62,7 @@ connect/sendto/sendmsg等请求到达后：
 
 要求：两filter之间绝无用户代码/用户线程执行；第二filter失败必须退出；永久拒绝新的seccomp安装与PR_SET_SECCOMP。第一filter里对bootstrap sendmsg的FD数值例外必须由第二filter永久封堵，避免关闭后相同FD数值复用成为绕过。transport槽位占用或永久限制产生的兼容代价要记录。monitor端只接收恰好一个预期SCM_RIGHTS FD，拒绝控制消息截断或额外FD。
 
-monitor应在可轮询listener就绪后调用NOTIF_RECV；信号/目标退出可使请求失效，失效ID不能被当作内部成功。代执行网络操作有严格超时和缓冲/请求上限，不能让慢DNS、connect或流量把取消路径永久阻塞。监听器意外丢失或broker错误时执行失败并清理，禁止退到host网络模式。
+独立broker在listener就绪后调用NOTIF_RECV；信号/目标退出可使请求失效，失效ID不能被当作内部成功。代执行操作保持缓冲、socket和worker总量上限，执行阶段的墙钟预算及取消由monitor管理；DNS准备与内核阻塞的范围另行说明。监听器意外丢失或broker错误时执行失败并清理，禁止退到host网络模式。
 
 ## 4. 文件metadata兼容性
 
@@ -100,14 +100,14 @@ payload不得获得写cgroup控制目录的授权，否则可写cgroup.procs迁�
 
 ## 9. 实现复审记录
 
-2026-11-06 已逐段静态复核新增 `security.c`、`broker.c`、`network.c`、`resources.c`、`workspace.c` 和各自header。监视器仍在整合，以下是复核中发现并反馈给实现者的事项；具体关闭状态必须随最终代码再次确认。
+2026-11-06 已逐段静态复核新增 `security.c`、`broker.c`、`network.c`、`resources.c`、`workspace.c` 和各自header。下表保留开发期间发现并反馈给实现者的事项；最终关闭状态见9.1–9.5。
 
 | 项目 | 观察 / 风险 | 要求的修复或边界 |
 |---|---|---|
 | metadata根重新realpath | **高风险**：可写中间symlink可把每次重新解释的rw规则指向启动时未授权的另一个对象 | 启动前固定所有policy O_PATH FD和canonical目标；LL、metadata和file worker均复用同一组固定根，绝不每请求重新生成授权根 |
 | 工作区源别名 | 额外rw目录中可能有指向source文件的hardlink/bind别名，字符串祖先/后代检查不足以保证源数据不变 | workspace模式拒绝额外rw授权，或实现完整别名检查并准确声明例外 |
 | 网络GC枚举 | 顶层TGID fd扫描会漏掉未共享FD表的线程；并发fork/dup也可能使快照漏引用 | 扫task线程，对读/遍历失败保守保留；把不可避免的可用性边界写明，不把GC作为授权依据 |
-| broker凭证 | root监管者残留capabilities可能使代执行绕过payload本应受的DAC限制 | 独立broker在业务开始前清NNP/capabilities，使用不高于payload的身份；管理权限留在monitor |
+| broker凭证 | root监管者残留capabilities可能使代执行绕过payload本应受的DAC限制 | 独立broker在业务开始前设置NNP并清capabilities，使用不高于payload的身份；管理权限留在monitor |
 | 审计字符串 | UTF-8逐byte转u00xx导致路径解码乱码；固定小缓冲静默截断长路径 | 可逆字节编码或正确UTF-8；完整记录或显式truncated/原长度，禁止静默损失 |
 | notification接收 | poll就绪与RECV之间请求可被信号撤销，ioctl可能阻塞，fcntl非阻塞不能单独证明取消路径有界 | 把可阻塞通知处理隔离为独立可信broker进程，monitor只做可唤醒生命周期事件循环；broker死亡触发整体清理 |
 
@@ -115,7 +115,7 @@ payload不得获得写cgroup控制目录的授权，否则可写cgroup.procs迁�
 
 整合方向更新为：CLI → monitor → 独立broker及payload；网络/file worker由broker派生。独立broker用于隔离可能阻塞的NOTIF ioctl和文件操作，monitor必须能在broker阻塞或崩溃时完成取消与子树收养清理。监听器、控制FD、固定policy FD的保留/关闭要按这四层逐一确认。
 
-修复复核进展：metadata与文件worker已经改为复用启动前固定的policy FD；workspace模式拒绝额外rw授权及外部可写普通文件stdio；broker启动清capabilities；审计改为完整动态单次write、正确UTF-8和可逆target_bytes_hex。上述修改已在源码中复核，但运行结果仍待统一实测。
+首轮修复已复核：metadata与文件worker复用启动前固定的policy FD；workspace模式拒绝额外rw授权及外部可写普通文件stdio；broker启动清capabilities；审计使用完整动态单次write、正确UTF-8和可逆target_bytes_hex。最终实测证据按统一验证报告与源码指纹记录。
 
 新增file-open broker审查指出主体转换风险：worker未exec，`/proc/self/environ`、`/proc/self/mem`和FD链接会指向可信worker，而非payload。实现已经通过提前O_PATH固定对象、fstatfs拒绝procfs、NO_MAGICLINKS、从固定对象实际打开、worker关闭非必要FD进行收紧；这也是审计模式明确的兼容性边界。不能只检查用户路径的字符串前缀，因为普通symlink同样可以指向procfs。
 
@@ -124,3 +124,52 @@ payload不得获得写cgroup控制目录的授权，否则可写cgroup.procs迁�
 其余部署边界须写明：树配额若只包含payload后代，不包括组外broker/代执行worker的内存、CPU和socket成本；这些可信辅助工作仍须有总量上限。cgroup控制目录还需考虑bind挂载别名，realpath不会消除bind别名。完整syscall日志有磁盘增长成本，应限量并在审计失败时终止，或明确依赖外层容量配额。
 
 以上是源码/设计审查结论，不计运行PASS。所有实际结果以最终validation与reports原始证据为准。
+
+### 9.1 最终代码复核与关闭状态
+
+最终复核已覆盖 `main.c`、`supervisor.c`、`security.c`、`broker.c`、`filebroker.c`、`network.c` 与结果输出。已经在源码确认：monitor使用signalfd、pidfd、timerfd唤醒，NOTIF_RECV及业务文件/网络代执行位于独立broker或worker；payload在exec屏障后才移入独立cgroup，完成安装和lockdown才报告ready；payload的policy FD在通知过滤安装前关闭。monitor与CLI分别作为subreaper，按尚未回收的直接子进程终止并以ECHILD确认清理，保留进程组leader身份直到最后一次killpg。
+
+网络GC现扫描所有task线程的FD表，以两遍引用并集、稳定task集合及所有读取成功为回收条件；非原子fork/dup扫描仍有已声明的可用性边界，不参与端点授权。网络代执行在fork前记录delivery_begin并增加共享pending，实际结果和响应后记录delivery_end；清理时非零pending判审计失败。审计存储新增跨worker原子预留配额，默认64MiB与100万记录，超过配额明确终止。cgroup保护已加入固定RW根的fstatfs检查及全部cgroup2 mountinfo祖先检查，覆盖预存在的bind挂载别名；树内存限制在memory.swap.max存在时写0并读回确认。
+
+本轮新发现的四项问题已逐项修复；其中可信输出别名进一步发现反向子目录bind情形，现已加入挂载身份映射。这里的关闭只表示代码与独立复核结论，真实VM/Docker结果以最终测试源码指纹为准：
+
+| 项目 | 风险与复现条件 | 已核对的修复 |
+|---|---|---|
+| 关闭stdio时可信FD进入0/1/2 | **高风险**：main在supervise补齐stdio之前创建result/audit/policy FD；调用方预先关闭stdout等槽位，可信FD可能被payload作为stdio继承并篡改 | **源码关闭**：main入口在任何内部open或prepare前补齐0/1/2，并恢复信号/子进程回收语义 |
+| 可信输出的bind别名 | **高风险**：仅realpath排除RW祖先无法识别指向输出parent的bind别名；payload可经另一授权路径改写audit/result或导出文件 | **源码关闭并由另一Agent独立复核**：固定FD取得STATX_MNT_ID，按精确mountinfo记录映射底层FS路径，按同设备祖先关系检查；包括 `/rw/sub` 单独bind到 `/alias` 的反向子目录情形。根inode祖先检查及RW下额外挂载拒绝继续作为补充 |
+| 文件/metadata实际效果窗口 | file worker仅在ADDFD前增加pending，漏掉open/create/truncate已经发生但结果尚未记录时被杀的窗口；metadata同样存在效果与结果之间窗口 | **源码关闭**：file worker在父broker fork前计pending，fork失败或统一worker_exit递减，强杀保留非零；metadata在实际操作前增加pending、结果记录后递减 |
+| 预开cgroup写FD | 规则检查不覆盖调用方把cgroup.procs作为可写stdio传入，可能直接迁移逃离树配额 | **源码关闭**：显式树配额模式检查标准FD的cgroup2文件系统类型及写访问模式并拒绝 |
+
+此外，树配额当前统计payload及其后代，组外broker和有上限的代执行worker资源不包含在该配额内。main的DNS解析、工作区复制准备和最终export/fsync也不由monitor墙钟timer直接界定；应在使用指南中精确说明预算范围。源树含嵌套mount已在准备前明确拒绝，workspace-parent与源的关系、export/output与源/私有根的关系、所有额外RO/RX规则与源/私有根的双向重叠，均纳入同一挂载身份映射；合法单文件RO/RX规则使用O_PATH而非强求O_DIRECTORY。安全校验已先于result独占创建；更早语法、授权根、目录布局错误仅输出stderr，避免被拒绝的输出别名先在源树产生空result。
+
+映射要求：对固定对象以AT_EMPTY_PATH取得STATX_MNT_ID，并确认返回mask包含该位；核对fstat与statx设备号，按mount ID精确选择mountinfo第1项，再核对第3项设备号，用第4项root和相对于第5项mountpoint的路径后缀组成FS内路径。字段转义、路径组件边界、长度与缺失记录均需拒绝错误，不以最长路径前缀猜测stacked mount。STATX_MNT_ID从Linux5.8提供，早于本项目最低运行内核；必须允许statx及可读mountinfo。初始化期间宿主挂载和目录布局应稳定可信；暴露overlay底层存储或不同服务器导出同一物理数据等跨文件系统别名，不属于通用VFS bind身份检查能证明的范围，部署者不得授予这种外部写通道。[statx接口](https://man7.org/linux/man-pages/man2/statx.2.html)、[mountinfo字段定义](https://man7.org/linux/man-pages/man5/proc_pid_mountinfo.5.html)
+
+这一最后的边界修复由本审查Agent实现，另一独立Agent逐段检查映射、转义、设备号、调用覆盖和共享上下文生命周期；VM/Docker执行由根Agent统一进行。新增输出边界用例真实核对samefile后才测试拒绝，不创建mount或改容器profile。启动失败结果后移到workspace/resource/guardian清理之后；共享ctx在unmap前复制并重定向cwd、规则和结果引用，避免使用已经解除的映射。
+
+最后的启动失败审计补丁已复核：成功写入finish才设置共享audit_finished；main在清理后补齐缺失的finish并fsync，不依赖是否指定result，正常monitor已完成的日志不重复补记。审计文件创建失败显式标audit_failed；启用审计时，结果只有在state存在、没有审计失败且finish已经记账时才报告complete=true。配置清理失败明确cleanup_complete=false及退出125，不在清理之前伪报成功。
+
+### 9.2 祖先内存读取RPC与阻塞边界
+
+不采用PR_SET_PTRACER例外：它不能替代任意fork后代的实际访问检查。独立broker通过私有SOCK_SEQPACKET向payload真实祖先monitor请求内存FD，monitor在打开 `/proc/TID/mem` 前后校验同一listener上的通知ID，broker接收后再次校验。通道在payload fork后才创建，因此payload从未继承任何端点；所有请求由单线程可信broker串行提交，已复制的TID/ID来自实际seccomp通知。文件与网络worker在fork前完成请求捕获，文件worker随后关闭无关FD。
+
+本轮对两处recvmsg接收增加错误立即返回、缓冲清零和实际控制消息容量内的长度检查；拒绝额外控制类型，关闭额外SCM_RIGHTS描述符，并使用MSG_CMSG_CLOEXEC。该修复避免错误路径解析未初始化控制缓冲；仍须纳入最终Linux编译和RPC回归。
+
+monitor并非无条件“绝不阻塞”：Linux的mm_access会在打开proc mem时取得可杀等待的exec_update_lock，文件系统、内核和exec竞态也可能影响完成时间。现有方案隔离了NOTIF_RECV和业务I/O，但不提供任意内核/存储停顿下的绝对取消时限；fsync、清理和导出同样有这一系统边界。若部署需要更强时限，应进一步隔离实际祖先内存opener并由独立控制者管理，不能只把普通本地文件系统测试当作形式化上限。[Linux 6.8 mm_access实现](https://raw.githubusercontent.com/torvalds/linux/v6.8/kernel/fork.c)
+
+### 9.3 新内核替代入口复核
+
+核对Linux 6.18、7.0及当前上游syscall表，native x86_64与asm-generic/aarch64编号一致。需要明确拒绝 `open_tree_attr=467`、`file_setattr=469`；当前上游另有 `fchroot=472`，也应预先拒绝。旧构建头缺少宏不能成为省略限制的理由，应使用已核实的固定编号。`file_getattr=468`为只读查询，不等同metadata写入口；未发现listns=470、rseq_slice_yield=471构成当前要求中的写权限替代入口。[Linux 7.0 x86 syscall表](https://raw.githubusercontent.com/torvalds/linux/v7.0/arch/x86/entry/syscalls/syscall_64.tbl)、[asm-generic syscall定义](https://raw.githubusercontent.com/torvalds/linux/v7.0/include/uapi/asm-generic/unistd.h)
+
+`file_setattr`直接按路径或AT_EMPTY_PATH对象调用vfs_fileattr_set，改变文件系统标志和扩展属性配置，走独立于ioctl/chmod的入口；不能借当前metadata兼容开关CONTINUE。`open_tree_attr`复用vfs_open_tree并可执行挂载属性修改，应与全部mount入口同样拒绝。上游fchroot包含特殊FD_FAILFS_ROOT及NNP分支，不能只依赖清空CAP_SYS_CHROOT阻止它。本地现已按固定编号拒绝这三项；审计模式复用同一分类返回EPERM，不因通知化而放行，已有独立静态/动态拒绝用例，实际结果须列入最后测试证据。[file_setattr实现](https://raw.githubusercontent.com/torvalds/linux/v7.0/fs/file_attr.c)、[open_tree_attr实现](https://raw.githubusercontent.com/torvalds/linux/v7.0/fs/namespace.c)、[上游fchroot实现](https://raw.githubusercontent.com/torvalds/linux/master/fs/open.c)
+
+### 9.4 准备守护与交接
+
+新增preparation guardian已静态复核：由guardian创建并固定0700容器，CLI仅在其内准备快照；cgroup由同一创建者通过RPC配置。D移交命令优先于父死亡处理排空，CLI收到ACK并回收guardian后才释放monitor的G屏障；没有G的monitor等status真正EOF后根据共享身份清理，不启动业务。guardian不持有将来执行控制管道的写端，递归删除使用目录FD且不跟随symlink，不猜测同UID目录归属。
+
+这一机制覆盖CLI取消和死亡时仍有创建者存活的情况，不声称guardian自身在mkdtemp成功到身份登记之间被强杀也能无残留；不可中断存储与整机故障同样不作固定时间回收保证。对应部署与实测阶段边界已写入 `docs/preparation.md`。
+
+### 9.5 源码冻结结论
+
+本轮已经识别的权限越界、可信输出别名、FD泄漏、准备阶段交接及审计完整性阻断项，均已修复并完成源码交叉复核；**当前没有剩余已知的源码冻结阻断项**。允许以当前源码指纹冻结候选版本，进行最后VM、Docker和架构/压力验证。只有最终受测指纹与交付指纹一致、相关必需用例没有FAIL或未解释BLOCKED，才能依据验证报告宣称交付完成。
+
+这一结论是多Agent源码/威胁模型审查，不是外部第三方审计或内核漏洞不存在的证明。本文明确的部署、兼容性、资源和阻塞边界继续适用；未运行的环境或案例不得由“源码可冻结”推定为PASS。

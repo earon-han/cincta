@@ -1,81 +1,63 @@
-# v0.1 设计与能力边界
+# v0.2 设计与安全边界
 
-本设计冻结《实施计划.txt》的 B00/B03 首版范围。版本为 `0.1.0-preview.1`；预览版表示能力和验证记录可审查，不代表已通过独立渗透测试或稳定版发布门槛。
+本设计把 v0.1 静态 CLI 扩展到动态出站网络、受限元数据操作、隔离工作区、业务树配额及审计。实施顺序见 [详细计划](implementation-plan-v02.md)，模块语义见各专项文档，真实状态见 [验证报告](validation.md)。版本 `0.2.0-preview.1` 不代表外部审计或所有平台稳定认证。
 
-## 目标与语言
+## 目标、语言和可信边界
 
-面向通用 Agent 的非交互 Linux CLI，采用 C17，直接调用内核 Landlock 和经典 seccomp BPF；不依赖 libseccomp、守护服务、容器管理器或 Agent 框架。C 与 UAPI 数据结构一致，产物可以静态链接、独立分发，也便于用户审阅。代价是内存安全和过滤器跳转正确性需要严格编译检查、限制数组规模及独立对抗测试；本版不引入复杂指针解析代理。Go 可用于上层 SDK，Rust 更适合大型监管器，但均不是本版交付的必要条件。
+采用 C17 与 Linux UAPI，可静态链接，不依赖 libseccomp 或 Agent 框架。代码目标为小端原生 x86_64/aarch64 syscall ABI；x32、i386 等替代 ABI 被过滤器拒绝。C 适合直接操作内核结构和独立分发；对应代价是显式管理 FD、内存、进程身份及过滤器跳转，必须独立复核和真实内核测试。
 
-目标执行架构仅为 Linux 原生 x86_64 和 aarch64，小端 64 位。其他 syscall ABI 拒绝执行。macOS 是开发控制端，不能提供这些内核保护。
+不可信业务可以执行任意原生代码、fork/clone/exec、操纵自己的指针/FD/线程并主动触发竞态。可信计算基包括内核、CLI、monitor、broker、短命 worker、策略输入和部署者提供的目录/委派。业务不能扩大权限；任何安装、代理、审计或清理失败都必须可观察。不会为通过测试而关闭保护、加入 privileged/unconfined 或修改主机全局 ptrace 策略。
 
-## 威胁模型
+不防御内核漏洞、侧信道、管理员、外部同 UID 可信协作者主动委托权限或获准写入数据造成的后续供应链影响。没有 mount/PID/user namespace 虚拟化；文件存在性和进程元数据不隐藏。保留 stdio 是显式能力授权，普通执行的 socket/file stdio 仍可通信。工作区模式进一步禁止可写普通文件 stdio 和额外 rw 根，防止写别名破坏源保护。
 
-不可信命令可以执行原生代码、派生进程、操纵其地址空间和系统调用参数。攻击目标包括读取未授权内容、修改未授权文件、创建网络连接、改变进程身份和逃避回收。可信计算基包括 Linux 内核、启动器、生命周期 monitor、策略输入及调用方。调用方负责避免把秘密环境变量、危险设备、Docker socket、控制文件或攻击者可修改的可执行文件授予命令。
-
-不防护内核漏洞、侧信道、可信外部同 UID 进程主动协助、主机管理员，以及获准写入数据引发的后续供应链攻击。没有 PID/mount/IPC/user namespace；路径名称和进程元数据不作虚拟化。Landlock 是对访问权限的收紧，不隐藏文件存在性。`stat/access` 等元数据探测并不等于获得文件内容读取权限。
-
-## 首版能力矩阵
-
-| 能力 | 默认严格模式 | 显式兼容模式 | 排除项 |
-|---|---|---|---|
-| 文件内容和目录访问 | Landlock 默认拒绝；显式 ro/rw/rx 授权 | 必须 ABI≥3；不跳过 Landlock | COW、回滚、路径隐藏、逐条 deny |
-| 截断、跨目录链接/重命名 | 纳入 handled 权限 | 同左 | 将 chmod 等元数据操作误称为 Landlock 内容规则 |
-| seccomp | 架构检查、危险 syscall 拒绝和参数检查 | 不允许缺失 | 完整 syscall allowlist、系统调用审计流 |
-| 网络 none | 禁止新 socket/socketpair；禁止 io_uring 替代入口 | 同左 | DNS/域名/IP/端口白名单 |
-| 网络 host | 用户主动豁免；只允许新建 AF_INET/AF_INET6 socket，不限制 IP 目的地 | 同左 | UNIX/netlink/raw 家族、HTTP 代理、TLS 检查、透明端口重映射 |
-| IPC | ABI≥6 signal/abstract UNIX scope；SysV IPC 等由 BPF 收紧 | ABI3–5 缺失 scope 必须报告 | IPC namespace、外部协作者隔离 |
-| 进程 | fork/exec 继承；不能离开固定进程组或创建 namespace | 同左；禁止全部 signal-send syscall，包括向内部子进程发送 | PID 隐藏、调试器、任意 clone3 特性 |
-| 资源 | 超时和 rlimit | 同左 | cgroup 总量配额、总树内存/CPU/进程硬计量 |
-| 生命周期 | 超时、取消、CLI 异常退出、monitor 单独崩溃时回收后代 | 同左 | CLI 与 monitor 同时被杀、内核不可中断任务的绝对清理保证 |
-
-严格模式最低 Landlock ABI6，通常对应 Linux 6.12；兼容模式最低 ABI3，通常对应 Linux 6.2。实际能力以 syscall 探测为准，发行版回移和启动配置可能改变结果。兼容模式缺失旧 ABI 无法提供的 IPC scope，不跳过文件权限、截断保护或 BPF。设备 ioctl 的 Landlock 权利虽然 ABI5 才有，但 BPF 在各模式下均全部拒绝 ioctl，因此本版这项有效限制相同。`--compat` 在新内核上仍应用已实现的 scope。内核新增而本版未知的权利不自动纳入；不能把 ABI 更高解读为本版实现了该 ABI 的所有能力。
-
-## 策略语义
-
-CLI 参数即策略，不接受可执行配置。`--ro PATH` 授予读内容和列目录，`--rx PATH` 额外授予执行，`--rw PATH` 授予读写及常用创建、删除、重命名操作。**rw 不隐含执行**。解释器读取可写脚本仍可以解释执行，因此 rw 的不可直接 exec 不能代替程序可信性控制。规则由内核按对象和层次匹配，授权路径以 `O_PATH` 描述符固定，不以字符串前缀判定。规则对象必须事先存在；路径中间的符号链接会被解析，最终路径分量必须是普通文件或目录，不允许符号链接、设备等特殊文件。传入系统 `/bin` 等符号链接时应先 `realpath`。
-
-同层规则是授权并集，父目录的宽授权不会被子目录窄授权撤回。需要隔离秘密时，应只授予必要的叶子目录。授权目录内现有 hardlink、bind mount、特殊文件和可信调用者并发修改均需纳入策略评估。主机可见目录不是自动安全的数据卷。
-
-不隐式授予 `/usr`、`/lib`、`/etc`、`/tmp` 或 cwd。动态链接器、解释器、共享库、证书及配置文件要由用户明确授予。环境仅有固定 PATH/LANG 基线与 `--env` 显式值，不继承宿主变量；标准输入输出由调用方授权并保留，其他继承 FD 在 exec 前关闭。stdio 可以是文件、pipe 或 socket，必须视为可信调用方主动开放的能力和通信通道；`network=none` 不撤销这些既有通道。
-
-为避免 Landlock 未覆盖的 inode 元数据修改，以及 TTY 控制和 FD 委托，BPF 在两种模式下均拒绝 chmod/chown/时间/xattr 修改族、全部 ioctl、socketpair 和非 IP socket。应用无法使用交互终端 ioctl、chmod 构建动作、UNIX socket IPC、netlink 查询或 debugger；这是一项明确兼容性取舍，不能宣传为任意 Linux 应用透明兼容。
-
-## 启动与生命周期
+## 分层执行
 
 ```text
-Agent -> CLI（调用方 pidfd、subreaper、控制管道写端）
-             |
-             +-> monitor（可信、subreaper、控制管道读端）
-                    |
-                    +-> payload（固定 PGID、rlimit、清理 FD、NNP、Landlock、BPF、exec）
+Agent -> CLI：调用方 pidfd、取消信号、独占结果/审计、准备工作区与资源
+           -> monitor：subreaper、启动屏障、pidfd/signalfd/timerfd、故障及清理
+                -> payload：固定 PGID、rlimit、NNP、Landlock、BPF、exec
+                -> broker（动态模式）：notification、固定对象、策略决定
+                     -> 有界 network/file workers：执行可能阻塞的可信操作
 ```
 
-业务开始前必须完成所有限制安装；任一步失败只报告 setup 错误，禁止降级后 exec。`probe` 的不可逆测试在临时子进程进行，不改变调用者限制。能力可探测不等于规则安装已成功，只有实际 setup 完成才在结果中声明相应保护已生效。
+CLI/monitor 都是 subreaper，单独一层异常退出由存活层收养并清理。monitor 在业务实际结束后清理所有后台后代。独立 broker 避免 NOTIF_RECV 或慢网络/文件操作阻塞取消路径；broker 死亡使本次动态任务失败。可信 worker 也是回收对象，不因其可信就允许遗留。
 
-monitor 是 payload 的父进程与 subreaper；payload 及后代无法调用 setsid/setpgid、使用 CLONE_PARENT 或 namespace flags，clone3 以 ENOSYS 促使常规 libc 回退。CLI 退出使控制管道 EOF，monitor 终止整个进程组并回收孤儿。保留组首领身份直到首次 killpg，防止组号复用误杀。随后反复读取 `/proc/self/task/PID/children`，只向尚未 wait 的直接子进程发送 SIGKILL；subreaper 接管的新孤儿在后续迭代处理。使用 `waitpid(...,__WALL)` 包含 exit_signal=0 的 clone 后代。正常命令退出后也结束后台后代。取消和超时均不依赖业务配合。
+运行阶段通过 pidfd、signalfd 和 timerfd 等待退出、取消和超时，不采用固定 10ms 空轮询。少量维护周期用于资源累计 CPU 预算、socket 引用回收、审计失败检测。准备guard负责monitor接管之前CLI异常退出的临时资源回收；快照复制计入总耗时但不计入当前monitor墙钟预算，最终故障覆盖须实测。清理阶段反复读取真实 procfs children，使用未 wait 的直接子进程身份发送信号，`__WALL` 包含 exit_signal=0 clone 子进程；只有 `ECHILD` 才声明回收完成。两层同时强杀、断电、内核不可中断任务不保证固定时间清理。
 
-CLI 通过 `pidfd_open` 固定调用方进程，并以 poll 检测整进程退出；没有采用只跟踪父线程的 PDEATHSIG 来判定调用方消失。CLI 自身也设置 subreaper，在 monitor 单独崩溃时接管并清理后代。CLI 与 monitor 同时被管理员 SIGKILL、主机断电或任务处于不可中断内核状态时，不能承诺在固定时间内全部回收。`cleanup_complete` 只有 wait 到 ECHILD 才成立；超出约两秒的清理截止时间要报告 false，不能仅根据发出了 SIGKILL 判定。普通调用方进程退出必须实测，不能只测显式 cancel。
+## 文件规则与固定对象
 
-procfs children 枚举在并发退出时不是完整快照，因此每轮重复枚举与回收，最终仍以 ECHILD 确认结束；枚举失败时不能宣称清理成功。所用 PID 均是本进程的直接子进程，在单线程监管者 wait 前保持身份有效，避免向已复用的外部 PID 发送信号。
+所有规则在业务开始前以 O_PATH 固定，保留根对象和规范路径。payload 与文件 worker 安装同一批固定根的 Landlock，不按业务运行期间可变的规则路径重新授权。最终 symlink/设备规则拒绝，目录中的符号链接访问仍受内核规则控制。
 
-## Agent 契约
+ro 为内容读取/枚举，rx 加执行，rw 加常用写入/截断/创建/删除/链接/重命名，不隐含执行。规则同层是并集；子路径的窄授权不能撤回父路径的宽授权。解释器可以解释可读脚本，因此 rw 不可直接 exec 不是代码可信性保证。无隐式 runtime、cwd、tmp 或配置文件权限。
 
-入口包括 `cincta probe` 和 `cincta run [策略] -- COMMAND [ARG...]`。业务 stdout/stderr 保留原语义，启动器日志带 cincta 前缀写 stderr；调用方应按前缀识别自身日志，并使用结果 JSON 获得结构化状态，不解析业务 stderr 来判定安全状态。独立结果文件避免 JSON 混入 stdout。
+默认拒绝 Landlock 不覆盖的 metadata 修改与 ioctl。可选 metadata broker 只对固定 rw 根内、属于当前 UID 的普通文件/目录操作，以 openat2 与 O_PATH 固定最终对象再执行；拒绝跨根、magic/symlink、特殊对象、setuid/setgid 权限、外部 UID/GID 和非 user.* xattr。不读取指针检查后 CONTINUE 授权。chmod 需要 fchmodat2(AT_EMPTY_PATH)，启动会无副作用探测，不可用时明确拒绝 `--metadata`。
 
-JSON 使用 `schema_version` 版本标识，报告状态、失败阶段、实际保护、ABI、缺失保护、退出码/信号、超时/取消及清理结果。消费者不能仅看 CLI 返回零或 ABI 可用。CLI 的保留错误码与业务同值退出可能重叠，应以 JSON 状态消歧。具体字段和命令选项以 [使用指南](usage.md) 和可执行文件 `--help` 为准。
+## 动态通知与网络
 
-## 资源与并发
+不可信指针只作为请求输入。先打开目标进程 mem 固定地址空间、检查通知 ID、复制参数，副作用前再验证；监管者使用副本和自己固定的对象执行。ID 有效性与外部效果不能构成跨进程事务，已经发出流量或发生文件截断后，取消无法撤销这些获准效果。
 
-rlimit 是继承的逐进程限制：地址空间不是总树物理内存；CPU 秒不是树 CPU 预算；NPROC 通常按真实 UID 累计，其他同 UID 工作负载会共同消耗额度，root 或特权进程可能豁免。Docker 的 `--memory/--pids-limit` 可作为外层总量控制，但它们不是 cincta 本身能力。FD 限额和 core 禁用一并作用于业务。
+两阶段过滤器在可信单线程引导期间传输 listener；第二层在 ready 前永久封堵新的 seccomp listener、PR_SET_SECCOMP、PR_SET_PTRACER 和 bootstrap FD 数字复用入口。listener/控制 FD 不进入用户代码。真实祖先monitor在私有通道上为broker打开目标mem，打开前后验证通知ID并仅传递固定地址空间FD；该通道在payload fork后创建，不被业务继承。这样支持fork子孙且不设置PR_SET_PTRACER例外或全局放宽；broker清空capabilities。monitor打开mem仍可能等待内核mm访问锁，普通本地文件系统的取消测试不构成任意文件系统下的绝对延迟上限。
 
-各次运行独立进程组和控制管道；结果路径应置于命令不可写的可信目录并且每次唯一。没有全局共享的策略注册表或可复用通知监听器。输出流由调用者消费，避免业务输出反压导致阻塞。对共享工作目录的并发修改不提供事务保证。
+网络 none 禁止新 socket；host 显式开放任意 IPv4/IPv6 目的地。allowlist 由 broker 创建/保留 TCP/UDP socket，以 O_PATH、S_ISSOCK、dev/inode 核对业务 FD 身份。dup/fork 共享同一对象，connect/send 指针复制后由 broker 执行，绝不 CONTINUE。危险路由选项、ancillary 数据、入站监听、UNIX/netlink/raw/socketpair 拒绝；只对登记 socket 代理安全 FIONBIO。
 
-## 决策记录与发布门槛
+域名在业务前解析并固定实际 A/AAAA 地址和端口，运行期间不刷新。它不是应用层域名身份；初始 DNS 答案可以包含私网/loopback，共享 IP 也可能承载其他域名。需要更窄能力时用显式 IP/CIDR。socket 引用 GC 不是原子 FD 快照，扫描失败保守延迟回收，所有 registry/worker/消息大小有硬上限。[网络细节](network.md)
 
-- ADR-001：选择 C17 + 内核 UAPI，减少运行时与构建依赖；静态产物为推荐交付形态。
-- ADR-002：首版只实现静态内核决策。用户通知、指针读取和代理执行引入 PID/FD/内存竞态，不能以最小静态原型冒充这些动态能力。
-- ADR-003：严格默认、显式 compat；缺失保护可见，安装失败必须拒绝执行。
-- ADR-004：独立可信 monitor 负责生命周期，保留 PID/PGID 身份并回收后代。
-- ADR-005：预览版需要 Linux VM 和 Docker 的真实日志、正反测试及残留检查；未运行项为 BLOCKED。稳定版还要求两种目标架构在严格模式实际通过、重复并发压力和独立安全复核，无未关闭高风险问题。
+## 工作区和资源
 
-性能目标是暖启动固定成本 p95≤50ms（不含目标命令、镜像拉取和 VM 启动），只作工程预算。发布报告需保存环境、策略、源码标识、逐样本数据与失败数；没有样本时不宣称满足预算。
+工作区把源复制到独立 baseline 与 tree，业务只获得 tree rw/cwd。硬链接不复用源 inode，链接完整解析约束在根内；特殊文件拒绝。完成时在业务和后代全部回收后比较内容、独占导出完整树，或丢弃本次改动。没有自动写回，也不是按需 overlayfs COW。默认tree只有rw，显式workspace-exec才对同一固定tree增加rx，支持生成二进制的编译/测试工作流；它不是只准执行预先可信代码的保证。准备期间要求源静止；双副本和可选导出有实际磁盘成本，运行期磁盘配额由部署者提供。[工作区细节](workspace.md)
+
+rlimit 保持逐进程/同 UID 语义。显式 cgroup v2 委派提供业务树 memory.max、pids.max、cpu.max 和定期采样的累计 CPU 预算；配置写入读回、业务 exec 前确认入组，后代继承。请求内存上限时，若存在 memory.swap.max 则配置为0。业务不能获得 cgroup 控制目录、其 bind 别名或可写祖先。monitor、broker 与可信 worker 在业务组外，因此树配额不包含可信代理成本；这些成本由 worker、socket、单请求和审计总量上限另外约束。[资源细节](resources.md)
+
+## 审计与结果
+
+stdout/stderr 保留业务含义；可信完成报告和 JSONL 独占新建，位于业务不可写的目录。schema_version=1 保留基础字段，v0.2 加入 dynamic、network_snapshot、workspace、resources 和 audit 对象。消费者必须判断实际保护、完整性和清理状态，不能只看退出0或 probe。
+
+事件日志区分请求、策略决定、broker 实际结果与 FD 投递。syscall 模式增加请求通知和文件打开实际结果；少数引导/外层静态拒绝不经过通知，其他原生 syscall 只有请求没有完成结果。旧内核 O_PATH ADDFD 不可用时仅作明确记录的原生内核授权回退，不能冒充已观察业务返回值。UTF-8 与 target_bytes_hex 保留目标说明及原字节，日志不能静默截断。
+
+审计默认64MiB/100万条，跨 worker 原子预留预算。写入/额度/投递完整性失败使本次运行失败。delivery_pending 检测效果完成后丢失记账，业务终止后给可信记账最多50ms，未归零则不能声明完整；无法回滚已经发生的获准效果。[审计细节](audit.md)
+
+## 检查点与发布
+
+设计、实现、自验证、独立测试由不同 Agent 分工；安全问题由所有者修复并交叉复核。设计评审记录不计运行 PASS，多 Agent 审查不等于外部审计。
+
+发布须保留源码/二进制指纹、策略、环境、逐项 PASS/FAIL/BLOCKED、原始性能样本和实际容器安全配置。Linux VM 与 Docker 分开执行；默认 Docker 无 cgroup 委派的负例和最小委派正例分开记录。全系统 QEMU 与硬件原生明确区分，不以 qemu-user 代替 seccomp 验证。外部审计、远端 CI 和 GitHub 发布只有实际完成才声明。

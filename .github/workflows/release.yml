@@ -10,9 +10,9 @@ jobs:
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
-      - run: make STATIC=1 check
-      - run: sh scripts/validate.sh release-candidate
-      - run: sh scripts/package.sh build/cincta
+      - run: make BUILD=build-static STATIC=1 check
+      - run: BUILD=build-static sh scripts/validate.sh release-candidate
+      - run: sh scripts/package.sh build-static/cincta
       # Produces reviewable artifacts. Publishing a stable release is a separate
       # maintainer action after the documented VM/Docker/strict security gates.
       - uses: actions/upload-artifact@v4
@@ -21,4 +21,4 @@ jobs:
           name: release-candidate-${{ matrix.runner }}
           path: |
             dist/*
-            reports/release-candidate-*.json
+            reports/v02-release-candidate/

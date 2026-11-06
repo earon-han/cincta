@@ -13,6 +13,7 @@
 #include <sys/socket.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/prctl.h>
 #include <sys/stat.h>
@@ -176,7 +177,8 @@ static int install_landlock(const struct config *cfg, int abi, char *error, size
             fail(error, size, "path rules must use absolute paths");
             goto out;
         }
-        int fd = open(rule->path, O_PATH | O_CLOEXEC | O_NOFOLLOW);
+        int fd = cfg->policy_pinned ? fcntl(cfg->rule_fds[i], F_DUPFD_CLOEXEC, 3)
+                                    : open(rule->path, O_PATH | O_CLOEXEC | O_NOFOLLOW);
         if (fd < 0) {
             fail(error, size, "open rule '%s': %s", rule->path, strerror(errno));
             goto out;
@@ -233,12 +235,12 @@ out:;
     return result;
 }
 
-struct filter_builder { struct sock_filter code[512]; unsigned count; };
+struct filter_builder { struct sock_filter code[1024]; unsigned count; };
 static void emit(struct filter_builder *b, unsigned short op, unsigned char jt,
                  unsigned char jf, uint32_t k)
 {
-    /* Fixed program size is below 512; checked again before installation. */
-    if (b->count < 512) b->code[b->count] = (struct sock_filter){ op, jt, jf, k };
+    /* Fixed program size is below 1024; checked again before installation. */
+    if (b->count < 1024) b->code[b->count] = (struct sock_filter){ op, jt, jf, k };
     ++b->count;
 }
 static void deny(struct filter_builder *b, unsigned nr, unsigned err)
@@ -256,7 +258,7 @@ static void deny_arg1(struct filter_builder *b, unsigned nr, unsigned arg)
     emit(b, BPF_LD | BPF_W | BPF_ABS, 0, 0, offsetof(struct seccomp_data, nr));
 }
 
-static int install_seccomp(const struct config *cfg, int abi)
+static int compile_filter(const struct config *cfg, int abi, struct filter_builder *output, bool kernel_filter)
 {
     struct filter_builder b = { .count = 0 };
     emit(&b, BPF_LD | BPF_W | BPF_ABS, 0, 0, offsetof(struct seccomp_data, arch));
@@ -268,6 +270,48 @@ static int install_seccomp(const struct config *cfg, int abi)
     emit(&b, BPF_JMP | BPF_JSET | BPF_K, 0, 1, 0x40000000U);
     emit(&b, BPF_RET | BPF_K, 0, 0, SECCOMP_RET_KILL_PROCESS);
 #endif
+    bool dynamic = cfg->network_allowlist || cfg->metadata || cfg->audit_syscalls;
+    if (dynamic) {
+        /* Single-threaded trusted bootstrap only; the mandatory second filter
+         * permanently revokes these exceptions before ready/exec. */
+        emit(&b, BPF_JMP | BPF_JEQ | BPF_K, 0, 1, __NR_seccomp);
+        emit(&b, BPF_RET | BPF_K, 0, 0, SECCOMP_RET_ALLOW);
+        emit(&b, BPF_JMP | BPF_JEQ | BPF_K, 0, 3, __NR_sendmsg);
+        emit(&b, BPF_LD | BPF_W | BPF_ABS, 0, 0, offsetof(struct seccomp_data, args[0]));
+        emit(&b, BPF_JMP | BPF_JEQ | BPF_K, 0, 1, (uint32_t)cfg->notify_transport);
+        emit(&b, BPF_RET | BPF_K, 0, 0, SECCOMP_RET_ALLOW);
+        emit(&b, BPF_LD | BPF_W | BPF_ABS, 0, 0, offsetof(struct seccomp_data, nr));
+    }
+    if (cfg->network_allowlist) {
+        const unsigned calls[] = {__NR_socket, __NR_connect, __NR_sendto, __NR_sendmsg,
+            __NR_sendmmsg, __NR_setsockopt, __NR_bind, __NR_listen, __NR_accept,
+            __NR_accept4, __NR_ioctl};
+        for (size_t i = 0; i < sizeof(calls)/sizeof(calls[0]); ++i) {
+            emit(&b, BPF_JMP | BPF_JEQ | BPF_K, 0, 1, calls[i]);
+            emit(&b, BPF_RET | BPF_K, 0, 0, SECCOMP_RET_USER_NOTIF);
+        }
+    }
+    if (cfg->metadata) {
+        const unsigned calls[] = {
+#ifdef __NR_chmod
+            __NR_chmod,
+#endif
+            __NR_fchmod, __NR_fchmodat, 452,
+#ifdef __NR_chown
+            __NR_chown, __NR_lchown,
+#endif
+            __NR_fchown, __NR_fchownat, __NR_utimensat,
+#ifdef __NR_utime
+            __NR_utime, __NR_utimes, __NR_futimesat,
+#endif
+            __NR_setxattr, __NR_lsetxattr, __NR_fsetxattr,
+            __NR_removexattr, __NR_lremovexattr, __NR_fremovexattr, 463, 466
+        };
+        for (size_t i = 0; i < sizeof(calls)/sizeof(calls[0]); ++i) {
+            emit(&b, BPF_JMP | BPF_JEQ | BPF_K, 0, 1, calls[i]);
+            emit(&b, BPF_RET | BPF_K, 0, 0, SECCOMP_RET_USER_NOTIF);
+        }
+    }
 #ifdef __NR_clone3
     deny(&b, __NR_clone3, ENOSYS); /* libc may fall back to inspectable clone. */
 #endif
@@ -432,6 +476,12 @@ static int install_seccomp(const struct config *cfg, int abi)
 #ifdef __NR_mount_setattr
     DENY(mount_setattr);
 #endif
+    /* Native x86_64/aarch64 stable numbers, even with older UAPI headers.
+     * open_tree_attr can modify mount attributes; file_setattr bypasses ioctl
+     * and chmod entry points. fchroot is a separate root-changing interface. */
+    deny(&b, 467, EPERM); /* open_tree_attr (Linux 6.15) */
+    deny(&b, 469, EPERM); /* file_setattr (Linux 6.17) */
+    deny(&b, 472, EPERM); /* fchroot: reserve its published native number */
 #ifdef __NR_keyctl
     DENY(keyctl);
 #endif
@@ -657,7 +707,7 @@ static int install_seccomp(const struct config *cfg, int abi)
         emit(&b, BPF_RET | BPF_K, 0, 0, SECCOMP_RET_ERRNO | EPERM);
         emit(&b, BPF_LD | BPF_W | BPF_ABS, 0, 0, offsetof(struct seccomp_data, nr));
 #endif
-    } else {
+    } else if (!cfg->network_allowlist) {
 #ifdef __NR_socket
         DENY(socket);
 #endif
@@ -696,10 +746,80 @@ static int install_seccomp(const struct config *cfg, int abi)
 #endif
     }
 #undef DENY
+    emit(&b, BPF_RET | BPF_K, 0, 0,
+         kernel_filter && cfg->audit_syscalls ? SECCOMP_RET_USER_NOTIF : SECCOMP_RET_ALLOW);
+    if (b.count > 1024) { errno = E2BIG; return -1; }
+    if (kernel_filter && cfg->audit_syscalls) {
+        for (unsigned i = 0; i < b.count; ++i)
+            if (b.code[i].code == (BPF_RET | BPF_K) &&
+                (b.code[i].k & SECCOMP_RET_ACTION_FULL) == SECCOMP_RET_ERRNO)
+                b.code[i].k = SECCOMP_RET_USER_NOTIF;
+    }
+    *output = b;
+    return 0;
+}
+
+static int notification_listener = -1;
+int security_listener(void) { return notification_listener; }
+
+static int install_seccomp(const struct config *cfg, int abi)
+{
+    struct filter_builder b;
+    if (compile_filter(cfg, abi, &b, true) < 0) return -1;
+    struct sock_fprog prog = {.len = (unsigned short)b.count, .filter = b.code};
+    bool dynamic = cfg->network_allowlist || cfg->metadata || cfg->audit_syscalls;
+    int result = (int)syscall(__NR_seccomp, SECCOMP_SET_MODE_FILTER,
+        dynamic ? SECCOMP_FILTER_FLAG_NEW_LISTENER : 0, &prog);
+    if (result < 0) return -1;
+    if (dynamic) notification_listener = result;
+    return 0;
+}
+
+int security_lockdown(const struct config *cfg)
+{
+    if (!(cfg->network_allowlist || cfg->metadata || cfg->audit_syscalls)) return 0;
+    struct filter_builder b = {.count = 0};
+    emit(&b, BPF_LD | BPF_W | BPF_ABS, 0, 0, offsetof(struct seccomp_data, nr));
+    deny(&b, __NR_seccomp, EPERM);
+    emit(&b, BPF_JMP | BPF_JEQ | BPF_K, 0, 3, __NR_prctl);
+    emit(&b, BPF_LD | BPF_W | BPF_ABS, 0, 0, offsetof(struct seccomp_data, args[0]));
+    emit(&b, BPF_JMP | BPF_JEQ | BPF_K, 0, 1, PR_SET_SECCOMP);
+    emit(&b, BPF_RET | BPF_K, 0, 0, SECCOMP_RET_ERRNO | EPERM);
+    emit(&b, BPF_LD | BPF_W | BPF_ABS, 0, 0, offsetof(struct seccomp_data, nr));
+    const unsigned transport_calls[] = {__NR_sendmsg, __NR_recvmsg};
+    emit(&b, BPF_JMP | BPF_JEQ | BPF_K, 0, 3, __NR_prctl);
+    emit(&b, BPF_LD | BPF_W | BPF_ABS, 0, 0, offsetof(struct seccomp_data, args[0]));
+    emit(&b, BPF_JMP | BPF_JEQ | BPF_K, 0, 1, PR_SET_PTRACER);
+    emit(&b, BPF_RET | BPF_K, 0, 0, SECCOMP_RET_ERRNO | EPERM);
+    emit(&b, BPF_LD | BPF_W | BPF_ABS, 0, 0, offsetof(struct seccomp_data, nr));
+    for (size_t i = 0; i < sizeof(transport_calls)/sizeof(transport_calls[0]); ++i) {
+        emit(&b, BPF_JMP | BPF_JEQ | BPF_K, 0, 3, transport_calls[i]);
+        emit(&b, BPF_LD | BPF_W | BPF_ABS, 0, 0, offsetof(struct seccomp_data, args[0]));
+        emit(&b, BPF_JMP | BPF_JEQ | BPF_K, 0, 1, (unsigned)cfg->notify_transport);
+        emit(&b, BPF_RET | BPF_K, 0, 0, SECCOMP_RET_ERRNO | EPERM);
+        emit(&b, BPF_LD | BPF_W | BPF_ABS, 0, 0, offsetof(struct seccomp_data, nr));
+    }
     emit(&b, BPF_RET | BPF_K, 0, 0, SECCOMP_RET_ALLOW);
-    if (b.count > 512) { errno = E2BIG; return -1; }
-    struct sock_fprog prog = { .len = (unsigned short)b.count, .filter = b.code };
+    struct sock_fprog prog = {.len = (unsigned short)b.count, .filter = b.code};
     return (int)syscall(__NR_seccomp, SECCOMP_SET_MODE_FILTER, 0, &prog);
+}
+
+uint32_t security_decide(const struct config *cfg, int abi, const struct seccomp_data *data)
+{
+    struct filter_builder b;
+    if (compile_filter(cfg, abi, &b, false) < 0) return SECCOMP_RET_ERRNO | EIO;
+    uint32_t a = 0;
+    for (unsigned pc = 0; pc < b.count; ++pc) {
+        struct sock_filter i = b.code[pc];
+        if (i.code == (BPF_LD | BPF_W | BPF_ABS)) {
+            if (i.k > sizeof(*data) - 4) return SECCOMP_RET_KILL_PROCESS;
+            memcpy(&a, (const char *)data + i.k, 4);
+        } else if (i.code == (BPF_JMP | BPF_JEQ | BPF_K)) pc += a == i.k ? i.jt : i.jf;
+        else if (i.code == (BPF_JMP | BPF_JSET | BPF_K)) pc += (a & i.k) ? i.jt : i.jf;
+        else if (i.code == (BPF_RET | BPF_K)) return i.k;
+        else return SECCOMP_RET_KILL_PROCESS;
+    }
+    return SECCOMP_RET_KILL_PROCESS;
 }
 
 static int clear_capabilities(void)
@@ -721,6 +841,12 @@ static int clear_capabilities(void)
     struct __user_cap_header_struct header = { .version = _LINUX_CAPABILITY_VERSION_3, .pid = 0 };
     struct __user_cap_data_struct data[2] = {{0}, {0}};
     return (int)syscall(__NR_capset, &header, data);
+}
+
+int security_drop_capabilities(void)
+{
+    if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0) < 0) return -1;
+    return clear_capabilities();
 }
 
 int security_apply(const struct config *cfg, struct capabilities *caps,
@@ -745,11 +871,58 @@ int security_apply(const struct config *cfg, struct capabilities *caps,
         caps->landlock_errno = errno;
         return -1;
     }
+    /* The broker retains its own forked copies. No policy capability survives
+     * into user code; close before notification filtering is installed. */
+    if (cfg->policy_pinned)
+        for (size_t i = 0; i < cfg->rule_count; ++i) close(cfg->rule_fds[i]);
     if (install_seccomp(cfg, abi) < 0) {
         caps->seccomp = false;
         caps->seccomp_errno = errno;
         return fail(error, error_size, "install seccomp filter: %s", strerror(errno));
     }
     caps->seccomp = true;
+    return 0;
+}
+
+int security_restrict_files(const struct config *cfg, char *error, size_t size)
+{
+    int abi = landlock_version();
+    if (abi < (cfg->compat ? 3 : 6)) { errno = ENOTSUP; return fail(error, size, "Landlock unavailable in file worker"); }
+    if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0) < 0 || clear_capabilities() < 0)
+        return fail(error, size, "restrict file worker credentials: %s", strerror(errno));
+    return install_landlock(cfg, abi, error, size);
+}
+
+void security_release_policy(struct config *cfg)
+{
+    if (!cfg->policy_pinned) return;
+    for (size_t i = 0; i < cfg->rule_count; ++i) {
+        if (cfg->rule_fds[i] >= 0) close(cfg->rule_fds[i]);
+        free(cfg->rule_targets[i]); cfg->rule_targets[i] = NULL; cfg->rule_fds[i] = -1;
+    }
+    cfg->policy_pinned = false;
+}
+
+int security_pin_policy(struct config *cfg, char *error, size_t size)
+{
+    cfg->policy_pinned = true;
+    for (size_t i = 0; i < cfg->rule_count; ++i) cfg->rule_fds[i] = -1;
+    for (size_t i = 0; i < cfg->rule_count; ++i) {
+        int fd = open(cfg->rules[i].path, O_PATH | O_CLOEXEC | O_NOFOLLOW);
+        cfg->rule_fds[i] = fd;
+        struct stat st;
+        if (fd < 0 || fstat(fd, &st) < 0 || (!S_ISDIR(st.st_mode) && !S_ISREG(st.st_mode))) {
+            if (fd >= 0) errno = EINVAL;
+            fail(error, size, "pin rule '%s': %s", cfg->rules[i].path, strerror(errno));
+            security_release_policy(cfg); return -1;
+        }
+        char proc[80], target[4096]; snprintf(proc, sizeof(proc), "/proc/self/fd/%d", fd);
+        ssize_t length = readlink(proc, target, sizeof(target) - 1);
+        if (length < 0 || (size_t)length >= sizeof(target) - 1) {
+            fail(error, size, "resolve pinned rule: %s", strerror(errno)); security_release_policy(cfg); return -1;
+        }
+        target[length] = 0; cfg->rule_targets[i] = strdup(target);
+        if (!cfg->rule_targets[i]) { security_release_policy(cfg); return -1; }
+    }
     return 0;
 }

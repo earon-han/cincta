@@ -1,5 +1,10 @@
 #define _GNU_SOURCE
 #include "cincta.h"
+#include "json.h"
+#include "broker.h"
+#include "network.h"
+#include "resources.h"
+#include "workspace.h"
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -24,19 +29,9 @@ void result_set_phases(uint64_t setup, uint64_t run, uint64_t cleanup)
 int result_open(const struct config *cfg)
 {
     if (!cfg->result) return 0;
+    if (result_fd >= 0) return 0;
     result_fd = open(cfg->result, O_WRONLY | O_CREAT | O_EXCL | O_NOFOLLOW | O_CLOEXEC, 0600);
     return result_fd < 0 ? -1 : 0;
-}
-
-static void json_string(FILE *f, const char *s)
-{
-    fputc('"', f);
-    for (const unsigned char *p = (const unsigned char *)s; *p; ++p) {
-        if (*p == '"' || *p == '\\') fprintf(f, "\\%c", *p);
-        else if (*p < 32 || *p >= 127) fprintf(f, "\\u%04x", *p);
-        else fputc(*p, f);
-    }
-    fputc('"', f);
 }
 
 int result_write(const struct config *cfg, const struct capabilities *caps,
@@ -45,7 +40,7 @@ int result_write(const struct config *cfg, const struct capabilities *caps,
                  bool cleanup_complete, uint64_t elapsed_ms)
 {
     FILE *f;
-    bool active = !strcmp(stage, "exec") || !strcmp(stage, "running");
+    bool active = (cfg->state && cfg->state->protections_active) || !strcmp(stage, "exec") || !strcmp(stage, "running");
     if (!cfg->result) return 0;
     if (result_fd < 0) { errno = EBADF; return -1; }
     f = fdopen(result_fd, "w");
@@ -60,13 +55,52 @@ int result_write(const struct config *cfg, const struct capabilities *caps,
         "\"landlock_abi\":%d,\"seccomp\":%s,\"network\":\"%s\",\"ipc_scoped\":%s},"
         "\"unsupported\":[", exit_code, term_signal, timed_out ? "true" : "false",
         cancelled ? "true" : "false", cleanup_complete ? "true" : "false",
-        (unsigned long long)elapsed_ms, (unsigned long long)setup_ms,
+        (unsigned long long)(elapsed_ms + cfg->preparation_ms), (unsigned long long)(setup_ms + cfg->preparation_ms),
         (unsigned long long)run_ms, (unsigned long long)cleanup_ms,
         active ? caps->landlock_abi : 0,
-        active && caps->seccomp ? "true" : "false", active ? (cfg->network_host ? "host" : "none") : "unconfined",
+        active && caps->seccomp ? "true" : "false", active ? (cfg->network_allowlist ? "allowlist" : cfg->network_host ? "host" : "none") : "unconfined",
         active && caps->landlock_abi >= 6 ? "true" : "false");
     if (caps->landlock_abi < 6) json_string(f, "signal_and_abstract_unix_scopes_require_abi_6");
-    fprintf(f, "]}\n");
+    fprintf(f, "],\"dynamic\":%s,\"network_snapshot\":", cfg->state && cfg->state->dynamic_active ? "true" : "false");
+    if (cfg->network) network_write_snapshot(f, cfg->network); else fputs("[]", f);
+    fprintf(f, ",\"audit\":{\"enabled\":%s,\"mode\":\"%s\",\"records\":%llu,\"complete\":%s,\"path\":",
+        cfg->audit ? "true" : "false", cfg->audit_syscalls ? "syscall_requests_and_broker_results" : "events",
+        cfg->state ? (unsigned long long)cfg->state->audit_records : 0,
+        cfg->audit && (!cfg->state || cfg->state->audit_failed || !cfg->state->audit_finished) ? "false" : "true");
+    json_string(f, cfg->audit ? cfg->audit : "");
+    fprintf(f, ",\"bytes\":%llu,\"max_bytes\":%u,\"max_records\":%u,\"limit_exceeded\":%s,\"delivery_pending\":%llu,\"native_open_fallbacks\":%llu}",
+        cfg->state ? (unsigned long long)cfg->state->audit_bytes : 0, cfg->audit_max_bytes, cfg->audit_max_records,
+        cfg->state && cfg->state->audit_limit_exceeded ? "true" : "false",
+        cfg->state ? (unsigned long long)cfg->state->delivery_pending : 0,
+        cfg->state ? (unsigned long long)cfg->state->native_open_fallbacks : 0);
+    fputs(",\"workspace\":{\"enabled\":", f); fputs(cfg->workspace ? "true" : "false", f);
+    if (cfg->workspace) {
+        const struct workspace_ctx *w = cfg->workspace;
+        fputs(",\"source\":", f); json_string(f, w->source);
+        fputs(",\"root\":", f); json_string(f, w->root);
+        fputs(",\"tree\":", f); json_string(f, w->tree);
+        fprintf(f, ",\"retained\":%s,\"exported\":%s,\"executable\":%s,\"changes\":%llu,\"copied_files\":%llu,\"copied_bytes\":%llu",
+            w->retained ? "true" : "false", w->exported ? "true" : "false",
+            cfg->workspace_exec ? "true" : "false",
+            (unsigned long long)w->changes, (unsigned long long)w->copied_files, (unsigned long long)w->copied_bytes);
+    }
+    fputs("},\"resources\":{\"enabled\":", f);
+    const struct resource_ctx *r = cfg->resources;
+    fputs(r && r->enabled ? "true" : "false", f);
+    if (r && r->enabled) {
+        fputs(",\"path\":", f); json_string(f, r->path);
+        fprintf(f, ",\"memory_peak_supported\":%s,\"pids_peak_supported\":%s",
+            r->memory_peak_supported ? "true" : "false", r->pids_peak_supported ? "true" : "false");
+        fprintf(f, ",\"removed\":%s,\"populated\":%s,\"memory_peak\":%llu,\"pids_peak\":%llu,"
+            "\"cpu_usage_usec\":%llu,\"cpu_nr_throttled\":%llu,\"memory_oom_kill\":%llu,\"pids_limit_hits\":%llu,\"swap_disabled\":%s,\"cpu_budget_exhausted\":%s",
+            r->removed ? "true" : "false", r->populated ? "true" : "false",
+            (unsigned long long)r->memory_peak, (unsigned long long)r->pids_peak,
+            (unsigned long long)r->cpu_usage_usec, (unsigned long long)r->cpu_nr_throttled,
+            (unsigned long long)r->memory_oom_kill, (unsigned long long)r->pids_limit_hits,
+            r->swap_disabled ? "true" : "false",
+            cfg->state && cfg->state->resource_cpu_exhausted ? "true" : "false");
+    }
+    fputs("}}\n", f);
     int failed = ferror(f);
     if (fflush(f) != 0) failed = 1;
     if (fsync(fileno(f)) != 0) failed = 1;

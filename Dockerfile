@@ -11,7 +11,7 @@ RUN make STATIC=1 && mkdir -p /out && cp build/cincta /out/cincta
 FROM build AS test
 RUN useradd --create-home --uid 10001 tester && chown -R tester:tester /src
 USER tester
-CMD ["python3", "tests/integration.py", "--binary", "build/cincta", "--helper", "build/adversary", "--environment", "docker"]
+CMD ["sh", "scripts/test_all.sh", "docker"]
 
 FROM scratch AS binary
 COPY --from=build /out/cincta /cincta

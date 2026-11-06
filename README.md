@@ -1,54 +1,90 @@
 # cincta
 
-独立交付的 C17 Linux CLI 沙箱，使用 **Landlock + 经典 seccomp BPF**，面向通用 Agent 的非交互命令执行。无需 root、特权容器、user namespace、libseccomp 或常驻服务。
+C17 实现、可静态交付的 Linux CLI 沙箱，面向通用 Agent 的非交互命令执行。文件访问由 Landlock 限制，系统调用由经典 seccomp BPF 限制，动态能力由可信 broker 处理；基本运行无需 root、特权容器或 user namespace。
 
-当前版本：`0.1.0-preview.1`。首版实现静态路径授权、默认断网、危险系统调用限制、资源限额、超时/取消、后代回收和 JSON 结果。已实测并交付aarch64；x86_64是尚待原生验证的源码目标。动态通知代理、域名白名单、COW、cgroup 树配额不在本版范围。
+当前开发版本：`0.2.0-preview.1`。功能与验证状态分开记录，最终实测以 [验证报告](docs/validation.md) 为准；原有 v0.1 证据保留在 `reports/`，不算作新版本通过。
 
-## 构建和运行
+| 能力 | v0.2 行为 |
+|---|---|
+| 文件授权 | 默认拒绝，显式 ro/rw/rx；启动前固定规则对象，限制安装失败不执行 |
+| 动态网络 | IPv4/IPv6、TCP/UDP、CIDR、端口范围和启动时域名地址快照 |
+| 元数据兼容 | 可选 `--metadata`，只对固定 rw 普通对象代执行受限 chmod/chown/时间/xattr 操作 |
+| 工作区 | 独立物理快照、差异查看、独占导出、保留或丢弃；显式workspace-exec支持构建后执行，不自动写回原目录 |
+| 资源 | rlimit；显式委派 cgroup v2 时提供业务进程树内存、pids、CPU 带宽/累计预算 |
+| 生命周期 | pidfd/signalfd/timerfd 事件驱动，超时、取消、单层监管故障及后代回收 |
+| 结果与审计 | 独立 JSON 完成报告；可选 JSONL 请求、决定、代执行结果与交付记录 |
 
-在 Linux x86_64/aarch64 上，需要 C 编译器、make、libc 开发文件和 Linux UAPI 开发头文件（6.2+）。macOS 只能作为开发控制端。
+## 构建与检查
+
+目标为 Linux 小端 x86_64/aarch64。需要 C17 编译器、make、libc 开发文件和 Linux UAPI headers ≥6.2；完整测试需要 Python 3 和 C 编译器。无需 libseccomp。macOS 可作为控制端，实际保护必须在 Linux 中运行。
 
 ```sh
 make
-make test
-make clean && make STATIC=1
-./build/cincta probe
+make check
+make test                         # 八套独立实核测试，报告不覆盖历史证据
+make test-legacy TESTFLAGS="--mode compat"  # 只运行原有基础回归
+make BUILD=build-static STATIC=1  # 独立静态交付产物
+./build-static/cincta probe
 ```
 
-严格模式要求 **Landlock ABI ≥6（通常 Linux ≥6.12）**，兼容模式要求 **ABI ≥3（通常 Linux ≥6.2）**。同时需要 Landlock LSM 启用、seccomp filter、可读 procfs 和允许相关 syscall 的外层安全策略。以实际探测结果为准。
+严格模式要求 Landlock ABI ≥6（通常 Linux ≥6.12）；显式 `--compat` 要求 ABI ≥3（通常 Linux ≥6.2）。动态网络/metadata/syscall 审计另外需要可用的 seccomp notification、ADDFD、procfs 和祖先监管者读取目标地址空间的权限；`probe` 的基础能力成功不证明所有增强功能可用。完整条件见 [外部依赖](docs/dependencies.md)。
+
+## 最小执行
+
+以下 runtime 目录适用于 Ubuntu merged-/usr；其他发行版应通过 `realpath` 确认真实路径。没有隐式 runtime、工作目录或临时目录授权。
 
 ```sh
-mkdir -p /tmp/cincta-demo
-# Ubuntu merged-/usr 示例；其他发行版请用 realpath 确定实际目录。
-./build/cincta run --rx /usr/bin --rx /usr/lib \
-  --rw /tmp/cincta-demo --cwd /tmp/cincta-demo \
-  --result /tmp/cincta-result-unique.json -- \
+work=$(mktemp -d)
+result_dir=$(mktemp -d)
+./build/cincta run --rx /usr/bin --rx /usr/lib --rw "$work" --cwd "$work" \
+  --result "$result_dir/run.json" -- \
   /bin/sh -c 'printf hello > answer; cat answer'
+cat "$result_dir/run.json"
 ```
 
-结果文件必须是不存在的新文件，并放在业务不可写的可信目录。所有文件权限均须显式授权，包括动态链接器、库和工作目录；`rw` 不包含直接执行权限，重叠授权是并集。规则不接受最终符号链接，请传其真实目标。旧内核可显式加 `--compat`，这会报告缺失的 IPC scopes；没有静默关闭文件或 seccomp 保护的模式。
+`rw` 不包含直接执行权限；重叠规则是授权并集。授权路径必须存在，最终分量不能是 symlink。结果和审计文件必须是新文件，并位于业务不可写的可信目录。
 
-默认禁止 socket。`--network host` 只开放 IPv4/IPv6 socket，允许任意 IP/端口；UNIX/netlink socket 仍禁止。标准输入输出是调用方主动授权的既有通信能力。所有 ioctl 及 chmod/chown/时间戳/xattr 修改均被禁用，部分构建工具可能不兼容。
+## 隔离工作区
 
-## 文档与验证
+```sh
+source_dir=$(mktemp -d)
+result_dir=$(mktemp -d)
+printf original > "$source_dir/input.txt"
+./build/cincta run --rx /usr/bin --rx /usr/lib --workspace "$source_dir" \
+  --workspace-diff "$result_dir/diff.json" \
+  --workspace-export "$result_dir/export" --result "$result_dir/run.json" -- \
+  /bin/sh -c 'printf sandbox > output.txt; cat input.txt'
+```
 
-- [使用指南与结果契约](docs/usage.md)
-- [设计、威胁模型与决策](docs/design.md)
-- [外部依赖、内核和安全策略](docs/dependencies.md)
-- [固定版本参考研究](docs/research.md)
-- [独立安全审查](docs/security-review.md)
-- [实测报告与性能](docs/validation.md)
-- [实施任务台账](docs/progress.md)
-- [通用 Agent 调用示例](examples/agent.py)
+命令在副本内工作，原目录不自动写回。快照使用真实复制，具有数据/条目上限；它不是 overlayfs 按需 COW。工作区模式禁止额外 rw 授权以及可写普通文件 stdio，防止 hardlink/bind 别名绕过原目录保护。业务输出使用管道、终端或 `/dev/null`。需要执行副本内新生成的二进制时显式加 `--workspace-exec`；默认 rw 仍不包含执行。详见 [工作区说明](docs/workspace.md)。
+
+## 网络、资源与审计
+
+默认 `--network none`。`--network host` 开放任意 IPv4/IPv6 目的地；`--network allowlist --allow-net tcp:example.com:443` 只开放启动时解析出的 IP/端口，可重复规则，UDP 用 `udp:`，IPv6 用 `[地址]`。域名规则是 IP 能力快照，不验证 HTTP Host、TLS SNI 或证书；业务需要 DNS/证书/配置文件时仍须显式授权。[网络说明](docs/network.md)
+
+树级资源必须提供已有的 `--cgroup-parent` 委派，不能从只读默认 Docker 自动获得。默认容器验证无委派拒绝；有委派正例使用单独记录的最小 RW 子树配置，保持默认 seccomp/AppArmor。[资源说明](docs/resources.md)
+
+`--audit PATH` 保存事件，`--audit-syscalls` 增加 syscall 请求和文件打开代执行结果。它不等于全部系统调用入口/出口追踪；旧内核 O_PATH 原生回退单列，不能由请求推断完成。日志默认限制 64MiB/100万条，写入或完整性失败终止任务。[审计说明](docs/audit.md)
+
+## 验证和交付
 
 ```sh
 sh scripts/validate.sh linux-vm
+# 默认安全配置、非 root、无 capabilities 的 Docker 验证
+# 默认无 cgroup 委派时，资源正例保持 BLOCKED，不算 PASS。
 docker build --target test -t cincta-test .
-docker run --rm --cap-drop ALL --security-opt no-new-privileges cincta-test
-make package
+docker run --name cincta-verify --cap-drop ALL --security-opt no-new-privileges cincta-test
+docker cp cincta-verify:/src/reports/. reports/
+docker rm cincta-verify
+sh scripts/package.sh build-static/cincta
 (cd dist && sha256sum -c *.sha256)
 ```
 
-`reports/` 保存真实运行数据，PASS、FAIL、BLOCKED 分开统计。容器使用宿主内核，不能补齐宿主缺失的 Landlock。资源限额是逐进程/同 UID 语义，需要总量隔离时由调用方额外配置 cgroup 或容器限额。
+PASS、FAIL、BLOCKED 分开记录。容器使用宿主内核；全系统 QEMU 可以运行真实目标架构内核，但必须标明仿真，不能叫作硬件原生测试。CI 配置存在不表示远端 CI 已运行。
 
-许可证：[Apache-2.0](LICENSE)。本项目独立实现，没有引入 Sandlock 源码或其运行依赖。
+- [详细实施计划](docs/implementation-plan-v02.md) · [任务台账](docs/progress.md)
+- [设计与威胁模型](docs/design.md) · [独立设计审查](docs/v02-design-review.md)
+- [使用及结果契约](docs/usage.md) · [依赖](docs/dependencies.md) · [验证记录](docs/validation.md)
+- [通用 Agent 示例](examples/agent.py) · [参考研究](docs/research.md) · [变更记录](CHANGELOG.md)
+
+许可证：[Apache-2.0](LICENSE)。独立实现，没有引入 Sandlock 源码或其运行依赖。

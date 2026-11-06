@@ -15,7 +15,7 @@ endif
 SOURCES := $(wildcard src/*.c)
 OBJECTS := $(patsubst src/%.c,$(BUILD)/%.o,$(SOURCES))
 
-.PHONY: all clean test check install package benchmark
+.PHONY: all clean test test-all test-legacy check install package benchmark
 all: $(BUILD)/cincta $(BUILD)/adversary
 
 $(BUILD):
@@ -30,12 +30,22 @@ $(BUILD)/cincta: $(OBJECTS)
 $(BUILD)/adversary: tests/adversary.c | $(BUILD)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $< $(LDFLAGS) -o $@
 
-test: all
+ifneq ($(strip $(TESTFLAGS)),)
+# Backwards compatibility: TESTFLAGS targets the original suite only.
+test: test-legacy
+else
+test: test-all
+endif
+
+test-legacy: all
 	python3 tests/integration.py --binary $(BUILD)/cincta --helper $(BUILD)/adversary $(TESTFLAGS)
 
+test-all: all
+	BUILD=$(BUILD) sh scripts/test_all.sh $(or $(TEST_LABEL),native)
+
 check: all
-	PYTHONPYCACHEPREFIX=$(BUILD)/pycache python3 -m py_compile tests/integration.py scripts/benchmark.py
-	sh -n scripts/validate.sh scripts/package.sh
+	PYTHONPYCACHEPREFIX=$(BUILD)/pycache python3 -m py_compile $(wildcard tests/*.py) $(wildcard scripts/*.py) $(wildcard examples/*.py)
+	for script in scripts/*.sh; do sh -n "$$script" || exit; done
 
 benchmark: all
 	python3 scripts/benchmark.py --binary $(BUILD)/cincta

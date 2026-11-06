@@ -10,13 +10,50 @@ if [ "$system" != Linux ]; then
   echo 'release packaging must run on Linux' >&2
   exit 2
 fi
-arch=$(uname -m)
+host_arch=$(uname -m)
+case "$host_arch" in
+  x86_64) host_arch=x86_64 ;;
+  aarch64|arm64) host_arch=aarch64 ;;
+  *) echo "unsupported builder architecture: $host_arch" >&2; exit 2 ;;
+esac
+arch=${CINCTA_PACKAGE_ARCH:-$host_arch}
 case "$arch" in
-  x86_64) arch=x86_64 ;;
-  aarch64|arm64) arch=aarch64 ;;
+  x86_64|aarch64) ;;
   *) echo "unsupported release architecture: $arch" >&2; exit 2 ;;
 esac
-version=$("$binary" --version | awk '{print $NF}')
+# Read the ELF header rather than executing a foreign target or trusting its name.
+binary_arch=$(python3 - "$binary" <<'PY'
+import struct,sys
+with open(sys.argv[1],"rb") as stream:
+    header=stream.read(64)
+if len(header)!=64 or header[:6]!=b"\x7fELF\x02\x01":
+    sys.exit("package input must be a little-endian ELF64 binary")
+machine=struct.unpack_from("<H",header,18)[0]
+architectures={62:"x86_64",183:"aarch64"}
+if machine not in architectures:
+    sys.exit("unsupported ELF e_machine: "+str(machine))
+print(architectures[machine])
+PY
+)
+if [ "$arch" != "$binary_arch" ]; then
+  echo "release architecture $arch does not match ELF architecture $binary_arch" >&2
+  exit 2
+fi
+if [ -n "${CINCTA_PACKAGE_VERSION:-}" ]; then
+  version=$CINCTA_PACKAGE_VERSION
+  version_method=explicit
+  source_version=$(sed -n 's/^#define CINCTA_VERSION "\([^"]*\)"$/\1/p' include/cincta.h)
+  if [ "$version" != "$source_version" ]; then
+    echo 'explicit package version must match include/cincta.h' >&2
+    exit 2
+  fi
+elif [ "$arch" = "$host_arch" ]; then
+  version=$("$binary" --version | awk '{print $NF}')
+  version_method=native-execution
+else
+  echo 'cross packaging requires CINCTA_PACKAGE_VERSION; foreign binaries are never executed' >&2
+  exit 2
+fi
 case "$version" in
   ''|*[!0-9a-zA-Z._-]*) echo 'invalid version response' >&2; exit 2 ;;
 esac
@@ -39,6 +76,8 @@ find src include tests scripts docs examples -type f ! -name '*.pyc' -print0 \
   | sort -z | xargs -0 sha256sum > "$staging/$name/SOURCE_SHA256"
 sha256sum Makefile Dockerfile README.md LICENSE >> "$staging/$name/SOURCE_SHA256"
 file "$binary" > "$staging/$name/BINARY_INFO"
+printf 'architecture=%s\nbuilder_architecture=%s\nversion=%s\nversion_source=%s\n' \
+  "$arch" "$host_arch" "$version" "$version_method" > "$staging/$name/PACKAGE_INFO"
 tar -C "$staging" -czf "dist/$name.tar.gz" "$name"
 (cd dist && sha256sum "$name.tar.gz" > "$name.tar.gz.sha256")
 printf '%s\n' "dist/$name.tar.gz" "dist/$name.tar.gz.sha256"
