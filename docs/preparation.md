@@ -34,4 +34,6 @@ guardian使用独立PGID并忽略意外终端取消信号，CLI仍可因SIGINT/S
 
 guardian自身若在创建容器成功、身份登记和READY尚未完成的极小窗口被强杀，CLI无法安全猜测一个路径是否确实由它创建，因此不能保证该窗口绝无残留。READY之后的guardian单独故障可由存活CLI根据已确认身份回收空容器，本套件的guardian-death用例覆盖的是这一阶段。guardian与CLI同时被强杀、不可中断的内核/存储操作、宿主断电等场景也不作固定时间清理保证。不能用准备取消的回收测试宣称整个启动链路已获得端到端硬超时。
 
-实测入口：`python3 tests/preparation_test.py --binary build/cincta --report reports/preparation.json`。该测试实际观察512MiB源文件被复制到一半时杀死CLI/控制者，检查私有目录和guardian进程消失，同时验证源数据、外部链接目标和相邻目录保持不变。另以SIGSTOP固定guardian，在D已缓冲且控制者退出后恢复它，确认monitor仍拥有快照并负责清理；还覆盖handover、keep、准备失败及READY后的guardian异常。`--module-only`只运行模块部分，不可冒充完整CLI验收。
+实测入口：`python3 tests/preparation_test.py --binary build/cincta --report reports/preparation.json`。该测试实际观察512MiB源文件被复制到一半时杀死CLI/控制者，检查私有目录和guardian进程消失，同时验证源数据、外部链接目标和相邻目录保持不变。另以SIGSTOP固定guardian，在D已缓冲且控制者退出后恢复它，确认monitor仍拥有快照并负责清理。控制者退出会使已停止的独立进程组成为孤儿组，Linux可先自动发送SIGHUP/SIGCONT；因此测试允许随后显式SIGCONT发现进程已退出，但仍必须取得monitor确认交接成功的标记、两个进程实际消失、私有目录删除和源数据不变的全部证据，不以ESRCH本身判定成功。[进程退出时的孤儿进程组处理](https://sourceware.org/glibc/manual/latest/html_node/Termination-Internals.html)
+
+测试还覆盖handover、keep、准备失败及READY后的guardian异常，报告保存测试、二进制和源文件SHA256以对应实际运行版本。`--module-only`只运行模块部分，不可冒充完整CLI验收。

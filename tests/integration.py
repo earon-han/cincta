@@ -92,6 +92,17 @@ class Suite:
         assert observed["errno"] in accepted, observed
         return {"operation": observed, "result": result}
 
+    def missing_grant(self, path):
+        args, result = self.command(["/bin/sh", "-c", "printf must-not-execute"], ["--ro", path])
+        proc = subprocess.run(args, capture_output=True, text=True, timeout=15)
+        assert proc.returncode == 125, (proc.returncode, proc.stdout, proc.stderr)
+        assert "must-not-execute" not in proc.stdout
+        assert "pin filesystem policy" in proc.stderr and str(path) in proc.stderr, proc.stderr
+        # Output identity cannot be validated until policy roots are pinned.
+        # Early failure therefore produces stderr without creating the result.
+        assert not result.exists(), "result was created before policy identity validation"
+        return {"exit_code": proc.returncode, "stderr": proc.stderr, "result_created": False}
+
     @staticmethod
     def stopped(pid):
         try:
@@ -204,7 +215,7 @@ class Suite:
         self.test("filesystem.single-file-grant", lambda: self.action("read", readable, options=["--ro", readable]))
         for operation in ("chmod", "chown", "utime", "xattr"):
             self.test("filesystem.metadata-" + operation, lambda op=operation: self.action(op, readable, options=["--rw", allowed], expected=errno.EPERM))
-        self.test("filesystem.grant-missing-fail-closed", lambda: self.run(["/bin/true"], ["--ro", area / "missing"], expected=125, status="setup_error")[1])
+        self.test("filesystem.grant-missing-fail-closed", lambda: self.missing_grant(area / "missing"))
         self.test("setup.add-rule-denial-fails-closed", lambda: self.injected_setup_test("deny-add-rule-exec", area, "security"))
         self.test("setup.landlock-denial-fails-closed", lambda: self.injected_setup_test("deny-landlock-exec", area, "capabilities"))
         self.test("setup.seccomp-denial-fails-closed", lambda: self.injected_setup_test("deny-seccomp-exec", area, "capabilities"))

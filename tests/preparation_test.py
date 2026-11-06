@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Real preparation cancellation tests; never replace guard effects with mocks."""
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -215,22 +216,30 @@ class Suite:
 
     def buffered_handover(self, area, source, scratch):
         proc = subprocess.Popen([str(self.helper), "buffered-handover", str(scratch), str(source)],
-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=0)
         guardian = monitor = None
         try:
             ready = json.loads(proc.stdout.readline())
             guardian = ready["guardian"]
             monitor = json.loads(proc.stdout.readline())["monitor"]
             assert proc.wait(timeout=8) == 0
-            os.kill(guardian, signal.SIGCONT)
+            # Exiting the controller orphans the stopped guardian's process
+            # group: Linux may send SIGHUP/SIGCONT and reap it before we run.
+            # ESRCH is harmless only if the monitor proves D won below.
+            guardian_already_exited = False
+            try:
+                os.kill(guardian, signal.SIGCONT)
+            except ProcessLookupError:
+                guardian_already_exited = True
             stdout, stderr = proc.communicate(timeout=10)
-            assert "buffered-handover-owned-by-monitor" in stdout, (stdout, stderr)
+            assert b"buffered-handover-owned-by-monitor" in stdout, (stdout, stderr)
             self.wait_gone(guardian)
             self.wait_gone(monitor)
             assert not Path(ready["container"]).exists()
             assert list(scratch.iterdir()) == []
             assert (source / "file").read_text() == "unchanged-source"
             return {"parent_died_with_D_buffered": True, "monitor_retained_cleanup_ownership": True,
+                    "guardian_exited_before_explicit_SIGCONT": guardian_already_exited,
                     "guardian_and_monitor_reaped": True}
         finally:
             if guardian and Path(f"/proc/{guardian}").exists():
@@ -358,6 +367,11 @@ def main():
             suite.case("preparation.cli-keep-after-handover", suite.cli_keep)
         report = {"schema_version": 1, "environment": args.environment,
                   "kernel": platform.release(), "architecture": platform.machine(), "uid": os.getuid(),
+                  "test_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                  "binary_sha256": hashlib.sha256(Path(suite.binary).read_bytes()).hexdigest()
+                      if Path(suite.binary).is_file() else None,
+                  "source_sha256": {str(path): hashlib.sha256(path.read_bytes()).hexdigest()
+                                    for path in sorted([*Path("src").glob("*.c"), *Path("include").glob("*.h")])},
                   "module_only": args.module_only, "build_command": command,
                   "counts": {state: sum(row["outcome"] == state for row in suite.rows)
                              for state in ("PASS", "FAIL", "BLOCKED")}, "results": suite.rows}

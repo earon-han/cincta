@@ -29,7 +29,7 @@ sudo env CINCTA_X86_VM_DIR=/tmp/cincta-x86-vm sh scripts/validate_x86_vm.sh
 
 ## 覆盖与证据
 
-初始开发轮已在 Linux6.18.60-0-virt / Landlock ABI7 中，以严格模式完成26项验证；扩展后当前开发快照为34 PASS、0 FAIL、0 BLOCKED。最终交付必须在源码冻结后重跑。扩展套件继续覆盖：
+冻结源码 `4437fcbab6386d46c81c385927532f1fdf043bf3` 已通过 `git archive` 完整导出，清空本任务交叉构建目录后重新编译，并在 Linux6.18.60-0-virt / Landlock ABI7 中，以严格模式完成 **34 PASS、0 FAIL、0 BLOCKED**。被测 cincta 与业务命令均为普通 UID501。套件覆盖：
 
 - 内容默认拒绝、单文件读取和目录写入、只读拒绝。
 - no_new_privs、默认断网、ptrace/bpf/namespace/io_uring/进程组限制、clone3回退。
@@ -41,7 +41,9 @@ sudo env CINCTA_X86_VM_DIR=/tmp/cincta-x86-vm sh scripts/validate_x86_vm.sh
 - 具备客体委派条件时的 cgroup 树配额和累计 CPU 预算。
 - 超时、取消、CLI/monitor 单独 SIGKILL 后后代实际回收。
 
-`reports/v02-x86-kernel.json` 保存环境、probe、逐条结果、PASS/FAIL/BLOCKED、被测二进制/内核/initramfs SHA256；`reports/v02-x86-serial.log` 保存完整串口输出；`reports/v02-x86-source-sha256.txt` 保存源码与二进制清单。开发轮证据不能冒充最终源码验证，最终统计以这组文件和对应源码指纹为准。
+`reports/v02-x86-kernel.json` 保存环境、probe、逐条结果、PASS/FAIL/BLOCKED、被测二进制/内核/initramfs SHA256；`reports/v02-x86-serial.log` 保存完整串口输出；`reports/v02-x86-source-sha256.txt` 保存源码与二进制清单。`reports/v02-x86-provenance.json` 补充冻结提交和来源核对：清单22个条目全部与该提交或取回的被测二进制相符，二进制 SHA256 为 `9ed861ec61e7a9d199262046448ca0d8f4283cf75efb6dc6d868b5c1912e87e7`。开发轮证据不能混入最终验收总数。
+
+本 x86 产物由 GNU libc 交叉工具链静态链接。链接器对 `getaddrinfo` 给出 NSS 可能需要匹配 glibc 共享库的通用提示；本套件实际测试的是数值 IP 的 TCP/UDP，未验证 x86 产物在缺少 NSS 运行库时的域名解析。因此不能仅凭 `file` 的“statically linked”结果宣称 x86 域名/NSS 场景完全没有动态依赖。部署域名策略时必须另行验证目标环境；ARM musl 产物的域名验证结果不能代替本 x86 产物验证。
 
 ## 在 ARM Linux 构建机打包 x86_64 产物
 
