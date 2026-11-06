@@ -1,0 +1,6 @@
+/build/
+/build-*/
+/dist/
+__pycache__/
+*.pyc
+/reports/local-*.json

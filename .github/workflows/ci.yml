@@ -1,0 +1,31 @@
+name: linux
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: make check
+      - run: make test TESTFLAGS="--environment ci-native --report reports/ci-native.json"
+      - run: make clean && make STATIC=1
+      - run: sh scripts/package.sh build/cincta
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-${{ matrix.runner }}
+          path: |
+            reports/*.json
+            dist/*
+  docker:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build --target test -t cincta-test .
+      - run: docker run --rm --cap-drop ALL --security-opt no-new-privileges cincta-test
