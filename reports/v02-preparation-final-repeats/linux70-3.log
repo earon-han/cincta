@@ -1,0 +1,12 @@
+PASS  preparation.partial-before-prepared-sigkill
+PASS  preparation.real-copy-sigkill
+PASS  preparation.buffered-D-parent-death
+PASS  preparation.handover-discard
+PASS  preparation.handover-keep
+PASS  preparation.handover-bad
+PASS  preparation.resource-fail
+PASS  preparation.guardian-death
+PASS  preparation.cli-real-copy-sigkill
+PASS  preparation.cli-copy-error-no-residue
+PASS  preparation.cli-keep-after-handover
+{"PASS": 11, "FAIL": 0, "BLOCKED": 0}

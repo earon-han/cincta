@@ -1,0 +1,13 @@
+{
+  "id": "sha256:0596eb328fd03448827f812b01b1fe434cac23e54cd826ba0913014d8e23e6ed",
+  "architecture": "arm64",
+  "os": "linux",
+  "user": "10001:10001",
+  "entrypoint": [
+    "/cincta"
+  ],
+  "layers": [
+    "sha256:137746b55efaa36e3311351326efba9b2e4fe907b8420ec4e799acf4352321c9"
+  ],
+  "tag": "cincta-delivery-scratch:v02-proof-325420337436767"
+}

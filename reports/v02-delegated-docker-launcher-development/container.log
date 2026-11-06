@@ -1,0 +1,10 @@
+PASS    resources.limits-without-parent-fail-closed
+PASS    resources.fake-filesystem-rejected
+PASS    resources.no-delegation-fail-closed
+PASS    resources.prepare-attach-cleanup
+PASS    resources.aggregate-pids
+PASS    resources.aggregate-memory
+PASS    resources.cpu-bandwidth
+PASS    resources.aggregate-cpu-budget
+PASS    resources.cancel-and-remove
+{"PASS": 9, "FAIL": 0, "BLOCKED": 0}

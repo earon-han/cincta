@@ -1,0 +1,1 @@
+{"id":"975a49e207b2ab0db992cacedb0677e327791a2730f7023c36240399872c554b","image":"sha256:a93f9539182e1f90d7c044962894134476057a29d1adf6cbdfb34f8fe6a84399","user":"501:1000","privileged":false,"cap_drop":["ALL"],"security_opt":["no-new-privileges"],"cgroupns_mode":"host","apparmor_profile":"docker-default","running":false,"exit_code":0}

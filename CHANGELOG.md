@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0-preview.1 — 开发中
+## 0.2.0-preview.1 — 2026-11-06 本地候选
 
 - 启动前固定文件授权根，payload与可信文件worker使用同源Landlock对象。
 - 可选seccomp notification broker，两阶段filter引导与listener/ptracer锁定。

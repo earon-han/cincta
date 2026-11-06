@@ -1,0 +1,8 @@
+[
+  "dockerenv",
+  "cincta",
+  "dev/console",
+  "etc/hostname",
+  "etc/hosts",
+  "etc/resolv.conf"
+]

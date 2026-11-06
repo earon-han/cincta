@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "environment": "preparation-module-vm",
+  "kernel": "6.8.0-147-generic",
+  "architecture": "aarch64",
+  "uid": 501,
+  "module_only": true,
+  "build_command": [
+    "cc",
+    "-std=c17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-O2",
+    "-Iinclude",
+    "src/preparation.c",
+    "src/workspace.c",
+    "src/resources.c",
+    "/tmp/cincta-preparation-tests-_x0m16_w/adapter.c",
+    "-o",
+    "/tmp/cincta-preparation-tests-_x0m16_w/helper"
+  ],
+  "counts": {
+    "PASS": 7,
+    "FAIL": 0,
+    "BLOCKED": 0
+  },
+  "results": [
+    {
+      "name": "preparation.partial-before-prepared-sigkill",
+      "outcome": "PASS",
+      "evidence": {
+        "unprepared_root_removed": true,
+        "external_symlink_not_followed": true,
+        "foreign_directory_preserved": true,
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.real-copy-sigkill",
+      "outcome": "PASS",
+      "evidence": {
+        "container": "/tmp/cincta-preparation-tests-_x0m16_w/2/scratch/cincta-preparation-h2K358",
+        "phase": "baseline",
+        "copied_bytes_at_kill": 1232896,
+        "source_bytes": 536870912
+      }
+    },
+    {
+      "name": "preparation.handover-discard",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "handover-discard",
+        "protocol": [
+          {
+            "guardian": 116593,
+            "container": "/tmp/cincta-preparation-tests-_x0m16_w/3/scratch/cincta-preparation-e5tYaF"
+          },
+          {
+            "root": "/tmp/cincta-preparation-tests-_x0m16_w/3/scratch/cincta-preparation-e5tYaF/cincta-workspace-xdgqcX",
+            "retained": false
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.handover-keep",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "handover-keep",
+        "protocol": [
+          {
+            "guardian": 116596,
+            "container": "/tmp/cincta-preparation-tests-_x0m16_w/4/scratch/cincta-preparation-WaC8Eq"
+          },
+          {
+            "root": "/tmp/cincta-preparation-tests-_x0m16_w/4/scratch/cincta-preparation-WaC8Eq/cincta-workspace-pz5Fsb",
+            "retained": true
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.handover-bad",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "handover-bad",
+        "protocol": [
+          {
+            "guardian": 116599,
+            "container": "/tmp/cincta-preparation-tests-_x0m16_w/5/scratch/cincta-preparation-SaMMAr"
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.resource-fail",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "resource-fail",
+        "protocol": [
+          {
+            "guardian": 116601,
+            "container": "/tmp/cincta-preparation-tests-_x0m16_w/6/scratch/cincta-preparation-y6Kp7N"
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.guardian-death",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "guardian-death",
+        "protocol": [
+          {
+            "guardian": 116603,
+            "container": "/tmp/cincta-preparation-tests-_x0m16_w/7/scratch/cincta-preparation-qdmO8w"
+          }
+        ],
+        "guardian_reaped": true
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 C17 实现、可静态交付的 Linux CLI 沙箱，面向通用 Agent 的非交互命令执行。文件访问由 Landlock 限制，系统调用由经典 seccomp BPF 限制，动态能力由可信 broker 处理；基本运行无需 root、特权容器或 user namespace。
 
-当前开发版本：`0.2.0-preview.1`。功能与验证状态分开记录，最终实测以 [验证报告](docs/validation.md) 为准；原有 v0.1 证据保留在 `reports/`，不算作新版本通过。
+当前预览版本：`0.2.0-preview.1`。功能与验证状态分开记录，最终实测以 [验证报告](docs/validation.md) 为准；原有 v0.1 证据保留在 `reports/`，不算作新版本通过。
 
 | 能力 | v0.2 行为 |
 |---|---|

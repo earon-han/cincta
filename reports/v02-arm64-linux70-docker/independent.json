@@ -1,0 +1,3939 @@
+{
+  "schema_version": 1,
+  "environment": "arm64-linux70-docker-independent",
+  "mode": "strict",
+  "kernel": "7.0.0-34-generic",
+  "architecture": "aarch64",
+  "uid": 10001,
+  "probe": {
+    "schema_version": 1,
+    "landlock_abi": 8,
+    "landlock_errno": 0,
+    "seccomp": true,
+    "seccomp_errno": 0,
+    "strict_supported": true,
+    "compat_supported": true
+  },
+  "binary_sha256": "046277b9de5d089f857d5f0b34871b84f7565e7f97bc6e8c3449daa6a7128928",
+  "test_sha256": "e1b68b6ef83d7b6863e936d5f9268928bfb6394eec524cda6da51d354f10a2f1",
+  "source_sha256": {
+    "src/broker.c": "5c248b739a32d23a3f0173aa5645ef7cc5062bfd658fd55ec112d13ead6da16d",
+    "src/filebroker.c": "533cb5784484831263648aec59b96151c973fda147cb4426397a9890fa9fb4d6",
+    "src/json.c": "2c9153af2da30200631f2b492c854d4895fed4b1a3ce055cc32abf31833bfe1e",
+    "src/main.c": "71eb0e211dcfe6a92b7168ccabc0caa62bef7404bc8d888dace1167fb6d2493f",
+    "src/network.c": "66ead55853d5bef3060db8e4bd7e089f1fa37b4374b886d5abf479fda843d150",
+    "src/preparation.c": "d07d8f87c8473e91faf4fa06717151abd71cf50ca127ae584472689930f22387",
+    "src/resources.c": "d417c98e6f1cfed87c837276c7a06f80051feea98a790d74f14baf0aa9d899fd",
+    "src/result.c": "9ca8d3cd39b4927e330f4a55494a07e4f33d7242329bde8fc0575371c178e97b",
+    "src/security.c": "52b8fab2924da5efd48359b32263e9ab093095184680f477ae182268e6b7aefc",
+    "src/supervisor.c": "5403ff7c600a1abe7613c919f86203c6ac5a8dd67462ea2cc3aca3b494f10fe0",
+    "src/workspace.c": "78cfd3de556fff529ab62f340ee94098abc866b22f8e4c9256b5949d756c761d",
+    "include/broker.h": "dc10119d1c3e5470ae4c5b7fd3b1de3516d7fcf9a5468cb742a2e8ecf718d139",
+    "include/cincta.h": "f3281127a7dfc18bbeb834339dda6814bb3a16301ed3d6999185a7dc9a0172a6",
+    "include/filebroker.h": "f264003938240d1b0a052d04c57cb4cc23aa05a03ef990388147269c16ce3500",
+    "include/json.h": "2128b60bfd1e4500d8822898eb12ffc18b40c9b42cc6be8d290bf82803ebab0e",
+    "include/network.h": "e0bcb39731922c222d4a80ba9cd7da5a9d3a2f31840b0716083c28da5b0866ba",
+    "include/preparation.h": "20d2b89ab604819e47cf3981e03e482120ddad71077272234b57bd84fbd29268",
+    "include/resources.h": "32e92642a9fcbb63b5bf917c7f53ae4f52372f0f5bd129ed3c118afba6b9ef3e",
+    "include/workspace.h": "9e07d735948a23e7e903728a2383b5292f50323bfecff2eaed22d751af7c4fba"
+  },
+  "counts": {
+    "PASS": 48,
+    "FAIL": 0,
+    "BLOCKED": 1
+  },
+  "results": [
+    {
+      "name": "workspace.cli-isolation-diff-export",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 20,
+        "phase_ms": {
+          "setup": 2,
+          "run": 16,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": false,
+          "mode": "events",
+          "records": 0,
+          "complete": true,
+          "path": "",
+          "bytes": 0,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-v02-j2a5dew2/1/source",
+          "root": "/tmp/cincta-preparation-LmggFM/cincta-workspace-L6yjmJ",
+          "tree": "/tmp/cincta-preparation-LmggFM/cincta-workspace-L6yjmJ/tree",
+          "retained": false,
+          "exported": true,
+          "executable": false,
+          "changes": 2,
+          "copied_files": 1,
+          "copied_bytes": 8
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "workspace.explicit-keep",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 14,
+        "phase_ms": {
+          "setup": 2,
+          "run": 12,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": false,
+          "mode": "events",
+          "records": 0,
+          "complete": true,
+          "path": "",
+          "bytes": 0,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-v02-j2a5dew2/2/source",
+          "root": "/tmp/cincta-preparation-sKcIyy/cincta-workspace-dtQ7Jk",
+          "tree": "/tmp/cincta-preparation-sKcIyy/cincta-workspace-dtQ7Jk/tree",
+          "retained": true,
+          "exported": false,
+          "executable": false,
+          "changes": 1,
+          "copied_files": 0,
+          "copied_bytes": 0
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "workspace.reject-cwd",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "rejected": "cwd",
+        "stderr": "cincta: workspace selects cwd: --cwd\n",
+        "result": null
+      }
+    },
+    {
+      "name": "workspace.reject-extra-rw",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "rejected": "extra-rw",
+        "stderr": "cincta: workspace mode permits writes only inside its snapshot: /tmp/cincta-v02-j2a5dew2/4/sibling\n",
+        "result": null
+      }
+    },
+    {
+      "name": "workspace.reject-source-ro",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "rejected": "source-ro",
+        "stderr": "cincta: grant overlaps original workspace: /tmp/cincta-v02-j2a5dew2/5/source\n",
+        "result": null
+      }
+    },
+    {
+      "name": "workspace.reject-ancestor-ro",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "rejected": "ancestor-ro",
+        "stderr": "cincta: grant overlaps original workspace: /tmp/cincta-v02-j2a5dew2/6\n",
+        "result": null
+      }
+    },
+    {
+      "name": "workspace.reject-descendant-rx",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "rejected": "descendant-rx",
+        "stderr": "cincta: grant overlaps original workspace: /tmp/cincta-v02-j2a5dew2/7/source/nested/file\n",
+        "result": null
+      }
+    },
+    {
+      "name": "workspace.reject-intermediate-symlink-grant",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "rejected": "intermediate-symlink-grant",
+        "stderr": "cincta: grant overlaps original workspace: /tmp/cincta-v02-j2a5dew2/8/alias/nested\n",
+        "result": null
+      }
+    },
+    {
+      "name": "workspace.reject-parent-inside-source",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "rejected": "parent-inside-source",
+        "stderr": "cincta: workspace parent must exist outside source: /tmp/cincta-v02-j2a5dew2/9/source/nested\n",
+        "result": null
+      }
+    },
+    {
+      "name": "workspace.writable-stdio-hardlink-denied",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "stderr": "cincta: workspace writable stdio must be a stream, not an external regular file: stdio\n",
+        "result_created": false,
+        "source_unchanged": true
+      }
+    },
+    {
+      "name": "workspace.original-source-content-denied",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 10,
+        "phase_ms": {
+          "setup": 1,
+          "run": 9,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": false,
+          "mode": "events",
+          "records": 0,
+          "complete": true,
+          "path": "",
+          "bytes": 0,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-v02-j2a5dew2/11/source",
+          "root": "/tmp/cincta-preparation-3cjcVv/cincta-workspace-35DtT7",
+          "tree": "/tmp/cincta-preparation-3cjcVv/cincta-workspace-35DtT7/tree",
+          "retained": false,
+          "exported": false,
+          "executable": false,
+          "changes": 0,
+          "copied_files": 1,
+          "copied_bytes": 7
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "workspace.cli-kill-cleanup-export",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "cancelled",
+        "stage": "running",
+        "message": "caller cancelled or exited",
+        "exit_code": 143,
+        "signal": 15,
+        "timed_out": false,
+        "cancelled": true,
+        "cleanup_complete": true,
+        "elapsed_ms": 28,
+        "phase_ms": {
+          "setup": 2,
+          "run": 15,
+          "cleanup": 11
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": false,
+          "mode": "events",
+          "records": 0,
+          "complete": true,
+          "path": "",
+          "bytes": 0,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-v02-j2a5dew2/12/source",
+          "root": "/tmp/cincta-preparation-EX8Ssf/cincta-workspace-DZFjsQ",
+          "tree": "/tmp/cincta-preparation-EX8Ssf/cincta-workspace-DZFjsQ/tree",
+          "retained": false,
+          "exported": true,
+          "executable": false,
+          "changes": 2,
+          "copied_files": 1,
+          "copied_bytes": 8
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "workspace.monitor-kill-cleanup-export",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "setup_error",
+        "stage": "monitor",
+        "message": "trusted monitor terminated unexpectedly",
+        "exit_code": 125,
+        "signal": 9,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 22,
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 0,
+          "seccomp": false,
+          "network": "unconfined",
+          "ipc_scoped": false
+        },
+        "unsupported": [
+          "signal_and_abstract_unix_scopes_require_abi_6"
+        ],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": false,
+          "mode": "events",
+          "records": 0,
+          "complete": true,
+          "path": "",
+          "bytes": 0,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-v02-j2a5dew2/13/source",
+          "root": "/tmp/cincta-preparation-H0Rg3o/cincta-workspace-tTmK98",
+          "tree": "/tmp/cincta-preparation-H0Rg3o/cincta-workspace-tTmK98/tree",
+          "retained": false,
+          "exported": true,
+          "executable": false,
+          "changes": 2,
+          "copied_files": 1,
+          "copied_bytes": 8
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "metadata.chmod",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "chmod",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 28,
+          "phase_ms": {
+            "setup": 2,
+            "run": 15,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/14/audit.jsonl",
+            "bytes": 1583,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287553093918,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287564558073,
+            "tid": 999,
+            "id": 13947867480397682793,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              246512186385392,
+              416,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "authorize",
+            "monotonic_ns": 9287565313048,
+            "tid": 999,
+            "id": 13947867480397682793,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/14/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31342f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              246512186385392,
+              416,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "result",
+            "monotonic_ns": 9287565332133,
+            "tid": 999,
+            "id": 13947867480397682793,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/14/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31342f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              246512186385392,
+              416,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "response",
+            "monotonic_ns": 9287565335724,
+            "tid": 999,
+            "id": 13947867480397682793,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              246512186385392,
+              416,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9287579825668,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.fchmod",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "fchmod",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 29,
+          "phase_ms": {
+            "setup": 2,
+            "run": 16,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/15/audit.jsonl",
+            "bytes": 1451,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287583993191,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287598175890,
+            "tid": 1004,
+            "id": 7554662740553600723,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              388,
+              0,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "authorize",
+            "monotonic_ns": 9287598273321,
+            "tid": 1004,
+            "id": 7554662740553600723,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/15/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31352f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              388,
+              0,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "result",
+            "monotonic_ns": 9287598289233,
+            "tid": 1004,
+            "id": 7554662740553600723,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/15/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31352f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              388,
+              0,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "response",
+            "monotonic_ns": 9287598294954,
+            "tid": 1004,
+            "id": 7554662740553600723,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              388,
+              0,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9287611680499,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.utimensat",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "utimensat",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 29,
+          "phase_ms": {
+            "setup": 1,
+            "run": 16,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/16/audit.jsonl",
+            "bytes": 1635,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287615587886,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287628334303,
+            "tid": 1009,
+            "id": 10449328538361000618,
+            "syscall": 88,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              252200704631792,
+              281474443658208,
+              0,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "authorize",
+            "monotonic_ns": 9287629224546,
+            "tid": 1009,
+            "id": 10449328538361000618,
+            "syscall": 88,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/16/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31362f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              252200704631792,
+              281474443658208,
+              0,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "result",
+            "monotonic_ns": 9287629270944,
+            "tid": 1009,
+            "id": 10449328538361000618,
+            "syscall": 88,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/16/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31362f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              252200704631792,
+              281474443658208,
+              0,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "response",
+            "monotonic_ns": 9287629277960,
+            "tid": 1009,
+            "id": 10449328538361000618,
+            "syscall": 88,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              252200704631792,
+              281474443658208,
+              0,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9287642905725,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.xattr",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "xattr",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 33,
+          "phase_ms": {
+            "setup": 0,
+            "run": 21,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 10,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/17/audit.jsonl",
+            "bytes": 2799,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287646966963,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287660026889,
+            "tid": 1014,
+            "id": 4260026217988551441,
+            "syscall": 5,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              260834728894512,
+              260834728842864,
+              260834728842144,
+              4,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "authorize",
+            "monotonic_ns": 9287661956464,
+            "tid": 1014,
+            "id": 4260026217988551441,
+            "syscall": 5,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/17/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31372f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              260834728894512,
+              260834728842864,
+              260834728842144,
+              4,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "result",
+            "monotonic_ns": 9287662681037,
+            "tid": 1014,
+            "id": 4260026217988551441,
+            "syscall": 5,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/17/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31372f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              260834728894512,
+              260834728842864,
+              260834728842144,
+              4,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "response",
+            "monotonic_ns": 9287662693691,
+            "tid": 1014,
+            "id": 4260026217988551441,
+            "syscall": 5,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              260834728894512,
+              260834728842864,
+              260834728842144,
+              4,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287662767902,
+            "tid": 1014,
+            "id": 4260026217988551442,
+            "syscall": 14,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              260834728894512,
+              260834728842912,
+              0,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "authorize",
+            "monotonic_ns": 9287664699858,
+            "tid": 1014,
+            "id": 4260026217988551442,
+            "syscall": 14,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/17/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31372f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              260834728894512,
+              260834728842912,
+              0,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "result",
+            "monotonic_ns": 9287665327083,
+            "tid": 1014,
+            "id": 4260026217988551442,
+            "syscall": 14,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/17/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31372f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              260834728894512,
+              260834728842912,
+              0,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "response",
+            "monotonic_ns": 9287665335436,
+            "tid": 1014,
+            "id": 4260026217988551442,
+            "syscall": 14,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              260834728894512,
+              260834728842912,
+              0,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9287679201370,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.same-owner",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "same-owner",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 30,
+          "phase_ms": {
+            "setup": 0,
+            "run": 19,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/18/audit.jsonl",
+            "bytes": 1607,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287682870838,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287696327921,
+            "tid": 1019,
+            "id": 6722974092405763821,
+            "syscall": 54,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              274680655012848,
+              10001,
+              10001,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "authorize",
+            "monotonic_ns": 9287698459417,
+            "tid": 1019,
+            "id": 6722974092405763821,
+            "syscall": 54,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/18/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31382f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              274680655012848,
+              10001,
+              10001,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "result",
+            "monotonic_ns": 9287698490947,
+            "tid": 1019,
+            "id": 6722974092405763821,
+            "syscall": 54,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/18/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31382f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              274680655012848,
+              10001,
+              10001,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "response",
+            "monotonic_ns": 9287698497504,
+            "tid": 1019,
+            "id": 6722974092405763821,
+            "syscall": 54,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              274680655012848,
+              10001,
+              10001,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9287712408332,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.suid",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "suid",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 27,
+          "phase_ms": {
+            "setup": 1,
+            "run": 15,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/19/audit.jsonl",
+            "bytes": 1587,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287716552760,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287726694769,
+            "tid": 1024,
+            "id": 17896815579855401498,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              251307382890384,
+              2541,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "authorize",
+            "monotonic_ns": 9287729745323,
+            "tid": 1024,
+            "id": 17896815579855401498,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/19/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31392f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              251307382890384,
+              2541,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "result",
+            "monotonic_ns": 9287729761526,
+            "tid": 1024,
+            "id": 17896815579855401498,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/19/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31392f72772f66696c65",
+            "value": 0,
+            "errno": 1,
+            "args": [
+              18446744073709551516,
+              251307382890384,
+              2541,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "deny",
+            "monotonic_ns": 9287729767373,
+            "tid": 1024,
+            "id": 17896815579855401498,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 1,
+            "args": [
+              18446744073709551516,
+              251307382890384,
+              2541,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9287743442496,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.external-owner",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "external-owner",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 31,
+          "phase_ms": {
+            "setup": 1,
+            "run": 18,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/20/audit.jsonl",
+            "bytes": 1607,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287747184087,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287758925626,
+            "tid": 1029,
+            "id": 11486763258879566338,
+            "syscall": 54,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              261928674811792,
+              10002,
+              10001,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "authorize",
+            "monotonic_ns": 9287762152791,
+            "tid": 1029,
+            "id": 11486763258879566338,
+            "syscall": 54,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/20/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f32302f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              261928674811792,
+              10002,
+              10001,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "result",
+            "monotonic_ns": 9287762165988,
+            "tid": 1029,
+            "id": 11486763258879566338,
+            "syscall": 54,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/20/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f32302f72772f66696c65",
+            "value": 0,
+            "errno": 1,
+            "args": [
+              18446744073709551516,
+              261928674811792,
+              10002,
+              10001,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "deny",
+            "monotonic_ns": 9287762172127,
+            "tid": 1029,
+            "id": 11486763258879566338,
+            "syscall": 54,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 1,
+            "args": [
+              18446744073709551516,
+              261928674811792,
+              10002,
+              10001,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9287776434091,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.readonly",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "readonly",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 32,
+          "phase_ms": {
+            "setup": 1,
+            "run": 19,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 4,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/21/audit.jsonl",
+            "bytes": 867,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287780605790,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287793869557,
+            "tid": 1034,
+            "id": 15750573929988893510,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              257277232766864,
+              384,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "deny",
+            "monotonic_ns": 9287797032785,
+            "tid": 1034,
+            "id": 15750573929988893510,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 13,
+            "args": [
+              18446744073709551516,
+              257277232766864,
+              384,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9287811344446,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.outside-link",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "outside-link",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 30,
+          "phase_ms": {
+            "setup": 2,
+            "run": 16,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 4,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/22/audit.jsonl",
+            "bytes": 865,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287815314017,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287825383943,
+            "tid": 1039,
+            "id": 6663974641826571055,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              274986395983600,
+              384,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "deny",
+            "monotonic_ns": 9287828669493,
+            "tid": 1039,
+            "id": 6663974641826571055,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 13,
+            "args": [
+              18446744073709551516,
+              274986395983600,
+              384,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9287842984829,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.inside-link",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "inside-link",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 33,
+          "phase_ms": {
+            "setup": 2,
+            "run": 19,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 4,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/23/audit.jsonl",
+            "bytes": 865,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287848423256,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287862096499,
+            "tid": 1044,
+            "id": 7858804702147976098,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              258956385279728,
+              384,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "deny",
+            "monotonic_ns": 9287865126172,
+            "tid": 1044,
+            "id": 7858804702147976098,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 13,
+            "args": [
+              18446744073709551516,
+              258956385279728,
+              384,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9287879379199,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.dotdot-escape",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "dotdot-escape",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 33,
+          "phase_ms": {
+            "setup": 2,
+            "run": 19,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 4,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/24/audit.jsonl",
+            "bytes": 865,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287883360296,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287897160873,
+            "tid": 1049,
+            "id": 4431831712723402656,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              256689505984240,
+              384,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "deny",
+            "monotonic_ns": 9287899827508,
+            "tid": 1049,
+            "id": 4431831712723402656,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 13,
+            "args": [
+              18446744073709551516,
+              256689505984240,
+              384,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9287914065208,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.security-xattr",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "security-xattr",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 30,
+          "phase_ms": {
+            "setup": 2,
+            "run": 17,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/25/audit.jsonl",
+            "bytes": 1607,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287919251476,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287930398196,
+            "tid": 1054,
+            "id": 18317040754072123317,
+            "syscall": 5,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              266182375792528,
+              266182375740896,
+              266182375740224,
+              4,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "authorize",
+            "monotonic_ns": 9287933354702,
+            "tid": 1054,
+            "id": 18317040754072123317,
+            "syscall": 5,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/25/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f32352f72772f66696c65",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              266182375792528,
+              266182375740896,
+              266182375740224,
+              4,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "result",
+            "monotonic_ns": 9287934092012,
+            "tid": 1054,
+            "id": 18317040754072123317,
+            "syscall": 5,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/25/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f32352f72772f66696c65",
+            "value": 0,
+            "errno": 1,
+            "args": [
+              266182375792528,
+              266182375740896,
+              266182375740224,
+              4,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "deny",
+            "monotonic_ns": 9287934103246,
+            "tid": 1054,
+            "id": 18317040754072123317,
+            "syscall": 5,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 1,
+            "args": [
+              266182375792528,
+              266182375740896,
+              266182375740224,
+              4,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9287947358869,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.unicode-long-target",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "unicode-long-target",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 53,
+          "phase_ms": {
+            "setup": 3,
+            "run": 37,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/26/audit.jsonl",
+            "bytes": 3375,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 9287953336277,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 9287968655616,
+            "tid": 1059,
+            "id": 14879208634984811402,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              444949344,
+              416,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "authorize",
+            "monotonic_ns": 9287988887137,
+            "tid": 1059,
+            "id": 14879208634984811402,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/26/rw/目录0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录4xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/引号\"换行\n",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f32362f72772fe79baee5bd953078787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953178787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953278787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953378787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953478787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe5bc95e58fb722e68da2e8a18c0a",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              444949344,
+              416,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "result",
+            "monotonic_ns": 9287988947984,
+            "tid": 1059,
+            "id": 14879208634984811402,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-j2a5dew2/26/rw/目录0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录4xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/引号\"换行\n",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f32362f72772fe79baee5bd953078787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953178787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953278787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953378787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953478787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe5bc95e58fb722e68da2e8a18c0a",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              444949344,
+              416,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "response",
+            "monotonic_ns": 9287988976090,
+            "tid": 1059,
+            "id": 14879208634984811402,
+            "syscall": 53,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              18446744073709551516,
+              444949344,
+              416,
+              1,
+              0,
+              11719560
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 9288003291927,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "audit.events",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 12,
+          "phase_ms": {
+            "setup": 1,
+            "run": 10,
+            "cleanup": 0
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": false,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 2,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/27/audit.jsonl",
+            "bytes": 363,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "events": 2,
+        "stdout": "business-output\n",
+        "event_types": [
+          "finish",
+          "start"
+        ]
+      }
+    },
+    {
+      "name": "audit.syscalls",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 40,
+          "phase_ms": {
+            "setup": 1,
+            "run": 28,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "syscall_requests_and_broker_results",
+            "records": 656,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/28/audit.jsonl",
+            "bytes": 172573,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "events": 656,
+        "stdout": "business-output\n",
+        "event_types": [
+          "continue_request",
+          "deny",
+          "file_open_delivery",
+          "file_open_result",
+          "file_open_snapshot",
+          "finish",
+          "request",
+          "start"
+        ]
+      }
+    },
+    {
+      "name": "audit.forged-output",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 45,
+          "phase_ms": {
+            "setup": 2,
+            "run": 31,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "syscall_requests_and_broker_results",
+            "records": 656,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/29/audit.jsonl",
+            "bytes": 172571,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "events": 656,
+        "stdout": "{\"schema_version\":1,\"event\":\"finish\",\"target\":\"FORGED-USER-EVENT\"}\n",
+        "event_types": [
+          "continue_request",
+          "deny",
+          "file_open_delivery",
+          "file_open_result",
+          "file_open_snapshot",
+          "finish",
+          "request",
+          "start"
+        ]
+      }
+    },
+    {
+      "name": "audit.reject-existing",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "rejected": "existing",
+        "stderr": "cincta: audit initialization: create audit: File exists\n",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "setup_error",
+          "stage": "audit",
+          "message": "create audit: File exists",
+          "exit_code": 125,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 0,
+          "phase_ms": {
+            "setup": 0,
+            "run": 0,
+            "cleanup": 0
+          },
+          "protections": {
+            "landlock_abi": 0,
+            "seccomp": false,
+            "network": "unconfined",
+            "ipc_scoped": false
+          },
+          "unsupported": [
+            "signal_and_abstract_unix_scopes_require_abi_6"
+          ],
+          "dynamic": false,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 0,
+            "complete": false,
+            "path": "/tmp/cincta-v02-j2a5dew2/30/existing",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "name": "audit.reject-symlink",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "rejected": "symlink",
+        "stderr": "cincta: audit initialization: create audit: File exists\n",
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "setup_error",
+          "stage": "audit",
+          "message": "create audit: File exists",
+          "exit_code": 125,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 0,
+          "phase_ms": {
+            "setup": 0,
+            "run": 0,
+            "cleanup": 0
+          },
+          "protections": {
+            "landlock_abi": 0,
+            "seccomp": false,
+            "network": "unconfined",
+            "ipc_scoped": false
+          },
+          "unsupported": [
+            "signal_and_abstract_unix_scopes_require_abi_6"
+          ],
+          "dynamic": false,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 0,
+            "complete": false,
+            "path": "/tmp/cincta-v02-j2a5dew2/31/alias",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "name": "audit.reject-writable-parent",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "rejected": "writable-parent",
+        "stderr": "cincta: outputs must have existing trusted parents outside writable grants: result/audit/workspace output\n",
+        "result": null
+      }
+    },
+    {
+      "name": "dynamic.nested-listener-lockdown",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 29,
+        "phase_ms": {
+          "setup": 1,
+          "run": 16,
+          "cleanup": 11
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": true,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": true,
+          "mode": "events",
+          "records": 2,
+          "complete": true,
+          "path": "/tmp/cincta-v02-j2a5dew2/33/audit.jsonl",
+          "bytes": 363,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": false
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "seccomp.new-filesystem-syscalls-static",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "syscalls": {
+          "467": 1,
+          "469": 1,
+          "472": 1
+        },
+        "dynamic": false,
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 16,
+          "phase_ms": {
+            "setup": 0,
+            "run": 16,
+            "cleanup": 0
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": false,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "name": "seccomp.new-filesystem-syscalls-dynamic",
+      "mode": "strict",
+      "outcome": "BLOCKED",
+      "reason": "outer filtering and action precedence prevent proving inner audit observation for [467, 469, 472]",
+      "evidence": {
+        "syscalls": {
+          "467": 38,
+          "469": 38,
+          "472": 38
+        },
+        "dynamic": true,
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 92,
+          "phase_ms": {
+            "setup": 2,
+            "run": 77,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "syscall_requests_and_broker_results",
+            "records": 1405,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/35/audit.jsonl",
+            "bytes": 371028,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "observation": {
+          "467": {
+            "returned_errno": 38,
+            "request_seen": false,
+            "deny_seen": false
+          },
+          "469": {
+            "returned_errno": 38,
+            "request_seen": false,
+            "deny_seen": false
+          },
+          "472": {
+            "returned_errno": 38,
+            "request_seen": false,
+            "deny_seen": false
+          }
+        },
+        "outer_seccomp": "2"
+      }
+    },
+    {
+      "name": "dynamic.broker-sigkill-fail-closed",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "setup_error",
+        "stage": "broker",
+        "message": "notification/audit/maintenance failed",
+        "exit_code": 125,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 13,
+        "phase_ms": {
+          "setup": 1,
+          "run": 10,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": true,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": true,
+          "mode": "events",
+          "records": 6,
+          "complete": true,
+          "path": "/tmp/cincta-v02-j2a5dew2/36/audit.jsonl",
+          "bytes": 1616,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": false
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "results.configuration-error-json",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "setup_error",
+        "stage": "configuration",
+        "message": "cgroup parent must be a writable delegated cgroup v2 directory: No such device",
+        "exit_code": 125,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 3,
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 0,
+          "seccomp": false,
+          "network": "unconfined",
+          "ipc_scoped": false
+        },
+        "unsupported": [
+          "signal_and_abstract_unix_scopes_require_abi_6"
+        ],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": true,
+          "mode": "events",
+          "records": 2,
+          "complete": true,
+          "path": "/tmp/cincta-v02-j2a5dew2/37/audit.jsonl",
+          "bytes": 392,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": false
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "audit.requests-require-output",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "stderr": "cincta: syscall audit requires output: --audit\n",
+        "result": null
+      }
+    },
+    {
+      "name": "stdio.closed-0",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "closed_fds": [
+          0
+        ],
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 28,
+          "phase_ms": {
+            "setup": 3,
+            "run": 13,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/39/audit.jsonl",
+            "bytes": 1583,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_records": 6
+      }
+    },
+    {
+      "name": "stdio.closed-1",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "closed_fds": [
+          1
+        ],
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 26,
+          "phase_ms": {
+            "setup": 2,
+            "run": 12,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/40/audit.jsonl",
+            "bytes": 1587,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_records": 6
+      }
+    },
+    {
+      "name": "stdio.closed-2",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "closed_fds": [
+          2
+        ],
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 26,
+          "phase_ms": {
+            "setup": 2,
+            "run": 12,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/41/audit.jsonl",
+            "bytes": 1583,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_records": 6
+      }
+    },
+    {
+      "name": "stdio.closed-0-1-2",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "closed_fds": [
+          0,
+          1,
+          2
+        ],
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 26,
+          "phase_ms": {
+            "setup": 1,
+            "run": 13,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-j2a5dew2/42/audit.jsonl",
+            "bytes": 1583,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_records": 6
+      }
+    },
+    {
+      "name": "audit.byte-budget-fail-closed",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "setup_error",
+        "stage": "audit",
+        "message": "audit output failed",
+        "exit_code": 125,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 12,
+        "phase_ms": {
+          "setup": 1,
+          "run": 1,
+          "cleanup": 10
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": true,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": true,
+          "mode": "syscall_requests_and_broker_results",
+          "records": 16,
+          "complete": false,
+          "path": "/tmp/cincta-v02-j2a5dew2/43/audit.jsonl",
+          "bytes": 3933,
+          "max_bytes": 4096,
+          "max_records": 1000000,
+          "limit_exceeded": true,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": false
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "audit.record-budget-fail-closed",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "setup_error",
+        "stage": "audit",
+        "message": "audit output failed",
+        "exit_code": 125,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 13,
+        "phase_ms": {
+          "setup": 2,
+          "run": 0,
+          "cleanup": 11
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": true,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": true,
+          "mode": "syscall_requests_and_broker_results",
+          "records": 12,
+          "complete": false,
+          "path": "/tmp/cincta-v02-j2a5dew2/44/audit.jsonl",
+          "bytes": 2892,
+          "max_bytes": 67108864,
+          "max_records": 12,
+          "limit_exceeded": true,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": false
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "stdio.closed-stdout-keeps-trusted-fds-private",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 11,
+        "phase_ms": {
+          "setup": 1,
+          "run": 9,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": true,
+          "mode": "events",
+          "records": 2,
+          "complete": true,
+          "path": "/tmp/cincta-v02-j2a5dew2/45/audit.jsonl",
+          "bytes": 363,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": false
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "stdio.closed-stdin-keeps-trusted-fds-private",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 11,
+        "phase_ms": {
+          "setup": 1,
+          "run": 9,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": true,
+          "mode": "events",
+          "records": 2,
+          "complete": true,
+          "path": "/tmp/cincta-v02-j2a5dew2/46/audit.jsonl",
+          "bytes": 363,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": false
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "workspace.direct-exec-default-denied",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "setup_error",
+        "stage": "exec",
+        "message": "Permission denied",
+        "exit_code": 126,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 3,
+        "phase_ms": {
+          "setup": 2,
+          "run": 1,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": false,
+          "mode": "events",
+          "records": 0,
+          "complete": true,
+          "path": "",
+          "bytes": 0,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-v02-j2a5dew2/47/source",
+          "root": "/tmp/cincta-preparation-AgU321/cincta-workspace-lOFOS7",
+          "tree": "/tmp/cincta-preparation-AgU321/cincta-workspace-lOFOS7/tree",
+          "retained": false,
+          "exported": false,
+          "executable": false,
+          "changes": 0,
+          "copied_files": 1,
+          "copied_bytes": 67792
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "workspace.direct-exec-explicit",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 3,
+        "phase_ms": {
+          "setup": 2,
+          "run": 0,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": false,
+          "mode": "events",
+          "records": 0,
+          "complete": true,
+          "path": "",
+          "bytes": 0,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-v02-j2a5dew2/48/source",
+          "root": "/tmp/cincta-preparation-IwSvB1/cincta-workspace-36TEJC",
+          "tree": "/tmp/cincta-preparation-IwSvB1/cincta-workspace-36TEJC/tree",
+          "retained": false,
+          "exported": false,
+          "executable": true,
+          "changes": 0,
+          "copied_files": 1,
+          "copied_bytes": 67792
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "workspace.compile-and-run",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 41,
+        "phase_ms": {
+          "setup": 2,
+          "run": 28,
+          "cleanup": 10
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true
+        },
+        "unsupported": [],
+        "dynamic": true,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": false,
+          "mode": "events",
+          "records": 0,
+          "complete": true,
+          "path": "",
+          "bytes": 0,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-v02-j2a5dew2/49/source",
+          "root": "/tmp/cincta-preparation-ml2fiS/cincta-workspace-3iuSAO",
+          "tree": "/tmp/cincta-preparation-ml2fiS/cincta-workspace-3iuSAO/tree",
+          "retained": false,
+          "exported": false,
+          "executable": true,
+          "changes": 1,
+          "copied_files": 1,
+          "copied_bytes": 74
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    }
+  ]
+}

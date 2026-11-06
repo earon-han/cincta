@@ -6,16 +6,17 @@
 
 | ID | 状态 | 已有交付 / 验证 | 提交 / 证据 | 阻断与下一步 |
 |---|---|---|---|---|
-| P1 | 进行中 | 详细计划、CLI/结果扩展、独立威胁模型与审查；模块接口已落盘 | 0732842；v02-design-review.md | 最终组合源码复核和文档同步 |
-| P2 | 进行中 | VM实际通知/ADDFD、定向Yama、cgroup委派机制已运行；x86全系统环境在建 | 各模块开发报告 | 完成默认Docker、最小委派Docker和最终x86镜像实测 |
-| P3 | 进行中 | 独立broker、固定policy FD、metadata代执行、file-open worker和引导锁定已实现 | src/security.c、broker.c、filebroker.c | 最终组合回归与故障收尾复核 |
-| P4 | 进行中 | TCP/UDP/CIDR/端口/DNS快照、复制后代执行及24项专门网络测试 | network.c；network_test.py | 最新投递审计补丁后重跑VM/Docker |
-| P5 | 进行中 | 真实业务树cgroup配额和事件驱动monitor已实现，VM资源9项通过 | resources.c；resources_test.py | 最小委派Docker正例、默认Docker负例和最终统计 |
-| P6 | 进行中 | 双副本、diff/export/discard、链接与别名限制已实现；独立模块17项通过 | workspace.c；workspace_test.py | 最终CLI/故障/容器复验，不把物理快照叫透明COW |
-| P7 | 进行中 | 请求/实际结果/FD交付事件、额度/pending检测、新结果对象及Agent示例 | result.c；broker.c；audit.md | 审计覆盖/失败/上限与最终示例复验 |
-| P8 | 进行中 | 独立跨模块36项、文件审计18项开发轮VM通过；legacy83项通过且旧ABI严格执行BLOCKED | reports/v02-*开发记录 | 最终同版本全套VM/Docker、压力/性能、x86全系统验证 |
-| P9.1 | 进行中 | v0.2文档、统一测试/验证脚本、CI及打包入口已更新 | test_all.sh；Makefile；CI；各指南 | 按最终受测提交打包/校验并更新validation实际数字 |
-| P9.2 | 受阻 | 本地分支/提交可审查 | codex/v02-full-sandbox | 此前自动审批拒绝GitHub外发；等待明确目的地批准，不重复尝试 |
+| P1 | 完成 | C17/CLI/结果协议、威胁模型及交叉审查 | 4437fcb；v02-design-review.md | 无已知源码冻结阻断 |
+| P2 | 完成 | 两真实VM/两默认Docker、祖先mem RPC、ADDFD、cgroup最小委派、x86全系统 | reports/v02-*最终证据 | 明确区分部署条件与默认环境 |
+| P3 | 完成 | broker、固定policy/内存FD、metadata、file-open代理、锁定与错误收尾 | 4437fcb；file-audit20项 | 范围与兼容拒绝已文档化 |
+| P4 | 完成 | TCP/UDP、IPv4/IPv6、CIDR/端口/DNS快照；26项专测 | 四环境network.json | 域名是地址能力，不是应用层身份 |
+| P5 | 完成 | 真实cgroup树配额、统计/清理与事件驱动生命周期 | VM及最小委派Docker各9项 | 默认无委派正例仍BLOCKED |
+| P6 | 完成 | 物理双副本、diff/export/discard/keep、构建执行与别名隔离 | workspace17项、独立49项、别名12项 | 无自动写回/透明COW承诺 |
+| P7 | 完成 | 审计结果/交付/预算/完整性、JSON与Agent示例 | broker/result、使用及审计指南 | 外层早拒绝不可观测如实BLOCKED |
+| P8 | 完成 | 主1088 PASS/0FAIL/40条件BLOCKED；400组合、800启动样本 | reports/v02-summary.json；validation.md | 额外重复、artifact验证和共享负载单列 |
+| P9.1 | 完成 | 两架构静态原件、元信息13项、scratch5项及文档齐备 | package.sh；两产物SHA | 两架构包/源码包与来源校验；候选完成后进入P10 |
+| P9.2 | 受阻 | 本地分支与提交可审查 | codex/v02-full-sandbox | 自动审批拒绝GitHub目的地外发，未重复尝试 |
+| P10 | 待办 | 用户追加：候选全部完成后启动全新代码审查Agent | implementation-plan-v02.md | 逐条讨论/判定/修复并功能验证后才通知完成 |
 
 上表模块开发结果只表示相应快照的自验证/独立测试。最终发行数字、受测源码指纹、镜像配置与重复样本统一在 [validation.md](validation.md)；代码更新后必须重跑相关套件，不能相加旧轮次来宣称全功能通过。x86的全系统TCG结果应与aarch64和硬件原生明确分开。
 

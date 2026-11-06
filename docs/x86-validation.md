@@ -43,7 +43,7 @@ sudo env CINCTA_X86_VM_DIR=/tmp/cincta-x86-vm sh scripts/validate_x86_vm.sh
 
 `reports/v02-x86-kernel.json` 保存环境、probe、逐条结果、PASS/FAIL/BLOCKED、被测二进制/内核/initramfs SHA256；`reports/v02-x86-serial.log` 保存完整串口输出；`reports/v02-x86-source-sha256.txt` 保存源码与二进制清单。`reports/v02-x86-provenance.json` 补充冻结提交和来源核对：清单22个条目全部与该提交或取回的被测二进制相符，二进制 SHA256 为 `9ed861ec61e7a9d199262046448ca0d8f4283cf75efb6dc6d868b5c1912e87e7`。开发轮证据不能混入最终验收总数。
 
-本 x86 产物由 GNU libc 交叉工具链静态链接。链接器对 `getaddrinfo` 给出 NSS 可能需要匹配 glibc 共享库的通用提示；本套件实际测试的是数值 IP 的 TCP/UDP，未验证 x86 产物在缺少 NSS 运行库时的域名解析。因此不能仅凭 `file` 的“statically linked”结果宣称 x86 域名/NSS 场景完全没有动态依赖。部署域名策略时必须另行验证目标环境；ARM musl 产物的域名验证结果不能代替本 x86 产物验证。
+本 x86 产物由 GNU libc 交叉工具链静态链接。链接器对 `getaddrinfo` 给出 NSS 可能需要匹配 glibc 共享库的通用提示；本套件实际测试的是数值 IP 的 TCP/UDP，未验证 x86 产物在缺少 NSS 运行库时的域名解析。因此不能仅凭 `file` 的“statically linked”结果宣称 x86 域名/NSS 场景完全没有动态依赖。部署域名策略时必须另行验证目标环境；其他平台或其他libc产物的验证结果不能代替本 x86 产物验证。
 
 ## 在 ARM Linux 构建机打包 x86_64 产物
 
@@ -51,6 +51,7 @@ sudo env CINCTA_X86_VM_DIR=/tmp/cincta-x86-vm sh scripts/validate_x86_vm.sh
 
 ```sh
 CINCTA_SOURCE_REVISION="$(git rev-parse HEAD)" \
+CINCTA_BINARY_SOURCE_REVISION=4437fcbab6386d46c81c385927532f1fdf043bf3 \
 CINCTA_PACKAGE_ARCH=x86_64 \
 CINCTA_PACKAGE_VERSION=0.2.0-preview.1 \
 sh scripts/package.sh /tmp/cincta-x86-vm/build/cincta
@@ -58,7 +59,9 @@ sh scripts/package.sh /tmp/cincta-x86-vm/build/cincta
 
 `CINCTA_PACKAGE_ARCH` 必须与二进制 ELF64 的 `e_machine` 相符；错误架构在打包前拒绝。交叉打包必须明确提供 `CINCTA_PACKAGE_VERSION`，并与 `include/cincta.h` 中的版本一致。脚本不执行异架构二进制，包内 `PACKAGE_INFO` 记录目标架构、构建机架构和版本来源；实际被测二进制身份以报告 SHA256 为准。原生打包不传这两个参数时，仍通过原生程序的 `--version` 读取版本。
 
-导出的源码目录没有 `.git` 时，`CINCTA_SOURCE_REVISION` 必须由导出者提供实际提交号，并核对包内 `SOURCE_SHA256`。打包本身不替代测试，也不把前一开发轮的二进制算作最终源码产物。
+导出的源码目录没有 `.git` 时，`CINCTA_SOURCE_REVISION` 必须由导出者提供实际提交号，并核对包内 `SOURCE_SHA256`。`SOURCE_REVISION` 表示本次打包所用源码与文档的提交；`BINARY_SOURCE_REVISION` 表示二进制构建、受测核心对应的提交，默认与前者相同，也可通过 `CINCTA_BINARY_SOURCE_REVISION` 显式记录。只更新测试、文档和交付证据后重新打包既有受测二进制时，应分别记录这两个来源，并确认核心源文件指纹一致；不能把显式版本号当成构建来源验证。
+
+二进制包也包含原始《实施计划.txt》，`SOURCE_SHA256` 纳入该文件。包内 `BINARY_SHA256` 使用相对文件名 `cincta`，解包并进入包根目录后可直接执行 `sha256sum -c BINARY_SHA256` 核对实际程序。`SOURCE_SHA256` 对应打包时的源文件内容，应在相同来源的完整源码树中核对，不能在仅含程序、文档和示例的二进制包中校验未附带的 C 源码。打包本身不替代测试，也不把前一开发轮的二进制算作最终源码产物。
 
 此轻量 guest 不运行 Docker，也没有完整发行版应用、长期压力或硬件性能结论。TCG 时钟/调度性能不作为产品暖启动预算依据。
 

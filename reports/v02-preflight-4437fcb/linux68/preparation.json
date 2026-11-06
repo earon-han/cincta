@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "environment": "arm64-linux68-vm-preparation",
+  "kernel": "6.8.0-147-generic",
+  "architecture": "aarch64",
+  "uid": 501,
+  "module_only": false,
+  "build_command": [
+    "cc",
+    "-std=c17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-O2",
+    "-Iinclude",
+    "src/preparation.c",
+    "src/workspace.c",
+    "src/resources.c",
+    "/tmp/cincta-preparation-tests-xm38ruga/adapter.c",
+    "-o",
+    "/tmp/cincta-preparation-tests-xm38ruga/helper"
+  ],
+  "counts": {
+    "PASS": 11,
+    "FAIL": 0,
+    "BLOCKED": 0
+  },
+  "results": [
+    {
+      "name": "preparation.partial-before-prepared-sigkill",
+      "outcome": "PASS",
+      "evidence": {
+        "unprepared_root_removed": true,
+        "external_symlink_not_followed": true,
+        "foreign_directory_preserved": true,
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.real-copy-sigkill",
+      "outcome": "PASS",
+      "evidence": {
+        "container": "/tmp/cincta-preparation-tests-xm38ruga/2/scratch/cincta-preparation-2Tz65w",
+        "phase": "baseline",
+        "copied_bytes_at_kill": 2469888,
+        "source_bytes": 536870912
+      }
+    },
+    {
+      "name": "preparation.buffered-D-parent-death",
+      "outcome": "PASS",
+      "evidence": {
+        "parent_died_with_D_buffered": true,
+        "monitor_retained_cleanup_ownership": true,
+        "guardian_and_monitor_reaped": true
+      }
+    },
+    {
+      "name": "preparation.handover-discard",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "handover-discard",
+        "protocol": [
+          {
+            "guardian": 134323,
+            "container": "/tmp/cincta-preparation-tests-xm38ruga/4/scratch/cincta-preparation-8XzSNF"
+          },
+          {
+            "root": "/tmp/cincta-preparation-tests-xm38ruga/4/scratch/cincta-preparation-8XzSNF/cincta-workspace-8wKwaP",
+            "retained": false
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.handover-keep",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "handover-keep",
+        "protocol": [
+          {
+            "guardian": 134326,
+            "container": "/tmp/cincta-preparation-tests-xm38ruga/5/scratch/cincta-preparation-JuC5f6"
+          },
+          {
+            "root": "/tmp/cincta-preparation-tests-xm38ruga/5/scratch/cincta-preparation-JuC5f6/cincta-workspace-guZu72",
+            "retained": true
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.handover-bad",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "handover-bad",
+        "protocol": [
+          {
+            "guardian": 134329,
+            "container": "/tmp/cincta-preparation-tests-xm38ruga/6/scratch/cincta-preparation-LjFwUD"
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.resource-fail",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "resource-fail",
+        "protocol": [
+          {
+            "guardian": 134331,
+            "container": "/tmp/cincta-preparation-tests-xm38ruga/7/scratch/cincta-preparation-cHOymX"
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.guardian-death",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "guardian-death",
+        "protocol": [
+          {
+            "guardian": 134333,
+            "container": "/tmp/cincta-preparation-tests-xm38ruga/8/scratch/cincta-preparation-HNKZ14"
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.cli-real-copy-sigkill",
+      "outcome": "PASS",
+      "evidence": {
+        "container": "/tmp/cincta-preparation-tests-xm38ruga/9/scratch/cincta-preparation-KcWE3R",
+        "phase": "baseline",
+        "copied_bytes_at_kill": 1769472,
+        "source_bytes": 536870912
+      }
+    },
+    {
+      "name": "preparation.cli-copy-error-no-residue",
+      "outcome": "PASS",
+      "evidence": {
+        "exit_code": 125,
+        "stderr": "cincta: workspace preparation: special file rejected: 'fifo'\n",
+        "no_private_directory_residue": true
+      }
+    },
+    {
+      "name": "preparation.cli-keep-after-handover",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 1,
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 4,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": false
+        },
+        "unsupported": [
+          "signal_and_abstract_unix_scopes_require_abi_6"
+        ],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": false,
+          "mode": "events",
+          "records": 0,
+          "complete": true,
+          "path": "",
+          "bytes": 0,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-preparation-tests-xm38ruga/11/source",
+          "root": "/tmp/cincta-preparation-tests-xm38ruga/11/scratch/cincta-preparation-6d7okr/cincta-workspace-twi2nE",
+          "tree": "/tmp/cincta-preparation-tests-xm38ruga/11/scratch/cincta-preparation-6d7okr/cincta-workspace-twi2nE/tree",
+          "retained": true,
+          "exported": false,
+          "executable": false,
+          "changes": 0,
+          "copied_files": 1,
+          "copied_bytes": 16
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    }
+  ]
+}

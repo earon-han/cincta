@@ -1,5 +1,17 @@
 # v0.2 使用指南与结果契约
 
+下载二进制包后，在包所在目录校验压缩包，再解包核对程序：
+
+```sh
+sha256sum -c cincta-0.2.0-preview.1-linux-aarch64.tar.gz.sha256
+tar -xzf cincta-0.2.0-preview.1-linux-aarch64.tar.gz
+cd cincta-0.2.0-preview.1-linux-aarch64
+sha256sum -c BINARY_SHA256
+install -Dm755 cincta "$HOME/.local/bin/cincta"
+```
+
+x86_64使用对应架构文件名。SOURCE_REVISION对应配套源码包，BINARY_SOURCE_REVISION对应实际受测核心；在配套源码根目录可用包内SOURCE_SHA256核对源码和证据。二进制包包含离线文档、示例及原始验证报告。
+
 ## 安装和能力探测
 
 源码静态交付：`make BUILD=build-static STATIC=1`；安装：`make BUILD=build-static install PREFIX=$HOME/.local`。动态构建`make`需要兼容libc；静态启动器仍不包含业务程序自己的loader/库。下载包先在同目录校验SHA256，再安装对应架构。完整环境要求见 [dependencies.md](dependencies.md)。
@@ -70,7 +82,7 @@ cincta run --rx /usr/bin --rx /usr/lib --rw "$work" --cwd "$work" \
 | --workspace-max-files N | 每棵树条目上限，默认100000 |
 | --workspace-max-bytes N | 每棵树普通文件字节上限，默认1GiB |
 
-workspace与自定义cwd冲突；禁止额外rw授权、原目录相交授权以及可写普通文件stdio，避免hardlink/bind别名改到原目录。输出用管道、终端或/dev/null。源应在准备期间静止；快照是物理双副本，不是按需overlay COW，也不是整目录原子快照。条目/字节上限不提供运行期磁盘quota。
+workspace与自定义cwd冲突；布局验证要求statx(STATX_MNT_ID)及可读mountinfo。禁止额外rw授权、原目录相交授权以及可写普通文件stdio，避免hardlink/bind别名改到原目录。输出用管道、终端或/dev/null。源应在准备期间静止；快照是物理双副本，不是按需overlay COW，也不是整目录原子快照。条目/字节上限不提供运行期磁盘quota。
 
 ```sh
 source_dir=$(mktemp -d)

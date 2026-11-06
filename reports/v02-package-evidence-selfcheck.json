@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "scope": "P9 binary package includes complete evidence and working documentation links; not runtime acceptance",
+  "source_revision": "f52601a061daaa1b594bfeae35d864bd5b69190b",
+  "candidate_note": "Current working-tree docs, evidence and packaging changes over f526 snapshot; formal package follows final commit.",
+  "binary_source_revision": "4437fcbab6386d46c81c385927532f1fdf043bf3",
+  "archive_bytes": 1869072,
+  "counts": {
+    "PASS": 7,
+    "FAIL": 0,
+    "BLOCKED": 0
+  },
+  "results": [
+    {
+      "name": "evidence-package.relative-binary-checksum",
+      "outcome": "PASS",
+      "evidence": "cincta: OK"
+    },
+    {
+      "name": "evidence-package.complete-report-tree-identical",
+      "outcome": "PASS",
+      "evidence": {
+        "files": 848,
+        "bytes": 16951666
+      }
+    },
+    {
+      "name": "evidence-package.source-manifest-includes-and-verifies-all-reports",
+      "outcome": "PASS",
+      "evidence": {
+        "manifest_entries": 908,
+        "reports_entries": 848
+      }
+    },
+    {
+      "name": "evidence-package.relative-link-readable:../reports/v02-summary.json",
+      "outcome": "PASS",
+      "evidence": {
+        "bytes": 8515
+      }
+    },
+    {
+      "name": "evidence-package.relative-link-readable:../reports/v02-arm64-linux70-vm/summary.json",
+      "outcome": "PASS",
+      "evidence": {
+        "bytes": 4075
+      }
+    },
+    {
+      "name": "evidence-package.progress-original-plan-link-readable",
+      "outcome": "PASS",
+      "evidence": null
+    },
+    {
+      "name": "evidence-package.archive-checksum",
+      "outcome": "PASS",
+      "evidence": "cincta-0.2.0-preview.1-linux-aarch64.tar.gz: OK"
+    }
+  ]
+}

@@ -1,0 +1,1487 @@
+{
+  "schema_version": 1,
+  "environment": "arm64-linux70-vm-network",
+  "architecture": "aarch64",
+  "kernel": "7.0.0-34-generic",
+  "mode": "strict",
+  "counts": {
+    "PASS": 26,
+    "FAIL": 0,
+    "BLOCKED": 0
+  },
+  "results": [
+    {
+      "name": "network.tcp-ip",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 21,
+          "phase_ms": {
+            "setup": 1,
+            "run": 10,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.1:45555",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 45555,
+              "port_last": 45555
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.tcp-cidr",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 20,
+          "phase_ms": {
+            "setup": 1,
+            "run": 8,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.0/8:46835",
+              "address": "127.0.0.0",
+              "prefix": 8,
+              "protocol": "tcp",
+              "port_first": 46835,
+              "port_last": 46835
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.tcp-domain-snapshot",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 20,
+          "phase_ms": {
+            "setup": 1,
+            "run": 9,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:localhost:53943",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 53943,
+              "port_last": 53943
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.tcp-address-denied",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 19,
+          "phase_ms": {
+            "setup": 1,
+            "run": 8,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.2:53729",
+              "address": "127.0.0.2",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 53729,
+              "port_last": 53729
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.tcp-port-denied",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 20,
+          "phase_ms": {
+            "setup": 0,
+            "run": 10,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.1:51298",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 51298,
+              "port_last": 51298
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.tcp-ipv6",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 22,
+          "phase_ms": {
+            "setup": 1,
+            "run": 10,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:[::1]:48025",
+              "address": "::1",
+              "prefix": 128,
+              "protocol": "tcp",
+              "port_first": 48025,
+              "port_last": 48025
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.udp-sendto",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 21,
+          "phase_ms": {
+            "setup": 1,
+            "run": 9,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "udp:127.0.0.1:38042",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "udp",
+              "port_first": 38042,
+              "port_last": 38042
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.udp-connected",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 22,
+          "phase_ms": {
+            "setup": 1,
+            "run": 11,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "udp:127.0.0.1:51000",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "udp",
+              "port_first": 51000,
+              "port_last": 51000
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.udp-sendmsg",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 21,
+          "phase_ms": {
+            "setup": 1,
+            "run": 10,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "udp:127.0.0.1:49643",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "udp",
+              "port_first": 49643,
+              "port_last": 49643
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.udp-sendmmsg",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 25,
+          "phase_ms": {
+            "setup": 1,
+            "run": 14,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "udp:127.0.0.1:56500",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "udp",
+              "port_first": 56500,
+              "port_last": 56500
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.udp-sendto-denied",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 20,
+          "phase_ms": {
+            "setup": 1,
+            "run": 9,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "udp:127.0.0.2:35032",
+              "address": "127.0.0.2",
+              "prefix": 32,
+              "protocol": "udp",
+              "port_first": 35032,
+              "port_last": 35032
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.udp-sendmsg-denied",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 21,
+          "phase_ms": {
+            "setup": 1,
+            "run": 10,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "udp:127.0.0.2:57073",
+              "address": "127.0.0.2",
+              "prefix": 32,
+              "protocol": "udp",
+              "port_first": 57073,
+              "port_last": 57073
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.ancillary-routing-denied",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 20,
+          "phase_ms": {
+            "setup": 1,
+            "run": 9,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "udp:127.0.0.1:33053",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "udp",
+              "port_first": 33053,
+              "port_last": 33053
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.unix-denied",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 20,
+          "phase_ms": {
+            "setup": 1,
+            "run": 8,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.1:1",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 1,
+              "port_last": 1
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.raw-denied",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 20,
+          "phase_ms": {
+            "setup": 1,
+            "run": 9,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.1:1",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 1,
+              "port_last": 1
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.socketpair-denied",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 21,
+          "phase_ms": {
+            "setup": 1,
+            "run": 10,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.1:1",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 1,
+              "port_last": 1
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.bind-denied",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 20,
+          "phase_ms": {
+            "setup": 0,
+            "run": 10,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.1:1",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 1,
+              "port_last": 1
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.route-option-denied",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 20,
+          "phase_ms": {
+            "setup": 0,
+            "run": 9,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.1:1",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 1,
+              "port_last": 1
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.fd-dup",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 21,
+          "phase_ms": {
+            "setup": 1,
+            "run": 10,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.1:60523",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 60523,
+              "port_last": 60523
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.fork-child-tcp",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 33,
+          "phase_ms": {
+            "setup": 1,
+            "run": 22,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.1:44941",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 44941,
+              "port_last": 44941
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.fork-child-udp",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 32,
+          "phase_ms": {
+            "setup": 1,
+            "run": 21,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "udp:127.0.0.1:40016",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "udp",
+              "port_first": 40016,
+              "port_last": 40016
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.close-produces-eof",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 522,
+          "phase_ms": {
+            "setup": 1,
+            "run": 511,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.1:52865",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 52865,
+              "port_last": 52865
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.thread-private-fd-table",
+      "outcome": "PASS",
+      "evidence": {
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 726,
+          "phase_ms": {
+            "setup": 1,
+            "run": 714,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "allowlist",
+            "ipc_scoped": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [
+            {
+              "rule": "tcp:127.0.0.1:46781",
+              "address": "127.0.0.1",
+              "prefix": 32,
+              "protocol": "tcp",
+              "port_first": 46781,
+              "port_last": 46781
+            }
+          ],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "stdout": "{\"private_thread_fd_errno\":0}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "network.legacy-numeric-denied-127.1",
+      "outcome": "PASS",
+      "evidence": {
+        "returncode": 125,
+        "stderr": "cincta: network policy: numeric IP address must use canonical notation\n"
+      }
+    },
+    {
+      "name": "network.legacy-numeric-denied-2130706433",
+      "outcome": "PASS",
+      "evidence": {
+        "returncode": 125,
+        "stderr": "cincta: network policy: numeric IP address must use canonical notation\n"
+      }
+    },
+    {
+      "name": "network.legacy-numeric-denied-0x7f000001",
+      "outcome": "PASS",
+      "evidence": {
+        "returncode": 125,
+        "stderr": "cincta: network policy: numeric IP address must use canonical notation\n"
+      }
+    }
+  ]
+}
