@@ -221,3 +221,26 @@ probe和原始审计也经主审交叉读取；本报告初版尚不宣称任何
 最终交付结论仍须主 Agent 完成修复版统一冻结、真实多环境回归和交付包核验，
 并在 `review-resolutions-v02.md` 记录最终提交及功能证据；本次源码复核没有
 重新执行已经通过且无新疑点的专项测试。
+
+## 补充：无可见父进程的 docker exec 兼容性
+
+主 Agent 在修复提交 `46d4919` 后提出 caller_capture 的兼容性核对。
+独立实核确认：Docker exec 创建的进程可以是当前 PID 命名空间内的非 PID1，
+但 `getppid()==0`。在 jiuwen-lite 新建专用容器，以 UID65534、cap-drop ALL、
+no-new-privileges、network none、默认 seccomp 和 AppArmor docker-default
+运行，直接 docker exec Python 的原始观测为：
+
+```json
+{"exec_process":{"pid":7,"ppid":0,"uid":65534},"hostconfig":{"Privileged":false,"CapDrop":["ALL"],"SecurityOpt":["no-new-privileges"],"NetworkMode":"none"},"apparmor":"docker-default"}
+```
+
+容器已停止并自动删除。`46d4919` 的 `src/caller.c:24` 只允许
+`parent==0 && getpid()==1` 使用 unbound 模式，会误拒绝上述常用执行方式；
+旧实现对任意 ppid0 都不绑定不可见父进程。认可主 Agent 的修正建议：任意
+`getppid()==0` 返回 caller_fd=-1，仅对当前 PID 命名空间中可见的调用方固定
+pidfd；将代码与文档的“PID1”表述改为“当前 PID 命名空间无可见调用方，
+由 runtime 信号取消”。负值或其他真正的身份探测错误仍失败关闭。
+
+应补真实 docker exec 正常执行及 runtime 发信号取消/后代回收验证，且保留
+可见调用方退出和线程退出语义回归。本段记录的是修复过程中的兼容性回归，
+尚不宣称其补丁或最终验收已经完成。

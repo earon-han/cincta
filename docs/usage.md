@@ -159,3 +159,5 @@ SIGTERM/SIGINT/SIGHUP取消CLI；运行阶段用pidfd/signalfd/timerfd监视业�
 业务终止后，可信记账最多有50ms收尾，delivery_pending未归零必须报告审计失败。发出SIGKILL或成为僵尸不代表完成回收。快照复制等准备耗时计入elapsed/setup，但当前--timeout-ms预算从monitor开始，复制不计入该墙钟预算。准备guard用于未移交monitor前的CLI异常退出清理；其最终覆盖与实测以验证报告为准，不把它说成硬全流程墙钟限制。
 
 `make test`默认六套独立测试；非空TESTFLAGS沿用legacy入口，明确只运行基础套件。`make test-all TEST_LABEL=linux-vm`强制完整验证。委派正例在已正确入组的launcher中设置`CINCTA_CGROUP_PARENT=/delegated/path`。报告位于reports/v02-标签，历史证据不覆盖。通用框架无关示例见 [agent.py](../examples/agent.py)。
+
+调用方按CLI启动时可见的父进程TGID绑定。当前PID namespace隐藏父进程时（如部分docker exec/PID1），结果protections.caller_bound=false，并列出caller_lifetime_unavailable_in_pid_namespace；此时由容器runtime信号控制取消，不能声称自动观察外部调用方退出。

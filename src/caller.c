@@ -21,7 +21,8 @@ int caller_capture(int *fd)
 {
     *fd = -1;
     pid_t parent = getppid();
-    if (parent == 0 && getpid() == 1) return 0;
+    /* Runtime exec children can have a parent outside this PID namespace. */
+    if (parent == 0) return 0;
     if (parent <= 0) { errno = ESRCH; return -1; }
     int pinned = (int)syscall(SYS_pidfd_open, parent, 0);
     if (pinned < 0) return -1;

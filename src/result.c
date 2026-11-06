@@ -52,15 +52,19 @@ int result_write(const struct config *cfg, const struct capabilities *caps,
     fprintf(f, ",\"message\":"); json_string(f, message);
     fprintf(f, ",\"exit_code\":%d,\"signal\":%d,\"timed_out\":%s,\"cancelled\":%s,"
         "\"cleanup_complete\":%s,\"elapsed_ms\":%llu,\"phase_ms\":{\"setup\":%llu,\"run\":%llu,\"cleanup\":%llu},\"protections\":{"
-        "\"landlock_abi\":%d,\"seccomp\":%s,\"network\":\"%s\",\"ipc_scoped\":%s},"
+        "\"landlock_abi\":%d,\"seccomp\":%s,\"network\":\"%s\",\"ipc_scoped\":%s,\"caller_bound\":%s},"
         "\"unsupported\":[", exit_code, term_signal, timed_out ? "true" : "false",
         cancelled ? "true" : "false", cleanup_complete ? "true" : "false",
         (unsigned long long)(elapsed_ms + cfg->preparation_ms), (unsigned long long)(setup_ms + cfg->preparation_ms),
         (unsigned long long)run_ms, (unsigned long long)cleanup_ms,
         active ? caps->landlock_abi : 0,
         active && caps->seccomp ? "true" : "false", active ? (cfg->network_allowlist ? "allowlist" : cfg->network_host ? "host" : "none") : "unconfined",
-        active && caps->landlock_abi >= 6 ? "true" : "false");
+        active && caps->landlock_abi >= 6 ? "true" : "false", cfg->caller_fd >= 0 ? "true" : "false");
     if (caps->landlock_abi < 6) json_string(f, "signal_and_abstract_unix_scopes_require_abi_6");
+    if (cfg->caller_fd < 0) {
+        if (caps->landlock_abi < 6) fputc(',', f);
+        json_string(f, "caller_lifetime_unavailable_in_pid_namespace");
+    }
     fprintf(f, "],\"dynamic\":%s,\"network_snapshot\":", cfg->state && cfg->state->dynamic_active ? "true" : "false");
     if (cfg->network) network_write_snapshot(f, cfg->network); else fputs("[]", f);
     fprintf(f, ",\"audit\":{\"enabled\":%s,\"mode\":\"%s\",\"records\":%llu,\"complete\":%s,\"path\":",

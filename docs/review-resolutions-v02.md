@@ -8,4 +8,7 @@
 | F2 / P2 | 主Agent复跑原候选：diff.count=0，源0755/导出0700。[原始输出](../reports/v02-review-root-confirm/F2.json) | 认可公开diff契约缺陷；以`.`记录根变化，复制量与预算仍排除根；独立审查者复核实现 | manifest收集根权限和mtime，统一差异比较；新增root chmod、mtime、不变及精确预算回归 | 模块21项分别VM/Docker通过，CLI3项通过，reports/v02-review-F2-*；最终集成重验待完成 |
 | F3 / P2 | 主Agent复跑原候选：pathlen4095、fchmod返回0、mode仍0600。[原始输出](../reports/v02-review-root-confirm/F3.txt) | 认可返回值与审计真实性缺陷；与实现/审查Agent讨论后选择完整buffer读取，支持合法4095字节而非简单拒绝；双方认可，截满明确ENAMETOOLONG且错误分支防御errno0 | readlink使用完整buffer、仅n<size补NUL；metadata失败零errno转EIO；新增4094/4095/4096边界，payload fstat与父driver dirfd stat双侧核验 | 隔离VM52PASS、默认Docker51PASS+1既有观察BLOCKED，F3专项两环境6PASS；reports/v02-review-f3；最终集成重验待完成 |
 
-没有尚未讨论的分歧。修复分工：主Agent处理F1和集成，fix_workspace_root处理F2，fix_metadata_path处理F3；final_code_review及原发现者独立复核，未由实现者自评替代。当前三项实现已落盘，等待修复版冻结、完整功能重验、来源更新及重新打包后关闭。
+
+| F4 / 兼容性补充 | 主Agent检查46d后发现parent0仅限PID1可能误拒；独立审查者在默认安全Docker实测docker exec为PID7/PPID0；主Agent修复后实际exec与signal取消3PASS。[原始报告](../reports/v02-review-namespace/docker-exec-check.json) | 双方讨论确认PID namespace隐藏parent不限PID1，恢复旧版任意ppid0不绑定语义；其他身份错误仍fail closed | caller_capture接受任意parent0；结果新增protections.caller_bound与明确unsupported原因，文档按实际能力描述；新增host Docker exec功能回归 | 默认profile/nonroot/capdrop/NNP下直接exec成功、SIGTERM取消和实际payload回收3PASS；最终artifact再验待完成 |
+
+没有尚未讨论的分歧。修复分工：主Agent处理F1和集成，fix_workspace_root处理F2，fix_metadata_path处理F3；final_code_review及原发现者独立复核，未由实现者自评替代。当前三项原始问题及一项兼容补充均已修复，等待修复版冻结、完整功能重验、来源更新及重新打包后关闭。
