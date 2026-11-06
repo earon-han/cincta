@@ -1,0 +1,43 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  180.7kB
+Step 1/10 : ARG BASE_IMAGE=ubuntu:24.04
+Step 2/10 : FROM ${BASE_IMAGE} AS build
+ ---> fe81560990fa
+Step 3/10 : RUN apt-get update && apt-get install -y --no-install-recommends build-essential python3 ca-certificates file     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 3f8d87efb8e1
+Step 4/10 : WORKDIR /src
+ ---> Using cache
+ ---> 9e884aaa2d95
+Step 5/10 : COPY . .
+ ---> 31163fd0e4e0
+Step 6/10 : RUN make STATIC=1 && mkdir -p /out && cp build/cincta /out/cincta
+ ---> Running in c49f5418e6b7
+mkdir -p build
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/main.c -o build/main.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/result.c -o build/result.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/security.c -o build/security.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/supervisor.c -o build/supervisor.o
+cc -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE build/main.o build/result.o build/security.o build/supervisor.o -Wl,-z,relro,-z,now,-z,noexecstack -static -o build/cincta
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE tests/adversary.c -Wl,-z,relro,-z,now,-z,noexecstack -static -o build/adversary
+ ---> Removed intermediate container c49f5418e6b7
+ ---> 425b8e155bf8
+Step 7/10 : FROM build AS test
+ ---> 425b8e155bf8
+Step 8/10 : RUN useradd --create-home --uid 10001 tester && chown -R tester:tester /src
+ ---> Running in a605c60eca31
+ ---> Removed intermediate container a605c60eca31
+ ---> 73974285d9c5
+Step 9/10 : USER tester
+ ---> Running in b46c8372d61c
+ ---> Removed intermediate container b46c8372d61c
+ ---> de381f512fb3
+Step 10/10 : CMD ["python3", "tests/integration.py", "--binary", "build/cincta", "--helper", "build/adversary", "--environment", "docker"]
+ ---> Running in 0494f86f52f5
+ ---> Removed intermediate container 0494f86f52f5
+ ---> 918c423d9d78
+Successfully built 918c423d9d78
+Successfully tagged cincta-test:238c008

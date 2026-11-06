@@ -1,0 +1,4 @@
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/supervisor.c -o build-gcc15/supervisor.o
+cc -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE build-gcc15/main.o build-gcc15/result.o build-gcc15/security.o build-gcc15/supervisor.o -Wl,-z,relro,-z,now,-z,noexecstack -pie -o build-gcc15/cincta
+PYTHONPYCACHEPREFIX=build-gcc15/pycache python3 -m py_compile tests/integration.py scripts/benchmark.py
+sh -n scripts/validate.sh scripts/package.sh

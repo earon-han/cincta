@@ -1,0 +1,41 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  180.7kB
+Step 1/13 : ARG BASE_IMAGE=ubuntu:24.04
+Step 2/13 : FROM ${BASE_IMAGE} AS build
+ ---> fe81560990fa
+Step 3/13 : RUN apt-get update && apt-get install -y --no-install-recommends build-essential python3 ca-certificates file     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 3f8d87efb8e1
+Step 4/13 : WORKDIR /src
+ ---> Using cache
+ ---> 9e884aaa2d95
+Step 5/13 : COPY . .
+ ---> Using cache
+ ---> 31163fd0e4e0
+Step 6/13 : RUN make STATIC=1 && mkdir -p /out && cp build/cincta /out/cincta
+ ---> Using cache
+ ---> 425b8e155bf8
+Step 7/13 : FROM build AS test
+ ---> 425b8e155bf8
+Step 8/13 : RUN useradd --create-home --uid 10001 tester && chown -R tester:tester /src
+ ---> Using cache
+ ---> 73974285d9c5
+Step 9/13 : USER tester
+ ---> Using cache
+ ---> de381f512fb3
+Step 10/13 : CMD ["python3", "tests/integration.py", "--binary", "build/cincta", "--helper", "build/adversary", "--environment", "docker"]
+ ---> Using cache
+ ---> 918c423d9d78
+Step 11/13 : FROM scratch AS binary
+ ---> 
+Step 12/13 : COPY --from=build /out/cincta /cincta
+ ---> a5664b8e356d
+Step 13/13 : ENTRYPOINT ["/cincta"]
+ ---> Running in 900083f7264f
+ ---> Removed intermediate container 900083f7264f
+ ---> c6557c2f7761
+Successfully built c6557c2f7761
+Successfully tagged cincta:238c008

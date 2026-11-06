@@ -1,0 +1,2 @@
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/supervisor.c -o build-static/supervisor.o
+cc -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE build-static/main.o build-static/result.o build-static/security.o build-static/supervisor.o -Wl,-z,relro,-z,now,-z,noexecstack -static -o build-static/cincta

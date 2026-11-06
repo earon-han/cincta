@@ -1,0 +1,21 @@
+{
+  "direct": {
+    "samples": 100,
+    "failures": 0,
+    "median_ms": 1.5397945,
+    "p95_ms": 3.336451,
+    "max_ms": 4.100027
+  },
+  "sandbox": {
+    "samples": 100,
+    "failures": 0,
+    "median_ms": 20.667931000000003,
+    "p95_ms": 21.983028,
+    "max_ms": 22.446272,
+    "phase_median_ms": {
+      "setup": 0.0,
+      "run": 10.0,
+      "cleanup": 0.0
+    }
+  }
+}

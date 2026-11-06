@@ -1,0 +1,1 @@
+{"image":"sha256:918c423d9d78621fd8386fd2808c741b91f51d094f715aa54afba068a07898b8","user":"tester","privileged":false,"cap_drop":["ALL"],"security_opt":["no-new-privileges"],"apparmor":"docker-default","exit_code":0}
