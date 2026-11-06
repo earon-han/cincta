@@ -286,8 +286,10 @@ int supervise(const struct config *cfg)
     /* pidfd follows the calling process, not just the spawning thread (the
      * latter would cause spurious cancellation with PR_SET_PDEATHSIG). */
     pid_t caller = getppid();
-    int caller_fd = (int)syscall(SYS_pidfd_open, caller, 0);
-    if (caller_fd < 0) { perror("cincta: caller pidfd"); return 125; }
+    /* A container's PID 1 has no visible parent (getppid()==0). Its runtime
+     * cancels it with signals; there is no in-namespace caller to watch. */
+    int caller_fd = caller > 0 ? (int)syscall(SYS_pidfd_open, caller, 0) : -1;
+    if (caller > 0 && caller_fd < 0) { perror("cincta: caller pidfd"); return 125; }
     if (getppid() != caller) caught = SIGTERM;
     if (prctl(PR_SET_CHILD_SUBREAPER, 1) < 0 || signal_children(false) < 0) {
         close(caller_fd); perror("cincta: recovery setup"); return 125;

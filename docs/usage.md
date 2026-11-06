@@ -85,6 +85,6 @@ stdout/stderr保留业务输出；沙箱日志写stderr且前缀 `cincta:`。业
 
 SIGTERM/SIGINT/SIGHUP取消CLI。取消、超时立即SIGKILL工作组；正常返回后也回收后台后代。monitor是subreaper，反复读真实procfs children，在wait前对固定子进程身份发送信号，含无SIGCHLD clone；仅ECHILD才算完成。等待约2秒，内核不可中断任务可能导致清理不完整。
 
-CLI用pidfd监视调用方**进程**，仅启动线程退出不取消。CLI单独SIGKILL由monitor管道EOF兜底；monitor单独崩溃由CLI第二层subreaper兜底。两层同时强杀、内核崩溃或断电不保证清理。僵尸不算回收完成。
+CLI用pidfd监视调用方**进程**，仅启动线程退出不取消。作为容器PID1运行时getppid=0，没有namespace内调用方可监视，由容器运行时向CLI发送取消信号。CLI单独SIGKILL由monitor管道EOF兜底；monitor单独崩溃由CLI第二层subreaper兜底。两层同时强杀、内核崩溃或断电不保证清理。僵尸不算回收完成。
 
 AS/CPU逐进程、NPROC按真实UID累计，root可能豁免。这些不是总树配额；输出量、磁盘、总树内存/CPU由调用方额外提供cgroup/独立UID/磁盘配额，并持续消费输出。通用框架无关调用见 [agent.py](../examples/agent.py)。
