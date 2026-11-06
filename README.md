@@ -46,7 +46,7 @@ sh scripts/validate.sh linux-vm
 docker build --target test -t cincta-test .
 docker run --rm --cap-drop ALL --security-opt no-new-privileges cincta-test
 make package
-sha256sum -c dist/*.sha256
+(cd dist && sha256sum -c *.sha256)
 ```
 
 `reports/` 保存真实运行数据，PASS、FAIL、BLOCKED 分开统计。容器使用宿主内核，不能补齐宿主缺失的 Landlock。资源限额是逐进程/同 UID 语义，需要总量隔离时由调用方额外配置 cgroup 或容器限额。
