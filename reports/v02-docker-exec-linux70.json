@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "kernel": "7.0.0-34-generic",
+  "architecture": "aarch64",
+  "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+  "test_sha256": "d6d9f37868b4a59ac90e9302fd04ea86d97ddf077f3ccaa3b48964dc3cf6ae6b",
+  "security": {
+    "image": "sha256:f3f32e31e6855feb0228e22c48d45428b06c2a5482db3790658600cc75e52092",
+    "user": "tester",
+    "privileged": false,
+    "cap_drop": [
+      "ALL"
+    ],
+    "security_opt": [
+      "no-new-privileges"
+    ],
+    "apparmor": "docker-default",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/tmp/cincta-v02-final-reviewed/build-static/cincta",
+        "Destination": "/tested/cincta",
+        "Mode": "",
+        "RW": false,
+        "Propagation": "rprivate"
+      }
+    ]
+  },
+  "results": [
+    {
+      "name": "hidden-caller-exec-success",
+      "outcome": "PASS",
+      "result": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 0,
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true,
+          "caller_bound": false
+        },
+        "unsupported": [
+          "caller_lifetime_unavailable_in_pid_namespace"
+        ],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": false,
+          "mode": "events",
+          "records": 0,
+          "complete": true,
+          "path": "",
+          "bytes": 0,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": false
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "hidden-caller-runtime-signal-cancel",
+      "outcome": "PASS",
+      "identity": {
+        "cli": 39,
+        "ppid": 0
+      },
+      "result": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "cancelled",
+        "stage": "running",
+        "message": "caller cancelled or exited",
+        "exit_code": 143,
+        "signal": 15,
+        "timed_out": false,
+        "cancelled": true,
+        "cleanup_complete": true,
+        "elapsed_ms": 58,
+        "phase_ms": {
+          "setup": 1,
+          "run": 57,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true,
+          "caller_bound": false
+        },
+        "unsupported": [
+          "caller_lifetime_unavailable_in_pid_namespace"
+        ],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": false,
+          "mode": "events",
+          "records": 0,
+          "complete": true,
+          "path": "",
+          "bytes": 0,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": false
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "exec-payload-actually-reaped",
+      "outcome": "PASS",
+      "pid": 47
+    }
+  ],
+  "counts": {
+    "PASS": 3,
+    "FAIL": 0,
+    "BLOCKED": 0
+  }
+}

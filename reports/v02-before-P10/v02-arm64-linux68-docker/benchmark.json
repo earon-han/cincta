@@ -1,0 +1,1858 @@
+{
+  "schema_version": 1,
+  "source_revision": "f52601a061daaa1b594bfeae35d864bd5b69190b",
+  "source_fingerprint_sha256": "9491f59aca64a551bcb10e7a98a9a34370598eb3c17ad5617c3136bb25267805",
+  "binary_sha256": "046277b9de5d089f857d5f0b34871b84f7565e7f97bc6e8c3449daa6a7128928",
+  "kernel": "6.8.0-147-generic",
+  "architecture": "aarch64",
+  "uid": 10001,
+  "policy": [
+    "/src/build/cincta",
+    "run",
+    "--compat",
+    "--rx",
+    "/usr/bin",
+    "--rx",
+    "/usr/lib",
+    "--",
+    "/bin/true"
+  ],
+  "concurrency": 1,
+  "probe": {
+    "schema_version": 1,
+    "landlock_abi": 4,
+    "landlock_errno": 0,
+    "seccomp": true,
+    "seccomp_errno": 0,
+    "strict_supported": false,
+    "compat_supported": true
+  },
+  "summary": {
+    "direct": {
+      "samples": 100,
+      "failures": 0,
+      "median_ms": 0.2666855,
+      "p95_ms": 0.594704,
+      "max_ms": 1.900403
+    },
+    "sandbox": {
+      "samples": 100,
+      "failures": 0,
+      "median_ms": 1.3095325,
+      "p95_ms": 1.725654,
+      "max_ms": 2.191817,
+      "phase_median_ms": {
+        "setup": 0.0,
+        "run": 0.0,
+        "cleanup": 0.0
+      }
+    }
+  },
+  "raw_samples": {
+    "direct": [
+      {
+        "index": 0,
+        "elapsed_ms": 1.072908,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 1,
+        "elapsed_ms": 0.346081,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 2,
+        "elapsed_ms": 0.279873,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 3,
+        "elapsed_ms": 0.363372,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 4,
+        "elapsed_ms": 0.321873,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 5,
+        "elapsed_ms": 0.304123,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 6,
+        "elapsed_ms": 0.326247,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 7,
+        "elapsed_ms": 0.381164,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 8,
+        "elapsed_ms": 0.476038,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 9,
+        "elapsed_ms": 0.421914,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 10,
+        "elapsed_ms": 0.594704,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 11,
+        "elapsed_ms": 0.370164,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 12,
+        "elapsed_ms": 0.273664,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 13,
+        "elapsed_ms": 0.309498,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 14,
+        "elapsed_ms": 0.574996,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 15,
+        "elapsed_ms": 0.261706,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 16,
+        "elapsed_ms": 0.334747,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 17,
+        "elapsed_ms": 0.272748,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 18,
+        "elapsed_ms": 0.266748,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 19,
+        "elapsed_ms": 0.375205,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 20,
+        "elapsed_ms": 0.237915,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 21,
+        "elapsed_ms": 0.243831,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 22,
+        "elapsed_ms": 0.320415,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 23,
+        "elapsed_ms": 0.31079,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 24,
+        "elapsed_ms": 0.246248,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 25,
+        "elapsed_ms": 0.245999,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 26,
+        "elapsed_ms": 0.277165,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 27,
+        "elapsed_ms": 0.214415,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 28,
+        "elapsed_ms": 0.247331,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 29,
+        "elapsed_ms": 0.216415,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 30,
+        "elapsed_ms": 0.412497,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 31,
+        "elapsed_ms": 0.301539,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 32,
+        "elapsed_ms": 0.21854,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 33,
+        "elapsed_ms": 0.327039,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 34,
+        "elapsed_ms": 0.302248,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 35,
+        "elapsed_ms": 0.261873,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 36,
+        "elapsed_ms": 0.267498,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 37,
+        "elapsed_ms": 0.230499,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 38,
+        "elapsed_ms": 0.400413,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 39,
+        "elapsed_ms": 0.300081,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 40,
+        "elapsed_ms": 0.391289,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 41,
+        "elapsed_ms": 0.315039,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 42,
+        "elapsed_ms": 0.301457,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 43,
+        "elapsed_ms": 0.279623,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 44,
+        "elapsed_ms": 0.280957,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 45,
+        "elapsed_ms": 0.317998,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 46,
+        "elapsed_ms": 0.366789,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 47,
+        "elapsed_ms": 0.276289,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 48,
+        "elapsed_ms": 0.214956,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 49,
+        "elapsed_ms": 0.266956,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 50,
+        "elapsed_ms": 0.274957,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 51,
+        "elapsed_ms": 0.247039,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 52,
+        "elapsed_ms": 0.234957,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 53,
+        "elapsed_ms": 1.900403,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 54,
+        "elapsed_ms": 0.421622,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 55,
+        "elapsed_ms": 0.244624,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 56,
+        "elapsed_ms": 0.266456,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 57,
+        "elapsed_ms": 0.276123,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 58,
+        "elapsed_ms": 0.347248,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 59,
+        "elapsed_ms": 0.224332,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 60,
+        "elapsed_ms": 0.26304,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 61,
+        "elapsed_ms": 0.726786,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 62,
+        "elapsed_ms": 0.636203,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 63,
+        "elapsed_ms": 0.318664,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 64,
+        "elapsed_ms": 0.568746,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 65,
+        "elapsed_ms": 0.297581,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 66,
+        "elapsed_ms": 0.25179,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 67,
+        "elapsed_ms": 0.242373,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 68,
+        "elapsed_ms": 0.220665,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 69,
+        "elapsed_ms": 0.18629,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 70,
+        "elapsed_ms": 0.207374,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 71,
+        "elapsed_ms": 0.187124,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 72,
+        "elapsed_ms": 0.28729,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 73,
+        "elapsed_ms": 0.194498,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 74,
+        "elapsed_ms": 0.174499,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 75,
+        "elapsed_ms": 0.174291,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 76,
+        "elapsed_ms": 0.225999,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 77,
+        "elapsed_ms": 0.259082,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 78,
+        "elapsed_ms": 0.277873,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 79,
+        "elapsed_ms": 0.232456,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 80,
+        "elapsed_ms": 0.244998,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 81,
+        "elapsed_ms": 0.242748,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 82,
+        "elapsed_ms": 0.266623,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 83,
+        "elapsed_ms": 0.213248,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 84,
+        "elapsed_ms": 0.204832,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 85,
+        "elapsed_ms": 0.21554,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 86,
+        "elapsed_ms": 0.200665,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 87,
+        "elapsed_ms": 0.205707,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 88,
+        "elapsed_ms": 0.215748,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 89,
+        "elapsed_ms": 0.187249,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 90,
+        "elapsed_ms": 0.185165,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 91,
+        "elapsed_ms": 0.20004,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 92,
+        "elapsed_ms": 0.188416,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 93,
+        "elapsed_ms": 0.193915,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 94,
+        "elapsed_ms": 0.237415,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 95,
+        "elapsed_ms": 0.187207,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 96,
+        "elapsed_ms": 0.172457,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 97,
+        "elapsed_ms": 0.186249,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 98,
+        "elapsed_ms": 0.216207,
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "index": 99,
+        "elapsed_ms": 0.212082,
+        "exit_code": 0,
+        "stderr": ""
+      }
+    ],
+    "sandbox": [
+      {
+        "index": 0,
+        "elapsed_ms": 2.191817,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 1,
+        "elapsed_ms": 1.81982,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 2,
+        "elapsed_ms": 1.663946,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 3,
+        "elapsed_ms": 1.268657,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 4,
+        "elapsed_ms": 1.476948,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 5,
+        "elapsed_ms": 1.229366,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 1,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 6,
+        "elapsed_ms": 1.66903,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 7,
+        "elapsed_ms": 1.381657,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 8,
+        "elapsed_ms": 1.290032,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 9,
+        "elapsed_ms": 1.140409,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 10,
+        "elapsed_ms": 1.409824,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 11,
+        "elapsed_ms": 1.551614,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 12,
+        "elapsed_ms": 1.544197,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 13,
+        "elapsed_ms": 1.222991,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 14,
+        "elapsed_ms": 1.234366,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 15,
+        "elapsed_ms": 1.392157,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 16,
+        "elapsed_ms": 1.290657,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 17,
+        "elapsed_ms": 1.269699,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 1,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 18,
+        "elapsed_ms": 1.555072,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 19,
+        "elapsed_ms": 1.302449,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 20,
+        "elapsed_ms": 1.308824,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 21,
+        "elapsed_ms": 1.18945,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 22,
+        "elapsed_ms": 1.293241,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 23,
+        "elapsed_ms": 1.282491,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 24,
+        "elapsed_ms": 1.432198,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 25,
+        "elapsed_ms": 1.432406,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 26,
+        "elapsed_ms": 1.265658,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 27,
+        "elapsed_ms": 1.199533,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 28,
+        "elapsed_ms": 1.673154,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 29,
+        "elapsed_ms": 1.548364,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 1,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 30,
+        "elapsed_ms": 1.332949,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 31,
+        "elapsed_ms": 1.213158,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 32,
+        "elapsed_ms": 1.170533,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 1,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 33,
+        "elapsed_ms": 1.164575,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 34,
+        "elapsed_ms": 1.213283,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 35,
+        "elapsed_ms": 1.447073,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 36,
+        "elapsed_ms": 1.668654,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 37,
+        "elapsed_ms": 1.288199,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 1,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 38,
+        "elapsed_ms": 1.206949,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 39,
+        "elapsed_ms": 1.218783,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 40,
+        "elapsed_ms": 1.249866,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 41,
+        "elapsed_ms": 1.344115,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 42,
+        "elapsed_ms": 1.359657,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 43,
+        "elapsed_ms": 1.313948,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 1,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 44,
+        "elapsed_ms": 1.219908,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 45,
+        "elapsed_ms": 1.42874,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 46,
+        "elapsed_ms": 1.633113,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 47,
+        "elapsed_ms": 1.720862,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 48,
+        "elapsed_ms": 1.339532,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 49,
+        "elapsed_ms": 1.310241,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 50,
+        "elapsed_ms": 1.314949,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 51,
+        "elapsed_ms": 1.286741,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 52,
+        "elapsed_ms": 1.1917,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 53,
+        "elapsed_ms": 1.418865,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 54,
+        "elapsed_ms": 1.458448,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 1,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 55,
+        "elapsed_ms": 1.24245,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 56,
+        "elapsed_ms": 1.164783,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 57,
+        "elapsed_ms": 1.286407,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 58,
+        "elapsed_ms": 1.304616,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 59,
+        "elapsed_ms": 1.513822,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 60,
+        "elapsed_ms": 1.296574,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 61,
+        "elapsed_ms": 1.167825,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 62,
+        "elapsed_ms": 1.142908,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 63,
+        "elapsed_ms": 1.218575,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 64,
+        "elapsed_ms": 1.663029,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 65,
+        "elapsed_ms": 1.905486,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 66,
+        "elapsed_ms": 1.451656,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 1,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 67,
+        "elapsed_ms": 1.298991,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 68,
+        "elapsed_ms": 1.187492,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 69,
+        "elapsed_ms": 1.424949,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 1,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 70,
+        "elapsed_ms": 1.725654,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 71,
+        "elapsed_ms": 1.59128,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 72,
+        "elapsed_ms": 1.338908,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 73,
+        "elapsed_ms": 1.216199,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 74,
+        "elapsed_ms": 1.239658,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 75,
+        "elapsed_ms": 1.241866,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 76,
+        "elapsed_ms": 1.535572,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 77,
+        "elapsed_ms": 1.494823,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 78,
+        "elapsed_ms": 1.360906,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 79,
+        "elapsed_ms": 1.179908,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 80,
+        "elapsed_ms": 1.1487,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 81,
+        "elapsed_ms": 1.386573,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 82,
+        "elapsed_ms": 1.745987,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 83,
+        "elapsed_ms": 1.391324,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 84,
+        "elapsed_ms": 1.23695,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 85,
+        "elapsed_ms": 1.36324,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 86,
+        "elapsed_ms": 1.16695,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 87,
+        "elapsed_ms": 1.59553,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 1,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 88,
+        "elapsed_ms": 1.60678,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 89,
+        "elapsed_ms": 1.273574,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 90,
+        "elapsed_ms": 1.124201,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 91,
+        "elapsed_ms": 1.115784,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 92,
+        "elapsed_ms": 1.254783,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 93,
+        "elapsed_ms": 1.315073,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 94,
+        "elapsed_ms": 1.546697,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 95,
+        "elapsed_ms": 1.590697,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 96,
+        "elapsed_ms": 1.270699,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 97,
+        "elapsed_ms": 1.129617,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 0,
+          "run": 1,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 98,
+        "elapsed_ms": 1.165491,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      },
+      {
+        "index": 99,
+        "elapsed_ms": 1.447698,
+        "exit_code": 0,
+        "stderr": "",
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "cleanup_complete": true
+      }
+    ]
+  },
+  "measurement_boundary": "wall clock around subprocess.run includes spawn/setup/exec/cleanup/result fsync; phase_ms contains monitor's measured setup/run/cleanup (millisecond resolution)"
+}

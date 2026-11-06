@@ -86,6 +86,10 @@ PASS    compat stability.repeated-concurrent
 PASS  workspace.independent-copy-and-discard
 PASS  workspace.diff-export-immutable-source
 PASS  workspace.unchanged-and-safe-relative-link
+PASS  workspace.root-chmod
+PASS  workspace.root-mtime
+PASS  workspace.root-unchanged
+PASS  workspace.root-budget
 PASS  workspace.symlink-absolute
 PASS  workspace.symlink-escape
 PASS  workspace.symlink-dangling
@@ -100,10 +104,11 @@ PASS  workspace.output-conflict-source-subtree
 PASS  workspace.payload-symlink-revalidated
 PASS  workspace.mode000-discard
 PASS  workspace.private-root-identity
-{"PASS": 17, "FAIL": 0, "BLOCKED": 0}
+{"PASS": 21, "FAIL": 0, "BLOCKED": 0}
 PASS  preparation.partial-before-prepared-sigkill
 PASS  preparation.real-copy-sigkill
 PASS  preparation.buffered-D-parent-death
+PASS  preparation.caller-death-overrides-buffered-D
 PASS  preparation.handover-discard
 PASS  preparation.handover-keep
 PASS  preparation.handover-bad
@@ -112,7 +117,10 @@ PASS  preparation.guardian-death
 PASS  preparation.cli-real-copy-sigkill
 PASS  preparation.cli-copy-error-no-residue
 PASS  preparation.cli-keep-after-handover
-{"PASS": 11, "FAIL": 0, "BLOCKED": 0}
+PASS  preparation.original-caller-natural-exit
+PASS  preparation.original-caller-stopped-cli
+PASS  preparation.original-caller-dns-only
+{"PASS": 15, "FAIL": 0, "BLOCKED": 0}
 PASS direct-bind-result 
 PASS direct-bind-audit 
 PASS nested-bind-result 
@@ -154,6 +162,9 @@ PASS network.legacy-numeric-denied-2130706433
 PASS network.legacy-numeric-denied-0x7f000001 
 {"PASS": 26, "FAIL": 0, "BLOCKED": 0}
 PASS    workspace.cli-isolation-diff-export
+PASS    workspace.root-chmod
+PASS    workspace.root-mtime
+PASS    workspace.root-unchanged
 PASS    workspace.explicit-keep
 PASS    workspace.reject-cwd
 PASS    workspace.reject-extra-rw
@@ -179,6 +190,9 @@ PASS    metadata.inside-link
 PASS    metadata.dotdot-escape
 PASS    metadata.security-xattr
 PASS    metadata.unicode-long-target
+PASS    metadata.fd-path-bytes-4094
+PASS    metadata.fd-path-bytes-4095
+PASS    metadata.fd-path-bytes-4096
 PASS    audit.events
 PASS    audit.syscalls
 PASS    audit.forged-output
@@ -202,7 +216,7 @@ PASS    stdio.closed-stdin-keeps-trusted-fds-private
 PASS    workspace.direct-exec-default-denied
 PASS    workspace.direct-exec-explicit
 PASS    workspace.compile-and-run
-{"PASS": 49, "FAIL": 0, "BLOCKED": 0}
+{"PASS": 55, "FAIL": 0, "BLOCKED": 0}
 PASS read-allowed 
 PASS read-denied 
 PASS create-allowed 
@@ -234,4 +248,4 @@ PASS    resources.cpu-bandwidth
 PASS    resources.aggregate-cpu-budget
 PASS    resources.cancel-and-remove
 {"PASS": 9, "FAIL": 0, "BLOCKED": 0}
-{"environment": "arm64-linux68-vm", "counts": {"PASS": 227, "FAIL": 0, "BLOCKED": 1}, "report": "reports/v02-arm64-linux68-vm/summary.json"}
+{"environment": "arm64-linux68-vm", "counts": {"PASS": 241, "FAIL": 0, "BLOCKED": 1}, "report": "/tmp/cincta-clean-reviewed68-vm/summary.json"}

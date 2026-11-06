@@ -132,17 +132,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 2,
+        "elapsed_ms": 1,
         "phase_ms": {
           "setup": 1,
           "run": 0,
-          "cleanup": 1
+          "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -183,17 +184,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 0,
         "phase_ms": {
-          "setup": 2,
-          "run": 1,
+          "setup": 0,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -234,17 +236,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 2,
+        "elapsed_ms": 1,
         "phase_ms": {
           "setup": 1,
-          "run": 1,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -301,7 +304,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -351,15 +355,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 0,
-            "run": 1,
+            "setup": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -407,17 +412,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
             "run": 0,
-            "cleanup": 1
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -465,17 +471,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
-            "cleanup": 1
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -523,17 +530,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -581,17 +589,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -641,15 +650,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 0,
-            "run": 1,
+            "setup": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -697,17 +707,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -755,9 +766,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -765,7 +776,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -823,7 +835,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -873,15 +886,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
-            "run": 0,
+            "setup": 0,
+            "run": 1,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -929,17 +943,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
             "setup": 0,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -987,17 +1002,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1055,7 +1071,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1105,15 +1122,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 0,
-            "run": 1,
+            "setup": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1146,7 +1164,7 @@
       "outcome": "PASS",
       "evidence": {
         "exit_code": 125,
-        "stderr": "cincta: pin filesystem policy: pin rule '/tmp/cincta-tests-sn6i6an1/strict-amfssx15/missing': No such file or directory\n",
+        "stderr": "cincta: pin filesystem policy: pin rule '/tmp/cincta-tests-bhsfv4v2/strict-75h485zz/missing': No such file or directory\n",
         "result_created": false
       }
     },
@@ -1168,9 +1186,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 0,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 0,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -1178,7 +1196,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1223,9 +1242,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 0,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 0,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -1233,7 +1252,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1280,9 +1300,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -1290,7 +1310,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1332,9 +1353,9 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 1,
+        "elapsed_ms": 0,
         "phase_ms": {
-          "setup": 1,
+          "setup": 0,
           "run": 0,
           "cleanup": 0
         },
@@ -1342,7 +1363,8 @@
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -1393,7 +1415,8 @@
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -1434,17 +1457,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 2,
+        "elapsed_ms": 1,
         "phase_ms": {
           "setup": 1,
           "run": 0,
-          "cleanup": 1
+          "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -1491,9 +1515,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -1501,7 +1525,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1551,15 +1576,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
-            "run": 0,
+            "setup": 0,
+            "run": 1,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1607,9 +1633,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -1617,7 +1643,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1665,9 +1692,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -1675,7 +1702,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1723,17 +1751,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1781,9 +1810,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -1791,7 +1820,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1839,17 +1869,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
             "run": 0,
-            "cleanup": 1
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1897,17 +1928,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
-            "run": 0,
-            "cleanup": 1
+            "setup": 0,
+            "run": 1,
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -1955,9 +1987,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -1965,7 +1997,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2013,17 +2046,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2071,9 +2105,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -2081,7 +2115,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2129,17 +2164,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
-            "cleanup": 1
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2187,9 +2223,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -2197,7 +2233,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2245,9 +2282,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -2255,7 +2292,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2303,17 +2341,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2361,17 +2400,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
             "run": 0,
-            "cleanup": 1
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2419,17 +2459,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
-            "cleanup": 1
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2477,17 +2518,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2535,9 +2577,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -2545,7 +2587,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2593,17 +2636,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
+            "setup": 1,
             "run": 0,
-            "cleanup": 1
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2651,17 +2695,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
-            "run": 1,
+            "setup": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2719,7 +2764,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2767,17 +2813,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
             "run": 0,
-            "cleanup": 1
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2827,15 +2874,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 0,
-            "run": 1,
+            "setup": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2883,9 +2931,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -2893,7 +2941,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2941,9 +2990,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -2951,7 +3000,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2993,17 +3043,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 4,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 1,
-          "run": 3,
+          "setup": 0,
+          "run": 1,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3044,17 +3095,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 0,
         "phase_ms": {
-          "setup": 2,
-          "run": 1,
+          "setup": 0,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3095,17 +3147,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 1,
-          "run": 2,
+          "setup": 0,
+          "run": 1,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3152,9 +3205,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -3162,7 +3215,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -3212,15 +3266,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 0,
-            "run": 1,
+            "setup": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -3268,17 +3323,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -3320,17 +3376,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 1013,
+        "elapsed_ms": 1027,
         "phase_ms": {
           "setup": 0,
-          "run": 1013,
+          "run": 1027,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3373,15 +3430,16 @@
         "cleanup_complete": true,
         "elapsed_ms": 212,
         "phase_ms": {
-          "setup": 3,
-          "run": 198,
-          "cleanup": 11
+          "setup": 0,
+          "run": 202,
+          "cleanup": 10
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3422,17 +3480,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 20,
+        "elapsed_ms": 21,
         "phase_ms": {
-          "setup": 1,
-          "run": 9,
-          "cleanup": 10
+          "setup": 0,
+          "run": 10,
+          "cleanup": 11
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3473,17 +3532,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 13,
+        "elapsed_ms": 12,
         "phase_ms": {
-          "setup": 1,
-          "run": 1,
-          "cleanup": 11
+          "setup": 0,
+          "run": 2,
+          "cleanup": 10
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3524,17 +3584,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 13,
+        "elapsed_ms": 12,
         "phase_ms": {
-          "setup": 0,
-          "run": 2,
-          "cleanup": 11
+          "setup": 1,
+          "run": 1,
+          "cleanup": 10
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3575,17 +3636,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 0,
         "phase_ms": {
-          "setup": 2,
-          "run": 1,
+          "setup": 0,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3626,17 +3688,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 21,
+        "elapsed_ms": 23,
         "phase_ms": {
-          "setup": 2,
+          "setup": 1,
           "run": 9,
-          "cleanup": 10
+          "cleanup": 13
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3680,17 +3743,18 @@
           "timed_out": false,
           "cancelled": true,
           "cleanup_complete": true,
-          "elapsed_ms": 22,
+          "elapsed_ms": 23,
           "phase_ms": {
-            "setup": 2,
-            "run": 9,
-            "cleanup": 11
+            "setup": 1,
+            "run": 10,
+            "cleanup": 12
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -3732,7 +3796,7 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 21,
+        "elapsed_ms": 10,
         "phase_ms": {
           "setup": 0,
           "run": 0,
@@ -3742,7 +3806,8 @@
           "landlock_abi": 0,
           "seccomp": false,
           "network": "unconfined",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3785,17 +3850,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 22,
+        "elapsed_ms": 21,
         "phase_ms": {
-          "setup": 2,
-          "run": 9,
-          "cleanup": 11
+          "setup": 1,
+          "run": 10,
+          "cleanup": 10
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3836,17 +3902,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 122,
+        "elapsed_ms": 133,
         "phase_ms": {
-          "setup": 1,
-          "run": 110,
-          "cleanup": 11
+          "setup": 0,
+          "run": 120,
+          "cleanup": 13
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3896,17 +3963,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 2,
+        "elapsed_ms": 1,
         "phase_ms": {
           "setup": 1,
-          "run": 1,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3949,15 +4017,16 @@
         "cleanup_complete": true,
         "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 0,
-          "run": 1,
+          "setup": 1,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -4008,17 +4077,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 4,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 3,
-          "run": 1,
+          "setup": 1,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -4059,17 +4129,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 2,
-          "run": 1,
+          "setup": 1,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -4110,17 +4181,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 0,
         "phase_ms": {
-          "setup": 2,
-          "run": 1,
+          "setup": 0,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -4167,17 +4239,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
-            "cleanup": 1
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4225,9 +4298,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -4235,7 +4308,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4283,17 +4357,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4341,17 +4416,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4399,17 +4475,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4457,17 +4534,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4515,17 +4593,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4573,17 +4652,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
             "setup": 0,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4631,17 +4711,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4689,17 +4770,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4747,17 +4829,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 4,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 3,
+            "setup": 0,
             "run": 0,
-            "cleanup": 1
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4805,17 +4888,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4863,9 +4947,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -4873,7 +4957,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4921,9 +5006,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -4931,7 +5016,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -4979,17 +5065,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5022,7 +5109,7 @@
       "outcome": "PASS",
       "evidence": {
         "exit_code": 125,
-        "stderr": "cincta: pin filesystem policy: pin rule '/tmp/cincta-tests-sn6i6an1/compat-5nf0jwpv/missing': No such file or directory\n",
+        "stderr": "cincta: pin filesystem policy: pin rule '/tmp/cincta-tests-bhsfv4v2/compat-i2nqawk8/missing': No such file or directory\n",
         "result_created": false
       }
     },
@@ -5044,9 +5131,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -5054,7 +5141,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5099,7 +5187,7 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
             "setup": 0,
             "run": 0,
@@ -5109,7 +5197,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -5156,9 +5245,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -5166,7 +5255,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5208,9 +5298,9 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 3,
+          "setup": 1,
           "run": 0,
           "cleanup": 0
         },
@@ -5218,7 +5308,8 @@
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -5259,9 +5350,9 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 2,
+          "setup": 1,
           "run": 0,
           "cleanup": 0
         },
@@ -5269,7 +5360,8 @@
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -5310,17 +5402,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 2,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 1,
-          "run": 0,
+          "setup": 0,
+          "run": 1,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -5367,17 +5460,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5427,15 +5521,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
-            "run": 0,
+            "setup": 0,
+            "run": 1,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5493,7 +5588,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5541,9 +5637,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -5551,7 +5647,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5599,9 +5696,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -5609,7 +5706,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5659,15 +5757,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
-            "run": 0,
+            "setup": 0,
+            "run": 1,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5715,9 +5814,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -5725,7 +5824,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5773,9 +5873,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -5783,7 +5883,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5841,7 +5942,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5889,17 +5991,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
-            "run": 0,
+            "setup": 0,
+            "run": 1,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -5949,15 +6052,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
-            "run": 0,
+            "setup": 0,
+            "run": 1,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6005,17 +6109,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
             "run": 0,
-            "cleanup": 1
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6065,15 +6170,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
-            "run": 0,
+            "setup": 0,
+            "run": 1,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6131,7 +6237,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6179,17 +6286,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
-            "run": 0,
+            "setup": 0,
+            "run": 1,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6239,15 +6347,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 0,
-            "run": 1,
+            "setup": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6295,9 +6404,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -6305,7 +6414,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6353,9 +6463,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -6363,7 +6473,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6411,17 +6522,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6469,9 +6581,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -6479,7 +6591,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6537,7 +6650,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6585,9 +6699,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -6595,7 +6709,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6643,17 +6758,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
             "run": 0,
-            "cleanup": 1
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6701,9 +6817,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -6711,7 +6827,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6759,9 +6876,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -6769,7 +6886,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6817,17 +6935,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
-            "run": 0,
+            "setup": 0,
+            "run": 1,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -6869,17 +6988,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 0,
-          "run": 3,
+          "setup": 1,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -6920,17 +7040,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 2,
+        "elapsed_ms": 0,
         "phase_ms": {
-          "setup": 1,
+          "setup": 0,
           "run": 0,
-          "cleanup": 1
+          "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -6971,17 +7092,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 4,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 1,
-          "run": 2,
-          "cleanup": 1
+          "setup": 0,
+          "run": 1,
+          "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -7028,17 +7150,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
             "setup": 0,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -7096,7 +7219,8 @@
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -7144,17 +7268,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -7198,15 +7323,16 @@
         "cleanup_complete": true,
         "elapsed_ms": 1004,
         "phase_ms": {
-          "setup": 1,
-          "run": 1003,
+          "setup": 0,
+          "run": 1004,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -7247,17 +7373,18 @@
         "timed_out": true,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 213,
+        "elapsed_ms": 208,
         "phase_ms": {
-          "setup": 7,
-          "run": 194,
-          "cleanup": 12
+          "setup": 0,
+          "run": 208,
+          "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -7298,17 +7425,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 22,
+        "elapsed_ms": 23,
         "phase_ms": {
-          "setup": 2,
+          "setup": 1,
           "run": 9,
-          "cleanup": 11
+          "cleanup": 13
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -7349,9 +7477,9 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 14,
+        "elapsed_ms": 12,
         "phase_ms": {
-          "setup": 2,
+          "setup": 0,
           "run": 2,
           "cleanup": 10
         },
@@ -7359,7 +7487,8 @@
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -7400,17 +7529,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 15,
+        "elapsed_ms": 12,
         "phase_ms": {
-          "setup": 2,
+          "setup": 0,
           "run": 2,
-          "cleanup": 11
+          "cleanup": 10
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -7451,17 +7581,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 2,
         "phase_ms": {
-          "setup": 1,
-          "run": 1,
+          "setup": 2,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -7502,17 +7633,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 20,
+        "elapsed_ms": 23,
         "phase_ms": {
           "setup": 1,
-          "run": 8,
-          "cleanup": 11
+          "run": 9,
+          "cleanup": 13
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -7556,17 +7688,18 @@
           "timed_out": false,
           "cancelled": true,
           "cleanup_complete": true,
-          "elapsed_ms": 21,
+          "elapsed_ms": 23,
           "phase_ms": {
             "setup": 1,
             "run": 9,
-            "cleanup": 11
+            "cleanup": 13
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -7608,7 +7741,7 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 21,
+        "elapsed_ms": 10,
         "phase_ms": {
           "setup": 0,
           "run": 0,
@@ -7618,7 +7751,8 @@
           "landlock_abi": 0,
           "seccomp": false,
           "network": "unconfined",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -7661,17 +7795,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 21,
+        "elapsed_ms": 22,
         "phase_ms": {
-          "setup": 2,
-          "run": 9,
-          "cleanup": 10
+          "setup": 1,
+          "run": 10,
+          "cleanup": 11
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -7712,17 +7847,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 121,
+        "elapsed_ms": 125,
         "phase_ms": {
-          "setup": 2,
-          "run": 109,
-          "cleanup": 10
+          "setup": 1,
+          "run": 111,
+          "cleanup": 12
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -7772,9 +7908,9 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 2,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 1,
+          "setup": 0,
           "run": 0,
           "cleanup": 1
         },
@@ -7782,7 +7918,8 @@
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -7823,17 +7960,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 0,
+        "elapsed_ms": 1,
         "phase_ms": {
           "setup": 0,
-          "run": 0,
+          "run": 1,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,

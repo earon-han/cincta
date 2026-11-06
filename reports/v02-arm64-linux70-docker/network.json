@@ -28,25 +28,26 @@
           "elapsed_ms": 22,
           "phase_ms": {
             "setup": 1,
-            "run": 10,
-            "cleanup": 11
+            "run": 11,
+            "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "tcp:127.0.0.1:55625",
+              "rule": "tcp:127.0.0.1:52303",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "tcp",
-              "port_first": 55625,
-              "port_last": 55625
+              "port_first": 52303,
+              "port_last": 52303
             }
           ],
           "audit": {
@@ -88,28 +89,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 21,
+          "elapsed_ms": 22,
           "phase_ms": {
             "setup": 1,
-            "run": 10,
+            "run": 11,
             "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "tcp:127.0.0.0/8:60583",
+              "rule": "tcp:127.0.0.0/8:48543",
               "address": "127.0.0.0",
               "prefix": 8,
               "protocol": "tcp",
-              "port_first": 60583,
-              "port_last": 60583
+              "port_first": 48543,
+              "port_last": 48543
             }
           ],
           "audit": {
@@ -151,36 +153,37 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 24,
+          "elapsed_ms": 14,
           "phase_ms": {
-            "setup": 2,
-            "run": 12,
-            "cleanup": 10
+            "setup": 0,
+            "run": 14,
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "tcp:localhost:47429",
+              "rule": "tcp:localhost:43691",
               "address": "::1",
               "prefix": 128,
               "protocol": "tcp",
-              "port_first": 47429,
-              "port_last": 47429
+              "port_first": 43691,
+              "port_last": 43691
             },
             {
-              "rule": "tcp:localhost:47429",
+              "rule": "tcp:localhost:43691",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "tcp",
-              "port_first": 47429,
-              "port_last": 47429
+              "port_first": 43691,
+              "port_last": 43691
             }
           ],
           "audit": {
@@ -222,28 +225,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 21,
+          "elapsed_ms": 22,
           "phase_ms": {
             "setup": 1,
-            "run": 9,
+            "run": 10,
             "cleanup": 11
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "tcp:127.0.0.2:37305",
+              "rule": "tcp:127.0.0.2:54445",
               "address": "127.0.0.2",
               "prefix": 32,
               "protocol": "tcp",
-              "port_first": 37305,
-              "port_last": 37305
+              "port_first": 54445,
+              "port_last": 54445
             }
           ],
           "audit": {
@@ -285,28 +289,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 22,
+          "elapsed_ms": 23,
           "phase_ms": {
-            "setup": 0,
-            "run": 12,
+            "setup": 2,
+            "run": 11,
             "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "tcp:127.0.0.1:34274",
+              "rule": "tcp:127.0.0.1:49372",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "tcp",
-              "port_first": 34274,
-              "port_last": 34274
+              "port_first": 49372,
+              "port_last": 49372
             }
           ],
           "audit": {
@@ -348,28 +353,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 27,
+          "elapsed_ms": 26,
           "phase_ms": {
             "setup": 1,
-            "run": 16,
+            "run": 14,
             "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "tcp:[::1]:52477",
+              "rule": "tcp:[::1]:38687",
               "address": "::1",
               "prefix": 128,
               "protocol": "tcp",
-              "port_first": 52477,
-              "port_last": 52477
+              "port_first": 38687,
+              "port_last": 38687
             }
           ],
           "audit": {
@@ -411,28 +417,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 24,
+          "elapsed_ms": 25,
           "phase_ms": {
-            "setup": 1,
-            "run": 13,
-            "cleanup": 10
+            "setup": 2,
+            "run": 11,
+            "cleanup": 12
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "udp:127.0.0.1:39833",
+              "rule": "udp:127.0.0.1:48737",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "udp",
-              "port_first": 39833,
-              "port_last": 39833
+              "port_first": 48737,
+              "port_last": 48737
             }
           ],
           "audit": {
@@ -474,28 +481,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 28,
+          "elapsed_ms": 13,
           "phase_ms": {
             "setup": 1,
-            "run": 16,
-            "cleanup": 11
+            "run": 12,
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "udp:127.0.0.1:40210",
+              "rule": "udp:127.0.0.1:58212",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "udp",
-              "port_first": 40210,
-              "port_last": 40210
+              "port_first": 58212,
+              "port_last": 58212
             }
           ],
           "audit": {
@@ -537,28 +545,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 27,
+          "elapsed_ms": 12,
           "phase_ms": {
-            "setup": 1,
-            "run": 16,
-            "cleanup": 10
+            "setup": 0,
+            "run": 12,
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "udp:127.0.0.1:54326",
+              "rule": "udp:127.0.0.1:56680",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "udp",
-              "port_first": 54326,
-              "port_last": 54326
+              "port_first": 56680,
+              "port_last": 56680
             }
           ],
           "audit": {
@@ -600,28 +609,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 27,
+          "elapsed_ms": 22,
           "phase_ms": {
-            "setup": 1,
-            "run": 16,
+            "setup": 0,
+            "run": 11,
             "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "udp:127.0.0.1:57556",
+              "rule": "udp:127.0.0.1:60467",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "udp",
-              "port_first": 57556,
-              "port_last": 57556
+              "port_first": 60467,
+              "port_last": 60467
             }
           ],
           "audit": {
@@ -663,28 +673,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 30,
+          "elapsed_ms": 24,
           "phase_ms": {
-            "setup": 1,
-            "run": 18,
-            "cleanup": 11
+            "setup": 2,
+            "run": 12,
+            "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "udp:127.0.0.2:33907",
+              "rule": "udp:127.0.0.2:42591",
               "address": "127.0.0.2",
               "prefix": 32,
               "protocol": "udp",
-              "port_first": 33907,
-              "port_last": 33907
+              "port_first": 42591,
+              "port_last": 42591
             }
           ],
           "audit": {
@@ -726,28 +737,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 28,
+          "elapsed_ms": 24,
           "phase_ms": {
-            "setup": 1,
-            "run": 17,
-            "cleanup": 10
+            "setup": 2,
+            "run": 11,
+            "cleanup": 11
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "udp:127.0.0.2:33425",
+              "rule": "udp:127.0.0.2:52768",
               "address": "127.0.0.2",
               "prefix": 32,
               "protocol": "udp",
-              "port_first": 33425,
-              "port_last": 33425
+              "port_first": 52768,
+              "port_last": 52768
             }
           ],
           "audit": {
@@ -789,28 +801,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 34,
+          "elapsed_ms": 11,
           "phase_ms": {
-            "setup": 2,
-            "run": 22,
-            "cleanup": 10
+            "setup": 0,
+            "run": 11,
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "udp:127.0.0.1:58770",
+              "rule": "udp:127.0.0.1:51936",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "udp",
-              "port_first": 58770,
-              "port_last": 58770
+              "port_first": 51936,
+              "port_last": 51936
             }
           ],
           "audit": {
@@ -852,17 +865,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 31,
+          "elapsed_ms": 21,
           "phase_ms": {
             "setup": 1,
-            "run": 20,
+            "run": 10,
             "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -915,17 +929,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 30,
+          "elapsed_ms": 22,
           "phase_ms": {
             "setup": 1,
-            "run": 19,
-            "cleanup": 10
+            "run": 10,
+            "cleanup": 11
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -978,17 +993,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 35,
+          "elapsed_ms": 23,
           "phase_ms": {
-            "setup": 1,
-            "run": 23,
-            "cleanup": 11
+            "setup": 0,
+            "run": 13,
+            "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -1041,17 +1057,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 36,
+          "elapsed_ms": 24,
           "phase_ms": {
-            "setup": 0,
-            "run": 26,
+            "setup": 1,
+            "run": 13,
             "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -1104,17 +1121,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 39,
+          "elapsed_ms": 22,
           "phase_ms": {
-            "setup": 2,
-            "run": 27,
-            "cleanup": 10
+            "setup": 0,
+            "run": 11,
+            "cleanup": 11
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -1167,28 +1185,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 32,
+          "elapsed_ms": 19,
           "phase_ms": {
-            "setup": 2,
-            "run": 20,
+            "setup": 0,
+            "run": 9,
             "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "tcp:127.0.0.1:33037",
+              "rule": "tcp:127.0.0.1:57107",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "tcp",
-              "port_first": 33037,
-              "port_last": 33037
+              "port_first": 57107,
+              "port_last": 57107
             }
           ],
           "audit": {
@@ -1230,28 +1249,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 45,
+          "elapsed_ms": 25,
           "phase_ms": {
             "setup": 1,
-            "run": 34,
+            "run": 14,
             "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "tcp:127.0.0.1:60801",
+              "rule": "tcp:127.0.0.1:33041",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "tcp",
-              "port_first": 60801,
-              "port_last": 60801
+              "port_first": 33041,
+              "port_last": 33041
             }
           ],
           "audit": {
@@ -1293,28 +1313,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 31,
+          "elapsed_ms": 24,
           "phase_ms": {
-            "setup": 1,
-            "run": 19,
-            "cleanup": 11
+            "setup": 0,
+            "run": 14,
+            "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "udp:127.0.0.1:42886",
+              "rule": "udp:127.0.0.1:59379",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "udp",
-              "port_first": 42886,
-              "port_last": 42886
+              "port_first": 59379,
+              "port_last": 59379
             }
           ],
           "audit": {
@@ -1356,28 +1377,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 534,
+          "elapsed_ms": 529,
           "phase_ms": {
-            "setup": 1,
-            "run": 522,
+            "setup": 2,
+            "run": 516,
             "cleanup": 11
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "tcp:127.0.0.1:38395",
+              "rule": "tcp:127.0.0.1:35341",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "tcp",
-              "port_first": 38395,
-              "port_last": 38395
+              "port_first": 35341,
+              "port_last": 35341
             }
           ],
           "audit": {
@@ -1419,28 +1441,29 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 737,
+          "elapsed_ms": 723,
           "phase_ms": {
-            "setup": 2,
-            "run": 724,
-            "cleanup": 11
+            "setup": 4,
+            "run": 709,
+            "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "allowlist",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
           "network_snapshot": [
             {
-              "rule": "tcp:127.0.0.1:39431",
+              "rule": "tcp:127.0.0.1:43793",
               "address": "127.0.0.1",
               "prefix": 32,
               "protocol": "tcp",
-              "port_first": 39431,
-              "port_last": 39431
+              "port_first": 43793,
+              "port_last": 43793
             }
           ],
           "audit": {

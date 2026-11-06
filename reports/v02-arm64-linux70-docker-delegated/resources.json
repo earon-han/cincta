@@ -46,7 +46,7 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
             "setup": 0,
             "run": 0,
@@ -56,7 +56,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -102,9 +103,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 0,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 0,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -112,7 +113,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -155,17 +157,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 11,
+        "elapsed_ms": 13,
         "phase_ms": {
-          "setup": 5,
+          "setup": 8,
           "run": 5,
-          "cleanup": 1
+          "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -188,14 +191,14 @@
         },
         "resources": {
           "enabled": true,
-          "path": "/cincta-cgroup/cincta-16-fff435da9f29bea1",
+          "path": "/cincta-cgroup/cincta-16-d3ac86fb3e708768",
           "memory_peak_supported": true,
           "pids_peak_supported": true,
           "removed": true,
           "populated": false,
-          "memory_peak": 3125248,
+          "memory_peak": 3129344,
           "pids_peak": 1,
-          "cpu_usage_usec": 5599,
+          "cpu_usage_usec": 5229,
           "cpu_nr_throttled": 0,
           "memory_oom_kill": 0,
           "pids_limit_hits": 0,
@@ -223,17 +226,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 372,
+          "elapsed_ms": 371,
           "phase_ms": {
             "setup": 4,
-            "run": 368,
+            "run": 367,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -256,14 +260,14 @@
           },
           "resources": {
             "enabled": true,
-            "path": "/cincta-cgroup/cincta-21-ec0dff6fa555d2a8",
+            "path": "/cincta-cgroup/cincta-21-0af319f71c578b2b",
             "memory_peak_supported": true,
             "pids_peak_supported": true,
             "removed": true,
             "populated": false,
             "memory_peak": 5222400,
             "pids_peak": 4,
-            "cpu_usage_usec": 17119,
+            "cpu_usage_usec": 16896,
             "cpu_nr_throttled": 0,
             "memory_oom_kill": 0,
             "pids_limit_hits": 1,
@@ -287,17 +291,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 57,
+        "elapsed_ms": 48,
         "phase_ms": {
-          "setup": 7,
-          "run": 50,
-          "cleanup": 0
+          "setup": 11,
+          "run": 26,
+          "cleanup": 11
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -320,14 +325,14 @@
         },
         "resources": {
           "enabled": true,
-          "path": "/cincta-cgroup/cincta-30-ae2955fab33424a8",
+          "path": "/cincta-cgroup/cincta-30-37657ffcf7fbc752",
           "memory_peak_supported": true,
           "pids_peak_supported": true,
           "removed": true,
           "populated": false,
           "memory_peak": 100663296,
           "pids_peak": 4,
-          "cpu_usage_usec": 86307,
+          "cpu_usage_usec": 42321,
           "cpu_nr_throttled": 0,
           "memory_oom_kill": 5,
           "pids_limit_hits": 0,
@@ -350,17 +355,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 718,
+        "elapsed_ms": 706,
         "phase_ms": {
-          "setup": 6,
-          "run": 712,
+          "setup": 2,
+          "run": 704,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -383,14 +389,14 @@
         },
         "resources": {
           "enabled": true,
-          "path": "/cincta-cgroup/cincta-38-4573f072b061e502",
+          "path": "/cincta-cgroup/cincta-38-dbba00e8793f3ce1",
           "memory_peak_supported": true,
           "pids_peak_supported": true,
           "removed": true,
           "populated": false,
-          "memory_peak": 2940928,
+          "memory_peak": 3125248,
           "pids_peak": 1,
-          "cpu_usage_usec": 188766,
+          "cpu_usage_usec": 182232,
           "cpu_nr_throttled": 7,
           "memory_oom_kill": 0,
           "pids_limit_hits": 0,
@@ -413,17 +419,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 117,
+        "elapsed_ms": 116,
         "phase_ms": {
           "setup": 6,
           "run": 100,
-          "cleanup": 11
+          "cleanup": 10
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -446,14 +453,14 @@
         },
         "resources": {
           "enabled": true,
-          "path": "/cincta-cgroup/cincta-43-41ff2a8c7f0037c7",
+          "path": "/cincta-cgroup/cincta-43-184202ab0ed0e8d5",
           "memory_peak_supported": true,
           "pids_peak_supported": true,
           "removed": true,
           "populated": false,
-          "memory_peak": 3653632,
+          "memory_peak": 3649536,
           "pids_peak": 3,
-          "cpu_usage_usec": 193723,
+          "cpu_usage_usec": 193810,
           "cpu_nr_throttled": 0,
           "memory_oom_kill": 0,
           "pids_limit_hits": 0,
@@ -476,17 +483,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 31,
+        "elapsed_ms": 32,
         "phase_ms": {
-          "setup": 6,
-          "run": 14,
+          "setup": 2,
+          "run": 19,
           "cleanup": 11
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -509,14 +517,14 @@
         },
         "resources": {
           "enabled": true,
-          "path": "/cincta-cgroup/cincta-50-49b503e41f96d192",
+          "path": "/cincta-cgroup/cincta-50-a9bd1734ec2dc2c2",
           "memory_peak_supported": true,
           "pids_peak_supported": true,
           "removed": true,
           "populated": false,
-          "memory_peak": 2940928,
+          "memory_peak": 3133440,
           "pids_peak": 1,
-          "cpu_usage_usec": 4163,
+          "cpu_usage_usec": 4099,
           "cpu_nr_throttled": 0,
           "memory_oom_kill": 0,
           "pids_limit_hits": 0,

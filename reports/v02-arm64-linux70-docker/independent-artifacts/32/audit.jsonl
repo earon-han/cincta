@@ -1,0 +1,4 @@
+{"schema_version":1,"event":"start","monotonic_ns":16090352428790,"tid":0,"id":0,"syscall":-1,"arch":0,"target":"","target_bytes_hex":"","value":0,"errno":0,"args":[0,0,0,0,0,0]}
+{"schema_version":1,"event":"request","monotonic_ns":16090353316316,"tid":1133,"id":555868833510736467,"syscall":52,"arch":3221225655,"target":"","target_bytes_hex":"","value":0,"errno":0,"args":[3,420,384,281474761029461,0,7161677110969590627]}
+{"schema_version":1,"event":"deny","monotonic_ns":16090353337086,"tid":1133,"id":555868833510736467,"syscall":52,"arch":3221225655,"target":"","target_bytes_hex":"","value":0,"errno":36,"args":[3,420,384,281474761029461,0,7161677110969590627]}
+{"schema_version":1,"event":"finish","monotonic_ns":16090363710023,"tid":0,"id":0,"syscall":-1,"arch":0,"target":"ok","target_bytes_hex":"6f6b","value":0,"errno":0,"args":[0,0,0,0,0,0]}

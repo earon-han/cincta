@@ -1,15 +1,27 @@
 {
-  "id": "36675aee88db142b397f6faee89bf30489fcfacc41a0d0ec6e45a073c63882ee",
-  "image": "sha256:3af69cb132a4f92d31f1c9aced5eee9dfc6ea17eed711411a6d55ec22852bd21",
+  "id": "32b335bd00e8644dff67eb5e6ee0eec0cbab09ac499a77f825e4a2b16d5e4fb4",
+  "image": "sha256:5912ea12b17100d661314f7670d024cf96643e518ec78587e0d378b6097aa08c",
   "user": "10001:10001",
   "privileged": false,
   "cap_drop": [
     "ALL"
   ],
+  "cap_add": null,
   "security_opt": [
     "no-new-privileges"
   ],
   "apparmor_profile": "docker-default",
   "exit_code": 0,
-  "running": false
+  "running": false,
+  "state_error": "",
+  "path": "/cincta",
+  "args": [
+    "run",
+    "--compat",
+    "--rx",
+    "/cincta",
+    "--",
+    "/cincta",
+    "--version"
+  ]
 }

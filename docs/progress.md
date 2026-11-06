@@ -6,21 +6,21 @@
 
 | ID | 状态 | 已有交付 / 验证 | 提交 / 证据 | 阻断与下一步 |
 |---|---|---|---|---|
-| P1 | 完成 | C17/CLI/结果协议、威胁模型及交叉审查 | 4437fcb；v02-design-review.md | 无已知源码冻结阻断 |
+| P1 | 完成 | C17/CLI/结果协议、威胁模型及交叉审查 | eebc770；v02-design-review.md、final-code-review.md | 无已知源码冻结阻断 |
 | P2 | 完成 | 两真实VM/两默认Docker、祖先mem RPC、ADDFD、cgroup最小委派、x86全系统 | reports/v02-*最终证据 | 明确区分部署条件与默认环境 |
-| P3 | 完成 | broker、固定policy/内存FD、metadata、file-open代理、锁定与错误收尾 | 4437fcb；file-audit20项 | 范围与兼容拒绝已文档化 |
+| P3 | 完成 | broker、固定policy/内存FD、metadata、file-open代理、锁定与错误收尾 | eebc770；file-audit20项 | 范围与兼容拒绝已文档化 |
 | P4 | 完成 | TCP/UDP、IPv4/IPv6、CIDR/端口/DNS快照；26项专测 | 四环境network.json | 域名是地址能力，不是应用层身份 |
 | P5 | 完成 | 真实cgroup树配额、统计/清理与事件驱动生命周期 | VM及最小委派Docker各9项 | 默认无委派正例仍BLOCKED |
 | P6 | 完成 | 物理双副本、diff/export/discard/keep、构建执行与别名隔离 | workspace17项、独立49项、别名12项 | 无自动写回/透明COW承诺 |
 | P7 | 完成 | 审计结果/交付/预算/完整性、JSON与Agent示例 | broker/result、使用及审计指南 | 外层早拒绝不可观测如实BLOCKED |
-| P8 | 完成 | 主1088 PASS/0FAIL/40条件BLOCKED；400组合、800启动样本 | reports/v02-summary.json；validation.md | 额外重复、artifact验证和共享负载单列 |
+| P8 | 完成 | 主1144 PASS/0FAIL/40条件BLOCKED；400组合、800启动样本 | reports/v02-summary.json；validation.md | 额外重复、artifact验证和共享负载单列 |
 | P9.1 | 完成 | 两架构静态原件、元信息13项、scratch5项及文档齐备 | package.sh；两产物SHA | 两架构包/源码包与来源校验；候选完成后进入P10 |
 | P9.2 | 受阻 | 本地分支与提交可审查 | codex/v02-full-sandbox | 自动审批拒绝GitHub目的地外发，未重复尝试 |
-| P10 | 进行中 | 候选c6a2ef5及双架构包完成后，已启动全新final_code_review及只读模块子审查 | review-resolutions-v02.md | 逐条讨论/判定/修复并功能验证后才通知完成 |
+| P10 | 完成 | 新Agent审查F1–F4经主Agent确认/讨论、分工修复、独立复核及最终重验 | eebc770；final-code-review.md；修复台账 | 无未关闭意见；最终归档校验 |
 
 上表模块开发结果只表示相应快照的自验证/独立测试。最终发行数字、受测源码指纹、镜像配置与重复样本统一在 [validation.md](validation.md)；代码更新后必须重跑相关套件，不能相加旧轮次来宣称全功能通过。x86的全系统TCG结果应与aarch64和硬件原生明确分开。
 
-分工：根Agent负责公共契约、CLI/生命周期/审计整合、环境与最终交付；v02_design_review独立威胁模型及安全复审；v02_network网络实现/专测；v02_workspace_tests快照模块及后续独立跨模块验收；v02_cgroup资源实现/专测；v02_file_audit文件打开实际结果代理与专测；v02_x86_validation全系统目标内核验证；v02_docs_release文档、总验证入口和CI。各自独占文件并交叉复核，自测不替代独立验收。
+分工：根Agent负责公共契约、CLI/生命周期/审计整合、环境与最终交付；v02_design_review独立威胁模型及安全复审；final_code_review与两位全新子审查者执行P10、实现者分工修复；v02_network网络实现/专测；v02_workspace_tests快照模块及后续独立跨模块验收；v02_cgroup资源实现/专测；v02_file_audit文件打开实际结果代理与专测；v02_x86_validation全系统目标内核验证；v02_docs_release文档、总验证入口和CI。各自独占文件并交叉复核，自测不替代独立验收。
 
 验收门槛：请求保护不能建立即拒绝执行；VM和Docker分别保留PASS/FAIL/BLOCKED；默认无委派容器与委派正例分开；审计不把请求当完成；快照不自动写回；清理必须wait到无后代；未执行的远端CI、外部审计或硬件平台不计通过。
 

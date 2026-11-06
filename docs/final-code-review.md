@@ -244,3 +244,96 @@ pidfd；将代码与文档的“PID1”表述改为“当前 PID 命名空间无
 应补真实 docker exec 正常执行及 runtime 发信号取消/后代回收验证，且保留
 可见调用方退出和线程退出语义回归。本段记录的是修复过程中的兼容性回归，
 尚不宣称其补丁或最终验收已经完成。
+
+## 最终源码与功能证据闭环（2026-11-07）
+
+**P10 独立审查闭环通过：F1、F2、F3 及兼容性补充 F4 均已修复，最终
+冻结源码与对应真实功能验证通过；没有未解决的审查发现或结论分歧。**
+初轮 FAIL 和缺陷复现保留为历史，不能用修复后的 PASS 抹去。
+
+最终 runtime/test 冻结为 `eebc7700ea70a6586007b7e38c126a9af88d507f`；
+三项修复提交为 `46d4919`，F4及能力报告补充提交为 `eebc770`。
+独立复核已确认：任意 ppid0 的无可见调用方模式恢复正确兼容语义；
+`protections.caller_bound` 和 unsupported 原因明确区分该边界，ABI不同
+组合下JSON分隔正确；guardian 的 signal0 权限预检位于准备容器创建之前，
+失败不创建对象。产品、头文件、测试和脚本在本次最终审计时均无偏离冻结版
+的工作树修改。
+
+| 项目 | 最终修复及功能证据 | 结论 |
+|---|---|---|
+| F1 / P1 | 四个主环境 preparation 各15 PASS，均含自然caller退出、stopped CLI、DNS-only及死亡优先buffered D；legacy 中运行期caller退出和创建线程退出但进程存活回归均 PASS | 关闭 |
+| F2 / P2 | 四环境 workspace 模块各21 PASS，根 chmod、mtime、未变化及精确预算均通过；四环境CLI根元数据专项各3 PASS，diff与实际导出一致 | 关闭 |
+| F3 / P2 | 四环境4094/4095/4096边界共12 PASS；helper与父进程双侧核对真实权限，审计目标字节与成功/拒绝结果一致，无伪成功 | 关闭 |
+| F4 / 兼容性 | 最终 `v02-docker-exec-linux68.json`、`v02-docker-exec-linux70.json` 各3 PASS，同一交付产物直接exec成功、SIGTERM取消、实际payload消失，caller_bound=false及unsupported原因准确 | 关闭 |
+
+### 来源与附件卫生
+
+四个主环境执行完全相同的 ARM 静态产物，SHA256：
+`e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180`。
+已逐项核对四份主 summary 共140个源码/头文件/测试摘要，既与本地文件匹配，
+也与 `git show eebc770:PATH` 匹配；专项测试摘要同步匹配。
+
+最终四环境八套测试从全新空报告根完整执行，之后整体替换 primary。
+独立交叉核对每环境45个附件 `result.json`，均与本轮 independent.json 中
+嵌套原始结果逐对象完全一致，且都有最终新增的 caller_bound 字段，没有
+发现旧结果混入；每环境32份JSONL均可逐行解析。旧候选报告保存在
+`reports/v02-before-P10/`，首轮附件整理前的整合报告保存在
+`reports/v02-initial-reviewed-run/`，均排除最终计数。
+
+两主 Docker 的不可变镜像均为
+`sha256:f3f32e31e6855feb0228e22c48d45428b06c2a5482db3790658600cc75e52092`，
+来源见 `reports/v02-reviewed-image-provenance.json`：由冻结源码测试镜像派生，
+仅将上述原静态产物 COPY 到 `/src/build/cincta`，保留非root tester、
+cap-drop ALL、NNP、默认 AppArmor docker-default 与 daemon builtin seccomp，
+主运行没有挂载或 privileged/unconfined 设置。
+
+部分 suite（如 legacy、network）与独立资源报告本身不含 binary_sha256；
+它们的来源通过统一 test_all 调度所用固定 binary 路径、主 summary 的源码/
+产物指纹，以及资源启动器与不可变镜像身份链关联，不能声称每份原始报告
+都独立自证二进制摘要。两份委派资源 security 的 image ID 均匹配上述镜像，
+启动器固定从镜像 `/src` 执行 `build/cincta`；该链条与报告是否自带摘要
+明确区分。模块审查者还在两台 VM 独立只读检查该不可变镜像的 WORKDIR=/src、
+USER=tester，并在默认安全profile、cap-drop ALL、NNP的只读临时容器中
+实际读取 `/src/build/cincta` 的 SHA256，两者均为上述 e4a 摘要。
+F4最终两份报告均直接记录同一 e4a 产物；早期
+`v02-review-namespace/docker-exec-check.json` 的9b09产物只保留为历史。
+
+### 最终验证范围与计数
+
+已从实际九个 functional report 重新累加，并核对每个主 summary 与其八套
+原始suite计数一致：
+
+| 配置 | PASS | FAIL | BLOCKED |
+|---|---:|---:|---:|
+| ARM / Linux6.8 VM | 241 | 0 | 1 |
+| ARM / Linux7.0 VM | 312 | 0 | 0 |
+| ARM / Linux6.8 默认 Docker | 222 | 0 | 20 |
+| ARM / Linux7.0 默认 Docker | 293 | 0 | 19 |
+| 两个最小委派 Docker 资源验证 | 18 | 0 | 0 |
+| 两个显式bind别名夹具验证 | 24 | 0 | 0 |
+| x86_64真实内核全系统 QEMU smoke | 34 | 0 | 0 |
+| **合计** | **1144** | **0** | **40** |
+
+这些是不同配置下的检查数，不是1144个互异逻辑功能。40个 BLOCKED 保留：
+两份ABI4环境的严格模式不可用各1；两个默认Docker各12个需显式bind夹具、
+6个需委派的正例及1个外层过滤阻止证明内层审计观察的入口。单独正例配置的
+PASS 没有改写原配置的 BLOCKED。
+
+x86产物 SHA256
+`04638adbe2cd0a52dd0aaf966d45b03874f64d30138a46964d7c190fd434d461`；
+已独立核对其22项冻结源码manifest和4个证据文件摘要。
+真实 x86_64 Linux6.18.60 内核在 QEMU full-system TCG 中运行，UID501、
+strict模式，34 PASS；它不是原生x86硬件，也不是qemu-user，覆盖窄于
+ARM完整套件。来源见 `reports/v02-x86-provenance.json`。
+
+另核对四环境共400个压力样本，均PASS；800个sandbox及800个direct原始
+性能样本全部实际退出0，800个sandbox样本均 cleanup_complete=true，来源指纹
+与冻结源码和同一 e4a 产物一致。scratch交付证明为5 PASS，context只有
+Dockerfile及原产物，不重新编译；context、实际执行容器导出产物摘要
+均为e4a，证据文件manifest逐项匹配。scratch不包含DNS/NSS能力证明。
+
+最终汇总入口为 `reports/v02-summary.json`。审查者没有为此重复已无新疑点
+的功能测试，而是独立核对原始结果、实际行为、附件、源码和产物来源。
+P10关闭不代表外部安全审计或所有平台稳定认证；远端CI、GitHub推送和外部
+审计均未完成，也未计为PASS。最终文档台账更新、重新打包及clean-source
+安装/校验由主 Agent 随后完成，不在本次源码/功能证据审查中提前宣称完成。

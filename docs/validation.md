@@ -1,79 +1,78 @@
 # 验证与预览交付记录
 
-## v0.2 本地交付候选
+## v0.2 最终本地验收
 
-日期：2026-11-06。版本：`0.2.0-preview.1`。产品源码冻结于 `4437fcbab6386d46c81c385927532f1fdf043bf3`，最终验收脚本冻结于 `f52601a061daaa1b594bfeae35d864bd5b69190b`；其间仅修订测试夹具及覆盖分类，src/include/Makefile字节相同。后续提交补文档、证据及打包元信息。P10用户追加的全新Agent代码审查将在本地候选包完成后执行，完成通知须等该轮闭环。
+日期：2026-11-07。版本：`0.2.0-preview.1`。最终产品与测试冻结提交：`eebc7700ea70a6586007b7e38c126a9af88d507f`。本轮实现/模块自测完成后，已按用户追加P10启动全新代码审查Agent及两位只读子审查者；主Agent独立复现、逐项讨论确认并修复F1–F4，最后重新完整验收。[原始审查及最终闭环](final-code-review.md)、[逐项修复台账](review-resolutions-v02.md)、[机器汇总](../reports/v02-summary.json)。多Agent审查不冒充外部安全审计。
 
-[机器汇总](../reports/v02-summary.json)、[独立证据审查](v02-acceptance-review.md)、[实现安全审查](v02-design-review.md)保留不同职责；多Agent互审不是外部第三方审计。
-
-### 真实内核验收
+### 真实内核功能验证
 
 | 环境 / 原始报告 | PASS | FAIL | BLOCKED |
 |---|---:|---:|---:|
-| [arm64-linux68-vm](../reports/v02-arm64-linux68-vm/summary.json) | 227 | 0 | 1 |
-| [arm64-linux68-docker](../reports/v02-arm64-linux68-docker/summary.json) | 208 | 0 | 20 |
-| [arm64-linux70-vm](../reports/v02-arm64-linux70-vm/summary.json) | 298 | 0 | 0 |
-| [arm64-linux70-docker](../reports/v02-arm64-linux70-docker/summary.json) | 279 | 0 | 19 |
+| [arm64-linux68-vm](../reports/v02-arm64-linux68-vm/summary.json) | 241 | 0 | 1 |
+| [arm64-linux68-docker](../reports/v02-arm64-linux68-docker/summary.json) | 222 | 0 | 20 |
+| [arm64-linux70-vm](../reports/v02-arm64-linux70-vm/summary.json) | 312 | 0 | 0 |
+| [arm64-linux70-docker](../reports/v02-arm64-linux70-docker/summary.json) | 293 | 0 | 19 |
 | [arm64-linux68-docker-delegated](../reports/v02-arm64-linux68-docker-delegated/resources.json) | 9 | 0 | 0 |
 | [arm64-linux70-docker-delegated](../reports/v02-arm64-linux70-docker-delegated/resources.json) | 9 | 0 | 0 |
 | [arm64-linux68-docker-alias](../reports/v02-arm64-linux68-docker-alias.json) | 12 | 0 | 0 |
 | [arm64-linux70-docker-alias](../reports/v02-arm64-linux70-docker-alias.json) | 12 | 0 | 0 |
 | [x86-kernel](../reports/v02-x86-kernel.json) | 34 | 0 | 0 |
-| 合计（不同执行配置的检查次数） | 1088 | 0 | 40 |
+| 合计（不同执行配置中的检查次数） | 1144 | 0 | 40 |
 
-两台本地Lima虚拟机分别为Ubuntu24.04 / Linux6.8.0-147 / Landlock ABI4及Ubuntu26.04 / Linux7.0.0-34 / ABI8。VM以UID501验证；Docker29.1.3内以UID10001验证，保留builtin seccomp、docker-default AppArmor、cap-drop ALL、NNP和私有cgroup namespace。两个默认Docker环境使用同一最终镜像，源、测试、二进制指纹及实际容器安全配置均在各报告目录。详细内核配置、LSM、Yama、编译器和委派记录见两VM的environment.json。
+两本地Lima VM分别是Ubuntu24.04 / Linux6.8.0-147 / Landlock ABI4，以及Ubuntu26.04 / Linux7.0.0-34 / ABI8。VM以UID501运行。默认Docker29.1.3以UID10001、builtin seccomp、docker-default AppArmor、cap-drop ALL、NNP和私有cgroup namespace验证，无额外挂载。
 
-40项BLOCKED分解：旧内核的严格模式各1项（VM及Docker共2），默认Docker没有委派的资源正例各6（共12），没有宿主bind夹具的别名正例各12（共24），外层过滤使内层新系统调用审计观察不可证明各1（共2）。前两类部署正例已在显式委派/夹具配置下分别实际运行，表中独立9项资源和12项别名正例不回填默认配置的BLOCKED。两个审计观察BLOCKED保留，原生VM同入口必须有真实request/deny；默认Docker中静态拒绝仍逐入口证明EPERM。ABI不足不以compat冒充严格模式。
+四主ARM环境均运行同一交付原件，SHA256为e4a33692…；Docker先构建冻结源码测试镜像，再用该原件覆盖固定`/src/build/cincta`，保留测试源码及默认USER。[不可变镜像与程序身份](../reports/v02-reviewed-image-provenance.json)记录来源镜像、派生Dockerfile、镜像ID及镜像内实测SHA。单suite未单独输出哈希的报告由test_all固定路径、总清单及不可变镜像链关联，不把缺字段说成直接哈希证明。GCC15独立构建检查也通过，但最终四环境均执行GCC13产物。
 
-默认Docker正例额外配置：委派使用UID501、`--cgroupns=host`，仅bind专用已有cgroup子树及报告目录RW，controller/owner由宿主部署者预先准备；测试脚本不修改全局配置。别名验证只bind宿主专用fixture，保留相同安全profile；包含根bind、子目录反向bind、源parent/export别名、ro/rx及私有baseline暴露拒绝。具体命令见[资源指南](resources.md)及对应launcher/security.json。
+40项BLOCKED分解：旧内核严格模式各1（VM/Docker共2），默认Docker无委派的资源正例各6（共12），默认Docker无宿主bind夹具的别名用例各12（共24），外层过滤导致内层新syscall审计不可观察各1（共2）。显式委派和真实夹具配置的9项/12项正例另列，不回填默认配置的BLOCKED。两个观察BLOCKED保留，不能用拒绝替代“见到request/deny”；原生VM同入口有严格审计断言。ABI不足不以compat冒充严格模式。
 
-x86是QEMU TCG全系统启动真实Linux6.18.60 / ABI7、UID501的34项smoke；不是qemu-user或原生x86硬件。实际自定义boot initramfs、内核、guest init、被测二进制和源码清单见[来源证明](../reports/v02-x86-provenance.json)。覆盖窄于完整aarch64发行版套件，不借此声称所有应用兼容或原生硬件性能。[x86指南](x86-validation.md)
+资源正例采用已部署专用cgroup父组、匹配UID501、`--cgroupns=host`及必要子树/报告目录RW挂载，保留默认seccomp/AppArmor与cap-drop/NNP。别名正例只增加专用宿主夹具bind，覆盖根/子目录反向bind、source parent/export及RO/RX/私有baseline拒绝；各自security/command附件记录实际配置。内核LSM、Yama、controllers、编译器与源码指纹在各VM environment.json和各环境summary.json。[依赖](dependencies.md)、[委派复现](resources.md)
 
-### 重复、组合与交付产物验证
+x86是QEMU TCG全系统启动真实Linux6.18.60 / ABI7、UID501严格模式的34项smoke；不是qemu-user或原生x86硬件。源码清单、实际boot initramfs（区别原始Alpine归档）、内核及guest四程序SHA均核对。[x86来源](../reports/v02-x86-provenance.json)；覆盖窄于ARM完整发行版套件，不宣称硬件性能或所有应用兼容。
 
-- 四主环境分别100次、并发8的组合任务，共400 PASS：每次执行工作区复制、真实文件打开/写入/chmod、TCP echo、syscall审计、导出及回收；核对源不变、审计完整且pending=0、内外临时容器都消失。原始数据见各stress.json，组合任务包含真实复制及密集通知成本，p95约112–415ms，不套用基本启动基准预算。
-- 准备阶段故障独立连续验证：两VM各5轮、每轮11项，共110 PASS；另默认Docker11 PASS。原ESRCH竞态实际复现后仍要求接管标记、进程真正从proc消失及目录/源内容断言，不把僵尸当清理完成。[重复证据](../reports/v02-preparation-final-repeats/summary.json)
-- 实际交付ARM64二进制在Linux6.8 VM完整受测，原样取到[Linux7.0 VM再完整298 PASS](../reports/v02-arm64-delivery-linux70-vm/summary.json)，并在[默认Docker完整208 PASS](../reports/v02-arm64-delivery-docker/summary.json)，指纹均为68a2d7f9…；不把其他工具链编译出的同源程序称为同一产物。
-- 同一ARM产物在FROM scratch镜像中以UID10001完成probe和受限自执行，导出的/cincta字节一致，镜像没有动态loader/libc文件，共5 PASS。[原始证明](../reports/v02-delivery-scratch/summary.json)
-- 包元信息、相对BINARY_SHA256、实施计划副本、来源清单和两个架构包自验证13 PASS。[打包证据](../reports/v02-package-metadata-selfcheck.json)
+### P10修复和额外验证
 
-上述补充重复/产物检查均单列，不与主1088次功能检查重复相加。当前仅交付经过验证的GNU libc静态产物；musl未完成验证。静态glibc的域名/NSS配置及可能的匹配运行库需求仍按[依赖指南](dependencies.md)处理，scratch受限自执行不证明独立DNS/NSS场景。
+- F1：原调用方身份在准备前固定，guardian监视原TGID死亡并先终止CLI再清理，D/ACK/G及payload屏障复核；四环境preparation各15项，包含自然退出、停止CLI、DNS-only、缓冲D与既有故障。现有caller线程/进程、CLI/monitor故障回归也通过。
+- F2：根权限/mtime以`.`计入diff，复制量/预算不含根；四环境模块各21项及CLI纯根chmod/mtime/不变回归通过。
+- F3：支持4095合法FD路径，截满显式ENAMETOOLONG、错误防零errno；四环境共12个边界回归同时核对业务fstat、父driver dirfd stat和审计，消除伪成功。
+- F4：无可见parent不限PID1；结果`caller_bound=false`及unsupported准确报告runtime信号控制。两内核实际Docker exec正常执行、SIGTERM取消、payload真正回收各3 PASS。[6项额外证明](../reports/v02-docker-exec-linux68.json)、[另一内核](../reports/v02-docker-exec-linux70.json)
+- 同一ARM原件在全新FROM scratch镜像以UID10001、默认安全profile完成probe及受限自执行；实际容器导出的/cincta SHA一致、无loader/libc/.so，共5 PASS。[scratch证明](../reports/v02-delivery-scratch/summary.json)
+- 四主环境各100次、并发8的组合任务，共400 PASS：真实工作区复制/写入/chmod、TCP echo、审计完整且pending=0、导出、原源不变及临时目录回收。组合任务包括复制和密集通知成本，不套用基本启动预算；原始样本见各stress.json。
+
+以上额外项与主1144检查分开，不重复叠加。源码、字段、逐条计数、180个附加result与本轮主报告逐对象一致性、128份JSONL、原始性能及产物哈希已由独立审查Agent复核。正式归档仍须在最终文档提交后生成并逐项校验。
 
 ### 基本启动性能
 
-每组100次直接基线及100次沙箱样本，共主800次沙箱、800次基线，均无失败。边界是subprocess.run墙钟，包含创建进程、安装保护、执行、清理与结果fsync；不是内核单次调用成本。原始命令、源码/二进制指纹、内核、逐样本与phase_ms见报告。
+主8组各100次沙箱和100次直接基线，共800受限执行、800基线，逐样本退出均0、沙箱cleanup_complete均true。墙钟包含创建、限制安装、执行、回收与结果fsync，非单次内核成本；每份原始报告包含策略、源码/二进制身份和phase_ms。
 
 | 环境 | 并发 | 中位ms | p95 ms | 失败/样本 |
 |---|---|---:|---:|---:|
-| arm64-linux68-vm | 串行 | 3.16 | 5.69 | 0/100 |
-| arm64-linux68-vm | 并发8 | 2.48 | 3.95 | 0/100 |
-| arm64-linux68-docker | 串行 | 1.31 | 1.73 | 0/100 |
-| arm64-linux68-docker | 并发8 | 2.84 | 4.04 | 0/100 |
-| arm64-linux70-vm | 串行 | 0.93 | 1.16 | 0/100 |
-| arm64-linux70-vm | 并发8 | 3.86 | 6.01 | 0/100 |
-| arm64-linux70-docker | 串行 | 1.35 | 2.34 | 0/100 |
-| arm64-linux70-docker | 并发8 | 4.77 | 6.98 | 0/100 |
+| arm64-linux68-vm | 串行 | 5.14 | 22.43 | 0/100 |
+| arm64-linux68-vm | 并发8 | 4.89 | 10.94 | 0/100 |
+| arm64-linux68-docker | 串行 | 1.06 | 1.29 | 0/100 |
+| arm64-linux68-docker | 并发8 | 2.34 | 3.57 | 0/100 |
+| arm64-linux70-vm | 串行 | 1.01 | 1.79 | 0/100 |
+| arm64-linux70-vm | 并发8 | 7.82 | 12.83 | 0/100 |
+| arm64-linux70-docker | 串行 | 1.17 | 1.38 | 0/100 |
+| arm64-linux70-docker | 并发8 | 4.10 | 5.91 | 0/100 |
 
-基本暖启动主样本满足p95≤50ms工程目标，不能推广到任意负载。额外保留旧VM与QEMU/镜像构建共用资源时的100次并发样本：p95=65.57ms、max=100.13ms、0失败，**该共享负载不满足50ms目标**，不计主800样本，也不删除或冒充独占性能。[共享负载原始数据](../reports/v02-arm64-linux68-vm/concurrent-shared-load.json)
+基本暖启动主样本满足p95≤50ms工程目标，不推广到任意机器或负载。P10之前候选在QEMU/镜像构建共享负载下曾p95=65.57ms、max=100.13ms、0失败；该轮不满足50ms目标，原始数据保留在[历史共享负载](../reports/v02-before-P10/v02-arm64-linux68-vm/concurrent-shared-load.json)，不计本轮800样本，也不冒充当前修复二进制的数据。
 
-### 缺陷与夹具历史
+### 证据卫生与历史
 
-保留 `reports/v02-preflight-4437fcb/`：首次两VM完整验收分别226 PASS/1FAIL和295PASS/3FAIL；缺失授权根的旧测试误要求早期JSON，另有准备测试SIGCONT时guardian合法提前退出的竞态。修订测试前后产品源码未改变，两VM各5轮复现并验证清理证明后再完整运行。
+最终四环境八suite在全新空`CINCTA_REPORT_DIR`中完整运行，整体替换primary目录，避免源码包自带历史reports使附件索引残留。源码/测试和产物不变。首次修复集成数据保存在`reports/v02-initial-reviewed-run/`，初始候选完整证据保存在`reports/v02-before-P10/`，均排除最终统计。
 
-保留 `reports/v02-preflight-e4c29f5/`：默认Docker各1个新入口动态审计预期错误；外层ERRNO优先于USER_NOTIF，不能把未观测记成功。最终记录逐NR errno/request_seen/deny_seen及外层Seccomp状态，完全无该入口事件且已有外层过滤时记BLOCKED；有请求无deny、错误返回或未建立审计仍FAIL。其他模块的开发缺陷复现及x86夹具修正记录同样保留并明确排除最终统计。
+`v02-preflight-4437fcb`保留早期JSON契约及guardian ESRCH夹具失败，`v02-preflight-e4c29f5`保留Docker观察预期错误；`v02-review-*`保留原候选缺陷复现、主Agent确认、隔离修复自测和中间x86候选。它们不是当前版本FAIL或最终通过数字。原始审查初轮FAIL保留，最终关闭结论在报告末尾。
 
-### 来源、交付与尚未执行的门槛
-
-实际交付二进制SHA256：
+### 产物和门槛
 
 ```text
-aarch64  68a2d7f9f5046512c28547c696857e4fe78c3b1f90fc30e26af21a1dbd97393a
-x86_64   9ed861ec61e7a9d199262046448ca0d8f4283cf75efb6dc6d868b5c1912e87e7
+aarch64 e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180
+x86_64  04638adbe2cd0a52dd0aaf966d45b03874f64d30138a46964d7c190fd434d461
 ```
 
-Linux7.0本机构建另为b6728f9e…，两Docker镜像编译为046277b9…；完整64位指纹见各summary，工具链/路径不同而源码一致。两个交付包记录SOURCE_REVISION、BINARY_SOURCE_REVISION、SOURCE_SHA256、BINARY_SHA256、PACKAGE_INFO及外部压缩包SHA256；配套源码包包含设计、指南、原始计划、C源码、全部测试与证据。最终打包来源提交可能晚于受测核心提交，但源码清单核对必须一致。
+两种GNU libc静态产物均有实际内核验证；musl未完成验证。静态getaddrinfo/NSS仍有配置/匹配运行库条件，scratch自执行不证明独立DNS/NSS。两个架构包与源码包包含文档、原始计划、源/测试/证据，包内SOURCE_REVISION对应最终文档提交、BINARY_SOURCE_REVISION对应eebc受测核心，SOURCE_SHA256/BINARY_SHA256及外部SHA用于核对。[安装](usage.md)
 
-远端CI和GitHub发布尚未执行。此前自动审批拒绝推送，理由是未明确批准GitHub目的地接收完整设计/源码/测试；未重试绕过。稳定版另需原生x86硬件、更广发行版/内核、长期压力和外部安全审计，当前只提供preview。P10新增代码审查的结论和后续修复验证将单独记录，不能用本轮实现审查替代。
+本地preview门槛和P10本轮已识别问题闭环完成。远端CI、GitHub发布、外部第三方审计和原生x86硬件未做；稳定版另需更广内核/发行版及长期压力。此前自动审批拒绝GitHub推送，理由是未明确批准目的地接收完整设计/源码/测试；未重试绕过。
 
 ## v0.1 历史验证（不计入v0.2）
 

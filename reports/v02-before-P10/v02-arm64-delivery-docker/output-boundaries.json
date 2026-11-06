@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "environment": "arm64-delivery-docker-output-boundaries",
+  "kernel": "6.8.0-147-generic",
+  "architecture": "aarch64",
+  "binary_sha256": "68a2d7f9f5046512c28547c696857e4fe78c3b1f90fc30e26af21a1dbd97393a",
+  "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "BLOCKED": 12
+  },
+  "results": [
+    {
+      "name": "direct-bind-result",
+      "outcome": "BLOCKED",
+      "reason": "requires explicit host-prepared bind aliases"
+    },
+    {
+      "name": "direct-bind-audit",
+      "outcome": "BLOCKED",
+      "reason": "requires explicit host-prepared bind aliases"
+    },
+    {
+      "name": "nested-bind-result",
+      "outcome": "BLOCKED",
+      "reason": "requires explicit host-prepared bind aliases"
+    },
+    {
+      "name": "workspace-export-source-bind",
+      "outcome": "BLOCKED",
+      "reason": "requires explicit host-prepared bind aliases"
+    },
+    {
+      "name": "workspace-nested-source-bind",
+      "outcome": "BLOCKED",
+      "reason": "requires explicit host-prepared bind aliases"
+    },
+    {
+      "name": "workspace-parent-source-bind",
+      "outcome": "BLOCKED",
+      "reason": "requires explicit host-prepared bind aliases"
+    },
+    {
+      "name": "reverse-subdir-bind-outputs",
+      "outcome": "BLOCKED",
+      "reason": "requires explicit host-prepared bind aliases"
+    },
+    {
+      "name": "workspace-export-source-subdir-bind",
+      "outcome": "BLOCKED",
+      "reason": "requires explicit host-prepared bind aliases"
+    },
+    {
+      "name": "workspace-parent-source-subdir-bind",
+      "outcome": "BLOCKED",
+      "reason": "requires explicit host-prepared bind aliases"
+    },
+    {
+      "name": "workspace-source-subdir-ro-bind",
+      "outcome": "BLOCKED",
+      "reason": "requires explicit host-prepared bind aliases"
+    },
+    {
+      "name": "workspace-source-subdir-rx-bind",
+      "outcome": "BLOCKED",
+      "reason": "requires explicit host-prepared bind aliases"
+    },
+    {
+      "name": "workspace-broad-tmp-ro-bind",
+      "outcome": "BLOCKED",
+      "reason": "requires explicit host-prepared bind aliases"
+    }
+  ]
+}

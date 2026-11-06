@@ -14,31 +14,32 @@
     "strict_supported": true,
     "compat_supported": true
   },
-  "binary_sha256": "046277b9de5d089f857d5f0b34871b84f7565e7f97bc6e8c3449daa6a7128928",
-  "test_sha256": "e1b68b6ef83d7b6863e936d5f9268928bfb6394eec524cda6da51d354f10a2f1",
+  "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+  "test_sha256": "49a5e6419702618a0ec0837f9f3010fdf5d842a8f9512ab804a56b4fef3d9942",
   "source_sha256": {
-    "src/broker.c": "5c248b739a32d23a3f0173aa5645ef7cc5062bfd658fd55ec112d13ead6da16d",
+    "src/broker.c": "3517a01288042ad1c9da4fb516c316095c4902ae299117a6c542a1e85db55bc7",
+    "src/caller.c": "7f637c5115034243b494d35dffbe80afebe3f36a3e9bb5f3245e19a442190b41",
     "src/filebroker.c": "533cb5784484831263648aec59b96151c973fda147cb4426397a9890fa9fb4d6",
     "src/json.c": "2c9153af2da30200631f2b492c854d4895fed4b1a3ce055cc32abf31833bfe1e",
-    "src/main.c": "71eb0e211dcfe6a92b7168ccabc0caa62bef7404bc8d888dace1167fb6d2493f",
+    "src/main.c": "a22de6d1d2623fa5dde8e99a2ac96403b463b2e0df6821d87209f4f374dec06b",
     "src/network.c": "66ead55853d5bef3060db8e4bd7e089f1fa37b4374b886d5abf479fda843d150",
-    "src/preparation.c": "d07d8f87c8473e91faf4fa06717151abd71cf50ca127ae584472689930f22387",
+    "src/preparation.c": "cb1b8d9a27374f1cae9448612cd449914bcfcc2c314ee4ba84bbedd8f128effc",
     "src/resources.c": "d417c98e6f1cfed87c837276c7a06f80051feea98a790d74f14baf0aa9d899fd",
-    "src/result.c": "9ca8d3cd39b4927e330f4a55494a07e4f33d7242329bde8fc0575371c178e97b",
+    "src/result.c": "a98a5a4053e39d4e884fc499fe25d1be073368059f7f891b1f7c973542aefe8c",
     "src/security.c": "52b8fab2924da5efd48359b32263e9ab093095184680f477ae182268e6b7aefc",
-    "src/supervisor.c": "5403ff7c600a1abe7613c919f86203c6ac5a8dd67462ea2cc3aca3b494f10fe0",
-    "src/workspace.c": "78cfd3de556fff529ab62f340ee94098abc866b22f8e4c9256b5949d756c761d",
+    "src/supervisor.c": "1a0bf6cad6d3a271d1bccdef5348fee3412070dfb3ede145d306f1ca227fb0b2",
+    "src/workspace.c": "cc54ebad7b2bb4c21dbd8f709027c452421dc911d98395f57ed9aa20313f5cdf",
     "include/broker.h": "dc10119d1c3e5470ae4c5b7fd3b1de3516d7fcf9a5468cb742a2e8ecf718d139",
-    "include/cincta.h": "f3281127a7dfc18bbeb834339dda6814bb3a16301ed3d6999185a7dc9a0172a6",
+    "include/cincta.h": "26eab59e74f1d52c34b0d043b33800d11eaec2968a33a6f5aafc2c03124f3f13",
     "include/filebroker.h": "f264003938240d1b0a052d04c57cb4cc23aa05a03ef990388147269c16ce3500",
     "include/json.h": "2128b60bfd1e4500d8822898eb12ffc18b40c9b42cc6be8d290bf82803ebab0e",
     "include/network.h": "e0bcb39731922c222d4a80ba9cd7da5a9d3a2f31840b0716083c28da5b0866ba",
-    "include/preparation.h": "20d2b89ab604819e47cf3981e03e482120ddad71077272234b57bd84fbd29268",
+    "include/preparation.h": "393eeaafea8a43fd5154905684f51bd7c53de55ef8858e5cf3532d31a508e840",
     "include/resources.h": "32e92642a9fcbb63b5bf917c7f53ae4f52372f0f5bd129ed3c118afba6b9ef3e",
     "include/workspace.h": "9e07d735948a23e7e903728a2383b5292f50323bfecff2eaed22d751af7c4fba"
   },
   "counts": {
-    "PASS": 48,
+    "PASS": 54,
     "FAIL": 0,
     "BLOCKED": 1
   },
@@ -58,17 +59,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 20,
+        "elapsed_ms": 12,
         "phase_ms": {
-          "setup": 2,
-          "run": 16,
+          "setup": 1,
+          "run": 10,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -88,18 +90,264 @@
         },
         "workspace": {
           "enabled": true,
-          "source": "/tmp/cincta-v02-j2a5dew2/1/source",
-          "root": "/tmp/cincta-preparation-LmggFM/cincta-workspace-L6yjmJ",
-          "tree": "/tmp/cincta-preparation-LmggFM/cincta-workspace-L6yjmJ/tree",
+          "source": "/tmp/cincta-v02-z0fxhcg2/1/source",
+          "root": "/tmp/cincta-preparation-j0ZINc/cincta-workspace-1NcEUf",
+          "tree": "/tmp/cincta-preparation-j0ZINc/cincta-workspace-1NcEUf/tree",
           "retained": false,
           "exported": true,
           "executable": false,
-          "changes": 2,
+          "changes": 3,
           "copied_files": 1,
           "copied_bytes": 8
         },
         "resources": {
           "enabled": false
+        }
+      }
+    },
+    {
+      "name": "workspace.root-chmod",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "chmod",
+        "diff": {
+          "schema_version": 1,
+          "source": "/tmp/cincta-v02-z0fxhcg2/2/source",
+          "workspace": "/tmp/cincta-preparation-fSs7ES/cincta-workspace-RIFoxu/tree",
+          "count": 1,
+          "exported": true,
+          "changes": [
+            {
+              "path": ".",
+              "status": "modified",
+              "before": {
+                "type": "directory",
+                "mode": 493,
+                "size": 4096
+              },
+              "after": {
+                "type": "directory",
+                "mode": 448,
+                "size": 4096
+              }
+            }
+          ]
+        },
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 18,
+          "phase_ms": {
+            "setup": 2,
+            "run": 4,
+            "cleanup": 11
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true,
+            "caller_bound": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": true,
+            "source": "/tmp/cincta-v02-z0fxhcg2/2/source",
+            "root": "/tmp/cincta-preparation-fSs7ES/cincta-workspace-RIFoxu",
+            "tree": "/tmp/cincta-preparation-fSs7ES/cincta-workspace-RIFoxu/tree",
+            "retained": false,
+            "exported": true,
+            "executable": false,
+            "changes": 1,
+            "copied_files": 0,
+            "copied_bytes": 0
+          },
+          "resources": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "name": "workspace.root-mtime",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "mtime",
+        "diff": {
+          "schema_version": 1,
+          "source": "/tmp/cincta-v02-z0fxhcg2/3/source",
+          "workspace": "/tmp/cincta-preparation-cvnm4x/cincta-workspace-TGjok0/tree",
+          "count": 1,
+          "exported": true,
+          "changes": [
+            {
+              "path": ".",
+              "status": "modified",
+              "before": {
+                "type": "directory",
+                "mode": 493,
+                "size": 4096
+              },
+              "after": {
+                "type": "directory",
+                "mode": 493,
+                "size": 4096
+              }
+            }
+          ]
+        },
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 17,
+          "phase_ms": {
+            "setup": 1,
+            "run": 5,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true,
+            "caller_bound": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": true,
+            "source": "/tmp/cincta-v02-z0fxhcg2/3/source",
+            "root": "/tmp/cincta-preparation-cvnm4x/cincta-workspace-TGjok0",
+            "tree": "/tmp/cincta-preparation-cvnm4x/cincta-workspace-TGjok0/tree",
+            "retained": false,
+            "exported": true,
+            "executable": false,
+            "changes": 1,
+            "copied_files": 0,
+            "copied_bytes": 0
+          },
+          "resources": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "name": "workspace.root-unchanged",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "unchanged",
+        "diff": {
+          "schema_version": 1,
+          "source": "/tmp/cincta-v02-z0fxhcg2/4/source",
+          "workspace": "/tmp/cincta-preparation-AgclSn/cincta-workspace-Rjf7Pf/tree",
+          "count": 0,
+          "exported": true,
+          "changes": []
+        },
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 7,
+          "phase_ms": {
+            "setup": 1,
+            "run": 6,
+            "cleanup": 0
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true,
+            "caller_bound": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": false,
+            "mode": "events",
+            "records": 0,
+            "complete": true,
+            "path": "",
+            "bytes": 0,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": true,
+            "source": "/tmp/cincta-v02-z0fxhcg2/4/source",
+            "root": "/tmp/cincta-preparation-AgclSn/cincta-workspace-Rjf7Pf",
+            "tree": "/tmp/cincta-preparation-AgclSn/cincta-workspace-Rjf7Pf/tree",
+            "retained": false,
+            "exported": true,
+            "executable": false,
+            "changes": 0,
+            "copied_files": 0,
+            "copied_bytes": 0
+          },
+          "resources": {
+            "enabled": false
+          }
         }
       }
     },
@@ -118,17 +366,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 14,
+        "elapsed_ms": 13,
         "phase_ms": {
-          "setup": 2,
-          "run": 12,
-          "cleanup": 0
+          "setup": 1,
+          "run": 11,
+          "cleanup": 1
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -148,13 +397,13 @@
         },
         "workspace": {
           "enabled": true,
-          "source": "/tmp/cincta-v02-j2a5dew2/2/source",
-          "root": "/tmp/cincta-preparation-sKcIyy/cincta-workspace-dtQ7Jk",
-          "tree": "/tmp/cincta-preparation-sKcIyy/cincta-workspace-dtQ7Jk/tree",
+          "source": "/tmp/cincta-v02-z0fxhcg2/5/source",
+          "root": "/tmp/cincta-preparation-XeUcyW/cincta-workspace-T52FWl",
+          "tree": "/tmp/cincta-preparation-XeUcyW/cincta-workspace-T52FWl/tree",
           "retained": true,
           "exported": false,
           "executable": false,
-          "changes": 1,
+          "changes": 2,
           "copied_files": 0,
           "copied_bytes": 0
         },
@@ -179,7 +428,7 @@
       "outcome": "PASS",
       "evidence": {
         "rejected": "extra-rw",
-        "stderr": "cincta: workspace mode permits writes only inside its snapshot: /tmp/cincta-v02-j2a5dew2/4/sibling\n",
+        "stderr": "cincta: workspace mode permits writes only inside its snapshot: /tmp/cincta-v02-z0fxhcg2/7/sibling\n",
         "result": null
       }
     },
@@ -189,7 +438,7 @@
       "outcome": "PASS",
       "evidence": {
         "rejected": "source-ro",
-        "stderr": "cincta: grant overlaps original workspace: /tmp/cincta-v02-j2a5dew2/5/source\n",
+        "stderr": "cincta: grant overlaps original workspace: /tmp/cincta-v02-z0fxhcg2/8/source\n",
         "result": null
       }
     },
@@ -199,7 +448,7 @@
       "outcome": "PASS",
       "evidence": {
         "rejected": "ancestor-ro",
-        "stderr": "cincta: grant overlaps original workspace: /tmp/cincta-v02-j2a5dew2/6\n",
+        "stderr": "cincta: grant overlaps original workspace: /tmp/cincta-v02-z0fxhcg2/9\n",
         "result": null
       }
     },
@@ -209,7 +458,7 @@
       "outcome": "PASS",
       "evidence": {
         "rejected": "descendant-rx",
-        "stderr": "cincta: grant overlaps original workspace: /tmp/cincta-v02-j2a5dew2/7/source/nested/file\n",
+        "stderr": "cincta: grant overlaps original workspace: /tmp/cincta-v02-z0fxhcg2/10/source/nested/file\n",
         "result": null
       }
     },
@@ -219,7 +468,7 @@
       "outcome": "PASS",
       "evidence": {
         "rejected": "intermediate-symlink-grant",
-        "stderr": "cincta: grant overlaps original workspace: /tmp/cincta-v02-j2a5dew2/8/alias/nested\n",
+        "stderr": "cincta: grant overlaps original workspace: /tmp/cincta-v02-z0fxhcg2/11/alias/nested\n",
         "result": null
       }
     },
@@ -229,7 +478,7 @@
       "outcome": "PASS",
       "evidence": {
         "rejected": "parent-inside-source",
-        "stderr": "cincta: workspace parent must exist outside source: /tmp/cincta-v02-j2a5dew2/9/source/nested\n",
+        "stderr": "cincta: workspace parent must exist outside source: /tmp/cincta-v02-z0fxhcg2/12/source/nested\n",
         "result": null
       }
     },
@@ -258,17 +507,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 10,
+        "elapsed_ms": 7,
         "phase_ms": {
           "setup": 1,
-          "run": 9,
+          "run": 6,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -288,9 +538,9 @@
         },
         "workspace": {
           "enabled": true,
-          "source": "/tmp/cincta-v02-j2a5dew2/11/source",
-          "root": "/tmp/cincta-preparation-3cjcVv/cincta-workspace-35DtT7",
-          "tree": "/tmp/cincta-preparation-3cjcVv/cincta-workspace-35DtT7/tree",
+          "source": "/tmp/cincta-v02-z0fxhcg2/14/source",
+          "root": "/tmp/cincta-preparation-OCm81T/cincta-workspace-FDGkUz",
+          "tree": "/tmp/cincta-preparation-OCm81T/cincta-workspace-FDGkUz/tree",
           "retained": false,
           "exported": false,
           "executable": false,
@@ -318,17 +568,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 28,
+        "elapsed_ms": 21,
         "phase_ms": {
-          "setup": 2,
-          "run": 15,
-          "cleanup": 11
+          "setup": 1,
+          "run": 10,
+          "cleanup": 10
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -348,13 +599,13 @@
         },
         "workspace": {
           "enabled": true,
-          "source": "/tmp/cincta-v02-j2a5dew2/12/source",
-          "root": "/tmp/cincta-preparation-EX8Ssf/cincta-workspace-DZFjsQ",
-          "tree": "/tmp/cincta-preparation-EX8Ssf/cincta-workspace-DZFjsQ/tree",
+          "source": "/tmp/cincta-v02-z0fxhcg2/15/source",
+          "root": "/tmp/cincta-preparation-YVSL2M/cincta-workspace-P3sKbo",
+          "tree": "/tmp/cincta-preparation-YVSL2M/cincta-workspace-P3sKbo/tree",
           "retained": false,
           "exported": true,
           "executable": false,
-          "changes": 2,
+          "changes": 3,
           "copied_files": 1,
           "copied_bytes": 8
         },
@@ -378,7 +629,7 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 22,
+        "elapsed_ms": 21,
         "phase_ms": {
           "setup": 1,
           "run": 0,
@@ -388,7 +639,8 @@
           "landlock_abi": 0,
           "seccomp": false,
           "network": "unconfined",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -410,13 +662,13 @@
         },
         "workspace": {
           "enabled": true,
-          "source": "/tmp/cincta-v02-j2a5dew2/13/source",
-          "root": "/tmp/cincta-preparation-H0Rg3o/cincta-workspace-tTmK98",
-          "tree": "/tmp/cincta-preparation-H0Rg3o/cincta-workspace-tTmK98/tree",
+          "source": "/tmp/cincta-v02-z0fxhcg2/16/source",
+          "root": "/tmp/cincta-preparation-14yXC8/cincta-workspace-Ni4gQS",
+          "tree": "/tmp/cincta-preparation-14yXC8/cincta-workspace-Ni4gQS/tree",
           "retained": false,
           "exported": true,
           "executable": false,
-          "changes": 2,
+          "changes": 3,
           "copied_files": 1,
           "copied_bytes": 8
         },
@@ -442,17 +694,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 28,
+          "elapsed_ms": 10,
           "phase_ms": {
-            "setup": 2,
-            "run": 15,
-            "cleanup": 10
+            "setup": 0,
+            "run": 9,
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -462,8 +715,8 @@
             "mode": "events",
             "records": 6,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/14/audit.jsonl",
-            "bytes": 1583,
+            "path": "/tmp/cincta-v02-z0fxhcg2/17/audit.jsonl",
+            "bytes": 1589,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -481,7 +734,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287553093918,
+            "monotonic_ns": 16090033508414,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -502,9 +755,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287564558073,
-            "tid": 999,
-            "id": 13947867480397682793,
+            "monotonic_ns": 16090040570463,
+            "tid": 1053,
+            "id": 7316831140425748769,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -513,7 +766,7 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              246512186385392,
+              248841098322928,
               416,
               1,
               0,
@@ -523,18 +776,18 @@
           {
             "schema_version": 1,
             "event": "authorize",
-            "monotonic_ns": 9287565313048,
-            "tid": 999,
-            "id": 13947867480397682793,
+            "monotonic_ns": 16090040986204,
+            "tid": 1053,
+            "id": 7316831140425748769,
             "syscall": 53,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/14/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31342f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/17/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f31372f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
               18446744073709551516,
-              246512186385392,
+              248841098322928,
               416,
               1,
               0,
@@ -544,18 +797,18 @@
           {
             "schema_version": 1,
             "event": "result",
-            "monotonic_ns": 9287565332133,
-            "tid": 999,
-            "id": 13947867480397682793,
+            "monotonic_ns": 16090040995440,
+            "tid": 1053,
+            "id": 7316831140425748769,
             "syscall": 53,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/14/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31342f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/17/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f31372f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
               18446744073709551516,
-              246512186385392,
+              248841098322928,
               416,
               1,
               0,
@@ -565,9 +818,9 @@
           {
             "schema_version": 1,
             "event": "response",
-            "monotonic_ns": 9287565335724,
-            "tid": 999,
-            "id": 13947867480397682793,
+            "monotonic_ns": 16090040998909,
+            "tid": 1053,
+            "id": 7316831140425748769,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -576,7 +829,7 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              246512186385392,
+              248841098322928,
               416,
               1,
               0,
@@ -586,7 +839,7 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9287579825668,
+            "monotonic_ns": 16090042692801,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -624,17 +877,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 29,
+          "elapsed_ms": 20,
           "phase_ms": {
-            "setup": 2,
-            "run": 16,
+            "setup": 1,
+            "run": 8,
             "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -644,8 +898,8 @@
             "mode": "events",
             "records": 6,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/15/audit.jsonl",
-            "bytes": 1451,
+            "path": "/tmp/cincta-v02-z0fxhcg2/18/audit.jsonl",
+            "bytes": 1457,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -663,7 +917,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287583993191,
+            "monotonic_ns": 16090044849868,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -684,9 +938,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287598175890,
-            "tid": 1004,
-            "id": 7554662740553600723,
+            "monotonic_ns": 16090051868747,
+            "tid": 1058,
+            "id": 6884381482104098714,
             "syscall": 52,
             "arch": 3221225655,
             "target": "",
@@ -705,13 +959,13 @@
           {
             "schema_version": 1,
             "event": "authorize",
-            "monotonic_ns": 9287598273321,
-            "tid": 1004,
-            "id": 7554662740553600723,
+            "monotonic_ns": 16090051894156,
+            "tid": 1058,
+            "id": 6884381482104098714,
             "syscall": 52,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/15/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31352f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/18/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f31382f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
@@ -726,13 +980,13 @@
           {
             "schema_version": 1,
             "event": "result",
-            "monotonic_ns": 9287598289233,
-            "tid": 1004,
-            "id": 7554662740553600723,
+            "monotonic_ns": 16090051900174,
+            "tid": 1058,
+            "id": 6884381482104098714,
             "syscall": 52,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/15/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31352f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/18/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f31382f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
@@ -747,9 +1001,9 @@
           {
             "schema_version": 1,
             "event": "response",
-            "monotonic_ns": 9287598294954,
-            "tid": 1004,
-            "id": 7554662740553600723,
+            "monotonic_ns": 16090051903225,
+            "tid": 1058,
+            "id": 6884381482104098714,
             "syscall": 52,
             "arch": 3221225655,
             "target": "",
@@ -768,7 +1022,7 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9287611680499,
+            "monotonic_ns": 16090063540480,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -806,17 +1060,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 29,
+          "elapsed_ms": 20,
           "phase_ms": {
-            "setup": 1,
-            "run": 16,
-            "cleanup": 10
+            "setup": 0,
+            "run": 9,
+            "cleanup": 11
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -826,8 +1081,8 @@
             "mode": "events",
             "records": 6,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/16/audit.jsonl",
-            "bytes": 1635,
+            "path": "/tmp/cincta-v02-z0fxhcg2/19/audit.jsonl",
+            "bytes": 1637,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -845,7 +1100,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287615587886,
+            "monotonic_ns": 16090065521730,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -866,9 +1121,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287628334303,
-            "tid": 1009,
-            "id": 10449328538361000618,
+            "monotonic_ns": 16090073002154,
+            "tid": 1063,
+            "id": 7066985667127861027,
             "syscall": 88,
             "arch": 3221225655,
             "target": "",
@@ -877,8 +1132,8 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              252200704631792,
-              281474443658208,
+              262976112321520,
+              281474091089584,
               0,
               0,
               11719560
@@ -887,19 +1142,19 @@
           {
             "schema_version": 1,
             "event": "authorize",
-            "monotonic_ns": 9287629224546,
-            "tid": 1009,
-            "id": 10449328538361000618,
+            "monotonic_ns": 16090073333518,
+            "tid": 1063,
+            "id": 7066985667127861027,
             "syscall": 88,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/16/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31362f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/19/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f31392f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
               18446744073709551516,
-              252200704631792,
-              281474443658208,
+              262976112321520,
+              281474091089584,
               0,
               0,
               11719560
@@ -908,19 +1163,19 @@
           {
             "schema_version": 1,
             "event": "result",
-            "monotonic_ns": 9287629270944,
-            "tid": 1009,
-            "id": 10449328538361000618,
+            "monotonic_ns": 16090073350360,
+            "tid": 1063,
+            "id": 7066985667127861027,
             "syscall": 88,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/16/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31362f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/19/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f31392f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
               18446744073709551516,
-              252200704631792,
-              281474443658208,
+              262976112321520,
+              281474091089584,
               0,
               0,
               11719560
@@ -929,9 +1184,9 @@
           {
             "schema_version": 1,
             "event": "response",
-            "monotonic_ns": 9287629277960,
-            "tid": 1009,
-            "id": 10449328538361000618,
+            "monotonic_ns": 16090073353411,
+            "tid": 1063,
+            "id": 7066985667127861027,
             "syscall": 88,
             "arch": 3221225655,
             "target": "",
@@ -940,8 +1195,8 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              252200704631792,
-              281474443658208,
+              262976112321520,
+              281474091089584,
               0,
               0,
               11719560
@@ -950,7 +1205,7 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9287642905725,
+            "monotonic_ns": 16090085060416,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -988,17 +1243,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 33,
+          "elapsed_ms": 23,
           "phase_ms": {
-            "setup": 0,
-            "run": 21,
-            "cleanup": 11
+            "setup": 1,
+            "run": 12,
+            "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -1008,8 +1264,8 @@
             "mode": "events",
             "records": 10,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/17/audit.jsonl",
-            "bytes": 2799,
+            "path": "/tmp/cincta-v02-z0fxhcg2/20/audit.jsonl",
+            "bytes": 2809,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -1027,7 +1283,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287646966963,
+            "monotonic_ns": 16090087572000,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -1048,9 +1304,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287660026889,
-            "tid": 1014,
-            "id": 4260026217988551441,
+            "monotonic_ns": 16090095122257,
+            "tid": 1068,
+            "id": 2699919493805443547,
             "syscall": 5,
             "arch": 3221225655,
             "target": "",
@@ -1058,9 +1314,9 @@
             "value": 0,
             "errno": 0,
             "args": [
-              260834728894512,
-              260834728842864,
-              260834728842144,
+              279880239439920,
+              279880239388272,
+              279880239387552,
               4,
               0,
               11719560
@@ -1069,19 +1325,19 @@
           {
             "schema_version": 1,
             "event": "authorize",
-            "monotonic_ns": 9287661956464,
-            "tid": 1014,
-            "id": 4260026217988551441,
+            "monotonic_ns": 16090096086554,
+            "tid": 1068,
+            "id": 2699919493805443547,
             "syscall": 5,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/17/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31372f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/20/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32302f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
-              260834728894512,
-              260834728842864,
-              260834728842144,
+              279880239439920,
+              279880239388272,
+              279880239387552,
               4,
               0,
               11719560
@@ -1090,19 +1346,19 @@
           {
             "schema_version": 1,
             "event": "result",
-            "monotonic_ns": 9287662681037,
-            "tid": 1014,
-            "id": 4260026217988551441,
+            "monotonic_ns": 16090096468904,
+            "tid": 1068,
+            "id": 2699919493805443547,
             "syscall": 5,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/17/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31372f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/20/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32302f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
-              260834728894512,
-              260834728842864,
-              260834728842144,
+              279880239439920,
+              279880239388272,
+              279880239387552,
               4,
               0,
               11719560
@@ -1111,9 +1367,9 @@
           {
             "schema_version": 1,
             "event": "response",
-            "monotonic_ns": 9287662693691,
-            "tid": 1014,
-            "id": 4260026217988551441,
+            "monotonic_ns": 16090096473083,
+            "tid": 1068,
+            "id": 2699919493805443547,
             "syscall": 5,
             "arch": 3221225655,
             "target": "",
@@ -1121,9 +1377,9 @@
             "value": 0,
             "errno": 0,
             "args": [
-              260834728894512,
-              260834728842864,
-              260834728842144,
+              279880239439920,
+              279880239388272,
+              279880239387552,
               4,
               0,
               11719560
@@ -1132,9 +1388,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287662767902,
-            "tid": 1014,
-            "id": 4260026217988551442,
+            "monotonic_ns": 16090096515752,
+            "tid": 1068,
+            "id": 2699919493805443548,
             "syscall": 14,
             "arch": 3221225655,
             "target": "",
@@ -1142,8 +1398,8 @@
             "value": 0,
             "errno": 0,
             "args": [
-              260834728894512,
-              260834728842912,
+              279880239439920,
+              279880239388320,
               0,
               1,
               0,
@@ -1153,18 +1409,18 @@
           {
             "schema_version": 1,
             "event": "authorize",
-            "monotonic_ns": 9287664699858,
-            "tid": 1014,
-            "id": 4260026217988551442,
+            "monotonic_ns": 16090097530867,
+            "tid": 1068,
+            "id": 2699919493805443548,
             "syscall": 14,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/17/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31372f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/20/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32302f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
-              260834728894512,
-              260834728842912,
+              279880239439920,
+              279880239388320,
               0,
               1,
               0,
@@ -1174,18 +1430,18 @@
           {
             "schema_version": 1,
             "event": "result",
-            "monotonic_ns": 9287665327083,
-            "tid": 1014,
-            "id": 4260026217988551442,
+            "monotonic_ns": 16090098030693,
+            "tid": 1068,
+            "id": 2699919493805443548,
             "syscall": 14,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/17/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31372f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/20/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32302f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
-              260834728894512,
-              260834728842912,
+              279880239439920,
+              279880239388320,
               0,
               1,
               0,
@@ -1195,9 +1451,9 @@
           {
             "schema_version": 1,
             "event": "response",
-            "monotonic_ns": 9287665335436,
-            "tid": 1014,
-            "id": 4260026217988551442,
+            "monotonic_ns": 16090098034538,
+            "tid": 1068,
+            "id": 2699919493805443548,
             "syscall": 14,
             "arch": 3221225655,
             "target": "",
@@ -1205,8 +1461,8 @@
             "value": 0,
             "errno": 0,
             "args": [
-              260834728894512,
-              260834728842912,
+              279880239439920,
+              279880239388320,
               0,
               1,
               0,
@@ -1216,7 +1472,7 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9287679201370,
+            "monotonic_ns": 16090110386762,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -1254,17 +1510,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 30,
+          "elapsed_ms": 11,
           "phase_ms": {
             "setup": 0,
-            "run": 19,
-            "cleanup": 10
+            "run": 10,
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -1274,8 +1531,8 @@
             "mode": "events",
             "records": 6,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/18/audit.jsonl",
-            "bytes": 1607,
+            "path": "/tmp/cincta-v02-z0fxhcg2/21/audit.jsonl",
+            "bytes": 1613,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -1293,7 +1550,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287682870838,
+            "monotonic_ns": 16090113431396,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -1314,9 +1571,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287696327921,
-            "tid": 1019,
-            "id": 6722974092405763821,
+            "monotonic_ns": 16090121898391,
+            "tid": 1073,
+            "id": 8570326326306175604,
             "syscall": 54,
             "arch": 3221225655,
             "target": "",
@@ -1325,7 +1582,7 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              274680655012848,
+              271559561536496,
               10001,
               10001,
               0,
@@ -1335,18 +1592,18 @@
           {
             "schema_version": 1,
             "event": "authorize",
-            "monotonic_ns": 9287698459417,
-            "tid": 1019,
-            "id": 6722974092405763821,
+            "monotonic_ns": 16090122246765,
+            "tid": 1073,
+            "id": 8570326326306175604,
             "syscall": 54,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/18/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31382f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/21/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32312f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
               18446744073709551516,
-              274680655012848,
+              271559561536496,
               10001,
               10001,
               0,
@@ -1356,18 +1613,18 @@
           {
             "schema_version": 1,
             "event": "result",
-            "monotonic_ns": 9287698490947,
-            "tid": 1019,
-            "id": 6722974092405763821,
+            "monotonic_ns": 16090122255959,
+            "tid": 1073,
+            "id": 8570326326306175604,
             "syscall": 54,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/18/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31382f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/21/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32312f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
               18446744073709551516,
-              274680655012848,
+              271559561536496,
               10001,
               10001,
               0,
@@ -1377,9 +1634,9 @@
           {
             "schema_version": 1,
             "event": "response",
-            "monotonic_ns": 9287698497504,
-            "tid": 1019,
-            "id": 6722974092405763821,
+            "monotonic_ns": 16090122259177,
+            "tid": 1073,
+            "id": 8570326326306175604,
             "syscall": 54,
             "arch": 3221225655,
             "target": "",
@@ -1388,7 +1645,7 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              274680655012848,
+              271559561536496,
               10001,
               10001,
               0,
@@ -1398,7 +1655,7 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9287712408332,
+            "monotonic_ns": 16090123978437,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -1436,17 +1693,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 27,
+          "elapsed_ms": 22,
           "phase_ms": {
             "setup": 1,
-            "run": 15,
-            "cleanup": 10
+            "run": 9,
+            "cleanup": 11
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -1456,8 +1714,8 @@
             "mode": "events",
             "records": 6,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/19/audit.jsonl",
-            "bytes": 1587,
+            "path": "/tmp/cincta-v02-z0fxhcg2/22/audit.jsonl",
+            "bytes": 1589,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -1475,7 +1733,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287716552760,
+            "monotonic_ns": 16090127047310,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -1496,9 +1754,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287726694769,
-            "tid": 1024,
-            "id": 17896815579855401498,
+            "monotonic_ns": 16090134503119,
+            "tid": 1078,
+            "id": 8483997649907839837,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -1507,7 +1765,7 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              251307382890384,
+              280876781952912,
               2541,
               1,
               0,
@@ -1517,18 +1775,18 @@
           {
             "schema_version": 1,
             "event": "authorize",
-            "monotonic_ns": 9287729745323,
-            "tid": 1024,
-            "id": 17896815579855401498,
+            "monotonic_ns": 16090135489523,
+            "tid": 1078,
+            "id": 8483997649907839837,
             "syscall": 53,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/19/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31392f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/22/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32322f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
               18446744073709551516,
-              251307382890384,
+              280876781952912,
               2541,
               1,
               0,
@@ -1538,18 +1796,18 @@
           {
             "schema_version": 1,
             "event": "result",
-            "monotonic_ns": 9287729761526,
-            "tid": 1024,
-            "id": 17896815579855401498,
+            "monotonic_ns": 16090135496586,
+            "tid": 1078,
+            "id": 8483997649907839837,
             "syscall": 53,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/19/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f31392f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/22/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32322f72772f66696c65",
             "value": 0,
             "errno": 1,
             "args": [
               18446744073709551516,
-              251307382890384,
+              280876781952912,
               2541,
               1,
               0,
@@ -1559,9 +1817,9 @@
           {
             "schema_version": 1,
             "event": "deny",
-            "monotonic_ns": 9287729767373,
-            "tid": 1024,
-            "id": 17896815579855401498,
+            "monotonic_ns": 16090135499804,
+            "tid": 1078,
+            "id": 8483997649907839837,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -1570,7 +1828,7 @@
             "errno": 1,
             "args": [
               18446744073709551516,
-              251307382890384,
+              280876781952912,
               2541,
               1,
               0,
@@ -1580,7 +1838,7 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9287743442496,
+            "monotonic_ns": 16090147416560,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -1618,17 +1876,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 31,
+          "elapsed_ms": 20,
           "phase_ms": {
-            "setup": 1,
-            "run": 18,
-            "cleanup": 11
+            "setup": 0,
+            "run": 10,
+            "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -1638,8 +1897,8 @@
             "mode": "events",
             "records": 6,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/20/audit.jsonl",
-            "bytes": 1607,
+            "path": "/tmp/cincta-v02-z0fxhcg2/23/audit.jsonl",
+            "bytes": 1609,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -1657,7 +1916,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287747184087,
+            "monotonic_ns": 16090149344526,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -1678,9 +1937,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287758925626,
-            "tid": 1029,
-            "id": 11486763258879566338,
+            "monotonic_ns": 16090156596183,
+            "tid": 1083,
+            "id": 4192975208902015803,
             "syscall": 54,
             "arch": 3221225655,
             "target": "",
@@ -1689,7 +1948,7 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              261928674811792,
+              260156887031696,
               10002,
               10001,
               0,
@@ -1699,18 +1958,18 @@
           {
             "schema_version": 1,
             "event": "authorize",
-            "monotonic_ns": 9287762152791,
-            "tid": 1029,
-            "id": 11486763258879566338,
+            "monotonic_ns": 16090157589567,
+            "tid": 1083,
+            "id": 4192975208902015803,
             "syscall": 54,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/20/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f32302f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/23/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32332f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
               18446744073709551516,
-              261928674811792,
+              260156887031696,
               10002,
               10001,
               0,
@@ -1720,18 +1979,18 @@
           {
             "schema_version": 1,
             "event": "result",
-            "monotonic_ns": 9287762165988,
-            "tid": 1029,
-            "id": 11486763258879566338,
+            "monotonic_ns": 16090157594456,
+            "tid": 1083,
+            "id": 4192975208902015803,
             "syscall": 54,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/20/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f32302f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/23/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32332f72772f66696c65",
             "value": 0,
             "errno": 1,
             "args": [
               18446744073709551516,
-              261928674811792,
+              260156887031696,
               10002,
               10001,
               0,
@@ -1741,9 +2000,9 @@
           {
             "schema_version": 1,
             "event": "deny",
-            "monotonic_ns": 9287762172127,
-            "tid": 1029,
-            "id": 11486763258879566338,
+            "monotonic_ns": 16090157597424,
+            "tid": 1083,
+            "id": 4192975208902015803,
             "syscall": 54,
             "arch": 3221225655,
             "target": "",
@@ -1752,7 +2011,7 @@
             "errno": 1,
             "args": [
               18446744073709551516,
-              261928674811792,
+              260156887031696,
               10002,
               10001,
               0,
@@ -1762,7 +2021,7 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9287776434091,
+            "monotonic_ns": 16090169289049,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -1800,17 +2059,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 32,
+          "elapsed_ms": 19,
           "phase_ms": {
-            "setup": 1,
-            "run": 19,
+            "setup": 0,
+            "run": 8,
             "cleanup": 11
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -1820,8 +2080,8 @@
             "mode": "events",
             "records": 4,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/21/audit.jsonl",
-            "bytes": 867,
+            "path": "/tmp/cincta-v02-z0fxhcg2/24/audit.jsonl",
+            "bytes": 871,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -1839,7 +2099,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287780605790,
+            "monotonic_ns": 16090170971240,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -1860,9 +2120,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287793869557,
-            "tid": 1034,
-            "id": 15750573929988893510,
+            "monotonic_ns": 16090177978208,
+            "tid": 1088,
+            "id": 13445775407179618059,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -1871,7 +2131,7 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              257277232766864,
+              258771756539792,
               384,
               1,
               0,
@@ -1881,9 +2141,9 @@
           {
             "schema_version": 1,
             "event": "deny",
-            "monotonic_ns": 9287797032785,
-            "tid": 1034,
-            "id": 15750573929988893510,
+            "monotonic_ns": 16090178298581,
+            "tid": 1088,
+            "id": 13445775407179618059,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -1892,7 +2152,7 @@
             "errno": 13,
             "args": [
               18446744073709551516,
-              257277232766864,
+              258771756539792,
               384,
               1,
               0,
@@ -1902,7 +2162,7 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9287811344446,
+            "monotonic_ns": 16090190249230,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -1940,17 +2200,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 30,
+          "elapsed_ms": 11,
           "phase_ms": {
-            "setup": 2,
-            "run": 16,
-            "cleanup": 10
+            "setup": 1,
+            "run": 9,
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -1960,8 +2221,8 @@
             "mode": "events",
             "records": 4,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/22/audit.jsonl",
-            "bytes": 865,
+            "path": "/tmp/cincta-v02-z0fxhcg2/25/audit.jsonl",
+            "bytes": 869,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -1979,7 +2240,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287815314017,
+            "monotonic_ns": 16090192041834,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -2000,9 +2261,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287825383943,
-            "tid": 1039,
-            "id": 6663974641826571055,
+            "monotonic_ns": 16090199476872,
+            "tid": 1093,
+            "id": 1971700534650993043,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -2011,7 +2272,7 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              274986395983600,
+              271176180129520,
               384,
               1,
               0,
@@ -2021,9 +2282,9 @@
           {
             "schema_version": 1,
             "event": "deny",
-            "monotonic_ns": 9287828669493,
-            "tid": 1039,
-            "id": 6663974641826571055,
+            "monotonic_ns": 16090199878781,
+            "tid": 1093,
+            "id": 1971700534650993043,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -2032,7 +2293,7 @@
             "errno": 13,
             "args": [
               18446744073709551516,
-              274986395983600,
+              271176180129520,
               384,
               1,
               0,
@@ -2042,7 +2303,7 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9287842984829,
+            "monotonic_ns": 16090201602136,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -2080,17 +2341,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 33,
+          "elapsed_ms": 11,
           "phase_ms": {
-            "setup": 2,
-            "run": 19,
-            "cleanup": 11
+            "setup": 1,
+            "run": 9,
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -2100,8 +2362,8 @@
             "mode": "events",
             "records": 4,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/23/audit.jsonl",
-            "bytes": 865,
+            "path": "/tmp/cincta-v02-z0fxhcg2/26/audit.jsonl",
+            "bytes": 869,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -2119,7 +2381,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287848423256,
+            "monotonic_ns": 16090203703537,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -2140,9 +2402,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287862096499,
-            "tid": 1044,
-            "id": 7858804702147976098,
+            "monotonic_ns": 16090211332278,
+            "tid": 1098,
+            "id": 5214029910237862469,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -2151,7 +2413,7 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              258956385279728,
+              272004357775088,
               384,
               1,
               0,
@@ -2161,9 +2423,9 @@
           {
             "schema_version": 1,
             "event": "deny",
-            "monotonic_ns": 9287865126172,
-            "tid": 1044,
-            "id": 7858804702147976098,
+            "monotonic_ns": 16090211709321,
+            "tid": 1098,
+            "id": 5214029910237862469,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -2172,7 +2434,7 @@
             "errno": 13,
             "args": [
               18446744073709551516,
-              258956385279728,
+              272004357775088,
               384,
               1,
               0,
@@ -2182,7 +2444,7 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9287879379199,
+            "monotonic_ns": 16090213520229,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -2220,17 +2482,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 33,
+          "elapsed_ms": 22,
           "phase_ms": {
             "setup": 2,
-            "run": 19,
-            "cleanup": 11
+            "run": 9,
+            "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -2240,8 +2503,8 @@
             "mode": "events",
             "records": 4,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/24/audit.jsonl",
-            "bytes": 865,
+            "path": "/tmp/cincta-v02-z0fxhcg2/27/audit.jsonl",
+            "bytes": 869,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -2259,7 +2522,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287883360296,
+            "monotonic_ns": 16090218132462,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -2280,9 +2543,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287897160873,
-            "tid": 1049,
-            "id": 4431831712723402656,
+            "monotonic_ns": 16090226428739,
+            "tid": 1103,
+            "id": 4980971320122768310,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -2291,7 +2554,7 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              256689505984240,
+              254128949845744,
               384,
               1,
               0,
@@ -2301,9 +2564,9 @@
           {
             "schema_version": 1,
             "event": "deny",
-            "monotonic_ns": 9287899827508,
-            "tid": 1049,
-            "id": 4431831712723402656,
+            "monotonic_ns": 16090226969103,
+            "tid": 1103,
+            "id": 4980971320122768310,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -2312,7 +2575,7 @@
             "errno": 13,
             "args": [
               18446744073709551516,
-              256689505984240,
+              254128949845744,
               384,
               1,
               0,
@@ -2322,7 +2585,7 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9287914065208,
+            "monotonic_ns": 16090238911812,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -2360,17 +2623,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 30,
+          "elapsed_ms": 11,
           "phase_ms": {
-            "setup": 2,
-            "run": 17,
-            "cleanup": 10
+            "setup": 1,
+            "run": 9,
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -2380,8 +2644,8 @@
             "mode": "events",
             "records": 6,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/25/audit.jsonl",
-            "bytes": 1607,
+            "path": "/tmp/cincta-v02-z0fxhcg2/28/audit.jsonl",
+            "bytes": 1609,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -2399,7 +2663,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287919251476,
+            "monotonic_ns": 16090242505377,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -2420,9 +2684,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287930398196,
-            "tid": 1054,
-            "id": 18317040754072123317,
+            "monotonic_ns": 16090250513042,
+            "tid": 1108,
+            "id": 2493073561719174877,
             "syscall": 5,
             "arch": 3221225655,
             "target": "",
@@ -2430,9 +2694,9 @@
             "value": 0,
             "errno": 0,
             "args": [
-              266182375792528,
-              266182375740896,
-              266182375740224,
+              275044584087440,
+              275044584035808,
+              275044584035136,
               4,
               0,
               11719560
@@ -2441,19 +2705,19 @@
           {
             "schema_version": 1,
             "event": "authorize",
-            "monotonic_ns": 9287933354702,
-            "tid": 1054,
-            "id": 18317040754072123317,
+            "monotonic_ns": 16090250850174,
+            "tid": 1108,
+            "id": 2493073561719174877,
             "syscall": 5,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/25/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f32352f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/28/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32382f72772f66696c65",
             "value": 0,
             "errno": 0,
             "args": [
-              266182375792528,
-              266182375740896,
-              266182375740224,
+              275044584087440,
+              275044584035808,
+              275044584035136,
               4,
               0,
               11719560
@@ -2462,19 +2726,19 @@
           {
             "schema_version": 1,
             "event": "result",
-            "monotonic_ns": 9287934092012,
-            "tid": 1054,
-            "id": 18317040754072123317,
+            "monotonic_ns": 16090250980605,
+            "tid": 1108,
+            "id": 2493073561719174877,
             "syscall": 5,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/25/rw/file",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f32352f72772f66696c65",
+            "target": "/tmp/cincta-v02-z0fxhcg2/28/rw/file",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32382f72772f66696c65",
             "value": 0,
             "errno": 1,
             "args": [
-              266182375792528,
-              266182375740896,
-              266182375740224,
+              275044584087440,
+              275044584035808,
+              275044584035136,
               4,
               0,
               11719560
@@ -2483,9 +2747,9 @@
           {
             "schema_version": 1,
             "event": "deny",
-            "monotonic_ns": 9287934103246,
-            "tid": 1054,
-            "id": 18317040754072123317,
+            "monotonic_ns": 16090250984199,
+            "tid": 1108,
+            "id": 2493073561719174877,
             "syscall": 5,
             "arch": 3221225655,
             "target": "",
@@ -2493,9 +2757,9 @@
             "value": 0,
             "errno": 1,
             "args": [
-              266182375792528,
-              266182375740896,
-              266182375740224,
+              275044584087440,
+              275044584035808,
+              275044584035136,
               4,
               0,
               11719560
@@ -2504,7 +2768,7 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9287947358869,
+            "monotonic_ns": 16090252543021,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -2542,17 +2806,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 53,
+          "elapsed_ms": 34,
           "phase_ms": {
             "setup": 3,
-            "run": 37,
-            "cleanup": 11
+            "run": 25,
+            "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -2562,8 +2827,8 @@
             "mode": "events",
             "records": 6,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/26/audit.jsonl",
-            "bytes": 3375,
+            "path": "/tmp/cincta-v02-z0fxhcg2/29/audit.jsonl",
+            "bytes": 3381,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -2581,7 +2846,7 @@
           {
             "schema_version": 1,
             "event": "start",
-            "monotonic_ns": 9287953336277,
+            "monotonic_ns": 16090257304116,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -2602,9 +2867,9 @@
           {
             "schema_version": 1,
             "event": "request",
-            "monotonic_ns": 9287968655616,
-            "tid": 1059,
-            "id": 14879208634984811402,
+            "monotonic_ns": 16090269025371,
+            "tid": 1113,
+            "id": 15261825655501678114,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -2613,7 +2878,7 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              444949344,
+              310580064,
               416,
               1,
               0,
@@ -2623,18 +2888,18 @@
           {
             "schema_version": 1,
             "event": "authorize",
-            "monotonic_ns": 9287988887137,
-            "tid": 1059,
-            "id": 14879208634984811402,
+            "monotonic_ns": 16090284424569,
+            "tid": 1113,
+            "id": 15261825655501678114,
             "syscall": 53,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/26/rw/目录0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录4xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/引号\"换行\n",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f32362f72772fe79baee5bd953078787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953178787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953278787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953378787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953478787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe5bc95e58fb722e68da2e8a18c0a",
+            "target": "/tmp/cincta-v02-z0fxhcg2/29/rw/目录0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录4xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/引号\"换行\n",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32392f72772fe79baee5bd953078787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953178787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953278787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953378787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953478787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe5bc95e58fb722e68da2e8a18c0a",
             "value": 0,
             "errno": 0,
             "args": [
               18446744073709551516,
-              444949344,
+              310580064,
               416,
               1,
               0,
@@ -2644,18 +2909,18 @@
           {
             "schema_version": 1,
             "event": "result",
-            "monotonic_ns": 9287988947984,
-            "tid": 1059,
-            "id": 14879208634984811402,
+            "monotonic_ns": 16090284466319,
+            "tid": 1113,
+            "id": 15261825655501678114,
             "syscall": 53,
             "arch": 3221225655,
-            "target": "/tmp/cincta-v02-j2a5dew2/26/rw/目录0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录4xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/引号\"换行\n",
-            "target_bytes_hex": "2f746d702f63696e6374612d7630322d6a326135646577322f32362f72772fe79baee5bd953078787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953178787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953278787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953378787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953478787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe5bc95e58fb722e68da2e8a18c0a",
+            "target": "/tmp/cincta-v02-z0fxhcg2/29/rw/目录0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/目录4xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/引号\"换行\n",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f32392f72772fe79baee5bd953078787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953178787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953278787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953378787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe79baee5bd953478787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878782fe5bc95e58fb722e68da2e8a18c0a",
             "value": 0,
             "errno": 0,
             "args": [
               18446744073709551516,
-              444949344,
+              310580064,
               416,
               1,
               0,
@@ -2665,9 +2930,9 @@
           {
             "schema_version": 1,
             "event": "response",
-            "monotonic_ns": 9287988976090,
-            "tid": 1059,
-            "id": 14879208634984811402,
+            "monotonic_ns": 16090284482576,
+            "tid": 1113,
+            "id": 15261825655501678114,
             "syscall": 53,
             "arch": 3221225655,
             "target": "",
@@ -2676,7 +2941,7 @@
             "errno": 0,
             "args": [
               18446744073709551516,
-              444949344,
+              310580064,
               416,
               1,
               0,
@@ -2686,7 +2951,541 @@
           {
             "schema_version": 1,
             "event": "finish",
-            "monotonic_ns": 9288003291927,
+            "monotonic_ns": 16090286627691,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.fd-path-bytes-4094",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "observed": {
+          "path_bytes": 4094,
+          "directory_levels": 20,
+          "leaf_bytes": 43,
+          "fchmod_syscall": 52,
+          "fchmod_rc": 0,
+          "fchmod_errno": 0,
+          "mode": 420
+        },
+        "external_mode": 420,
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 13,
+          "phase_ms": {
+            "setup": 1,
+            "run": 1,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true,
+            "caller_bound": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-z0fxhcg2/30/audit.jsonl",
+            "bytes": 25919,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 16090323178768,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 16090324161411,
+            "tid": 1123,
+            "id": 2194399053051403743,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              420,
+              384,
+              281474460826403,
+              0,
+              7161677110969590627
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "authorize",
+            "monotonic_ns": 16090324208969,
+            "tid": 1123,
+            "id": 2194399053051403743,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-z0fxhcg2/30/rw/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffffffff",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f33302f72772f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f66666666666666666666666666666666666666666666666666666666666666666666666666666666666666",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              420,
+              384,
+              281474460826403,
+              0,
+              7161677110969590627
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "result",
+            "monotonic_ns": 16090324355114,
+            "tid": 1123,
+            "id": 2194399053051403743,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-z0fxhcg2/30/rw/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffffffff",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f33302f72772f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f66666666666666666666666666666666666666666666666666666666666666666666666666666666666666",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              420,
+              384,
+              281474460826403,
+              0,
+              7161677110969590627
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "response",
+            "monotonic_ns": 16090324478065,
+            "tid": 1123,
+            "id": 2194399053051403743,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              420,
+              384,
+              281474460826403,
+              0,
+              7161677110969590627
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 16090334862453,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.fd-path-bytes-4095",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "observed": {
+          "path_bytes": 4095,
+          "directory_levels": 20,
+          "leaf_bytes": 44,
+          "fchmod_syscall": 52,
+          "fchmod_rc": 0,
+          "fchmod_errno": 0,
+          "mode": 420
+        },
+        "external_mode": 420,
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 13,
+          "phase_ms": {
+            "setup": 1,
+            "run": 1,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true,
+            "caller_bound": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 6,
+            "complete": true,
+            "path": "/tmp/cincta-v02-z0fxhcg2/31/audit.jsonl",
+            "bytes": 25929,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 16090337855182,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 16090338788887,
+            "tid": 1128,
+            "id": 12852784883320911852,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              420,
+              384,
+              281474955631860,
+              0,
+              7161677110969590627
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "authorize",
+            "monotonic_ns": 16090338840166,
+            "tid": 1128,
+            "id": 12852784883320911852,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-z0fxhcg2/31/rw/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffff",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f33312f72772f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              420,
+              384,
+              281474955631860,
+              0,
+              7161677110969590627
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "result",
+            "monotonic_ns": 16090338979122,
+            "tid": 1128,
+            "id": 12852784883320911852,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "/tmp/cincta-v02-z0fxhcg2/31/rw/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffff",
+            "target_bytes_hex": "2f746d702f63696e6374612d7630322d7a306678686367322f33312f72772f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f64646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464642f6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              420,
+              384,
+              281474955631860,
+              0,
+              7161677110969590627
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "response",
+            "monotonic_ns": 16090339114527,
+            "tid": 1128,
+            "id": 12852784883320911852,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              420,
+              384,
+              281474955631860,
+              0,
+              7161677110969590627
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 16090349558509,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "ok",
+            "target_bytes_hex": "6f6b",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "metadata.fd-path-bytes-4096",
+      "mode": "strict",
+      "outcome": "PASS",
+      "evidence": {
+        "observed": {
+          "path_bytes": 4096,
+          "directory_levels": 20,
+          "leaf_bytes": 45,
+          "fchmod_syscall": 52,
+          "fchmod_rc": -1,
+          "fchmod_errno": 36,
+          "mode": 384
+        },
+        "external_mode": 384,
+        "result": {
+          "schema_version": 1,
+          "version": "0.2.0-preview.1",
+          "status": "ok",
+          "stage": "running",
+          "message": "",
+          "exit_code": 0,
+          "signal": 0,
+          "timed_out": false,
+          "cancelled": false,
+          "cleanup_complete": true,
+          "elapsed_ms": 12,
+          "phase_ms": {
+            "setup": 0,
+            "run": 1,
+            "cleanup": 10
+          },
+          "protections": {
+            "landlock_abi": 8,
+            "seccomp": true,
+            "network": "none",
+            "ipc_scoped": true,
+            "caller_bound": true
+          },
+          "unsupported": [],
+          "dynamic": true,
+          "network_snapshot": [],
+          "audit": {
+            "enabled": true,
+            "mode": "events",
+            "records": 4,
+            "complete": true,
+            "path": "/tmp/cincta-v02-z0fxhcg2/32/audit.jsonl",
+            "bytes": 855,
+            "max_bytes": 67108864,
+            "max_records": 1000000,
+            "limit_exceeded": false,
+            "delivery_pending": 0,
+            "native_open_fallbacks": 0
+          },
+          "workspace": {
+            "enabled": false
+          },
+          "resources": {
+            "enabled": false
+          }
+        },
+        "audit_events": [
+          {
+            "schema_version": 1,
+            "event": "start",
+            "monotonic_ns": 16090352428790,
+            "tid": 0,
+            "id": 0,
+            "syscall": -1,
+            "arch": 0,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "request",
+            "monotonic_ns": 16090353316316,
+            "tid": 1133,
+            "id": 555868833510736467,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 0,
+            "args": [
+              3,
+              420,
+              384,
+              281474761029461,
+              0,
+              7161677110969590627
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "deny",
+            "monotonic_ns": 16090353337086,
+            "tid": 1133,
+            "id": 555868833510736467,
+            "syscall": 52,
+            "arch": 3221225655,
+            "target": "",
+            "target_bytes_hex": "",
+            "value": 0,
+            "errno": 36,
+            "args": [
+              3,
+              420,
+              384,
+              281474761029461,
+              0,
+              7161677110969590627
+            ]
+          },
+          {
+            "schema_version": 1,
+            "event": "finish",
+            "monotonic_ns": 16090363710023,
             "tid": 0,
             "id": 0,
             "syscall": -1,
@@ -2723,17 +3522,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 12,
+          "elapsed_ms": 6,
           "phase_ms": {
             "setup": 1,
-            "run": 10,
+            "run": 4,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -2743,8 +3543,8 @@
             "mode": "events",
             "records": 2,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/27/audit.jsonl",
-            "bytes": 363,
+            "path": "/tmp/cincta-v02-z0fxhcg2/33/audit.jsonl",
+            "bytes": 365,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -2782,17 +3582,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 40,
+          "elapsed_ms": 23,
           "phase_ms": {
-            "setup": 1,
-            "run": 28,
+            "setup": 0,
+            "run": 12,
             "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -2802,8 +3603,8 @@
             "mode": "syscall_requests_and_broker_results",
             "records": 656,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/28/audit.jsonl",
-            "bytes": 172573,
+            "path": "/tmp/cincta-v02-z0fxhcg2/34/audit.jsonl",
+            "bytes": 172575,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -2847,17 +3648,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 45,
+          "elapsed_ms": 25,
           "phase_ms": {
-            "setup": 2,
-            "run": 31,
+            "setup": 0,
+            "run": 13,
             "cleanup": 11
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -2867,8 +3669,8 @@
             "mode": "syscall_requests_and_broker_results",
             "records": 656,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/29/audit.jsonl",
-            "bytes": 172571,
+            "path": "/tmp/cincta-v02-z0fxhcg2/35/audit.jsonl",
+            "bytes": 173887,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -2924,7 +3726,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2936,7 +3739,7 @@
             "mode": "events",
             "records": 0,
             "complete": false,
-            "path": "/tmp/cincta-v02-j2a5dew2/30/existing",
+            "path": "/tmp/cincta-v02-z0fxhcg2/36/existing",
             "bytes": 0,
             "max_bytes": 67108864,
             "max_records": 1000000,
@@ -2981,7 +3784,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2993,7 +3797,7 @@
             "mode": "events",
             "records": 0,
             "complete": false,
-            "path": "/tmp/cincta-v02-j2a5dew2/31/alias",
+            "path": "/tmp/cincta-v02-z0fxhcg2/37/alias",
             "bytes": 0,
             "max_bytes": 67108864,
             "max_records": 1000000,
@@ -3035,17 +3839,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 29,
+        "elapsed_ms": 20,
         "phase_ms": {
-          "setup": 1,
-          "run": 16,
-          "cleanup": 11
+          "setup": 0,
+          "run": 9,
+          "cleanup": 10
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": true,
@@ -3055,8 +3860,8 @@
           "mode": "events",
           "records": 2,
           "complete": true,
-          "path": "/tmp/cincta-v02-j2a5dew2/33/audit.jsonl",
-          "bytes": 363,
+          "path": "/tmp/cincta-v02-z0fxhcg2/39/audit.jsonl",
+          "bytes": 365,
           "max_bytes": 67108864,
           "max_records": 1000000,
           "limit_exceeded": false,
@@ -3093,17 +3898,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 16,
+          "elapsed_ms": 10,
           "phase_ms": {
-            "setup": 0,
-            "run": 16,
+            "setup": 1,
+            "run": 9,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": false,
@@ -3153,17 +3959,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 92,
+          "elapsed_ms": 39,
           "phase_ms": {
-            "setup": 2,
-            "run": 77,
-            "cleanup": 11
+            "setup": 0,
+            "run": 28,
+            "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -3173,8 +3980,8 @@
             "mode": "syscall_requests_and_broker_results",
             "records": 1405,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/35/audit.jsonl",
-            "bytes": 371028,
+            "path": "/tmp/cincta-v02-z0fxhcg2/41/audit.jsonl",
+            "bytes": 372893,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -3223,17 +4030,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 13,
+        "elapsed_ms": 17,
         "phase_ms": {
           "setup": 1,
-          "run": 10,
-          "cleanup": 0
+          "run": 5,
+          "cleanup": 10
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": true,
@@ -3243,8 +4051,8 @@
           "mode": "events",
           "records": 6,
           "complete": true,
-          "path": "/tmp/cincta-v02-j2a5dew2/36/audit.jsonl",
-          "bytes": 1616,
+          "path": "/tmp/cincta-v02-z0fxhcg2/42/audit.jsonl",
+          "bytes": 1618,
           "max_bytes": 67108864,
           "max_records": 1000000,
           "limit_exceeded": false,
@@ -3274,9 +4082,9 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 0,
         "phase_ms": {
-          "setup": 1,
+          "setup": 0,
           "run": 0,
           "cleanup": 0
         },
@@ -3284,7 +4092,8 @@
           "landlock_abi": 0,
           "seccomp": false,
           "network": "unconfined",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3296,8 +4105,8 @@
           "mode": "events",
           "records": 2,
           "complete": true,
-          "path": "/tmp/cincta-v02-j2a5dew2/37/audit.jsonl",
-          "bytes": 392,
+          "path": "/tmp/cincta-v02-z0fxhcg2/43/audit.jsonl",
+          "bytes": 394,
           "max_bytes": 67108864,
           "max_records": 1000000,
           "limit_exceeded": false,
@@ -3340,17 +4149,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 28,
+          "elapsed_ms": 17,
           "phase_ms": {
-            "setup": 3,
-            "run": 13,
-            "cleanup": 11
+            "setup": 0,
+            "run": 6,
+            "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -3360,8 +4170,8 @@
             "mode": "events",
             "records": 6,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/39/audit.jsonl",
-            "bytes": 1583,
+            "path": "/tmp/cincta-v02-z0fxhcg2/45/audit.jsonl",
+            "bytes": 1589,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -3397,17 +4207,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 26,
+          "elapsed_ms": 16,
           "phase_ms": {
-            "setup": 2,
-            "run": 12,
+            "setup": 0,
+            "run": 5,
             "cleanup": 11
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -3417,8 +4228,8 @@
             "mode": "events",
             "records": 6,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/40/audit.jsonl",
-            "bytes": 1587,
+            "path": "/tmp/cincta-v02-z0fxhcg2/46/audit.jsonl",
+            "bytes": 1593,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -3454,17 +4265,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 26,
+          "elapsed_ms": 16,
           "phase_ms": {
-            "setup": 2,
-            "run": 12,
+            "setup": 0,
+            "run": 6,
             "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -3474,8 +4286,8 @@
             "mode": "events",
             "records": 6,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/41/audit.jsonl",
-            "bytes": 1583,
+            "path": "/tmp/cincta-v02-z0fxhcg2/47/audit.jsonl",
+            "bytes": 1589,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -3513,17 +4325,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 26,
+          "elapsed_ms": 16,
           "phase_ms": {
-            "setup": 1,
-            "run": 13,
-            "cleanup": 11
+            "setup": 0,
+            "run": 6,
+            "cleanup": 10
           },
           "protections": {
             "landlock_abi": 8,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": true
+            "ipc_scoped": true,
+            "caller_bound": true
           },
           "unsupported": [],
           "dynamic": true,
@@ -3533,8 +4346,8 @@
             "mode": "events",
             "records": 6,
             "complete": true,
-            "path": "/tmp/cincta-v02-j2a5dew2/42/audit.jsonl",
-            "bytes": 1583,
+            "path": "/tmp/cincta-v02-z0fxhcg2/48/audit.jsonl",
+            "bytes": 1593,
             "max_bytes": 67108864,
             "max_records": 1000000,
             "limit_exceeded": false,
@@ -3576,7 +4389,8 @@
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": true,
@@ -3586,8 +4400,8 @@
           "mode": "syscall_requests_and_broker_results",
           "records": 16,
           "complete": false,
-          "path": "/tmp/cincta-v02-j2a5dew2/43/audit.jsonl",
-          "bytes": 3933,
+          "path": "/tmp/cincta-v02-z0fxhcg2/49/audit.jsonl",
+          "bytes": 3949,
           "max_bytes": 4096,
           "max_records": 1000000,
           "limit_exceeded": true,
@@ -3617,17 +4431,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 13,
+        "elapsed_ms": 15,
         "phase_ms": {
-          "setup": 2,
-          "run": 0,
-          "cleanup": 11
+          "setup": 4,
+          "run": 1,
+          "cleanup": 10
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": true,
@@ -3637,8 +4452,8 @@
           "mode": "syscall_requests_and_broker_results",
           "records": 12,
           "complete": false,
-          "path": "/tmp/cincta-v02-j2a5dew2/44/audit.jsonl",
-          "bytes": 2892,
+          "path": "/tmp/cincta-v02-z0fxhcg2/50/audit.jsonl",
+          "bytes": 2904,
           "max_bytes": 67108864,
           "max_records": 12,
           "limit_exceeded": true,
@@ -3668,17 +4483,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 11,
+        "elapsed_ms": 6,
         "phase_ms": {
-          "setup": 1,
-          "run": 9,
+          "setup": 0,
+          "run": 6,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3688,8 +4504,8 @@
           "mode": "events",
           "records": 2,
           "complete": true,
-          "path": "/tmp/cincta-v02-j2a5dew2/45/audit.jsonl",
-          "bytes": 363,
+          "path": "/tmp/cincta-v02-z0fxhcg2/51/audit.jsonl",
+          "bytes": 365,
           "max_bytes": 67108864,
           "max_records": 1000000,
           "limit_exceeded": false,
@@ -3719,17 +4535,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 11,
+        "elapsed_ms": 7,
         "phase_ms": {
           "setup": 1,
-          "run": 9,
+          "run": 6,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3739,8 +4556,8 @@
           "mode": "events",
           "records": 2,
           "complete": true,
-          "path": "/tmp/cincta-v02-j2a5dew2/46/audit.jsonl",
-          "bytes": 363,
+          "path": "/tmp/cincta-v02-z0fxhcg2/52/audit.jsonl",
+          "bytes": 365,
           "max_bytes": 67108864,
           "max_records": 1000000,
           "limit_exceeded": false,
@@ -3770,17 +4587,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 2,
-          "run": 1,
+          "setup": 1,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3800,9 +4618,9 @@
         },
         "workspace": {
           "enabled": true,
-          "source": "/tmp/cincta-v02-j2a5dew2/47/source",
-          "root": "/tmp/cincta-preparation-AgU321/cincta-workspace-lOFOS7",
-          "tree": "/tmp/cincta-preparation-AgU321/cincta-workspace-lOFOS7/tree",
+          "source": "/tmp/cincta-v02-z0fxhcg2/53/source",
+          "root": "/tmp/cincta-preparation-aiEA4r/cincta-workspace-vfph3i",
+          "tree": "/tmp/cincta-preparation-aiEA4r/cincta-workspace-vfph3i/tree",
           "retained": false,
           "exported": false,
           "executable": false,
@@ -3832,7 +4650,7 @@
         "cleanup_complete": true,
         "elapsed_ms": 3,
         "phase_ms": {
-          "setup": 2,
+          "setup": 3,
           "run": 0,
           "cleanup": 0
         },
@@ -3840,7 +4658,8 @@
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": false,
@@ -3860,9 +4679,9 @@
         },
         "workspace": {
           "enabled": true,
-          "source": "/tmp/cincta-v02-j2a5dew2/48/source",
-          "root": "/tmp/cincta-preparation-IwSvB1/cincta-workspace-36TEJC",
-          "tree": "/tmp/cincta-preparation-IwSvB1/cincta-workspace-36TEJC/tree",
+          "source": "/tmp/cincta-v02-z0fxhcg2/54/source",
+          "root": "/tmp/cincta-preparation-gYEH9D/cincta-workspace-ldesCd",
+          "tree": "/tmp/cincta-preparation-gYEH9D/cincta-workspace-ldesCd/tree",
           "retained": false,
           "exported": false,
           "executable": true,
@@ -3890,17 +4709,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 41,
+        "elapsed_ms": 28,
         "phase_ms": {
           "setup": 2,
-          "run": 28,
-          "cleanup": 10
+          "run": 15,
+          "cleanup": 11
         },
         "protections": {
           "landlock_abi": 8,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": true
+          "ipc_scoped": true,
+          "caller_bound": true
         },
         "unsupported": [],
         "dynamic": true,
@@ -3920,13 +4740,13 @@
         },
         "workspace": {
           "enabled": true,
-          "source": "/tmp/cincta-v02-j2a5dew2/49/source",
-          "root": "/tmp/cincta-preparation-ml2fiS/cincta-workspace-3iuSAO",
-          "tree": "/tmp/cincta-preparation-ml2fiS/cincta-workspace-3iuSAO/tree",
+          "source": "/tmp/cincta-v02-z0fxhcg2/55/source",
+          "root": "/tmp/cincta-preparation-mloHnx/cincta-workspace-8RWWr3",
+          "tree": "/tmp/cincta-preparation-mloHnx/cincta-workspace-8RWWr3/tree",
           "retained": false,
           "exported": false,
           "executable": true,
-          "changes": 1,
+          "changes": 2,
           "copied_files": 1,
           "copied_bytes": 74
         },

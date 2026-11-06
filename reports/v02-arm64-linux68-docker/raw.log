@@ -86,6 +86,10 @@ PASS    compat stability.repeated-concurrent
 PASS  workspace.independent-copy-and-discard
 PASS  workspace.diff-export-immutable-source
 PASS  workspace.unchanged-and-safe-relative-link
+PASS  workspace.root-chmod
+PASS  workspace.root-mtime
+PASS  workspace.root-unchanged
+PASS  workspace.root-budget
 PASS  workspace.symlink-absolute
 PASS  workspace.symlink-escape
 PASS  workspace.symlink-dangling
@@ -100,10 +104,11 @@ PASS  workspace.output-conflict-source-subtree
 PASS  workspace.payload-symlink-revalidated
 PASS  workspace.mode000-discard
 PASS  workspace.private-root-identity
-{"PASS": 17, "FAIL": 0, "BLOCKED": 0}
+{"PASS": 21, "FAIL": 0, "BLOCKED": 0}
 PASS  preparation.partial-before-prepared-sigkill
 PASS  preparation.real-copy-sigkill
 PASS  preparation.buffered-D-parent-death
+PASS  preparation.caller-death-overrides-buffered-D
 PASS  preparation.handover-discard
 PASS  preparation.handover-keep
 PASS  preparation.handover-bad
@@ -112,7 +117,10 @@ PASS  preparation.guardian-death
 PASS  preparation.cli-real-copy-sigkill
 PASS  preparation.cli-copy-error-no-residue
 PASS  preparation.cli-keep-after-handover
-{"PASS": 11, "FAIL": 0, "BLOCKED": 0}
+PASS  preparation.original-caller-natural-exit
+PASS  preparation.original-caller-stopped-cli
+PASS  preparation.original-caller-dns-only
+{"PASS": 15, "FAIL": 0, "BLOCKED": 0}
 BLOCKED direct-bind-result requires explicit host-prepared bind aliases
 BLOCKED direct-bind-audit requires explicit host-prepared bind aliases
 BLOCKED nested-bind-result requires explicit host-prepared bind aliases
@@ -154,6 +162,9 @@ PASS network.legacy-numeric-denied-2130706433
 PASS network.legacy-numeric-denied-0x7f000001 
 {"PASS": 26, "FAIL": 0, "BLOCKED": 0}
 PASS    workspace.cli-isolation-diff-export
+PASS    workspace.root-chmod
+PASS    workspace.root-mtime
+PASS    workspace.root-unchanged
 PASS    workspace.explicit-keep
 PASS    workspace.reject-cwd
 PASS    workspace.reject-extra-rw
@@ -179,6 +190,9 @@ PASS    metadata.inside-link
 PASS    metadata.dotdot-escape
 PASS    metadata.security-xattr
 PASS    metadata.unicode-long-target
+PASS    metadata.fd-path-bytes-4094
+PASS    metadata.fd-path-bytes-4095
+PASS    metadata.fd-path-bytes-4096
 PASS    audit.events
 PASS    audit.syscalls
 PASS    audit.forged-output
@@ -202,7 +216,7 @@ PASS    stdio.closed-stdin-keeps-trusted-fds-private
 PASS    workspace.direct-exec-default-denied
 PASS    workspace.direct-exec-explicit
 PASS    workspace.compile-and-run
-{"PASS": 48, "FAIL": 0, "BLOCKED": 1}
+{"PASS": 54, "FAIL": 0, "BLOCKED": 1}
 PASS read-allowed 
 PASS read-denied 
 PASS create-allowed 
@@ -234,47 +248,4 @@ BLOCKED resources.cpu-bandwidth
 BLOCKED resources.aggregate-cpu-budget
 BLOCKED resources.cancel-and-remove
 {"PASS": 3, "FAIL": 0, "BLOCKED": 6}
-{"environment": "arm64-linux68-docker", "counts": {"PASS": 208, "FAIL": 0, "BLOCKED": 20}, "report": "reports/v02-arm64-linux68-docker/summary.json"}
-{
-  "direct": {
-    "samples": 100,
-    "failures": 0,
-    "median_ms": 0.2666855,
-    "p95_ms": 0.594704,
-    "max_ms": 1.900403
-  },
-  "sandbox": {
-    "samples": 100,
-    "failures": 0,
-    "median_ms": 1.3095325,
-    "p95_ms": 1.725654,
-    "max_ms": 2.191817,
-    "phase_median_ms": {
-      "setup": 0.0,
-      "run": 0.0,
-      "cleanup": 0.0
-    }
-  }
-}
-{
-  "direct": {
-    "samples": 100,
-    "failures": 0,
-    "median_ms": 1.632155,
-    "p95_ms": 3.964763,
-    "max_ms": 5.09113
-  },
-  "sandbox": {
-    "samples": 100,
-    "failures": 0,
-    "median_ms": 2.8435629999999996,
-    "p95_ms": 4.03868,
-    "max_ms": 4.597383,
-    "phase_median_ms": {
-      "setup": 1.0,
-      "run": 0.0,
-      "cleanup": 0.0
-    }
-  }
-}
-{"PASS": 100, "FAIL": 0, "BLOCKED": 0}
+{"environment": "arm64-linux68-docker", "counts": {"PASS": 222, "FAIL": 0, "BLOCKED": 20}, "report": "/tmp/cincta-clean-report/summary.json"}

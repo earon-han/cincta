@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "runtime_revision": "4437fcbab6386d46c81c385927532f1fdf043bf3",
-  "test_revision": "f52601a061daaa1b594bfeae35d864bd5b69190b",
+  "runtime_revision": "eebc7700ea70a6586007b7e38c126a9af88d507f",
+  "test_revision": "eebc7700ea70a6586007b7e38c126a9af88d507f",
   "functional_counts": {
-    "PASS": 1088,
+    "PASS": 1144,
     "FAIL": 0,
     "BLOCKED": 40
   },
@@ -11,38 +11,38 @@
     {
       "report": "reports/v02-arm64-linux68-vm/summary.json",
       "counts": {
-        "PASS": 227,
+        "PASS": 241,
         "FAIL": 0,
         "BLOCKED": 1
       },
-      "binary_sha256": "68a2d7f9f5046512c28547c696857e4fe78c3b1f90fc30e26af21a1dbd97393a"
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180"
     },
     {
       "report": "reports/v02-arm64-linux68-docker/summary.json",
       "counts": {
-        "PASS": 208,
+        "PASS": 222,
         "FAIL": 0,
         "BLOCKED": 20
       },
-      "binary_sha256": "046277b9de5d089f857d5f0b34871b84f7565e7f97bc6e8c3449daa6a7128928"
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180"
     },
     {
       "report": "reports/v02-arm64-linux70-vm/summary.json",
       "counts": {
-        "PASS": 298,
+        "PASS": 312,
         "FAIL": 0,
         "BLOCKED": 0
       },
-      "binary_sha256": "b6728f9ee84600c4715e6ebdd9cf85e3ea3f6b4195b49e0379b79f56df805b05"
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180"
     },
     {
       "report": "reports/v02-arm64-linux70-docker/summary.json",
       "counts": {
-        "PASS": 279,
+        "PASS": 293,
         "FAIL": 0,
         "BLOCKED": 19
       },
-      "binary_sha256": "046277b9de5d089f857d5f0b34871b84f7565e7f97bc6e8c3449daa6a7128928"
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180"
     },
     {
       "report": "reports/v02-arm64-linux68-docker-delegated/resources.json",
@@ -51,7 +51,7 @@
         "FAIL": 0,
         "BLOCKED": 0
       },
-      "binary_sha256": null
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180"
     },
     {
       "report": "reports/v02-arm64-linux70-docker-delegated/resources.json",
@@ -60,7 +60,7 @@
         "FAIL": 0,
         "BLOCKED": 0
       },
-      "binary_sha256": null
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180"
     },
     {
       "report": "reports/v02-arm64-linux68-docker-alias.json",
@@ -69,7 +69,7 @@
         "FAIL": 0,
         "BLOCKED": 0
       },
-      "binary_sha256": "046277b9de5d089f857d5f0b34871b84f7565e7f97bc6e8c3449daa6a7128928"
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180"
     },
     {
       "report": "reports/v02-arm64-linux70-docker-alias.json",
@@ -78,7 +78,7 @@
         "FAIL": 0,
         "BLOCKED": 0
       },
-      "binary_sha256": "046277b9de5d089f857d5f0b34871b84f7565e7f97bc6e8c3449daa6a7128928"
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180"
     },
     {
       "report": "reports/v02-x86-kernel.json",
@@ -87,7 +87,7 @@
         "FAIL": 0,
         "BLOCKED": 0
       },
-      "binary_sha256": "9ed861ec61e7a9d199262046448ca0d8f4283cf75efb6dc6d868b5c1912e87e7"
+      "binary_sha256": "04638adbe2cd0a52dd0aaf966d45b03874f64d30138a46964d7c190fd434d461"
     }
   ],
   "stress_counts": {
@@ -103,8 +103,8 @@
         "FAIL": 0,
         "BLOCKED": 0
       },
-      "median_ms": 140.906692,
-      "p95_ms": 415.071113
+      "median_ms": 233.8107855,
+      "p95_ms": 324.692627
     },
     {
       "report": "reports/v02-arm64-linux68-docker/stress.json",
@@ -113,8 +113,8 @@
         "FAIL": 0,
         "BLOCKED": 0
       },
-      "median_ms": 86.81522849999999,
-      "p95_ms": 112.193525
+      "median_ms": 84.516126,
+      "p95_ms": 106.284629
     },
     {
       "report": "reports/v02-arm64-linux70-vm/stress.json",
@@ -123,8 +123,8 @@
         "FAIL": 0,
         "BLOCKED": 0
       },
-      "median_ms": 223.179693,
-      "p95_ms": 331.186139
+      "median_ms": 253.1107965,
+      "p95_ms": 488.639641
     },
     {
       "report": "reports/v02-arm64-linux70-docker/stress.json",
@@ -133,8 +133,8 @@
         "FAIL": 0,
         "BLOCKED": 0
       },
-      "median_ms": 161.710263,
-      "p95_ms": 304.260329
+      "median_ms": 162.52837599999998,
+      "p95_ms": 258.409271
     }
   ],
   "benchmark_sandbox_samples": 800,
@@ -145,21 +145,21 @@
       "sandbox": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 3.161389,
-        "p95_ms": 5.685414,
-        "max_ms": 7.261515,
+        "median_ms": 5.1441455000000005,
+        "p95_ms": 22.432298,
+        "max_ms": 38.95828,
         "phase_median_ms": {
           "setup": 1.0,
-          "run": 1.0,
+          "run": 0.0,
           "cleanup": 0.0
         }
       },
       "direct": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 0.8029875,
-        "p95_ms": 2.039135,
-        "max_ms": 4.027522
+        "median_ms": 0.874462,
+        "p95_ms": 3.02847,
+        "max_ms": 6.551443
       }
     },
     {
@@ -167,9 +167,9 @@
       "sandbox": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 2.4847075,
-        "p95_ms": 3.947256,
-        "max_ms": 5.018709,
+        "median_ms": 4.888624,
+        "p95_ms": 10.939918,
+        "max_ms": 13.190886,
         "phase_median_ms": {
           "setup": 1.0,
           "run": 0.0,
@@ -179,9 +179,9 @@
       "direct": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 1.5386555,
-        "p95_ms": 3.558619,
-        "max_ms": 4.15493
+        "median_ms": 1.5377355,
+        "p95_ms": 4.038307,
+        "max_ms": 5.541189
       }
     },
     {
@@ -189,9 +189,9 @@
       "sandbox": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 1.3095325,
-        "p95_ms": 1.725654,
-        "max_ms": 2.191817,
+        "median_ms": 1.0646915,
+        "p95_ms": 1.291839,
+        "max_ms": 2.187342,
         "phase_median_ms": {
           "setup": 0.0,
           "run": 0.0,
@@ -201,9 +201,9 @@
       "direct": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 0.2666855,
-        "p95_ms": 0.594704,
-        "max_ms": 1.900403
+        "median_ms": 0.1938965,
+        "p95_ms": 0.271043,
+        "max_ms": 0.685253
       }
     },
     {
@@ -211,9 +211,9 @@
       "sandbox": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 2.8435629999999996,
-        "p95_ms": 4.03868,
-        "max_ms": 4.597383,
+        "median_ms": 2.3385095,
+        "p95_ms": 3.570514,
+        "max_ms": 4.925853,
         "phase_median_ms": {
           "setup": 1.0,
           "run": 0.0,
@@ -223,9 +223,9 @@
       "direct": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 1.632155,
-        "p95_ms": 3.964763,
-        "max_ms": 5.09113
+        "median_ms": 1.4080469999999998,
+        "p95_ms": 3.459639,
+        "max_ms": 4.197309
       }
     },
     {
@@ -233,11 +233,11 @@
       "sandbox": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 0.9348605,
-        "p95_ms": 1.157473,
-        "max_ms": 2.074021,
+        "median_ms": 1.0057705000000001,
+        "p95_ms": 1.791785,
+        "max_ms": 2.893693,
         "phase_median_ms": {
-          "setup": 0.0,
+          "setup": 1.0,
           "run": 0.0,
           "cleanup": 0.0
         }
@@ -245,9 +245,9 @@
       "direct": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 0.2120665,
-        "p95_ms": 0.265272,
-        "max_ms": 0.566709
+        "median_ms": 0.246817,
+        "p95_ms": 0.422889,
+        "max_ms": 0.828822
       }
     },
     {
@@ -255,21 +255,21 @@
       "sandbox": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 3.855375,
-        "p95_ms": 6.005235,
-        "max_ms": 6.835795,
+        "median_ms": 7.8195975,
+        "p95_ms": 12.826647,
+        "max_ms": 16.445633,
         "phase_median_ms": {
-          "setup": 1.0,
-          "run": 1.0,
+          "setup": 2.0,
+          "run": 2.0,
           "cleanup": 0.0
         }
       },
       "direct": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 1.2799814999999999,
-        "p95_ms": 3.173528,
-        "max_ms": 4.898295
+        "median_ms": 4.24816,
+        "p95_ms": 9.481418,
+        "max_ms": 14.590619
       }
     },
     {
@@ -277,9 +277,9 @@
       "sandbox": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 1.3528829999999998,
-        "p95_ms": 2.339303,
-        "max_ms": 2.79685,
+        "median_ms": 1.1686079999999999,
+        "p95_ms": 1.37518,
+        "max_ms": 1.773745,
         "phase_median_ms": {
           "setup": 0.0,
           "run": 0.0,
@@ -289,9 +289,9 @@
       "direct": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 0.5125675000000001,
-        "p95_ms": 0.764455,
-        "max_ms": 2.703302
+        "median_ms": 0.224595,
+        "p95_ms": 0.270792,
+        "max_ms": 0.969597
       }
     },
     {
@@ -299,9 +299,9 @@
       "sandbox": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 4.767958,
-        "p95_ms": 6.975231,
-        "max_ms": 7.408303,
+        "median_ms": 4.1042985000000005,
+        "p95_ms": 5.908013,
+        "max_ms": 6.378923,
         "phase_median_ms": {
           "setup": 1.0,
           "run": 1.0,
@@ -311,26 +311,25 @@
       "direct": {
         "samples": 100,
         "failures": 0,
-        "median_ms": 1.6465755,
-        "p95_ms": 2.927523,
-        "max_ms": 4.113107
+        "median_ms": 1.208143,
+        "p95_ms": 2.274311,
+        "max_ms": 2.830222
       }
     }
   ],
-  "additional_shared_load_report": "reports/v02-arm64-linux68-vm/concurrent-shared-load.json",
   "supplementary_reports": [
-    "reports/v02-preparation-final-repeats/summary.json",
-    "reports/v02-preparation-default-docker-fixture/preparation.json",
-    "reports/v02-arm64-delivery-linux70-vm/summary.json",
-    "reports/v02-arm64-delivery-docker/summary.json",
-    "reports/v02-package-metadata-selfcheck.json",
-    "reports/v02-delivery-scratch/summary.json"
+    "reports/v02-docker-exec-linux68.json",
+    "reports/v02-docker-exec-linux70.json",
+    "reports/v02-delivery-scratch/summary.json",
+    "docs/final-code-review.md",
+    "docs/review-resolutions-v02.md"
   ],
+  "historical_shared_load_report": "reports/v02-before-P10/v02-arm64-linux68-vm/concurrent-shared-load.json",
   "excluded_from_final_totals": [
-    "v0.1 reports",
-    "development/reproduction reports",
-    "preflight failures",
+    "before-P10 reports",
+    "initial-reviewed-run attachment staging",
+    "development/reproduction/preflight reports",
     "supplementary repeat and artifact verification"
   ],
-  "interpretation": "Counts represent checks in distinct execution configurations, not unique logical test cases. Conditional BLOCKED checks remain BLOCKED; separate positive configurations do not rewrite default-environment outcomes."
+  "interpretation": "Counts represent checks in distinct execution configurations, not unique logical cases. All four main ARM environments execute the same delivered artifact. Conditional BLOCKED outcomes are not rewritten by separate positive configurations."
 }

@@ -15,12 +15,17 @@
     "-shared",
     "-Iinclude",
     "src/workspace.c",
-    "/tmp/cincta-workspace-tests-thvew7bq/adapter.c",
+    "/tmp/cincta-workspace-tests-8gu7uc_i/adapter.c",
     "-o",
-    "/tmp/cincta-workspace-tests-thvew7bq/workspace.so"
+    "/tmp/cincta-workspace-tests-8gu7uc_i/workspace.so"
   ],
+  "test_sha256": "69361f2ef76e7e6400733da277fc245ffb228edc136077231174753fac357960",
+  "source_sha256": {
+    "src/workspace.c": "cc54ebad7b2bb4c21dbd8f709027c452421dc911d98395f57ed9aa20313f5cdf",
+    "include/workspace.h": "9e07d735948a23e7e903728a2383b5292f50323bfecff2eaed22d751af7c4fba"
+  },
   "counts": {
-    "PASS": 17,
+    "PASS": 21,
     "FAIL": 0,
     "BLOCKED": 0
   },
@@ -38,11 +43,25 @@
       "outcome": "PASS",
       "evidence": {
         "schema_version": 1,
-        "source": "/tmp/cincta-workspace-tests-thvew7bq/case-2/source",
-        "workspace": "/tmp/cincta-workspace-tests-thvew7bq/case-2/scratch/cincta-workspace-ExsAgO/tree",
-        "count": 3,
+        "source": "/tmp/cincta-workspace-tests-8gu7uc_i/case-2/source",
+        "workspace": "/tmp/cincta-workspace-tests-8gu7uc_i/case-2/scratch/cincta-workspace-ea4XcP/tree",
+        "count": 4,
         "exported": true,
         "changes": [
+          {
+            "path": ".",
+            "status": "modified",
+            "before": {
+              "type": "directory",
+              "mode": 493,
+              "size": 4096
+            },
+            "after": {
+              "type": "directory",
+              "mode": 493,
+              "size": 4096
+            }
+          },
           {
             "path": "added",
             "status": "added",
@@ -85,11 +104,136 @@
       "outcome": "PASS",
       "evidence": {
         "schema_version": 1,
-        "source": "/tmp/cincta-workspace-tests-thvew7bq/case-3/source",
-        "workspace": "/tmp/cincta-workspace-tests-thvew7bq/case-3/scratch/cincta-workspace-acnD5L/tree",
+        "source": "/tmp/cincta-workspace-tests-8gu7uc_i/case-3/source",
+        "workspace": "/tmp/cincta-workspace-tests-8gu7uc_i/case-3/scratch/cincta-workspace-vnYFsa/tree",
         "count": 0,
         "exported": false,
         "changes": []
+      }
+    },
+    {
+      "name": "workspace.root-chmod",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "chmod",
+        "diff": {
+          "schema_version": 1,
+          "source": "/tmp/cincta-workspace-tests-8gu7uc_i/case-4/source",
+          "workspace": "/tmp/cincta-workspace-tests-8gu7uc_i/case-4/scratch/cincta-workspace-6FpmvP/tree",
+          "count": 1,
+          "exported": true,
+          "changes": [
+            {
+              "path": ".",
+              "status": "modified",
+              "before": {
+                "type": "directory",
+                "mode": 493,
+                "size": 4096
+              },
+              "after": {
+                "type": "directory",
+                "mode": 448,
+                "size": 4096
+              }
+            }
+          ]
+        },
+        "root_mode": 448,
+        "root_mtime_ns": 1700000000123456789,
+        "copied_files": 0,
+        "copied_bytes": 0,
+        "source_unchanged": true
+      }
+    },
+    {
+      "name": "workspace.root-mtime",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "mtime",
+        "diff": {
+          "schema_version": 1,
+          "source": "/tmp/cincta-workspace-tests-8gu7uc_i/case-5/source",
+          "workspace": "/tmp/cincta-workspace-tests-8gu7uc_i/case-5/scratch/cincta-workspace-FhPYx7/tree",
+          "count": 1,
+          "exported": true,
+          "changes": [
+            {
+              "path": ".",
+              "status": "modified",
+              "before": {
+                "type": "directory",
+                "mode": 493,
+                "size": 4096
+              },
+              "after": {
+                "type": "directory",
+                "mode": 493,
+                "size": 4096
+              }
+            }
+          ]
+        },
+        "root_mode": 493,
+        "root_mtime_ns": 1700000011123456792,
+        "copied_files": 0,
+        "copied_bytes": 0,
+        "source_unchanged": true
+      }
+    },
+    {
+      "name": "workspace.root-unchanged",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "unchanged",
+        "diff": {
+          "schema_version": 1,
+          "source": "/tmp/cincta-workspace-tests-8gu7uc_i/case-6/source",
+          "workspace": "/tmp/cincta-workspace-tests-8gu7uc_i/case-6/scratch/cincta-workspace-mozT3X/tree",
+          "count": 0,
+          "exported": true,
+          "changes": []
+        },
+        "root_mode": 493,
+        "root_mtime_ns": 1700000000123456789,
+        "copied_files": 0,
+        "copied_bytes": 0,
+        "source_unchanged": true
+      }
+    },
+    {
+      "name": "workspace.root-budget",
+      "outcome": "PASS",
+      "evidence": {
+        "operation": "budget",
+        "diff": {
+          "schema_version": 1,
+          "source": "/tmp/cincta-workspace-tests-8gu7uc_i/case-7/source",
+          "workspace": "/tmp/cincta-workspace-tests-8gu7uc_i/case-7/scratch/cincta-workspace-4bKee2/tree",
+          "count": 1,
+          "exported": true,
+          "changes": [
+            {
+              "path": ".",
+              "status": "modified",
+              "before": {
+                "type": "directory",
+                "mode": 493,
+                "size": 4096
+              },
+              "after": {
+                "type": "directory",
+                "mode": 493,
+                "size": 4096
+              }
+            }
+          ]
+        },
+        "root_mode": 493,
+        "root_mtime_ns": 1700000011123456792,
+        "copied_files": 1,
+        "copied_bytes": 1,
+        "source_unchanged": true
       }
     },
     {

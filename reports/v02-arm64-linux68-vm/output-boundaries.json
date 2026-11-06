@@ -3,7 +3,7 @@
   "environment": "arm64-linux68-vm-output-boundaries",
   "kernel": "6.8.0-147-generic",
   "architecture": "aarch64",
-  "binary_sha256": "68a2d7f9f5046512c28547c696857e4fe78c3b1f90fc30e26af21a1dbd97393a",
+  "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
   "counts": {
     "PASS": 12,
     "FAIL": 0,

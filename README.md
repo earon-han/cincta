@@ -85,6 +85,7 @@ PASS、FAIL、BLOCKED 分开记录。容器使用宿主内核；全系统 QEMU �
 - [详细实施计划](docs/implementation-plan-v02.md) · [任务台账](docs/progress.md)
 - [设计与威胁模型](docs/design.md) · [独立设计审查](docs/v02-design-review.md)
 - [使用及结果契约](docs/usage.md) · [依赖](docs/dependencies.md) · [验证记录](docs/validation.md)
+- [最终代码审查](docs/final-code-review.md) · [逐项修复台账](docs/review-resolutions-v02.md)
 - [通用 Agent 示例](examples/agent.py) · [参考研究](docs/research.md) · [变更记录](CHANGELOG.md)
 
 许可证：[Apache-2.0](LICENSE)。独立实现，没有引入 Sandlock 源码或其运行依赖。

@@ -1,0 +1,2 @@
+{"schema_version":1,"event":"start","monotonic_ns":14703738535702,"tid":0,"id":0,"syscall":-1,"arch":0,"target":"","target_bytes_hex":"","value":0,"errno":0,"args":[0,0,0,0,0,0]}
+{"schema_version":1,"event":"finish","monotonic_ns":14703760293920,"tid":0,"id":0,"syscall":-1,"arch":0,"target":"ok","target_bytes_hex":"6f6b","value":0,"errno":0,"args":[0,0,0,0,0,0]}

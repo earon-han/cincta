@@ -138,9 +138,9 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 1,
+        "elapsed_ms": 0,
         "phase_ms": {
-          "setup": 1,
+          "setup": 0,
           "run": 0,
           "cleanup": 0
         },
@@ -148,7 +148,8 @@
           "landlock_abi": 0,
           "seccomp": false,
           "network": "unconfined",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -191,17 +192,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 2,
-          "run": 1,
+          "setup": 1,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -244,17 +246,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 2,
+        "elapsed_ms": 0,
         "phase_ms": {
-          "setup": 1,
-          "run": 1,
+          "setup": 0,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -297,9 +300,9 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 2,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 1,
+          "setup": 0,
           "run": 1,
           "cleanup": 0
         },
@@ -307,7 +310,8 @@
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -356,17 +360,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -416,9 +421,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -426,7 +431,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -476,9 +482,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -486,7 +492,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -536,17 +543,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -596,9 +604,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -606,7 +614,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -656,9 +665,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -666,7 +675,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -716,17 +726,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -776,17 +787,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -838,15 +850,16 @@
           "cleanup_complete": true,
           "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 0,
-            "run": 1,
+            "setup": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -896,17 +909,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
             "setup": 0,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -956,9 +970,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 1,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -966,7 +980,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1016,17 +1031,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1076,17 +1092,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1136,17 +1153,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1196,17 +1214,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 4,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 3,
-            "run": 1,
+            "setup": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1241,7 +1260,7 @@
       "outcome": "PASS",
       "evidence": {
         "exit_code": 125,
-        "stderr": "cincta: pin filesystem policy: pin rule '/tmp/cincta-tests-q9f0le0w/compat-pluew4jz/missing': No such file or directory\n",
+        "stderr": "cincta: pin filesystem policy: pin rule '/tmp/cincta-tests-sv140jwg/compat-i3uybrbg/missing': No such file or directory\n",
         "result_created": false
       }
     },
@@ -1263,9 +1282,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 7,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 7,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -1273,7 +1292,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1320,9 +1340,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -1330,7 +1350,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1387,7 +1408,8 @@
             "landlock_abi": 0,
             "seccomp": false,
             "network": "unconfined",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1431,9 +1453,9 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 2,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 2,
+          "setup": 1,
           "run": 0,
           "cleanup": 0
         },
@@ -1441,7 +1463,8 @@
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1484,17 +1507,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 4,
+        "elapsed_ms": 0,
         "phase_ms": {
-          "setup": 3,
-          "run": 1,
+          "setup": 0,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1537,17 +1561,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 6,
+        "elapsed_ms": 1,
         "phase_ms": {
-          "setup": 2,
-          "run": 4,
+          "setup": 0,
+          "run": 1,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1606,7 +1631,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1656,17 +1682,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
-            "run": 1,
+            "setup": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1716,17 +1743,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 3,
-            "run": 0,
+            "setup": 0,
+            "run": 1,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1776,17 +1804,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1836,9 +1865,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -1846,7 +1875,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1896,9 +1926,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -1906,7 +1936,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -1956,9 +1987,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -1966,7 +1997,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2016,17 +2048,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2076,17 +2109,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2136,17 +2170,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 4,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 3,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2196,9 +2231,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 3,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -2206,7 +2241,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2256,17 +2292,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 4,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 3,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2316,17 +2353,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 5,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 3,
-            "run": 2,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2376,9 +2414,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 3,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -2386,7 +2424,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2436,17 +2475,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 5,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 4,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2496,17 +2536,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
-            "run": 1,
+            "setup": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2556,17 +2597,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
             "setup": 1,
-            "run": 1,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2616,9 +2658,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 4,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 4,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -2626,7 +2668,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2676,17 +2719,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 5,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 3,
-            "run": 2,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2736,9 +2780,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
+            "setup": 0,
             "run": 0,
             "cleanup": 0
           },
@@ -2746,7 +2790,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2796,17 +2841,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 2,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2856,17 +2902,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 8,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 6,
-            "run": 2,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2916,17 +2963,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -2976,9 +3024,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 6,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 5,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -2986,7 +3034,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3036,9 +3085,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 4,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 3,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -3046,7 +3095,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3096,9 +3146,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
+            "setup": 1,
             "run": 0,
             "cleanup": 0
           },
@@ -3106,7 +3156,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "host",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3150,17 +3201,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 2,
+        "elapsed_ms": 1,
         "phase_ms": {
           "setup": 1,
-          "run": 1,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3203,9 +3255,9 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 3,
+        "elapsed_ms": 0,
         "phase_ms": {
-          "setup": 3,
+          "setup": 0,
           "run": 0,
           "cleanup": 0
         },
@@ -3213,7 +3265,8 @@
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3256,17 +3309,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 4,
+        "elapsed_ms": 0,
         "phase_ms": {
-          "setup": 3,
-          "run": 1,
+          "setup": 0,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3315,17 +3369,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 2,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 1,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3375,17 +3430,18 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 4,
+          "elapsed_ms": 0,
           "phase_ms": {
-            "setup": 3,
-            "run": 1,
+            "setup": 0,
+            "run": 0,
             "cleanup": 0
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3435,9 +3491,9 @@
           "timed_out": false,
           "cancelled": false,
           "cleanup_complete": true,
-          "elapsed_ms": 3,
+          "elapsed_ms": 1,
           "phase_ms": {
-            "setup": 2,
+            "setup": 0,
             "run": 1,
             "cleanup": 0
           },
@@ -3445,7 +3501,8 @@
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3489,17 +3546,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 1024,
+        "elapsed_ms": 1000,
         "phase_ms": {
-          "setup": 1,
-          "run": 1023,
+          "setup": 0,
+          "run": 1000,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3544,15 +3602,16 @@
         "cleanup_complete": true,
         "elapsed_ms": 214,
         "phase_ms": {
-          "setup": 8,
-          "run": 195,
-          "cleanup": 11
+          "setup": 1,
+          "run": 199,
+          "cleanup": 14
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3595,17 +3654,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 34,
+        "elapsed_ms": 22,
         "phase_ms": {
-          "setup": 9,
-          "run": 13,
+          "setup": 2,
+          "run": 8,
           "cleanup": 12
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3648,17 +3708,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 29,
+        "elapsed_ms": 15,
         "phase_ms": {
-          "setup": 15,
-          "run": 3,
+          "setup": 2,
+          "run": 2,
           "cleanup": 11
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3701,17 +3762,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 20,
+        "elapsed_ms": 15,
         "phase_ms": {
-          "setup": 4,
-          "run": 6,
-          "cleanup": 10
+          "setup": 2,
+          "run": 2,
+          "cleanup": 11
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3754,17 +3816,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 14,
+        "elapsed_ms": 2,
         "phase_ms": {
-          "setup": 12,
-          "run": 2,
+          "setup": 1,
+          "run": 1,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3807,17 +3870,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 36,
+        "elapsed_ms": 22,
         "phase_ms": {
-          "setup": 11,
-          "run": 11,
-          "cleanup": 14
+          "setup": 2,
+          "run": 9,
+          "cleanup": 11
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3863,17 +3927,18 @@
           "timed_out": false,
           "cancelled": true,
           "cleanup_complete": true,
-          "elapsed_ms": 28,
+          "elapsed_ms": 21,
           "phase_ms": {
-            "setup": 8,
-            "run": 10,
+            "setup": 2,
+            "run": 9,
             "cleanup": 10
           },
           "protections": {
             "landlock_abi": 4,
             "seccomp": true,
             "network": "none",
-            "ipc_scoped": false
+            "ipc_scoped": false,
+            "caller_bound": true
           },
           "unsupported": [
             "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3917,9 +3982,9 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 28,
+        "elapsed_ms": 21,
         "phase_ms": {
-          "setup": 4,
+          "setup": 1,
           "run": 0,
           "cleanup": 0
         },
@@ -3927,7 +3992,8 @@
           "landlock_abi": 0,
           "seccomp": false,
           "network": "unconfined",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -3970,17 +4036,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 25,
+        "elapsed_ms": 21,
         "phase_ms": {
-          "setup": 3,
-          "run": 10,
-          "cleanup": 12
+          "setup": 1,
+          "run": 9,
+          "cleanup": 11
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -4023,17 +4090,18 @@
         "timed_out": false,
         "cancelled": true,
         "cleanup_complete": true,
-        "elapsed_ms": 154,
+        "elapsed_ms": 124,
         "phase_ms": {
-          "setup": 29,
-          "run": 107,
-          "cleanup": 18
+          "setup": 3,
+          "run": 109,
+          "cleanup": 12
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -4085,17 +4153,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 13,
+        "elapsed_ms": 3,
         "phase_ms": {
-          "setup": 10,
-          "run": 2,
+          "setup": 2,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"
@@ -4138,17 +4207,18 @@
         "timed_out": false,
         "cancelled": false,
         "cleanup_complete": true,
-        "elapsed_ms": 5,
+        "elapsed_ms": 2,
         "phase_ms": {
-          "setup": 4,
-          "run": 1,
+          "setup": 2,
+          "run": 0,
           "cleanup": 0
         },
         "protections": {
           "landlock_abi": 4,
           "seccomp": true,
           "network": "none",
-          "ipc_scoped": false
+          "ipc_scoped": false,
+          "caller_bound": true
         },
         "unsupported": [
           "signal_and_abstract_unix_scopes_require_abi_6"

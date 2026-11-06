@@ -1,0 +1,1 @@
+/tmp/cincta-v02-final-reviewed/build-static/cincta: ELF 64-bit LSB executable, ARM aarch64, version 1 (GNU/Linux), statically linked, BuildID[sha1]=5dc490e3f1ce9dc5d56dddaeda636c4ea19d559f, for GNU/Linux 3.7.0, with debug_info, not stripped

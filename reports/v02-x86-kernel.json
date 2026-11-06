@@ -269,7 +269,7 @@
       "detail": "descendant reaped and completion JSON observed"
     }
   ],
-  "binary_sha256": "9ed861ec61e7a9d199262046448ca0d8f4283cf75efb6dc6d868b5c1912e87e7",
+  "binary_sha256": "04638adbe2cd0a52dd0aaf966d45b03874f64d30138a46964d7c190fd434d461",
   "kernel_sha256": "0c41150f2c75a1edf0456ffeb54880837fd9cba86cbf3a351c4a1c94b6ab7978",
   "initramfs_sha256": "187258620253cac1400bf48cb6b8f8b70c4af59c6f8c637d0a27b5a4e899d369",
   "evidence_note": "Full-system TCG boots a real x86_64 kernel; this is neither native x86 hardware nor qemu-user. Smoke coverage is narrower than the ARM VM/Docker suites."

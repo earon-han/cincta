@@ -1,0 +1,1328 @@
+{
+  "schema_version": 1,
+  "environment": "arm64-linux68-docker-stress",
+  "architecture": "aarch64",
+  "kernel": "6.8.0-147-generic",
+  "uid": 10001,
+  "probe": {
+    "schema_version": 1,
+    "landlock_abi": 4,
+    "landlock_errno": 0,
+    "seccomp": true,
+    "seccomp_errno": 0,
+    "strict_supported": false,
+    "compat_supported": true
+  },
+  "binary_sha256": "046277b9de5d089f857d5f0b34871b84f7565e7f97bc6e8c3449daa6a7128928",
+  "test_sha256": "4035c009afc138d66853099bf48ad5813d4ec1350470626dd4e7f41614d7314c",
+  "samples": 100,
+  "concurrency": 8,
+  "counts": {
+    "PASS": 100,
+    "FAIL": 0,
+    "BLOCKED": 0
+  },
+  "scope": "Each sample combines copied workspace, actual file open/write/chmod, TCP echo, syscall audit, export and cleanup; original source is checked after every sample.",
+  "results": [
+    {
+      "index": 0,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285838,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 76,
+        "cleanup": 1
+      },
+      "elapsed_ms": 86.095672
+    },
+    {
+      "index": 1,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285846,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 58,
+        "cleanup": 0
+      },
+      "elapsed_ms": 78.91939
+    },
+    {
+      "index": 2,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285844,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 1,
+        "run": 82,
+        "cleanup": 0
+      },
+      "elapsed_ms": 106.696482
+    },
+    {
+      "index": 3,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286919,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 4,
+        "run": 56,
+        "cleanup": 0
+      },
+      "elapsed_ms": 79.950549
+    },
+    {
+      "index": 4,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285842,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 81,
+        "cleanup": 0
+      },
+      "elapsed_ms": 100.252612
+    },
+    {
+      "index": 5,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285844,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 64,
+        "cleanup": 0
+      },
+      "elapsed_ms": 78.150104
+    },
+    {
+      "index": 6,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285844,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 4,
+        "run": 78,
+        "cleanup": 10
+      },
+      "elapsed_ms": 104.812245
+    },
+    {
+      "index": 7,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286923,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 77,
+        "cleanup": 0
+      },
+      "elapsed_ms": 87.588578
+    },
+    {
+      "index": 8,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285842,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 82,
+        "cleanup": 2
+      },
+      "elapsed_ms": 100.609067
+    },
+    {
+      "index": 9,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285842,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 6,
+        "run": 84,
+        "cleanup": 0
+      },
+      "elapsed_ms": 104.341624
+    },
+    {
+      "index": 10,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 284769,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 1,
+        "run": 80,
+        "cleanup": 10
+      },
+      "elapsed_ms": 114.123178
+    },
+    {
+      "index": 11,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286923,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 93,
+        "cleanup": 0
+      },
+      "elapsed_ms": 108.954882
+    },
+    {
+      "index": 12,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286927,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 78,
+        "cleanup": 0
+      },
+      "elapsed_ms": 104.315206
+    },
+    {
+      "index": 13,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285850,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 99,
+        "cleanup": 11
+      },
+      "elapsed_ms": 117.279113
+    },
+    {
+      "index": 14,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286929,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 42,
+        "cleanup": 0
+      },
+      "elapsed_ms": 49.815308
+    },
+    {
+      "index": 15,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286927,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 54,
+        "cleanup": 0
+      },
+      "elapsed_ms": 63.358669
+    },
+    {
+      "index": 16,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285466,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 56,
+        "cleanup": 0
+      },
+      "elapsed_ms": 71.504193
+    },
+    {
+      "index": 17,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285850,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 71,
+        "cleanup": 10
+      },
+      "elapsed_ms": 95.737602
+    },
+    {
+      "index": 18,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285848,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 1,
+        "run": 48,
+        "cleanup": 0
+      },
+      "elapsed_ms": 59.050949
+    },
+    {
+      "index": 19,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285848,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 1,
+        "run": 67,
+        "cleanup": 0
+      },
+      "elapsed_ms": 81.324997
+    },
+    {
+      "index": 20,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285852,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 63,
+        "cleanup": 10
+      },
+      "elapsed_ms": 87.209705
+    },
+    {
+      "index": 21,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286927,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 72,
+        "cleanup": 10
+      },
+      "elapsed_ms": 103.601712
+    },
+    {
+      "index": 22,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286228,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 58,
+        "cleanup": 10
+      },
+      "elapsed_ms": 86.420752
+    },
+    {
+      "index": 23,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285151,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 58,
+        "cleanup": 1
+      },
+      "elapsed_ms": 77.757106
+    },
+    {
+      "index": 24,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285850,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 73,
+        "cleanup": 0
+      },
+      "elapsed_ms": 82.057825
+    },
+    {
+      "index": 25,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286927,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 84,
+        "cleanup": 10
+      },
+      "elapsed_ms": 112.193525
+    },
+    {
+      "index": 26,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285470,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 87,
+        "cleanup": 0
+      },
+      "elapsed_ms": 106.439317
+    },
+    {
+      "index": 27,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285844,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 5,
+        "run": 83,
+        "cleanup": 1
+      },
+      "elapsed_ms": 105.457282
+    },
+    {
+      "index": 28,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285852,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 77,
+        "cleanup": 10
+      },
+      "elapsed_ms": 98.907287
+    },
+    {
+      "index": 29,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286923,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 5,
+        "run": 46,
+        "cleanup": 0
+      },
+      "elapsed_ms": 68.182758
+    },
+    {
+      "index": 30,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286228,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 4,
+        "run": 76,
+        "cleanup": 11
+      },
+      "elapsed_ms": 98.761163
+    },
+    {
+      "index": 31,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285850,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 4,
+        "run": 58,
+        "cleanup": 0
+      },
+      "elapsed_ms": 73.949217
+    },
+    {
+      "index": 32,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286925,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 65,
+        "cleanup": 10
+      },
+      "elapsed_ms": 85.944464
+    },
+    {
+      "index": 33,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286927,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 5,
+        "run": 78,
+        "cleanup": 10
+      },
+      "elapsed_ms": 104.912077
+    },
+    {
+      "index": 34,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285848,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 65,
+        "cleanup": 0
+      },
+      "elapsed_ms": 78.064604
+    },
+    {
+      "index": 35,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286925,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 77,
+        "cleanup": 0
+      },
+      "elapsed_ms": 102.211888
+    },
+    {
+      "index": 36,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285846,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 75,
+        "cleanup": 10
+      },
+      "elapsed_ms": 109.872792
+    },
+    {
+      "index": 37,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286927,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 59,
+        "cleanup": 10
+      },
+      "elapsed_ms": 81.692494
+    },
+    {
+      "index": 38,
+      "outcome": "PASS",
+      "audit_records": 1077,
+      "audit_bytes": 285325,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 5,
+        "run": 62,
+        "cleanup": 10
+      },
+      "elapsed_ms": 102.620303
+    },
+    {
+      "index": 39,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285850,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 59,
+        "cleanup": 0
+      },
+      "elapsed_ms": 75.97087
+    },
+    {
+      "index": 40,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285850,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 76,
+        "cleanup": 11
+      },
+      "elapsed_ms": 105.632239
+    },
+    {
+      "index": 41,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 287309,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 64,
+        "cleanup": 0
+      },
+      "elapsed_ms": 86.25842
+    },
+    {
+      "index": 42,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 287305,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 61,
+        "cleanup": 1
+      },
+      "elapsed_ms": 76.214243
+    },
+    {
+      "index": 43,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286925,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 51,
+        "cleanup": 0
+      },
+      "elapsed_ms": 59.399155
+    },
+    {
+      "index": 44,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 284074,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 69,
+        "cleanup": 0
+      },
+      "elapsed_ms": 80.52617
+    },
+    {
+      "index": 45,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286927,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 80,
+        "cleanup": 0
+      },
+      "elapsed_ms": 107.871639
+    },
+    {
+      "index": 46,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286923,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 63,
+        "cleanup": 11
+      },
+      "elapsed_ms": 85.116886
+    },
+    {
+      "index": 47,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285848,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 4,
+        "run": 64,
+        "cleanup": 0
+      },
+      "elapsed_ms": 82.61503
+    },
+    {
+      "index": 48,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286925,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 75,
+        "cleanup": 10
+      },
+      "elapsed_ms": 104.170499
+    },
+    {
+      "index": 49,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286923,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 4,
+        "run": 76,
+        "cleanup": 10
+      },
+      "elapsed_ms": 101.078105
+    },
+    {
+      "index": 50,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286927,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 5,
+        "run": 64,
+        "cleanup": 11
+      },
+      "elapsed_ms": 88.239447
+    },
+    {
+      "index": 51,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286547,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 67,
+        "cleanup": 0
+      },
+      "elapsed_ms": 84.003061
+    },
+    {
+      "index": 52,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286535,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 41,
+        "cleanup": 1
+      },
+      "elapsed_ms": 62.566091
+    },
+    {
+      "index": 53,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285850,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 62,
+        "cleanup": 10
+      },
+      "elapsed_ms": 90.840887
+    },
+    {
+      "index": 54,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285846,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 4,
+        "run": 58,
+        "cleanup": 10
+      },
+      "elapsed_ms": 89.195857
+    },
+    {
+      "index": 55,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286927,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 57,
+        "cleanup": 1
+      },
+      "elapsed_ms": 67.296932
+    },
+    {
+      "index": 56,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286925,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 58,
+        "cleanup": 0
+      },
+      "elapsed_ms": 71.136696
+    },
+    {
+      "index": 57,
+      "outcome": "PASS",
+      "audit_records": 1077,
+      "audit_bytes": 284246,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 1,
+        "run": 72,
+        "cleanup": 10
+      },
+      "elapsed_ms": 95.904475
+    },
+    {
+      "index": 58,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286923,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 5,
+        "run": 72,
+        "cleanup": 0
+      },
+      "elapsed_ms": 95.932767
+    },
+    {
+      "index": 59,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286927,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 51,
+        "cleanup": 10
+      },
+      "elapsed_ms": 70.219827
+    },
+    {
+      "index": 60,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285848,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 4,
+        "run": 65,
+        "cleanup": 10
+      },
+      "elapsed_ms": 93.972197
+    },
+    {
+      "index": 61,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285844,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 65,
+        "cleanup": 11
+      },
+      "elapsed_ms": 93.345078
+    },
+    {
+      "index": 62,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286917,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 6,
+        "run": 55,
+        "cleanup": 10
+      },
+      "elapsed_ms": 78.158229
+    },
+    {
+      "index": 63,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286923,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 56,
+        "cleanup": 1
+      },
+      "elapsed_ms": 67.376431
+    },
+    {
+      "index": 64,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285844,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 71,
+        "cleanup": 10
+      },
+      "elapsed_ms": 93.988656
+    },
+    {
+      "index": 65,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285846,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 42,
+        "cleanup": 0
+      },
+      "elapsed_ms": 52.345623
+    },
+    {
+      "index": 66,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286917,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 65,
+        "cleanup": 11
+      },
+      "elapsed_ms": 90.090476
+    },
+    {
+      "index": 67,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285846,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 80,
+        "cleanup": 0
+      },
+      "elapsed_ms": 93.402744
+    },
+    {
+      "index": 68,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286921,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 71,
+        "cleanup": 0
+      },
+      "elapsed_ms": 82.632113
+    },
+    {
+      "index": 69,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285846,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 78,
+        "cleanup": 10
+      },
+      "elapsed_ms": 104.796661
+    },
+    {
+      "index": 70,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286923,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 1,
+        "run": 68,
+        "cleanup": 1
+      },
+      "elapsed_ms": 79.812091
+    },
+    {
+      "index": 71,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286923,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 5,
+        "run": 63,
+        "cleanup": 0
+      },
+      "elapsed_ms": 89.262982
+    },
+    {
+      "index": 72,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286923,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 53,
+        "cleanup": 10
+      },
+      "elapsed_ms": 76.853779
+    },
+    {
+      "index": 73,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285848,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 6,
+        "run": 78,
+        "cleanup": 10
+      },
+      "elapsed_ms": 103.061382
+    },
+    {
+      "index": 74,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285848,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 1,
+        "run": 46,
+        "cleanup": 0
+      },
+      "elapsed_ms": 56.078638
+    },
+    {
+      "index": 75,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285848,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 30,
+        "cleanup": 10
+      },
+      "elapsed_ms": 55.18481
+    },
+    {
+      "index": 76,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 287307,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 88,
+        "cleanup": 10
+      },
+      "elapsed_ms": 114.851006
+    },
+    {
+      "index": 77,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 287305,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 44,
+        "cleanup": 0
+      },
+      "elapsed_ms": 58.859326
+    },
+    {
+      "index": 78,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285850,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 75,
+        "cleanup": 0
+      },
+      "elapsed_ms": 109.383878
+    },
+    {
+      "index": 79,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286232,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 66,
+        "cleanup": 10
+      },
+      "elapsed_ms": 102.558261
+    },
+    {
+      "index": 80,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286927,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 91,
+        "cleanup": 10
+      },
+      "elapsed_ms": 113.636973
+    },
+    {
+      "index": 81,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285466,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 85,
+        "cleanup": 10
+      },
+      "elapsed_ms": 108.769299
+    },
+    {
+      "index": 82,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286545,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 74,
+        "cleanup": 0
+      },
+      "elapsed_ms": 89.103399
+    },
+    {
+      "index": 83,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285852,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 1,
+        "run": 63,
+        "cleanup": 10
+      },
+      "elapsed_ms": 86.151421
+    },
+    {
+      "index": 84,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 284769,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 32,
+        "cleanup": 0
+      },
+      "elapsed_ms": 54.573607
+    },
+    {
+      "index": 85,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285850,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 55,
+        "cleanup": 10
+      },
+      "elapsed_ms": 74.645504
+    },
+    {
+      "index": 86,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285850,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 85,
+        "cleanup": 10
+      },
+      "elapsed_ms": 106.838855
+    },
+    {
+      "index": 87,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286927,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 1,
+        "run": 65,
+        "cleanup": 0
+      },
+      "elapsed_ms": 73.400471
+    },
+    {
+      "index": 88,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285466,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 66,
+        "cleanup": 10
+      },
+      "elapsed_ms": 89.150815
+    },
+    {
+      "index": 89,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285850,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 79,
+        "cleanup": 11
+      },
+      "elapsed_ms": 106.554315
+    },
+    {
+      "index": 90,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286539,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 85,
+        "cleanup": 10
+      },
+      "elapsed_ms": 107.200144
+    },
+    {
+      "index": 91,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286230,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 71,
+        "cleanup": 0
+      },
+      "elapsed_ms": 89.89431
+    },
+    {
+      "index": 92,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 285850,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 4,
+        "run": 35,
+        "cleanup": 10
+      },
+      "elapsed_ms": 54.919854
+    },
+    {
+      "index": 93,
+      "outcome": "PASS",
+      "audit_records": 1077,
+      "audit_bytes": 285323,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 1,
+        "run": 65,
+        "cleanup": 10
+      },
+      "elapsed_ms": 83.559773
+    },
+    {
+      "index": 94,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286925,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 2,
+        "run": 58,
+        "cleanup": 0
+      },
+      "elapsed_ms": 65.236071
+    },
+    {
+      "index": 95,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286925,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 1,
+        "run": 67,
+        "cleanup": 0
+      },
+      "elapsed_ms": 77.343109
+    },
+    {
+      "index": 96,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286925,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 45,
+        "cleanup": 1
+      },
+      "elapsed_ms": 54.638939
+    },
+    {
+      "index": 97,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286921,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 1,
+        "run": 45,
+        "cleanup": 11
+      },
+      "elapsed_ms": 63.845206
+    },
+    {
+      "index": 98,
+      "outcome": "PASS",
+      "audit_records": 1079,
+      "audit_bytes": 286547,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 38,
+        "cleanup": 10
+      },
+      "elapsed_ms": 57.753417
+    },
+    {
+      "index": 99,
+      "outcome": "PASS",
+      "audit_records": 1077,
+      "audit_bytes": 285321,
+      "changes": 1,
+      "phase_ms": {
+        "setup": 3,
+        "run": 51,
+        "cleanup": 10
+      },
+      "elapsed_ms": 69.173251
+    }
+  ]
+}

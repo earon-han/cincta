@@ -1,12 +1,11 @@
 {
   "schema_version": 1,
   "scope": "Delivery artifact proof, not a replacement for VM/Docker acceptance suites",
-  "binary_source_revision": "4437fcbab6386d46c81c385927532f1fdf043bf3",
-  "artifact_path": "/tmp/cincta-v02-final/build-static/cincta",
-  "artifact_sha256": "68a2d7f9f5046512c28547c696857e4fe78c3b1f90fc30e26af21a1dbd97393a",
+  "binary_source_revision": "eebc7700ea70a6586007b7e38c126a9af88d507f",
+  "artifact_path": "/tmp/cincta-v02-final-reviewed/build-static/cincta",
+  "artifact_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
   "context_contains": "Dockerfile and copied cincta only; no rebuild",
   "runtime_dependencies_note": "Docker supplies kernel proc/dev and hosts/resolver configuration mounts. The image supplies no dynamic loader or libc. This proof does not exercise DNS/NSS resolution.",
-  "fixture_development_note": "First temporary assertion used nonexistent key seccomp_supported (actual probe already exited zero). Second temporary export used Docker --output creating a root-only archive; actual probe and selfexec already passed. Corrected fixture uses seccomp, exact version output, and caller-owned export output stream. No binary or source changed.",
   "counts": {
     "PASS": 5,
     "FAIL": 0,
@@ -30,46 +29,135 @@
       "name": "scratch.restricted-static-selfexec-default-security",
       "outcome": "PASS",
       "evidence": {
-        "version": "0.2.0-preview.1",
-        "user": "10001:10001"
+        "stdout_exact": true,
+        "expected_stdout": "0.2.0-preview.1\n",
+        "user": "10001:10001",
+        "exit_code": 0
       }
     },
     {
       "name": "scratch.copied-delivery-artifact-sha256",
       "outcome": "PASS",
-      "evidence": "68a2d7f9f5046512c28547c696857e4fe78c3b1f90fc30e26af21a1dbd97393a"
+      "evidence": {
+        "source_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+        "context_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+        "exported_cincta_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180"
+      }
     },
     {
       "name": "scratch.no-loader-or-libc-in-exported-rootfs",
       "outcome": "PASS",
       "evidence": {
         "regular_files": [
-          "dockerenv",
+          ".dockerenv",
           "cincta",
           "dev/console",
           "etc/hostname",
           "etc/hosts",
           "etc/resolv.conf"
-        ]
+        ],
+        "forbidden_entries": [],
+        "elf_interpreter_present": false
       }
     },
     {
       "name": "scratch.builtin-seccomp-confirmed",
       "outcome": "PASS",
-      "evidence": null
+      "evidence": {
+        "daemon_security_options": [
+          "name=apparmor",
+          "name=seccomp,profile=builtin",
+          "name=cgroupns"
+        ],
+        "container_security_options": [
+          [
+            "no-new-privileges"
+          ],
+          [
+            "no-new-privileges"
+          ]
+        ],
+        "apparmor_profiles": [
+          "docker-default",
+          "docker-default"
+        ],
+        "containers": [
+          {
+            "id": "3124be7615451878c61e4f6b08da9d2ffb70f908d07b891aa98094d52a791eae",
+            "image": "sha256:5912ea12b17100d661314f7670d024cf96643e518ec78587e0d378b6097aa08c",
+            "user": "10001:10001",
+            "privileged": false,
+            "cap_drop": [
+              "ALL"
+            ],
+            "cap_add": null,
+            "security_opt": [
+              "no-new-privileges"
+            ],
+            "apparmor_profile": "docker-default",
+            "exit_code": 0,
+            "running": false,
+            "state_error": "",
+            "path": "/cincta",
+            "args": [
+              "probe"
+            ]
+          },
+          {
+            "id": "32b335bd00e8644dff67eb5e6ee0eec0cbab09ac499a77f825e4a2b16d5e4fb4",
+            "image": "sha256:5912ea12b17100d661314f7670d024cf96643e518ec78587e0d378b6097aa08c",
+            "user": "10001:10001",
+            "privileged": false,
+            "cap_drop": [
+              "ALL"
+            ],
+            "cap_add": null,
+            "security_opt": [
+              "no-new-privileges"
+            ],
+            "apparmor_profile": "docker-default",
+            "exit_code": 0,
+            "running": false,
+            "state_error": "",
+            "path": "/cincta",
+            "args": [
+              "run",
+              "--compat",
+              "--rx",
+              "/cincta",
+              "--",
+              "/cincta",
+              "--version"
+            ]
+          }
+        ]
+      }
     }
   ],
   "cleanup": [
     {
-      "container": "8cd4536973dbe3db7f17595df942a7489f1e9680e849320f6134a8addbf2dc9e",
-      "removed": true
+      "container": "cincta-final-scratch-1793980283435469010-probe",
+      "removed": true,
+      "exit_code": 0,
+      "stdout": "cincta-final-scratch-1793980283435469010-probe\n",
+      "stderr": ""
     },
     {
-      "container": "36675aee88db142b397f6faee89bf30489fcfacc41a0d0ec6e45a073c63882ee",
-      "removed": true
+      "container": "cincta-final-scratch-1793980283435469010-selfexec",
+      "removed": true,
+      "exit_code": 0,
+      "stdout": "cincta-final-scratch-1793980283435469010-selfexec\n",
+      "stderr": ""
     },
     {
-      "image_tag": "cincta-delivery-scratch:v02-proof-325507442967199",
+      "image_tag": "cincta-delivery-scratch:v02-final-proof-1793980283435469010",
+      "removed": true,
+      "exit_code": 0,
+      "stdout": "Untagged: cincta-delivery-scratch:v02-final-proof-1793980283435469010\nDeleted: sha256:5912ea12b17100d661314f7670d024cf96643e518ec78587e0d378b6097aa08c\nDeleted: sha256:db61ac0b3adebb602ba45edc423e996e9e81c036b2f8d5c773165f76bc0d65aa\nDeleted: sha256:6af39edf39663eed2ee423054f1c62aa5d6610c49c3d473a4d2fad76503cba4d\n",
+      "stderr": ""
+    },
+    {
+      "context": "/tmp/cincta-final-scratch-context-kon62apb",
       "removed": true
     }
   ]

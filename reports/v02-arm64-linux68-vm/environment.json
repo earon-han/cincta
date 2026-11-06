@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "collected_utc": "2026-11-06T14:17:06.276463+00:00",
+  "collected_utc": "2026-11-06T15:53:08.452604+00:00",
   "collector_uid": 0,
   "test_uid": 501,
   "kernel": "6.8.0-147-generic",
@@ -46,6 +46,6 @@
       "350 32 253:1 /tmp /tmp/cincta-v02-alias-fixtures/tmp-alias rw,relatime shared:1 - ext4 /dev/vda1 rw,discard,errors=remount-ro,commit=30"
     ]
   },
-  "build_revision": "4437fcbab6386d46c81c385927532f1fdf043bf3",
-  "test_revision": "f52601a061daaa1b594bfeae35d864bd5b69190b"
+  "build_revision": "eebc7700ea70a6586007b7e38c126a9af88d507f",
+  "test_revision": "eebc7700ea70a6586007b7e38c126a9af88d507f"
 }

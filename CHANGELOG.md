@@ -1,6 +1,8 @@
 # Changelog
 
-## 0.2.0-preview.1 — 2026-11-06 本地候选
+## 0.2.0-preview.1 — 2026-11-07 本地预览交付
+
+- 最终独立代码审查F1–F4已闭环：准备前固定caller、根目录diff、4095字节metadata真实结果、docker exec隐藏父进程兼容和实际绑定字段。
 
 - 启动前固定文件授权根，payload与可信文件worker使用同源Landlock对象。
 - 可选seccomp notification broker，两阶段filter引导与listener/ptracer锁定。

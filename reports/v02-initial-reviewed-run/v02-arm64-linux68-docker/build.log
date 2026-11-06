@@ -1,0 +1,72 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  772.6kB
+Step 1/10 : ARG BASE_IMAGE=ubuntu:24.04
+Step 2/10 : FROM ${BASE_IMAGE} AS build
+ ---> fe81560990fa
+Step 3/10 : RUN apt-get update && apt-get install -y --no-install-recommends build-essential python3 ca-certificates file     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 3f8d87efb8e1
+Step 4/10 : WORKDIR /src
+ ---> Using cache
+ ---> 9e884aaa2d95
+Step 5/10 : COPY . .
+ ---> d9e26553f1e0
+Step 6/10 : RUN make STATIC=1 && mkdir -p /out && cp build/cincta /out/cincta
+ ---> Running in ba32ed749b55
+mkdir -p build
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/broker.c -o build/broker.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/caller.c -o build/caller.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/filebroker.c -o build/filebroker.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/json.c -o build/json.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/main.c -o build/main.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/network.c -o build/network.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/preparation.c -o build/preparation.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/resources.c -o build/resources.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/result.c -o build/result.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/security.c -o build/security.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/supervisor.c -o build/supervisor.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/workspace.c -o build/workspace.o
+cc -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE build/broker.o build/caller.o build/filebroker.o build/json.o build/main.o build/network.o build/preparation.o build/resources.o build/result.o build/security.o build/supervisor.o build/workspace.o -Wl,-z,relro,-z,now,-z,noexecstack -static -o build/cincta
+[91m/usr/bin/ld: [0m[91mbuild/network.o: in function `network_prepare':
+/src/src/network.c:192:(.text+0x23c0): warning: Using 'getaddrinfo' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+[0mcc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE tests/adversary.c -Wl,-z,relro,-z,now,-z,noexecstack -static -o build/adversary
+ ---> Removed intermediate container ba32ed749b55
+ ---> c1f7e503bfaa
+Step 7/10 : FROM build AS test
+ ---> c1f7e503bfaa
+Step 8/10 : RUN useradd --create-home --uid 10001 tester && chown -R tester:tester /src
+ ---> Running in 451a02704a82
+ ---> Removed intermediate container 451a02704a82
+ ---> 60999272624f
+Step 9/10 : USER tester
+ ---> Running in e627478cd0de
+ ---> Removed intermediate container e627478cd0de
+ ---> 4bb5693822db
+Step 10/10 : CMD ["sh", "scripts/test_all.sh", "docker"]
+ ---> Running in bcc0aecef5f1
+ ---> Removed intermediate container bcc0aecef5f1
+ ---> c7694a1b0afa
+Successfully built c7694a1b0afa
+Successfully tagged cincta-test:v02-reviewed-source
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  1.595MB
+Step 1/4 : FROM sha256:c7694a1b0afacbdb771ed4463a6b57c297abe204f862674757a2174e85d64be7
+ ---> c7694a1b0afa
+Step 2/4 : COPY cincta /src/build/cincta
+ ---> 0a2cef2f0677
+Step 3/4 : USER tester
+ ---> Running in 05d887cde840
+ ---> Removed intermediate container 05d887cde840
+ ---> 592c22e3ee33
+Step 4/4 : CMD ["sh", "scripts/test_all.sh", "docker"]
+ ---> Running in f5539f95dc9f
+ ---> Removed intermediate container f5539f95dc9f
+ ---> f3f32e31e685
+Successfully built f3f32e31e685
+Successfully tagged cincta-test:v02-reviewed

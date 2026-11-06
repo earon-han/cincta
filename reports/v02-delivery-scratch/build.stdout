@@ -1,16 +1,15 @@
-Sending build context to Docker daemon  1.588MB
-
+Sending build context to Docker daemon  1.595MB
 Step 1/4 : FROM scratch
  ---> 
 Step 2/4 : COPY cincta /cincta
- ---> bb0f2497f32a
+ ---> 6af39edf3966
 Step 3/4 : USER 10001:10001
- ---> Running in dcd0b5c7af23
- ---> Removed intermediate container dcd0b5c7af23
- ---> 0119e26fe62b
+ ---> Running in d6e002f8bc11
+ ---> Removed intermediate container d6e002f8bc11
+ ---> db61ac0b3ade
 Step 4/4 : ENTRYPOINT ["/cincta"]
- ---> Running in 800bc2e3b70c
- ---> Removed intermediate container 800bc2e3b70c
- ---> 3af69cb132a4
-Successfully built 3af69cb132a4
-Successfully tagged cincta-delivery-scratch:v02-proof-325507442967199
+ ---> Running in 4a95994b39bd
+ ---> Removed intermediate container 4a95994b39bd
+ ---> 5912ea12b171
+Successfully built 5912ea12b171
+Successfully tagged cincta-delivery-scratch:v02-final-proof-1793980283435469010

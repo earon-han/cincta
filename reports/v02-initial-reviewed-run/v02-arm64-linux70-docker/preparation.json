@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "environment": "arm64-linux70-docker-preparation",
+  "kernel": "7.0.0-34-generic",
+  "architecture": "aarch64",
+  "uid": 10001,
+  "test_sha256": "a0508bd3d62f5a5652ef1d6bae81bb0026d30558db7fdeb6e410ac272a4f1c2a",
+  "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+  "source_sha256": {
+    "include/broker.h": "dc10119d1c3e5470ae4c5b7fd3b1de3516d7fcf9a5468cb742a2e8ecf718d139",
+    "include/cincta.h": "26eab59e74f1d52c34b0d043b33800d11eaec2968a33a6f5aafc2c03124f3f13",
+    "include/filebroker.h": "f264003938240d1b0a052d04c57cb4cc23aa05a03ef990388147269c16ce3500",
+    "include/json.h": "2128b60bfd1e4500d8822898eb12ffc18b40c9b42cc6be8d290bf82803ebab0e",
+    "include/network.h": "e0bcb39731922c222d4a80ba9cd7da5a9d3a2f31840b0716083c28da5b0866ba",
+    "include/preparation.h": "393eeaafea8a43fd5154905684f51bd7c53de55ef8858e5cf3532d31a508e840",
+    "include/resources.h": "32e92642a9fcbb63b5bf917c7f53ae4f52372f0f5bd129ed3c118afba6b9ef3e",
+    "include/workspace.h": "9e07d735948a23e7e903728a2383b5292f50323bfecff2eaed22d751af7c4fba",
+    "src/broker.c": "3517a01288042ad1c9da4fb516c316095c4902ae299117a6c542a1e85db55bc7",
+    "src/caller.c": "7f637c5115034243b494d35dffbe80afebe3f36a3e9bb5f3245e19a442190b41",
+    "src/filebroker.c": "533cb5784484831263648aec59b96151c973fda147cb4426397a9890fa9fb4d6",
+    "src/json.c": "2c9153af2da30200631f2b492c854d4895fed4b1a3ce055cc32abf31833bfe1e",
+    "src/main.c": "a22de6d1d2623fa5dde8e99a2ac96403b463b2e0df6821d87209f4f374dec06b",
+    "src/network.c": "66ead55853d5bef3060db8e4bd7e089f1fa37b4374b886d5abf479fda843d150",
+    "src/preparation.c": "cb1b8d9a27374f1cae9448612cd449914bcfcc2c314ee4ba84bbedd8f128effc",
+    "src/resources.c": "d417c98e6f1cfed87c837276c7a06f80051feea98a790d74f14baf0aa9d899fd",
+    "src/result.c": "a98a5a4053e39d4e884fc499fe25d1be073368059f7f891b1f7c973542aefe8c",
+    "src/security.c": "52b8fab2924da5efd48359b32263e9ab093095184680f477ae182268e6b7aefc",
+    "src/supervisor.c": "1a0bf6cad6d3a271d1bccdef5348fee3412070dfb3ede145d306f1ca227fb0b2",
+    "src/workspace.c": "cc54ebad7b2bb4c21dbd8f709027c452421dc911d98395f57ed9aa20313f5cdf"
+  },
+  "module_only": false,
+  "build_command": [
+    "cc",
+    "-std=c17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-O2",
+    "-Iinclude",
+    "src/preparation.c",
+    "src/caller.c",
+    "src/workspace.c",
+    "src/resources.c",
+    "/tmp/cincta-preparation-tests-n0cj34lr/adapter.c",
+    "-o",
+    "/tmp/cincta-preparation-tests-n0cj34lr/helper"
+  ],
+  "counts": {
+    "PASS": 15,
+    "FAIL": 0,
+    "BLOCKED": 0
+  },
+  "results": [
+    {
+      "name": "preparation.partial-before-prepared-sigkill",
+      "outcome": "PASS",
+      "evidence": {
+        "unprepared_root_removed": true,
+        "external_symlink_not_followed": true,
+        "foreign_directory_preserved": true,
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.real-copy-sigkill",
+      "outcome": "PASS",
+      "evidence": {
+        "container": "/tmp/cincta-preparation-tests-n0cj34lr/2/scratch/cincta-preparation-UuYrmw",
+        "phase": "baseline",
+        "copied_bytes_at_kill": 3342336,
+        "source_bytes": 536870912
+      }
+    },
+    {
+      "name": "preparation.buffered-D-parent-death",
+      "outcome": "PASS",
+      "evidence": {
+        "parent_died_with_D_buffered": true,
+        "monitor_retained_cleanup_ownership": true,
+        "guardian_exited_before_explicit_SIGCONT": false,
+        "guardian_and_monitor_reaped": true
+      }
+    },
+    {
+      "name": "preparation.caller-death-overrides-buffered-D",
+      "outcome": "PASS",
+      "evidence": {
+        "caller_death_overrides_buffered_D": true,
+        "no_G_released": true,
+        "identities": {
+          "guardian": 769,
+          "container": "/tmp/cincta-preparation-tests-n0cj34lr/4/scratch/cincta-preparation-pjB62l",
+          "monitor": 770,
+          "cli": 768
+        }
+      }
+    },
+    {
+      "name": "preparation.handover-discard",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "handover-discard",
+        "protocol": [
+          {
+            "guardian": 772,
+            "container": "/tmp/cincta-preparation-tests-n0cj34lr/5/scratch/cincta-preparation-uza43N"
+          },
+          {
+            "root": "/tmp/cincta-preparation-tests-n0cj34lr/5/scratch/cincta-preparation-uza43N/cincta-workspace-IKDbCx",
+            "retained": false
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.handover-keep",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "handover-keep",
+        "protocol": [
+          {
+            "guardian": 775,
+            "container": "/tmp/cincta-preparation-tests-n0cj34lr/6/scratch/cincta-preparation-OY5W5V"
+          },
+          {
+            "root": "/tmp/cincta-preparation-tests-n0cj34lr/6/scratch/cincta-preparation-OY5W5V/cincta-workspace-glmLbN",
+            "retained": true
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.handover-bad",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "handover-bad",
+        "protocol": [
+          {
+            "guardian": 778,
+            "container": "/tmp/cincta-preparation-tests-n0cj34lr/7/scratch/cincta-preparation-AhlWTv"
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.resource-fail",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "resource-fail",
+        "protocol": [
+          {
+            "guardian": 780,
+            "container": "/tmp/cincta-preparation-tests-n0cj34lr/8/scratch/cincta-preparation-TTxwEf"
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.guardian-death",
+      "outcome": "PASS",
+      "evidence": {
+        "mode": "guardian-death",
+        "protocol": [
+          {
+            "guardian": 782,
+            "container": "/tmp/cincta-preparation-tests-n0cj34lr/9/scratch/cincta-preparation-EQDGnK"
+          }
+        ],
+        "guardian_reaped": true
+      }
+    },
+    {
+      "name": "preparation.cli-real-copy-sigkill",
+      "outcome": "PASS",
+      "evidence": {
+        "container": "/tmp/cincta-preparation-tests-n0cj34lr/10/scratch/cincta-preparation-dHMIse",
+        "phase": "baseline",
+        "copied_bytes_at_kill": 1179648,
+        "source_bytes": 536870912
+      }
+    },
+    {
+      "name": "preparation.cli-copy-error-no-residue",
+      "outcome": "PASS",
+      "evidence": {
+        "exit_code": 125,
+        "stderr": "cincta: workspace preparation: special file rejected: 'fifo'\n",
+        "no_private_directory_residue": true
+      }
+    },
+    {
+      "name": "preparation.cli-keep-after-handover",
+      "outcome": "PASS",
+      "evidence": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 1,
+        "phase_ms": {
+          "setup": 1,
+          "run": 0,
+          "cleanup": 0
+        },
+        "protections": {
+          "landlock_abi": 8,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": true,
+          "caller_bound": true
+        },
+        "unsupported": [],
+        "dynamic": false,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": false,
+          "mode": "events",
+          "records": 0,
+          "complete": true,
+          "path": "",
+          "bytes": 0,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-preparation-tests-n0cj34lr/12/source",
+          "root": "/tmp/cincta-preparation-tests-n0cj34lr/12/scratch/cincta-preparation-I4KLTr/cincta-workspace-bVoxz2",
+          "tree": "/tmp/cincta-preparation-tests-n0cj34lr/12/scratch/cincta-preparation-I4KLTr/cincta-workspace-bVoxz2/tree",
+          "retained": true,
+          "exported": false,
+          "executable": false,
+          "changes": 0,
+          "copied_files": 1,
+          "copied_bytes": 16
+        },
+        "resources": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "preparation.original-caller-natural-exit",
+      "outcome": "PASS",
+      "evidence": {
+        "original_caller_exited": true,
+        "paused_cli": false,
+        "dns_only": false,
+        "business_not_started": true,
+        "identities": {
+          "cli": 793,
+          "guardian": 794
+        },
+        "result": null
+      }
+    },
+    {
+      "name": "preparation.original-caller-stopped-cli",
+      "outcome": "PASS",
+      "evidence": {
+        "original_caller_exited": true,
+        "paused_cli": true,
+        "dns_only": false,
+        "business_not_started": true,
+        "identities": {
+          "cli": 796,
+          "guardian": 797
+        },
+        "result": null
+      }
+    },
+    {
+      "name": "preparation.original-caller-dns-only",
+      "outcome": "PASS",
+      "evidence": {
+        "original_caller_exited": true,
+        "paused_cli": true,
+        "dns_only": true,
+        "business_not_started": true,
+        "identities": {
+          "cli": 799,
+          "guardian": 800
+        },
+        "result": null
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 [
-  "dockerenv",
+  ".dockerenv",
   "cincta",
   "dev/console",
   "etc/hostname",

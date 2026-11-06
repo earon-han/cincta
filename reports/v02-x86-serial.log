@@ -38,4 +38,4 @@ CINCTA_X86_CASE {"name":"lifecycle.cli-sigkill","outcome":"PASS","expected":137,
 CINCTA_X86_CASE {"name":"lifecycle.monitor-sigkill","outcome":"PASS","expected":125,"observed":125,"detail":"descendant reaped and completion JSON observed"}
 CINCTA_X86_SUMMARY {"PASS":34,"FAIL":0,"BLOCKED":0,"uid":501,"mode":"strict"}
 CINCTA_X86_INIT_EXIT 0
-[    2.891555] reboot: Power down
+[    3.055024] reboot: Power down
