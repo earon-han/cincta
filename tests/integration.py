@@ -209,6 +209,7 @@ class Suite:
         self.test("setup.landlock-denial-fails-closed", lambda: self.injected_setup_test("deny-landlock-exec", area, "capabilities"))
         self.test("setup.seccomp-denial-fails-closed", lambda: self.injected_setup_test("deny-seccomp-exec", area, "capabilities"))
         self.test("filesystem.rw-does-not-grant-execute", lambda: self.exec_permission_test(allowed))
+        self.test("exec.no-implicit-shell", lambda: self.no_implicit_shell(allowed))
         self.test("fd.inherited-closed", lambda: self.fd_test(secret))
         self.test("seccomp.no-new-privs", lambda: self.action("get-nnp"))
         for operation in ("ptrace", "bpf", "unshare", "setsid", "setpgid", "clone-ns", "clone-parent", "io-uring", "ioctl", "fcntl-setown", "fcntl-async"):
@@ -284,6 +285,14 @@ class Suite:
         program.write_bytes(Path(self.helper).read_bytes())
         program.chmod(0o755)
         return self.run([str(program), "get-nnp"], ["--rw", allowed], expected=126, status="setup_error")[1]
+
+    def no_implicit_shell(self, allowed):
+        program = allowed / "plain-text-command"
+        program.write_text("echo implicit-shell-must-not-run\n")
+        program.chmod(0o755)
+        proc, result = self.run([str(program)], ["--rx", allowed], expected=126, status="setup_error")
+        assert "implicit-shell-must-not-run" not in proc.stdout, proc.stdout
+        return result
 
     def environment_test(self):
         environment = dict(os.environ, CINCTA_TEST_SECRET="must-not-leak")

@@ -31,7 +31,7 @@ ABI 版本比版本号字符串可靠：发行版可能回移特性，也可能�
 
 ## 构建、测试、分发依赖
 
-源码构建需要 C17 编译器（GCC 或 Clang）、make、Linux UAPI headers 和 libc headers；无需 libseccomp/pkg-config/cgo。使用旧系统头时，源码可包含已知 ABI 位定义，仍以运行时 syscall 探测为准，不能模拟内核能力。静态链接需要静态 libc 开发包，musl 或 glibc 的具体产物应在对应平台测试。
+源码构建需要 C17 编译器（GCC 或 Clang）、make、**Linux UAPI headers ≥6.2** 和 libc headers；源码通过 linux/version.h 和关键 syscall 宏在编译期强制检查，避免旧头文件静默漏掉过滤。无需 libseccomp/pkg-config/cgo。较新 Landlock ABI 位由固定 UAPI 定义提供，仍以运行时 syscall 探测为准，不能模拟内核能力。静态链接需要静态 libc 开发包，musl 或 glibc 的具体产物应在对应平台测试；本次交付使用 glibc 静态链接，不把未运行的 musl 产物算已验证。
 
 测试和 Agent 示例需要 Python 3 标准库，部分回归探针由 C 编译。Docker 测试需要可访问的 Docker CLI/daemon、构建镜像及基础包来源；它不是运行 cincta 二进制的依赖。VM 验证需要实际 Linux VM，不能用 macOS 的 clang 编译成功代替。
 

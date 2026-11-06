@@ -28,10 +28,12 @@ mkdir "$staging/$name"
 cp "$binary" "$staging/$name/cincta"
 cp README.md LICENSE "$staging/$name/"
 cp -R docs examples "$staging/$name/"
-if command -v git >/dev/null 2>&1; then
-  git rev-parse HEAD > "$staging/$name/SOURCE_REVISION"
+if git rev-parse --verify HEAD > "$staging/$name/SOURCE_REVISION" 2>/dev/null; then
   git diff --stat > "$staging/$name/WORKTREE_DIFF"
   git status --porcelain > "$staging/$name/WORKTREE_STATUS"
+else
+  printf '%s\n' "${CINCTA_SOURCE_REVISION:?export CINCTA_SOURCE_REVISION for an exported source tree}" > "$staging/$name/SOURCE_REVISION"
+  printf '%s\n' 'Exported source tree; verify SOURCE_SHA256 against the recorded revision.' > "$staging/$name/WORKTREE_STATUS"
 fi
 find src include tests scripts docs examples -type f ! -name '*.pyc' -print0 \
   | sort -z | xargs -0 sha256sum > "$staging/$name/SOURCE_SHA256"

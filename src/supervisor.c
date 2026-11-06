@@ -82,6 +82,31 @@ static int signal_children(bool send_signal)
     return failed ? -1 : 0;
 }
 
+/* execvp/execvpe run /bin/sh on ENOEXEC. Preserve the CLI's literal argv
+ * contract: search explicit PATH, but never add an implicit interpreter. */
+static void exec_command(const struct config *cfg)
+{
+    const char *name = cfg->command[0];
+    if (strchr(name, '/')) { execve(name, cfg->command, (char *const *)cfg->env); return; }
+    const char *path = getenv("PATH");
+    if (!path) path = "/usr/bin:/bin";
+    bool denied = false;
+    for (;;) {
+        const char *end = strchr(path, ':');
+        size_t length = end ? (size_t)(end - path) : strlen(path);
+        char candidate[PATH_MAX];
+        int n = length ? snprintf(candidate, sizeof(candidate), "%.*s/%s", (int)length, path, name)
+                       : snprintf(candidate, sizeof(candidate), "%s", name);
+        if (n < 0 || (size_t)n >= sizeof(candidate)) { errno = ENAMETOOLONG; return; }
+        execve(candidate, cfg->command, (char *const *)cfg->env);
+        if (errno == EACCES) denied = true;
+        else if (errno != ENOENT && errno != ENOTDIR) return;
+        if (!end) break;
+        path = end + 1;
+    }
+    errno = denied ? EACCES : ENOENT;
+}
+
 static void payload(const struct config *cfg, int error_fd)
 {
     struct capabilities caps = {0};
@@ -106,11 +131,10 @@ static void payload(const struct config *cfg, int error_fd)
     struct setup_message ready = {.code = 0, .timestamp = now_ms(), .stage = "running"};
     if (write(error_fd, &ready, sizeof(ready)) != (ssize_t)sizeof(ready))
         child_error(error_fd, 125, "handshake", "cannot report installed protections");
-    /* vpe's executable search uses the calling process environment. Set it to
-     * the same explicit environment we pass to exec; no LD_* ambient inputs. */
+    /* The executable search and exec use the same explicit environment. */
     extern char **environ;
     environ = (char **)cfg->env;
-    execvpe(cfg->command[0], cfg->command, (char *const *)cfg->env);
+    exec_command(cfg);
     int saved = errno;
     child_error(error_fd, saved == ENOENT ? 127 : 126, "exec", strerror(saved));
 }
