@@ -19,6 +19,12 @@ import tempfile
 import time
 
 
+class ObservationBlocked(Exception):
+    def __init__(self, reason, evidence):
+        super().__init__(reason)
+        self.evidence = evidence
+
+
 class Suite:
     def __init__(self, args):
         self.args = args
@@ -76,6 +82,8 @@ class Suite:
         else:
             try:
                 record.update(outcome="PASS", evidence=fn())
+            except ObservationBlocked as error:
+                record.update(outcome="BLOCKED", reason=str(error), evidence=error.evidence)
             except Exception as error:
                 record.update(outcome="FAIL", reason=str(error))
         self.records.append(record)
@@ -401,22 +409,43 @@ class Suite:
     def new_filesystem_syscalls(self, dynamic):
         area = self.area()
         audit = area / "audit.jsonl"
-        script = r'''import ctypes,errno
+        script = r'''import ctypes,errno,json
 libc=ctypes.CDLL(None,use_errno=True)
+observed={}
 for nr in (467,469,472):
  ctypes.set_errno(0)
  result=libc.syscall(nr,-1,ctypes.c_char_p(b""),0,0,0,0)
- assert result==-1 and ctypes.get_errno()==errno.EPERM,(nr,result,ctypes.get_errno())
-print('new-filesystem-syscalls-denied')
+ assert result==-1 and ctypes.get_errno() in (errno.EPERM,errno.ENOSYS),(nr,result,ctypes.get_errno())
+ observed[nr]=ctypes.get_errno()
+print(json.dumps(observed))
 '''
         options = ["--metadata", "--audit", audit, "--audit-syscalls"] if dynamic else []
         proc, report = self.execute(area, script, options)
-        assert "new-filesystem-syscalls-denied" in proc.stdout
+        returned = {int(nr): error for nr, error in json.loads(proc.stdout).items()}
+        evidence = {"syscalls": returned, "dynamic": dynamic, "result": report}
         if dynamic:
             events = self.audit_events(audit, report)
+            status = dict(line.split(":", 1) for line in Path("/proc/self/status").read_text().splitlines() if ":" in line)
+            outer = status.get("Seccomp", "0").strip()
+            observed = {}
+            blocked = []
             for nr in (467, 469, 472):
-                assert any(e.get("syscall") == nr and e.get("errno") == errno.EPERM for e in events), nr
-        return {"syscalls": [467, 469, 472], "dynamic": dynamic, "result": report}
+                relevant = [e for e in events if e.get("syscall") == nr]
+                request_seen = any(e.get("event") == "request" for e in relevant)
+                denied = any(e.get("event") == "deny" and e.get("errno") == errno.EPERM for e in relevant)
+                observed[nr] = {"returned_errno": returned[nr], "request_seen": request_seen, "deny_seen": denied}
+                if relevant:
+                    assert request_seen and denied and returned[nr] == errno.EPERM, (nr, relevant, returned)
+                elif outer == "2":
+                    blocked.append(nr)
+                else:
+                    raise AssertionError(("unconfined notification was not observed", nr, returned))
+            evidence.update(observation=observed, outer_seccomp=outer)
+            if blocked:
+                raise ObservationBlocked("outer filtering and action precedence prevent proving inner audit observation for " + str(blocked), evidence)
+        else:
+            assert all(error == errno.EPERM for error in returned.values()), returned
+        return evidence
 
     def nested_filter(self):
         area = self.area()

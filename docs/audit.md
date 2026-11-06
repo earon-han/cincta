@@ -17,6 +17,8 @@
 
 `--audit`记录监管和broker事件；`--audit-syscalls`增加受通知覆盖的native syscall请求，并对open/openat/openat2/creat代执行，取得实际打开结果。少数bootstrap调用及第二层静态filter直接拒绝的入口、外层seccomp提前拒绝、其他架构被内核直接终止等，不会产生等价的入口通知。所有调用的返回值、每次read/write的真实字节数不是当前通知接口的覆盖承诺。此日志不命名为“全部系统调用入口与出口完整追踪”。
 
+多层seccomp中ERRNO优先于USER_NOTIF。默认Docker可能使新系统调用直接得到ENOSYS，而不进入cincta通知；同一入口在cincta静态ERRNO模式下又可能返回EPERM，因为相同action优先级取最近安装filter的数据。验收逐入口保留返回errno、是否见request/deny及外层Seccomp状态；外层过滤使内层观察无法证明时记BLOCKED，不把拒绝冒充审计观察成功，也不放宽Docker profile。[内核filter优先级](https://docs.kernel.org/userspace-api/seccomp_filter.html)
+
 ## 文件打开的可信执行
 
 真实祖先monitor通过只向可信broker开放的私人socketpair接收内存请求，先检查notification ID，打开 `/proc/TID/mem` 固定原地址空间，再复核同一ID，并经SCM_RIGHTS传递句柄。broker收取和复制参数后也复核ID。当前实现不设置PR_SET_PTRACER例外、不修改Yama配置；祖先访问路径支持业务fork出的子孙，不让兄弟broker依赖不会继承到fork后代的ptracer例外。hidepid、目标关闭dumpable或其他LSM仍可能拒绝procfs访问，相应操作必须失败。相对路径使用通过 `/proc/TID/cwd` 或 `/proc/TID/fd/N` 固定的目录对象，worker不会重新使用业务的目录FD数字。openat2的IN_ROOT语义保留。结构长度限制4096字节，未知非零扩展和过短结构明确拒绝。
