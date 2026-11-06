@@ -43,6 +43,7 @@ DNS解析、工作区复制及cgroup准备在执行timer建立前；diff/export�
 
 ## 显式兼容性边界
 
+- metadata的FD/cwd路径捕获为PATH_MAX字节缓冲，允许最多4095字节的目标并明确追加NUL；readlink满缓冲或内核拒绝更长路径时返回ENAMETOOLONG。捕获或实际执行失败必须有非零errno，不能以残留的零errno伪装成功。回归同时核对4094/4095字节对象的真实权限变化与结果事件，以及4096字节对象的拒绝、权限不变和deny事件。
 - 审计模式的文件打开统一通过openat2，额外设置RESOLVE_NO_MAGICLINKS。magic FD链接不会跟随，避免解析到可信worker持有的内部对象。
 - 旧内核的ADDFD使用fget而拒绝O_PATH（EBADF），上游fget_raw支持在较新内核才出现。仅在有效O_PATH源FD且实际ADDFD明确EBADF、尚未注入任何FD时，记录失败与native fallback后CONTINUE，由业务自身的Landlock/BPF最终授权。普通文件FD、模糊失败及网络/metadata绝不套用此fallback；原生调用可能使用变化后的path/how，实际结果未知，不能用worker结果冒充成功。该分支的/proc/self是业务自身，不会暴露可信worker的主体。[上游O_PATH ADDFD修复](https://lkml.iu.edu/2609.3/02887.html)
 - 所有procfs对象在实际内容打开前以O_PATH与fstatfs检查并拒绝，交付前再次复核；相对目录基准位于procfs时提前拒绝。普通symlink别名也按固定对象类型检查。`/proc/self`在worker中代表不同进程，尤其不能把可信worker的mem等FD交给不可信业务。需要原生procfs行为的工作负载不能在该文件打开代理模式下透明运行。

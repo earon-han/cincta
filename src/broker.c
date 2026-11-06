@@ -263,11 +263,16 @@ static int remote_string(int listener, const struct seccomp_notif *r, uint64_t a
 
 static int path_from_fd(const struct seccomp_notif *r, int fd, bool cwd, char *out, size_t size)
 {
+    if (!size) { errno = ENAMETOOLONG; return -1; }
     char proc[96];
     if (cwd) snprintf(proc, sizeof(proc), "/proc/%u/cwd", r->pid);
     else snprintf(proc, sizeof(proc), "/proc/%u/fd/%d", r->pid, fd);
-    ssize_t n = readlink(proc, out, size - 1);
-    if (n < 0 || (size_t)n >= size - 1) return -1;
+    /* readlink does not append NUL. Read the full buffer so a valid
+     * PATH_MAX-1 target fits, and distinguish a full/truncated reply from an
+     * actual readlink error. Never propagate success with a stale errno. */
+    ssize_t n = readlink(proc, out, size);
+    if (n < 0) return -1;
+    if ((size_t)n >= size) { errno = ENAMETOOLONG; return -1; }
     out[n] = 0; return 0;
 }
 
@@ -350,7 +355,7 @@ static int metadata_handle(const struct config *cfg, int listener, const struct 
     }
     char target[PATH_MAX];
     int object = metadata_object(cfg, listener, r, dirfd, path, by_fd, target, sizeof(target));
-    if (object < 0) { response->error = -errno; return 0; }
+    if (object < 0) { response->error = -(errno ? errno : EIO); return 0; }
     if (broker_event(cfg, "authorize", r, target, 0, 0) < 0) { close(object); return -1; }
     if (cfg->audit && cfg->state) ++cfg->state->delivery_pending;
     int result = -1;
@@ -383,7 +388,7 @@ static int metadata_handle(const struct config *cfg, int listener, const struct 
             }
         }
     }
-    int saved = result < 0 ? errno : 0; close(object);
+    int saved = result < 0 ? (errno ? errno : EIO) : 0; close(object);
     response->error = -saved; response->val = result < 0 ? 0 : result;
     int recorded = broker_event(cfg, "result", r, target, response->val, saved);
     if (cfg->audit && cfg->state) --cfg->state->delivery_pending;
@@ -439,6 +444,7 @@ int broker_drain(const struct config *cfg, int listener, int abi)
 int broker_run(const struct config *cfg, int listener, int abi, pid_t payload_group, int memory_channel)
 {
     memory_transport = memory_channel;
+    if (cfg->caller_fd >= 0) close(cfg->caller_fd);
     if (security_drop_capabilities() < 0) return 125;
     for (;;) {
         if (cfg->state && cfg->state->audit_failed) return 125;

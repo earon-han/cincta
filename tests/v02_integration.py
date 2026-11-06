@@ -350,6 +350,54 @@ class Suite:
             assert matching[-1]["target"] == str(target), matching[-1]
         return {"operation": kind, "result": report, "audit_events": events}
 
+    def metadata_path_boundary(self, path_bytes):
+        area = self.area()
+        writable = area / "rw"
+        writable.mkdir()
+        audit = area / "audit.jsonl"
+        helper = self.root / "metadata-path-boundary"
+        if not helper.exists():
+            source = Path(__file__).with_name("metadata_path_boundary.c").resolve()
+            compilation = subprocess.run([os.environ.get("CC", "cc"), "-std=c17", "-O2",
+                "-Wall", "-Wextra", "-Wpedantic", "-Werror", str(source), "-o", str(helper)],
+                capture_output=True, text=True, timeout=30)
+            assert compilation.returncode == 0, compilation.stderr
+        try:
+            proc, report = self.execute(area, options=["--metadata", "--rw", writable,
+                "--rx", helper, "--audit", audit], command=[str(helper), str(writable), str(path_bytes)])
+            observed = json.loads(proc.stdout)
+            assert observed["path_bytes"] == path_bytes, observed
+            expected_error = 0 if path_bytes <= 4095 else errno.ENAMETOOLONG
+            expected_mode = 0o644 if not expected_error else 0o600
+            assert observed["fchmod_rc"] == (-1 if expected_error else 0), observed
+            assert observed["fchmod_errno"] == expected_error and observed["mode"] == expected_mode, observed
+            directory = os.open(writable, os.O_RDONLY | os.O_DIRECTORY)
+            try:
+                for _ in range(observed["directory_levels"]):
+                    child = os.open("d" * 200, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory)
+                    os.close(directory); directory = child
+                actual_mode = os.stat("f" * observed["leaf_bytes"], dir_fd=directory,
+                                      follow_symlinks=False).st_mode & 0o777
+            finally:
+                os.close(directory)
+            assert actual_mode == expected_mode, (observed, actual_mode)
+            events = self.audit_events(audit, report)
+            operation = [e for e in events if e["syscall"] == observed["fchmod_syscall"]]
+            assert any(e["event"] == "request" for e in operation), operation
+            if expected_error:
+                assert any(e["event"] == "deny" and e["errno"] == expected_error for e in operation), operation
+                assert not any(e["event"] in ("response", "result") and e["errno"] == 0 for e in operation), operation
+            else:
+                results = [e for e in operation if e["event"] == "result"]
+                assert len(results) == 1 and results[0]["errno"] == 0 and results[0]["value"] == 0, operation
+                assert len(bytes.fromhex(results[0]["target_bytes_hex"])) == path_bytes, results[0]
+                assert any(e["event"] == "response" and e["errno"] == 0 for e in operation), operation
+            return {"observed": observed, "external_mode": actual_mode, "result": report, "audit_events": events}
+        finally:
+            # Relative rmtree traversal removes >PATH_MAX paths too; keeping
+            # them would make the later optional artifact path walk invalid.
+            shutil.rmtree(writable)
+
     @staticmethod
     def audit_events(path, report):
         events = [json.loads(line) for line in path.read_text().splitlines()]
@@ -405,6 +453,29 @@ class Suite:
         elif report:
             assert report["audit"]["enabled"] and not report["audit"]["complete"], report
         return {"rejected": kind, "stderr": proc.stderr, "result": report}
+
+    def workspace_root_metadata(self, operation):
+        area = self.area()
+        source = area / "source"
+        source.mkdir(mode=0o755)
+        os.chmod(source, 0o755)
+        original_ns = 1234567890000000000
+        os.utime(source, ns=(original_ns, original_ns))
+        diff, export = area / "diff.json", area / "export"
+        script = {"chmod": "import os;os.chmod('.',0o700)",
+                  "mtime": "import os;os.utime('.',ns=(1234567892000000000,1234567892000000000))",
+                  "unchanged": "pass"}[operation]
+        _, report = self.execute(area, script, ["--workspace", source, "--metadata",
+                                                "--workspace-diff", diff, "--workspace-export", export])
+        changes = json.loads(diff.read_text())
+        paths = [entry["path"] for entry in changes["changes"]]
+        assert paths == ([] if operation == "unchanged" else ["."]), changes
+        assert report["workspace"]["changes"] == len(paths)
+        assert report["workspace"]["copied_files"] == report["workspace"]["copied_bytes"] == 0, report
+        assert stat_mode(source) == 0o755 and source.stat().st_mtime_ns == original_ns
+        assert stat_mode(export) == (0o700 if operation == "chmod" else 0o755)
+        assert export.stat().st_mtime_ns == (1234567892000000000 if operation == "mtime" else original_ns)
+        return {"operation": operation, "diff": changes, "result": report}
 
     def new_filesystem_syscalls(self, dynamic):
         area = self.area()
@@ -667,6 +738,8 @@ def main():
         suite.test("v02.effective-suite", None, blocked=f"{mode} kernel requirements absent: {probe}")
         return suite.finish(probe)
     suite.test("workspace.cli-isolation-diff-export", suite.workspace_case)
+    for operation in ("chmod", "mtime", "unchanged"):
+        suite.test("workspace.root-" + operation, lambda op=operation: suite.workspace_root_metadata(op))
     suite.test("workspace.explicit-keep", suite.workspace_keep)
     for kind in ("cwd", "extra-rw", "source-ro", "ancestor-ro", "descendant-rx",
                  "intermediate-symlink-grant", "parent-inside-source"):
@@ -678,6 +751,9 @@ def main():
     for kind in ("chmod", "fchmod", "utimensat", "xattr", "same-owner", "suid", "external-owner",
                  "readonly", "outside-link", "inside-link", "dotdot-escape", "security-xattr", "unicode-long-target"):
         suite.test("metadata." + kind, lambda k=kind: suite.metadata(k))
+    for path_bytes in (4094, 4095, 4096):
+        suite.test("metadata.fd-path-bytes-" + str(path_bytes), lambda n=path_bytes: suite.metadata_path_boundary(n),
+            blocked=None if shutil.which(os.environ.get("CC", "cc")) else "C compiler unavailable for the real path boundary probe")
     for kind in ("events", "syscalls", "forged-output"):
         suite.test("audit." + kind, lambda k=kind: suite.audit(k))
     for kind in ("existing", "symlink", "writable-parent"):

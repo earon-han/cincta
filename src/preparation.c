@@ -65,14 +65,14 @@ static int high_pipe(int fds[2])
     return 0;
 }
 
-static int close_except(int a, int b, int c)
+static int close_except(int a, int b, int c, int d)
 {
-    int keep[3] = {a, b, c};
-    for (int i = 0; i < 3; ++i)
-        for (int j = i + 1; j < 3; ++j)
+    int keep[4] = {a, b, c, d};
+    for (int i = 0; i < 4; ++i)
+        for (int j = i + 1; j < 4; ++j)
             if (keep[j] < keep[i]) { int swap = keep[i]; keep[i] = keep[j]; keep[j] = swap; }
     unsigned first = 3;
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 4; ++i) {
         if (keep[i] < 3) continue;
         unsigned fd = (unsigned)keep[i];
         if (first < fd && syscall(SYS_close_range, first, fd - 1, 0) < 0) return -1;
@@ -244,8 +244,20 @@ static int create_container(struct preparation_guard *guard, const char *parent,
     return 0;
 }
 
+static int stop_preparing_cli(int parent_fd)
+{
+    /* The CLI may be stopped, or already block TERM for signalfd. Use the
+     * pinned process identity, then wait until it cannot write preparation. */
+    if (syscall(SYS_pidfd_send_signal, parent_fd, SIGKILL, NULL, 0) < 0 && errno != ESRCH) return -1;
+    struct pollfd p = {.fd = parent_fd, .events = POLLIN};
+    int ready;
+    do { ready = poll(&p, 1, -1); } while (ready < 0 && errno == EINTR);
+    if (ready < 0 || p.revents & POLLNVAL) { if (ready >= 0) errno = EBADF; return -1; }
+    return 0;
+}
+
 static int guardian(struct preparation_guard *guard, int control, int status,
-                    pid_t parent_pid, const char *requested_parent)
+                    pid_t parent_pid, const char *requested_parent, int caller_fd)
 {
     struct sigaction ignore = {.sa_handler = SIG_IGN};
     sigemptyset(&ignore.sa_mask);
@@ -258,19 +270,26 @@ static int guardian(struct preparation_guard *guard, int control, int status,
         int high = fcntl(parent_fd, F_DUPFD_CLOEXEC, 3); close(parent_fd); parent_fd = high;
     }
     if (parent_fd < 0 || getppid() != parent_pid) { if (parent_fd >= 0) close(parent_fd); return 125; }
-    if (close_except(control, status, parent_fd) < 0) { send_reply(status, -1, "sanitize guardian descriptors"); return 125; }
+    if (close_except(control, status, parent_fd, caller_fd) < 0) { send_reply(status, -1, "sanitize guardian descriptors"); return 125; }
     char error[512] = {0};
+    if (caller_fd >= 0 && syscall(SYS_pidfd_send_signal, parent_fd, 0, NULL, 0) < 0) {
+        send_reply(status, -1, "original caller cancellation requires pidfd_send_signal permission");
+        close(parent_fd); return 125;
+    }
+    if (caller_alive(caller_fd) != 1) return stop_preparing_cli(parent_fd) < 0 ? 125 : 0;
     if (create_container(guard, requested_parent, error, sizeof(error)) < 0) { send_reply(status, -1, error); return 125; }
     if (send_reply(status, 0, "") < 0) {
         (void)cancelled_cleanup(guard, error, sizeof(error)); return 125;
     }
-    bool resource_requested = false;
+    bool resource_requested = false, caller_ended = false;
     for (;;) {
-        struct pollfd waiting[2] = {{.fd = control, .events = POLLIN | POLLHUP},
-                                    {.fd = parent_fd, .events = POLLIN}};
-        int ready = poll(waiting, 2, -1);
+        struct pollfd waiting[3] = {{.fd = control, .events = POLLIN | POLLHUP},
+                                    {.fd = parent_fd, .events = POLLIN},
+                                    {.fd = caller_fd, .events = POLLIN}};
+        int ready = poll(waiting, 3, -1);
         if (ready < 0 && errno == EINTR) continue;
         if (ready < 0) break;
+        if (caller_alive(caller_fd) != 1) { caller_ended = true; break; }
         bool ended = waiting[1].revents != 0;
         /* Drain control before acting on parent death/EOF: D may already be
          * buffered and monitor may own the artifacts even if CLI just died. */
@@ -280,13 +299,20 @@ static int guardian(struct preparation_guard *guard, int control, int status,
             if (n < 0 && errno == EINTR) continue;
             if (n < 0 && errno == EAGAIN) break;
             if (n != (ssize_t)sizeof(cmd)) { ended = true; break; }
+            if (caller_alive(caller_fd) != 1) { caller_ended = true; ended = true; break; }
             if (cmd.operation == 'D') {
                 int monitor = cmd.monitor > 0 ? (int)syscall(SYS_pidfd_open, cmd.monitor, 0) : -1;
                 if (monitor < 0) {
                     errno = ESRCH; send_reply(status, -1, "handover monitor identity unavailable");
                     continue;
                 }
-                close(monitor); send_reply(status, 0, ""); close(parent_fd); return 0;
+                close(monitor);
+                if (!guard->shared->workspace.prepared && !guard->shared->workspace.retained &&
+                    preparation_cleanup_container(guard, false, error, sizeof(error)) < 0) {
+                    send_reply(status, -1, error); continue;
+                }
+                if (caller_alive(caller_fd) != 1) { caller_ended = true; ended = true; break; }
+                send_reply(status, 0, ""); close(parent_fd); return 0;
             }
             if (cmd.operation == 'F') {
                 int rc = resource_finish(&guard->shared->resources, error, sizeof(error));
@@ -307,6 +333,10 @@ static int guardian(struct preparation_guard *guard, int control, int status,
             } else { errno = EPROTO; send_reply(status, -1, "invalid preparation command"); ended = true; break; }
         }
         if (ended) break;
+    }
+    if (caller_ended && stop_preparing_cli(parent_fd) < 0) {
+        fprintf(stderr, "cincta: cannot stop cancelled preparation: %s\n", strerror(errno));
+        close(parent_fd); return 125; /* Never delete while a writer may live. */
     }
     int rc = cancelled_cleanup(guard, error, sizeof(error));
     if (rc < 0) fprintf(stderr, "cincta: preparation cancellation cleanup failed: %s\n", error[0] ? error : strerror(errno));
@@ -339,7 +369,7 @@ static int command_send(struct preparation_guard *guard, unsigned char operation
 }
 
 int preparation_start(struct workspace_ctx **workspace, struct resource_ctx **resources,
-                      const char *requested_parent, struct preparation_guard *guard,
+                      const char *requested_parent, int caller_fd, struct preparation_guard *guard,
                       char *error, size_t size)
 {
     if (!workspace || !resources || !guard) { errno = EINVAL; return errorf(error, size, "preparation context pointers are required"); }
@@ -359,7 +389,7 @@ int preparation_start(struct workspace_ctx **workspace, struct resource_ctx **re
     if (guard->pid < 0) { int saved = errno; close(control[0]); close(control[1]); close(status[0]); close(status[1]); errno = saved; goto failed; }
     if (guard->pid == 0) {
         close(control[1]); close(status[0]);
-        _exit(guardian(guard, control[0], status[1], parent_pid, requested_parent));
+        _exit(guardian(guard, control[0], status[1], parent_pid, requested_parent, caller_fd));
     }
     close(control[0]); close(status[1]);
     guard->control_fd = control[1]; guard->status_fd = status[0]; guard->active = true;

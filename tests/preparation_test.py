@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Real preparation cancellation tests; never replace guard effects with mocks."""
 import argparse
+import ctypes
 import hashlib
 import json
 import os
@@ -31,11 +32,13 @@ HELPER = r'''
 #include <unistd.h>
 int main(int argc, char **argv) {
     if (argc != 4) return 2;
+    int caller_fd = -1;
+    if (!strcmp(argv[1],"caller-buffered") && caller_capture(&caller_fd)<0) return 30;
     struct preparation_guard guard;
     struct workspace_ctx *w;
     struct resource_ctx *r;
     char error[512] = {0};
-    if (preparation_start(&w,&r,argv[2],&guard,error,sizeof(error)) < 0) {
+    if (preparation_start(&w,&r,argv[2],caller_fd,&guard,error,sizeof(error)) < 0) {
         fprintf(stderr,"start: %s\n",error); return 3;
     }
     printf("{\"guardian\":%ld,\"container\":\"%s\"}\n",(long)guard.pid,preparation_workspace_parent(&guard));
@@ -66,6 +69,24 @@ int main(int argc, char **argv) {
         fprintf(stderr,"workspace: %s\n",error); preparation_finish(&guard,error,sizeof(error)); return 11;
     }
     if (!strcmp(argv[1],"copy-wait")) { puts("copy-finished"); fflush(stdout); for (;;) pause(); }
+    if (!strcmp(argv[1],"caller-buffered")) {
+        int gate[2]; if (pipe(gate)<0) return 31;
+        pid_t monitor=fork(); if (monitor<0) return 32;
+        if (!monitor) {
+            close(guard.control_fd); close(gate[1]); char permit;
+            ssize_t n=read(gate[0],&permit,1);
+            _exit(n==0 ? 0 : 33); /* A cancelled CLI must never release G. */
+        }
+        close(gate[0]);
+        if (kill(guard.pid,SIGSTOP)<0) return 34;
+        int status;
+        if (waitpid(guard.pid,&status,WUNTRACED)!=guard.pid || !WIFSTOPPED(status)) return 35;
+        struct { unsigned char operation; pid_t monitor; } command={.operation='D',.monitor=monitor};
+        if (write(guard.control_fd,&command,sizeof(command))!=(ssize_t)sizeof(command)) return 36;
+        printf("{\"monitor\":%ld}\n",(long)monitor); fflush(stdout);
+        raise(SIGSTOP);
+        return 37; /* Original caller death must make guardian terminate us. */
+    }
     if (!strcmp(argv[1],"buffered-handover")) {
         pid_t monitor=fork();
         if (monitor<0) return 22;
@@ -123,6 +144,7 @@ int main(int argc, char **argv) {
 
 class Suite:
     def __init__(self, args, root, helper):
+        assert ctypes.CDLL(None).prctl(36, 1, 0, 0, 0) == 0
         self.args, self.root, self.helper = args, root, helper
         self.rows = []
         self.counter = 0
@@ -250,6 +272,102 @@ class Suite:
             if proc.poll() is None:
                 proc.kill(); proc.communicate(timeout=8)
 
+    def original_caller_exit(self, area, source, scratch, paused=False, dns=False):
+        result = area / "result.json"
+        marker_dir = area / "payload"
+        marker_dir.mkdir()
+        command = [self.binary, "run", *self.runtime, *self.compat, "--result", str(result)]
+        if dns:
+            for _ in range(128):
+                command += ["--allow-net", "tcp:localhost:32123"]
+            command += ["--rw", str(marker_dir), "--", "/bin/sh", "-c",
+                        f"printf PAYLOAD_EXECUTED > {marker_dir / 'marker'}"]
+        else:
+            with (source / "large").open("wb") as stream:
+                stream.truncate(128 * 1024 * 1024)
+            command += ["--workspace", str(source), "--workspace-parent", str(scratch),
+                        "--workspace-export", str(area / "export"), "--", "/bin/sh", "-c",
+                        "printf PAYLOAD_EXECUTED > marker"]
+        reader, writer = os.pipe()
+        caller = os.fork()
+        if caller == 0:
+            os.close(reader)
+            try:
+                process = subprocess.Popen(command, stdin=subprocess.DEVNULL,
+                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                for _ in range(10000):
+                    children = Path(f"/proc/{process.pid}/task/{process.pid}/children").read_text().split()
+                    if children and not result.exists():
+                        if paused:
+                            os.kill(process.pid, signal.SIGSTOP)
+                        os.write(writer, json.dumps({"cli": process.pid, "guardian": int(children[0])}).encode())
+                        os._exit(0)
+                    if process.poll() is not None:
+                        raise AssertionError("CLI completed before preparation window")
+                    time.sleep(0.0002)
+                raise AssertionError("preparation guardian was not observed")
+            except BaseException as error:
+                os.write(writer, json.dumps({"error": str(error)}).encode())
+                os._exit(2)
+        os.close(writer)
+        identities = json.loads(os.read(reader, 4096)); os.close(reader)
+        _, status = os.waitpid(caller, 0)
+        assert status == 0 and "error" not in identities, (status, identities)
+        try:
+            # In the paused variant the guardian must kill even a stopped CLI;
+            # the test driver never resumes it to make cancellation succeed.
+            self.wait_gone(identities["cli"])
+            self.wait_gone(identities["guardian"])
+            assert not (marker_dir / "marker").exists()
+            assert not (area / "export").exists(), "business was started/exported after caller exit"
+            assert list(scratch.iterdir()) == []
+            assert (source / "file").read_text() == "unchanged-source"
+            completed = None
+            if result.exists() and result.stat().st_size:
+                completed = json.loads(result.read_text())
+                assert completed["status"] != "ok", completed
+            return {"original_caller_exited": True, "paused_cli": paused, "dns_only": dns,
+                    "business_not_started": True, "identities": identities, "result": completed}
+        finally:
+            for pid in identities.values():
+                if isinstance(pid, int) and Path(f"/proc/{pid}").exists():
+                    try: os.kill(pid, signal.SIGKILL)
+                    except ProcessLookupError: pass
+
+    def caller_buffered_handover(self, area, source, scratch):
+        reader, writer = os.pipe()
+        caller = os.fork()
+        if caller == 0:
+            os.close(reader)
+            try:
+                process = subprocess.Popen([str(self.helper), "caller-buffered", str(scratch), str(source)],
+                    stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                    text=True, bufsize=1)
+                ready = json.loads(process.stdout.readline())
+                ready.update(json.loads(process.stdout.readline()), cli=process.pid)
+                os.write(writer, json.dumps(ready).encode()); os._exit(0)
+            except BaseException as error:
+                os.write(writer, json.dumps({"error": str(error)}).encode()); os._exit(2)
+        os.close(writer)
+        identities = json.loads(os.read(reader, 4096)); os.close(reader)
+        _, status = os.waitpid(caller, 0)
+        assert status == 0 and "error" not in identities, (status, identities)
+        try:
+            try: os.kill(identities["guardian"], signal.SIGCONT)
+            except ProcessLookupError: pass
+            for key in ("cli", "guardian", "monitor"):
+                self.wait_gone(identities[key])
+            assert not Path(identities["container"]).exists(), identities
+            assert list(scratch.iterdir()) == []
+            assert (source / "file").read_text() == "unchanged-source"
+            return {"caller_death_overrides_buffered_D": True, "no_G_released": True,
+                    "identities": identities}
+        finally:
+            for value in identities.values():
+                if isinstance(value, int) and Path(f"/proc/{value}").exists():
+                    try: os.kill(value, signal.SIGKILL)
+                    except ProcessLookupError: pass
+
     def large_copy_cancel(self, area, source, scratch, cli):
         large = source / "large"
         size = 512 * 1024 * 1024
@@ -351,7 +469,7 @@ def main():
         adapter.write_text(HELPER)
         helper = root / "helper"
         command = [args.cc, "-std=c17", "-Wall", "-Wextra", "-Wpedantic", "-Werror", "-O2", "-Iinclude",
-                   "src/preparation.c", "src/workspace.c", "src/resources.c", str(adapter), "-o", str(helper)]
+                   "src/preparation.c", "src/caller.c", "src/workspace.c", "src/resources.c", str(adapter), "-o", str(helper)]
         built = subprocess.run(command, capture_output=True, text=True)
         if built.returncode:
             raise RuntimeError(built.stderr)
@@ -359,12 +477,16 @@ def main():
         suite.case("preparation.partial-before-prepared-sigkill", suite.partial_cancel)
         suite.case("preparation.real-copy-sigkill", lambda a, s, p: suite.large_copy_cancel(a, s, p, False))
         suite.case("preparation.buffered-D-parent-death", suite.buffered_handover)
+        suite.case("preparation.caller-death-overrides-buffered-D", suite.caller_buffered_handover)
         for mode in ("handover-discard", "handover-keep", "handover-bad", "resource-fail", "guardian-death"):
             suite.case("preparation." + mode, lambda a, s, p, m=mode: suite.helper_normal(a, s, p, m))
         if not args.module_only:
             suite.case("preparation.cli-real-copy-sigkill", lambda a, s, p: suite.large_copy_cancel(a, s, p, True))
             suite.case("preparation.cli-copy-error-no-residue", suite.cli_preparation_error)
             suite.case("preparation.cli-keep-after-handover", suite.cli_keep)
+            suite.case("preparation.original-caller-natural-exit", lambda a,s,p: suite.original_caller_exit(a,s,p))
+            suite.case("preparation.original-caller-stopped-cli", lambda a,s,p: suite.original_caller_exit(a,s,p,True))
+            suite.case("preparation.original-caller-dns-only", lambda a,s,p: suite.original_caller_exit(a,s,p,True,True))
         report = {"schema_version": 1, "environment": args.environment,
                   "kernel": platform.release(), "architecture": platform.machine(), "uid": os.getuid(),
                   "test_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),

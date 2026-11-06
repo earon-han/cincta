@@ -10,7 +10,7 @@ v0.2 的基本静态运行、动态能力和树级资源有不同依赖。请求
 | Landlock | 严格 ABI≥6（上游6.12起），显式--compat ABI≥3（上游6.2起）；无保护不执行 |
 | LSM配置 | CONFIG_SECURITY_LANDLOCK及必要SECURITY支持，启动有效LSM列表启用landlock |
 | seccomp | CONFIG_SECCOMP、CONFIG_SECCOMP_FILTER，外层策略允许安装经典filter及no_new_privs |
-| 生命周期 | fork/pipe/socketpair、poll、wait、subreaper、pidfd_open、signalfd、timerfd、信号和close_range可用 |
+| 生命周期 | fork/pipe/socketpair、poll、wait、subreaper、pidfd_open、pidfd_send_signal（guardian以signal0预检权限）、signalfd、timerfd、信号和close_range可用 |
 | procfs | CONFIG_PROC_FS、CONFIG_PROC_CHILDREN，真实/proc可读取自身children、fd及所需mountinfo，statx(STATX_MNT_ID)可用以识别bind子目录别名；不可读时拒绝相关保护 |
 | runtime文件 | 业务二进制、loader、共享库、解释器及配置逐项显式授权；静态启动器不自动授予这些路径 |
 | 身份 | 推荐普通UID、无额外capabilities；payload清空caps和设置NNP，不借setuid提权 |

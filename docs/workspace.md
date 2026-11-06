@@ -37,7 +37,7 @@ cincta run --workspace /absolute/SOURCE --workspace-exec --metadata \
 
 ## 变更与导出
 
-- `--workspace-diff PATH`：独占新建JSON差异文件，记录added/deleted/modified、相对路径、前后类型、大小、权限及符号链接目标；内容比较能发现大小和mtime未变的字节修改。目录mtime变化也计入差异。
+- `--workspace-diff PATH`：独占新建JSON差异文件，记录added/deleted/modified、相对路径、前后类型、大小、权限及符号链接目标；内容比较能发现大小和mtime未变的字节修改。目录mtime变化也计入差异，包括工作树根本身，根以相对路径 `.` 表示。新增或删除根内条目导致根mtime变化时，报告也会包含该根变更。`workspace.changes`包含这条根变更；copied_files/copied_bytes与条目/字节配额仍排除源根，不因差异报告加入 `.` 而增加。
 - `--workspace-export DIR`：独占新建目录，复制**完整最终树**，适合后续检查或交给调用方处理；不是自动应用补丁。
 - 不提供自动写回原目录；调用方审查导出后另行决定如何应用。默认discard就是回滚本次沙箱产生的工作区改动。
 - diff及export的路径必须在原目录和私有快照之外，且最终组件不存在；不会覆盖任何已有文件/目录/符号链接。

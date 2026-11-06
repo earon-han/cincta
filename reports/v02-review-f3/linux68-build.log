@@ -1,0 +1,18 @@
+mkdir -p build-static
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/broker.c -o build-static/broker.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/filebroker.c -o build-static/filebroker.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/json.c -o build-static/json.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/main.c -o build-static/main.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/network.c -o build-static/network.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/preparation.c -o build-static/preparation.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/resources.c -o build-static/resources.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/result.c -o build-static/result.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/security.c -o build-static/security.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/supervisor.c -o build-static/supervisor.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE -MMD -MP -c src/workspace.c -o build-static/workspace.o
+cc -Iinclude -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE tests/adversary.c -Wl,-z,relro,-z,now,-z,noexecstack -static -o build-static/adversary
+cc -O2 -g -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE build-static/broker.o build-static/filebroker.o build-static/json.o build-static/main.o build-static/network.o build-static/preparation.o build-static/resources.o build-static/result.o build-static/security.o build-static/supervisor.o build-static/workspace.o -Wl,-z,relro,-z,now,-z,noexecstack -static -o build-static/cincta
+/usr/bin/ld: build-static/network.o: in function `network_prepare':
+/tmp/cincta-fix-f3/src/network.c:192:(.text+0x23c0): warning: Using 'getaddrinfo' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+PYTHONPYCACHEPREFIX=build-static/pycache python3 -m py_compile tests/file_audit_test.py tests/integration.py tests/network_test.py tests/output_boundary_test.py tests/preparation_test.py tests/resources_test.py tests/stress_test.py tests/v02_integration.py tests/workspace_test.py scripts/benchmark.py examples/agent.py
+for script in scripts/*.sh; do sh -n "$script" || exit; done

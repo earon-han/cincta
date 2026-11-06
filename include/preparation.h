@@ -28,6 +28,7 @@ struct preparation_guard {
 int preparation_start(struct workspace_ctx **workspace,
                       struct resource_ctx **resources,
                       const char *requested_parent,
+                      int caller_fd,
                       struct preparation_guard *guard,
                       char *error, size_t error_size);
 

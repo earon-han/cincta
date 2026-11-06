@@ -16,7 +16,7 @@
 | P8 | 完成 | 主1088 PASS/0FAIL/40条件BLOCKED；400组合、800启动样本 | reports/v02-summary.json；validation.md | 额外重复、artifact验证和共享负载单列 |
 | P9.1 | 完成 | 两架构静态原件、元信息13项、scratch5项及文档齐备 | package.sh；两产物SHA | 两架构包/源码包与来源校验；候选完成后进入P10 |
 | P9.2 | 受阻 | 本地分支与提交可审查 | codex/v02-full-sandbox | 自动审批拒绝GitHub目的地外发，未重复尝试 |
-| P10 | 待办 | 用户追加：候选全部完成后启动全新代码审查Agent | implementation-plan-v02.md | 逐条讨论/判定/修复并功能验证后才通知完成 |
+| P10 | 进行中 | 候选c6a2ef5及双架构包完成后，已启动全新final_code_review及只读模块子审查 | review-resolutions-v02.md | 逐条讨论/判定/修复并功能验证后才通知完成 |
 
 上表模块开发结果只表示相应快照的自验证/独立测试。最终发行数字、受测源码指纹、镜像配置与重复样本统一在 [validation.md](validation.md)；代码更新后必须重跑相关套件，不能相加旧轮次来宣称全功能通过。x86的全系统TCG结果应与aarch64和硬件原生明确分开。
 

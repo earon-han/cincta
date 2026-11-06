@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "scope": "Isolated F3 self-validation: c6a2ef5 source plus broker/tests/audit changes; excludes parallel F1/F2 modifications; final integrated acceptance is separate.",
+  "base_revision": "c6a2ef525f4d32bd0c5ba33167cfb25b3f955d90",
+  "binary_sha256": "87ad72a6271b2e9508fb7d8745054992f1b98b93578b4a558891085d13c15054",
+  "broker_sha256": "1c7725c2522ce174b2c96a242dda4d97ec7dea56949ed7ac9b76ed3c9d2224e7",
+  "test_sha256": "7a6956c32274712d49da214ccce2b7d8e41da38e9b5ad0b88a1e34e04905269c",
+  "helper_sha256": "e94b81477d588a7befc38a9733a6cb65e2c074ef3bd2469e31ebfbef0b35980d",
+  "reports": {
+    "linux68": {
+      "PASS": 52,
+      "FAIL": 0,
+      "BLOCKED": 0
+    },
+    "default_docker68": {
+      "PASS": 51,
+      "FAIL": 0,
+      "BLOCKED": 1
+    }
+  },
+  "targeted_boundary_checks": {
+    "PASS": 6,
+    "FAIL": 0,
+    "BLOCKED": 0
+  },
+  "docker_blocked_reason": "unrelated pre-existing outer-filter new-filesystem syscall audit observation; denial remains enforced"
+}

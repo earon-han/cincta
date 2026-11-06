@@ -361,10 +361,35 @@ static void manifest_free(struct manifest *m)
     free(m->items);
 }
 
+static struct entry *manifest_entry(struct manifest *m, const char *path,
+                                    const struct stat *st)
+{
+    if (m->count == m->capacity) {
+        size_t cap = m->capacity ? m->capacity * 2 : 64;
+        if (cap < m->capacity || cap > SIZE_MAX / sizeof(*m->items)) { errno = EOVERFLOW; return NULL; }
+        struct entry *next = realloc(m->items, cap * sizeof(*m->items));
+        if (!next) return NULL;
+        m->items = next; m->capacity = cap;
+    }
+    struct entry *entry = &m->items[m->count];
+    memset(entry, 0, sizeof(*entry)); entry->st = *st;
+    entry->path = strdup(path);
+    if (!entry->path) return NULL;
+    ++m->count;
+    return entry;
+}
+
 static int collect(int anchor, int fd, const char *relative, unsigned depth, struct manifest *m,
                    char *error, size_t size)
 {
     if (depth > WORKSPACE_MAX_DEPTH) { errno = ELOOP; return failure(error, size, "workspace diff depth exceeded"); }
+    if (depth == 0) {
+        struct stat st;
+        /* Root metadata belongs in the diff but not in the copied-entry or
+         * final-tree budget. It denotes the tree itself, never an extra file. */
+        if (fstat(fd, &st) < 0 || !manifest_entry(m, ".", &st))
+            return failure(error, size, "collect workspace root metadata: %s", strerror(errno));
+    }
     int duplicate = dup(fd);
     if (duplicate < 0) return failure(error, size, "duplicate diff directory: %s", strerror(errno));
     DIR *dir = fdopendir(duplicate);
@@ -386,18 +411,8 @@ static int collect(int anchor, int fd, const char *relative, unsigned depth, str
         if (!S_ISREG(st.st_mode) && !S_ISDIR(st.st_mode) && !S_ISLNK(st.st_mode)) {
             errno = EINVAL; failure(error, size, "special file in completed workspace: '%s'", rel); break;
         }
-        if (m->count == m->capacity) {
-            size_t cap = m->capacity ? m->capacity * 2 : 64;
-            if (cap < m->capacity || cap > SIZE_MAX / sizeof(*m->items)) { errno = EOVERFLOW; break; }
-            struct entry *next = realloc(m->items, cap * sizeof(*m->items));
-            if (!next) break;
-            m->items = next; m->capacity = cap;
-        }
-        struct entry *entry = &m->items[m->count];
-        memset(entry, 0, sizeof(*entry)); entry->st = st;
-        entry->path = strdup(rel);
-        if (!entry->path) break;
-        ++m->count;
+        struct entry *entry = manifest_entry(m, rel, &st);
+        if (!entry) break;
         if (S_ISLNK(st.st_mode)) {
             char target[PATH_MAX];
             ssize_t n = readlinkat(fd, de->d_name, target, sizeof(target));

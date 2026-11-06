@@ -37,3 +37,9 @@ guardian自身若在创建容器成功、身份登记和READY尚未完成的极�
 实测入口：`python3 tests/preparation_test.py --binary build/cincta --report reports/preparation.json`。该测试实际观察512MiB源文件被复制到一半时杀死CLI/控制者，检查私有目录和guardian进程消失，同时验证源数据、外部链接目标和相邻目录保持不变。另以SIGSTOP固定guardian，在D已缓冲且控制者退出后恢复它，确认monitor仍拥有快照并负责清理。控制者退出会使已停止的独立进程组成为孤儿组，Linux可先自动发送SIGHUP/SIGCONT；因此测试允许随后显式SIGCONT发现进程已退出，但仍必须取得monitor确认交接成功的标记、两个进程实际消失、私有目录删除和源数据不变的全部证据，不以ESRCH本身判定成功。[进程退出时的孤儿进程组处理](https://sourceware.org/glibc/manual/latest/html_node/Termination-Internals.html)
 
 测试还覆盖handover、keep、准备失败及READY后的guardian异常，报告保存测试、二进制和源文件SHA256以对应实际运行版本。`--module-only`只运行模块部分，不可冒充完整CLI验收。
+
+## P10：原调用方在准备阶段退出
+
+CLI在解析运行任务及任何复制/DNS/cgroup准备前固定原调用进程的pidfd，重父化不能重新定义caller。guardian同时观察CLI与原caller；原caller死亡时用固定CLI pidfd发SIGKILL，并等CLI实际退出后才删除准备对象，避免复制/删除并发。启动前无副作用signal0探测确认外层允许pidfd_send_signal。D交接和ACK前caller死亡优先于缓冲命令；CLI、monitor及payload的启动屏障还会复核原caller。纯DNS准备也有guardian，未使用的空容器在D前删除。
+
+该身份是捕获到的父进程TGID，不是创建线程，线程退出不取消仍存活的调用进程。PID namespace的PID1没有可见父进程时显式不绑定，仍由runtime信号控制。尚未创建结果文件的准备阶段取消可无JSON；守护者会清理已登记的准备对象。初次capture之前已经重父化的原始创建者无法由内核ppid反推，承诺从CLI启动捕获的身份开始。

@@ -19,6 +19,7 @@ struct resource_ctx;
 struct preparation_guard;
 struct seccomp_data;
 struct config {
+    int caller_fd; /* Original caller TGID pidfd, captured before preparation; -1 for PID1. */
     struct path_rule rules[CINCTA_MAX_RULES];
     int rule_fds[CINCTA_MAX_RULES];
     char *rule_targets[CINCTA_MAX_RULES];
@@ -80,6 +81,9 @@ uint32_t security_decide(const struct config *cfg, int abi,
                          const struct seccomp_data *data);
 
 int supervise(const struct config *cfg);
+int caller_capture(int *fd);
+/* 1 alive/unbound PID1, 0 exited, -1 inspection failed. */
+int caller_alive(int fd);
 int result_open(const struct config *cfg);
 int result_get_fd(void);
 void result_close(void);

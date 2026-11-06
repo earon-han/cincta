@@ -6,6 +6,7 @@ Linux VM and Docker should execute this separately from CLI integration tests.
 """
 import argparse
 import ctypes
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -34,6 +35,10 @@ int ws_finish(void *p, const char *diff, const char *export, int keep,
 }
 int ws_discard(void *p, char *error, size_t size) {
     return workspace_discard(p, error, size);
+}
+unsigned long long ws_count(void *p, int which) {
+    struct workspace_ctx *ctx = p;
+    return which == 0 ? ctx->copied_files : which == 1 ? ctx->copied_bytes : ctx->changes;
 }
 void ws_free(void *p) { free(p); }
 '''
@@ -85,6 +90,8 @@ def configure(lib):
     lib.ws_finish.argtypes = [ctypes.c_void_p, ctypes.c_char_p, ctypes.c_char_p,
                              ctypes.c_int, ctypes.c_void_p, ctypes.c_size_t]
     lib.ws_discard.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_size_t]
+    lib.ws_count.argtypes = [ctypes.c_void_p, ctypes.c_int]
+    lib.ws_count.restype = ctypes.c_ulonglong
     lib.ws_free.argtypes = [ctypes.c_void_p]
 
 
@@ -159,10 +166,13 @@ def main():
             ws = Workspace(lib, source, parent)
             try:
                 original = (ws.tree / "modified").stat()
+                original_root = ws.tree.stat()
                 (ws.tree / "modified").write_text("bbbb")
                 os.utime(ws.tree / "modified", ns=(original.st_atime_ns, original.st_mtime_ns))
                 (ws.tree / "deleted").unlink()
                 (ws.tree / "added").write_text("new")
+                os.utime(ws.tree, ns=(original_root.st_atime_ns,
+                                     original_root.st_mtime_ns + 2000000017))
                 diff = area / "diff.json"
                 export = area / "export"
                 ws.finish(diff, export)
@@ -171,6 +181,7 @@ def main():
                 assert changes["modified"] == "modified", report
                 assert changes["deleted"] == "deleted", report
                 assert changes["added"] == "added", report
+                assert changes["."] == "modified" and report["count"] == 4, report
                 assert "unchanged" not in changes and '目录/引号"换行\n' not in changes
                 assert report["exported"] is True
                 assert (export / "modified").read_text() == "bbbb"
@@ -179,6 +190,53 @@ def main():
                 assert (source / "deleted").exists()
                 assert not ws.root.exists()
                 return report
+            finally:
+                ws.close()
+
+        def root_metadata(area, source, parent, kind):
+            source.chmod(0o755)
+            os.utime(source, ns=(1700000000123456789, 1700000000123456789))
+            initial = source.stat()
+            # The root must not consume the one-entry budget, even when there
+            # is already one real child and the root appears in the diff.
+            if kind == "budget":
+                (source / "file").write_text("x")
+                os.utime(source, ns=(initial.st_atime_ns, initial.st_mtime_ns))
+            ws = Workspace(lib, source, parent, files=1, size=1)
+            try:
+                before = ws.tree.stat()
+                if kind == "chmod":
+                    ws.tree.chmod(0o700)
+                elif kind in ("mtime", "budget"):
+                    os.utime(ws.tree, ns=(before.st_atime_ns,
+                                         before.st_mtime_ns + 11000000003))
+                modified = ws.tree.stat()
+                diff, export = area / "diff.json", area / "export"
+                ws.finish(diff, export)
+                report = json.loads(diff.read_text())
+                expected = 0 if kind == "unchanged" else 1
+                assert report["count"] == expected, report
+                assert lib.ws_count(ws.ctx, 2) == expected
+                if expected:
+                    change, = report["changes"]
+                    assert change["path"] == "." and change["status"] == "modified", report
+                    assert change["before"]["type"] == change["after"]["type"] == "directory", change
+                    assert change["before"]["mode"] == before.st_mode & 0o777
+                    assert change["after"]["mode"] == modified.st_mode & 0o777
+                else:
+                    assert report["changes"] == [], report
+                assert export.stat().st_mode & 0o777 == modified.st_mode & 0o777
+                assert export.stat().st_mtime_ns == modified.st_mtime_ns
+                assert source.stat().st_mode == initial.st_mode
+                assert source.stat().st_mtime_ns == initial.st_mtime_ns
+                copied = 1 if kind == "budget" else 0
+                assert lib.ws_count(ws.ctx, 0) == lib.ws_count(ws.ctx, 1) == copied
+                if kind == "budget":
+                    assert (export / "file").read_text() == (source / "file").read_text() == "x"
+                assert not ws.root.exists()
+                return {"operation": kind, "diff": report, "root_mode": modified.st_mode & 0o777,
+                        "root_mtime_ns": modified.st_mtime_ns, "copied_files": copied,
+                        "copied_bytes": copied, "source_unchanged": True}
             finally:
                 ws.close()
 
@@ -300,6 +358,8 @@ def main():
         case("workspace.independent-copy-and-discard", independent)
         case("workspace.diff-export-immutable-source", diff_export)
         case("workspace.unchanged-and-safe-relative-link", unchanged)
+        for kind in ("chmod", "mtime", "unchanged", "budget"):
+            case("workspace.root-" + kind, lambda a, s, p, k=kind: root_metadata(a, s, p, k))
         for kind in ("absolute", "escape", "dangling", "loop", "intermediate-dotdot"):
             case("workspace.symlink-" + kind, lambda a, s, p, k=kind: invalid_link(a, s, p, k))
         case("workspace.special-file-rejected", special)
@@ -314,6 +374,9 @@ def main():
     report = {"schema_version": 1, "environment": args.environment,
               "kernel": platform.release(), "architecture": platform.machine(),
               "uid": os.getuid(), "build_command": command,
+              "test_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest()
+                                for p in (Path("src/workspace.c"), Path("include/workspace.h"))},
               "counts": {state: sum(row["outcome"] == state for row in results)
                          for state in ("PASS", "FAIL", "BLOCKED")}, "results": results}
     if args.report:

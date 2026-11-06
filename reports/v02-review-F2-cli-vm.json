@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "environment": "linux68-F2-root-diff-cli",
+  "kernel": "6.8.0-147-generic",
+  "architecture": "aarch64",
+  "base_revision": "c6a2ef525f4d32bd0c5ba33167cfb25b3f955d90",
+  "overlay_source_sha256": {
+    "src/workspace.c": "cc54ebad7b2bb4c21dbd8f709027c452421dc911d98395f57ed9aa20313f5cdf"
+  },
+  "binary_sha256": "e7b7674c9a684061947e541faaf12fb20ff48b161f015ca890a757e3570d2fc0",
+  "counts": {
+    "PASS": 3,
+    "FAIL": 0,
+    "BLOCKED": 0
+  },
+  "results": [
+    {
+      "name": "F2.cli-root-chmod",
+      "command": [
+        "/tmp/cincta-fix-f2/build-f2/cincta",
+        "run",
+        "--compat",
+        "--rx",
+        "/usr/bin",
+        "--rx",
+        "/usr/lib",
+        "--metadata",
+        "--workspace",
+        "/tmp/cincta-f2-cli-tr25bdy2/chmod/source",
+        "--workspace-max-files",
+        "1",
+        "--workspace-max-bytes",
+        "1",
+        "--workspace-diff",
+        "/tmp/cincta-f2-cli-tr25bdy2/chmod/diff.json",
+        "--workspace-export",
+        "/tmp/cincta-f2-cli-tr25bdy2/chmod/export",
+        "--result",
+        "/tmp/cincta-f2-cli-tr25bdy2/chmod/result.json",
+        "--audit",
+        "/tmp/cincta-f2-cli-tr25bdy2/chmod/audit.jsonl",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import os;os.chmod(\".\",0o700)"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "outcome": "PASS",
+      "result": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 36,
+        "phase_ms": {
+          "setup": 1,
+          "run": 12,
+          "cleanup": 11
+        },
+        "protections": {
+          "landlock_abi": 4,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": false
+        },
+        "unsupported": [
+          "signal_and_abstract_unix_scopes_require_abi_6"
+        ],
+        "dynamic": true,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": true,
+          "mode": "events",
+          "records": 6,
+          "complete": true,
+          "path": "/tmp/cincta-f2-cli-tr25bdy2/chmod/audit.jsonl",
+          "bytes": 1731,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-f2-cli-tr25bdy2/chmod/source",
+          "root": "/tmp/cincta-preparation-pByysB/cincta-workspace-XXgSPF",
+          "tree": "/tmp/cincta-preparation-pByysB/cincta-workspace-XXgSPF/tree",
+          "retained": false,
+          "exported": true,
+          "executable": false,
+          "changes": 1,
+          "copied_files": 0,
+          "copied_bytes": 0
+        },
+        "resources": {
+          "enabled": false
+        }
+      },
+      "diff": {
+        "schema_version": 1,
+        "source": "/tmp/cincta-f2-cli-tr25bdy2/chmod/source",
+        "workspace": "/tmp/cincta-preparation-pByysB/cincta-workspace-XXgSPF/tree",
+        "count": 1,
+        "exported": true,
+        "changes": [
+          {
+            "path": ".",
+            "status": "modified",
+            "before": {
+              "type": "directory",
+              "mode": 493,
+              "size": 4096
+            },
+            "after": {
+              "type": "directory",
+              "mode": 448,
+              "size": 4096
+            }
+          }
+        ]
+      },
+      "export_mode": 448,
+      "export_mtime_ns": 1700000000123456789,
+      "source_unchanged": true
+    },
+    {
+      "name": "F2.cli-root-mtime",
+      "command": [
+        "/tmp/cincta-fix-f2/build-f2/cincta",
+        "run",
+        "--compat",
+        "--rx",
+        "/usr/bin",
+        "--rx",
+        "/usr/lib",
+        "--metadata",
+        "--workspace",
+        "/tmp/cincta-f2-cli-tr25bdy2/mtime/source",
+        "--workspace-max-files",
+        "1",
+        "--workspace-max-bytes",
+        "1",
+        "--workspace-diff",
+        "/tmp/cincta-f2-cli-tr25bdy2/mtime/diff.json",
+        "--workspace-export",
+        "/tmp/cincta-f2-cli-tr25bdy2/mtime/export",
+        "--result",
+        "/tmp/cincta-f2-cli-tr25bdy2/mtime/result.json",
+        "--audit",
+        "/tmp/cincta-f2-cli-tr25bdy2/mtime/audit.jsonl",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import os;os.utime(\".\",ns=(1700000000123456789,1700000011123456792))"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "outcome": "PASS",
+      "result": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 24,
+        "phase_ms": {
+          "setup": 2,
+          "run": 10,
+          "cleanup": 10
+        },
+        "protections": {
+          "landlock_abi": 4,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": false
+        },
+        "unsupported": [
+          "signal_and_abstract_unix_scopes_require_abi_6"
+        ],
+        "dynamic": true,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": true,
+          "mode": "events",
+          "records": 6,
+          "complete": true,
+          "path": "/tmp/cincta-f2-cli-tr25bdy2/mtime/audit.jsonl",
+          "bytes": 1783,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-f2-cli-tr25bdy2/mtime/source",
+          "root": "/tmp/cincta-preparation-k2cDxP/cincta-workspace-gJQYpU",
+          "tree": "/tmp/cincta-preparation-k2cDxP/cincta-workspace-gJQYpU/tree",
+          "retained": false,
+          "exported": true,
+          "executable": false,
+          "changes": 1,
+          "copied_files": 0,
+          "copied_bytes": 0
+        },
+        "resources": {
+          "enabled": false
+        }
+      },
+      "diff": {
+        "schema_version": 1,
+        "source": "/tmp/cincta-f2-cli-tr25bdy2/mtime/source",
+        "workspace": "/tmp/cincta-preparation-k2cDxP/cincta-workspace-gJQYpU/tree",
+        "count": 1,
+        "exported": true,
+        "changes": [
+          {
+            "path": ".",
+            "status": "modified",
+            "before": {
+              "type": "directory",
+              "mode": 493,
+              "size": 4096
+            },
+            "after": {
+              "type": "directory",
+              "mode": 493,
+              "size": 4096
+            }
+          }
+        ]
+      },
+      "export_mode": 493,
+      "export_mtime_ns": 1700000011123456792,
+      "source_unchanged": true
+    },
+    {
+      "name": "F2.cli-root-unchanged",
+      "command": [
+        "/tmp/cincta-fix-f2/build-f2/cincta",
+        "run",
+        "--compat",
+        "--rx",
+        "/usr/bin",
+        "--rx",
+        "/usr/lib",
+        "--metadata",
+        "--workspace",
+        "/tmp/cincta-f2-cli-tr25bdy2/unchanged/source",
+        "--workspace-max-files",
+        "1",
+        "--workspace-max-bytes",
+        "1",
+        "--workspace-diff",
+        "/tmp/cincta-f2-cli-tr25bdy2/unchanged/diff.json",
+        "--workspace-export",
+        "/tmp/cincta-f2-cli-tr25bdy2/unchanged/export",
+        "--result",
+        "/tmp/cincta-f2-cli-tr25bdy2/unchanged/result.json",
+        "--audit",
+        "/tmp/cincta-f2-cli-tr25bdy2/unchanged/audit.jsonl",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "pass"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "outcome": "PASS",
+      "result": {
+        "schema_version": 1,
+        "version": "0.2.0-preview.1",
+        "status": "ok",
+        "stage": "running",
+        "message": "",
+        "exit_code": 0,
+        "signal": 0,
+        "timed_out": false,
+        "cancelled": false,
+        "cleanup_complete": true,
+        "elapsed_ms": 21,
+        "phase_ms": {
+          "setup": 1,
+          "run": 8,
+          "cleanup": 11
+        },
+        "protections": {
+          "landlock_abi": 4,
+          "seccomp": true,
+          "network": "none",
+          "ipc_scoped": false
+        },
+        "unsupported": [
+          "signal_and_abstract_unix_scopes_require_abi_6"
+        ],
+        "dynamic": true,
+        "network_snapshot": [],
+        "audit": {
+          "enabled": true,
+          "mode": "events",
+          "records": 2,
+          "complete": true,
+          "path": "/tmp/cincta-f2-cli-tr25bdy2/unchanged/audit.jsonl",
+          "bytes": 367,
+          "max_bytes": 67108864,
+          "max_records": 1000000,
+          "limit_exceeded": false,
+          "delivery_pending": 0,
+          "native_open_fallbacks": 0
+        },
+        "workspace": {
+          "enabled": true,
+          "source": "/tmp/cincta-f2-cli-tr25bdy2/unchanged/source",
+          "root": "/tmp/cincta-preparation-8x3Npk/cincta-workspace-47RWJ2",
+          "tree": "/tmp/cincta-preparation-8x3Npk/cincta-workspace-47RWJ2/tree",
+          "retained": false,
+          "exported": true,
+          "executable": false,
+          "changes": 0,
+          "copied_files": 0,
+          "copied_bytes": 0
+        },
+        "resources": {
+          "enabled": false
+        }
+      },
+      "diff": {
+        "schema_version": 1,
+        "source": "/tmp/cincta-f2-cli-tr25bdy2/unchanged/source",
+        "workspace": "/tmp/cincta-preparation-8x3Npk/cincta-workspace-47RWJ2/tree",
+        "count": 0,
+        "exported": true,
+        "changes": []
+      },
+      "export_mode": 493,
+      "export_mtime_ns": 1700000000123456789,
+      "source_unchanged": true
+    }
+  ]
+}

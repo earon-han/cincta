@@ -152,6 +152,8 @@ static void payload(const struct config *cfg, int error_fd, int launch_gate)
     do { received = read(launch_gate, &permit, 1); } while (received < 0 && errno == EINTR);
     close(launch_gate);
     if (received != 1 || permit != 'G') child_error(error_fd, 125, "cgroup", "launch gate was not released");
+    if (caller_alive(cfg->caller_fd) != 1)
+        child_error(error_fd, 143, "caller", "original caller exited before execution");
     int kept[CINCTA_MAX_RULES + 2] = {error_fd, cfg->notify_transport};
     size_t kept_count = 2;
     if (cfg->policy_pinned) for (size_t i = 0; i < cfg->rule_count; ++i) kept[kept_count++] = cfg->rule_fds[i];
@@ -241,14 +243,16 @@ static int monitor_run(const struct config *cfg, int control)
     int broker_pidfd = -1; pid_t broker_pid = -1;
     int memory_channel[2] = {-1, -1}, validation_listener = -1;
     pid_t child;
-    int preserved[CINCTA_MAX_RULES + 3] = {control, result_get_fd(), cfg->state ? cfg->state->audit_fd : -1};
-    size_t preserved_count = 3;
+    int preserved[CINCTA_MAX_RULES + 4] = {control, result_get_fd(), cfg->state ? cfg->state->audit_fd : -1, cfg->caller_fd};
+    size_t preserved_count = 4;
     if (cfg->policy_pinned) for (size_t i = 0; i < cfg->rule_count; ++i) preserved[preserved_count++] = cfg->rule_fds[i];
     if (close_fds_preserve(preserved, preserved_count) < 0) {
         fprintf(stderr, "cincta: monitor descriptor cleanup failed\n"); return 125;
     }
     int signal_fd = cancellation_fd();
     if (signal_fd < 0) return finish(cfg, &caps, "setup_error", "signals", strerror(errno), 125, 0, false, false, true, start);
+    if (caller_alive(cfg->caller_fd) != 1)
+        return finish(cfg, &caps, "cancelled", "preparation", "original caller exited before execution", 143, SIGTERM, false, true, true, start);
     if (security_probe(&caps) < 0 || prctl(PR_SET_CHILD_SUBREAPER, 1) < 0)
         return finish(cfg, &caps, "setup_error", "probe", strerror(errno), 125, 0, false, false, true, start);
     if (caps.landlock_abi < (cfg->compat ? 3 : 6) || !caps.seccomp)
@@ -294,20 +298,22 @@ static int monitor_run(const struct config *cfg, int control)
         maintenance_fd = timer_create_ms(50, 50);
         if (maintenance_fd < 0) { setup_failed = true; snprintf(run_error, sizeof(run_error), "maintenance timer: %s", strerror(errno)); }
     }
-    if (!setup_failed) {
+    bool caller_cancelled = caller_alive(cfg->caller_fd) != 1;
+    if (!setup_failed && !caller_cancelled) {
         char permit = 'G';
         if (write(gate[1], &permit, 1) != 1) setup_failed = true;
     }
     close(gate[1]);
-    if (setup_failed) kill(child, SIGKILL);
+    if (setup_failed || caller_cancelled) kill(child, SIGKILL);
     /* Parent and child both set the same group, closing the launch race. */
     int pgerr = setpgid(child, child);
     if (pgerr < 0 && errno != EACCES && errno != ESRCH) {
         kill(child, SIGKILL);
     }
-    bool timed_out = false, cancelled = false;
-    int cancel_signal = 0;
+    bool timed_out = false, cancelled = caller_cancelled;
+    int cancel_signal = caller_cancelled ? SIGTERM : 0;
     for (;;) {
+        if (cancelled || caller_alive(cfg->caller_fd) != 1) { cancelled = true; cancel_signal = SIGTERM; break; }
         siginfo_t info = {0};
         int observed = waitid(P_PID, (id_t)child, &info, WEXITED | WNOHANG | WNOWAIT);
         if (observed == 0 && info.si_pid) break;
@@ -323,9 +329,11 @@ static int monitor_run(const struct config *cfg, int control)
             {.fd = maintenance_fd, .events = POLLIN},
             {.fd = signal_fd, .events = POLLIN},
             {.fd = broker_pidfd, .events = POLLIN},
-            {.fd = memory_channel[0], .events = POLLIN}};
+            {.fd = memory_channel[0], .events = POLLIN},
+            {.fd = cfg->caller_fd, .events = POLLIN}};
         int ready = poll(p, sizeof(p)/sizeof(p[0]), -1);
         if (ready < 0) { if (errno == EINTR) continue; broker_failed = true; break; }
+        if (p[8].revents) { cancelled = true; cancel_signal = SIGTERM; break; }
         if (p[0].revents) {
             unsigned char sig; ssize_t n = read(control, &sig, 1);
             if (n == 0 || n == 1) { cancelled = true; cancel_signal = n == 1 ? sig : SIGTERM; break; }
@@ -420,6 +428,8 @@ static int monitor_run(const struct config *cfg, int control)
     if (memory_channel[1] >= 0) close(memory_channel[1]);
     if (validation_listener >= 0) close(validation_listener);
     close(signal_fd);
+    if (cfg->caller_fd >= 0) close(cfg->caller_fd);
+    if (m.code && !strcmp(m.stage, "caller")) { cancelled = true; cancel_signal = SIGTERM; m.code = 0; }
     if (cfg->audit && cfg->state && cfg->state->delivery_pending) cfg->state->audit_failed = true;
     if (cfg->state) { cfg->state->dynamic_active = active && dynamic; cfg->state->protections_active = active; }
     result_set_phases(ready_ms - start, cleanup_start - ready_ms, now_ms() - cleanup_start);
@@ -464,14 +474,16 @@ int supervise(const struct config *cfg)
     sigaction(SIGCHLD, &dfl, NULL);
     sigset_t empty;
     sigemptyset(&empty); sigprocmask(SIG_SETMASK, &empty, NULL);
-    /* pidfd follows the calling process, not just the spawning thread (the
-     * latter would cause spurious cancellation with PR_SET_PDEATHSIG). */
-    pid_t caller = getppid();
-    /* A container's PID 1 has no visible parent (getppid()==0). Its runtime
-     * cancels it with signals; there is no in-namespace caller to watch. */
-    int caller_fd = caller > 0 ? (int)syscall(SYS_pidfd_open, caller, 0) : -1;
-    if (caller > 0 && caller_fd < 0) { perror("cincta: caller pidfd"); return 125; }
-    if (getppid() != caller) caught = SIGTERM;
+    /* Use the identity pinned before DNS/copying; reparenting must never
+     * redefine the caller. A private duplicate is owned by this function. */
+    int caller_fd = cfg->caller_fd >= 0 ? fcntl(cfg->caller_fd, F_DUPFD_CLOEXEC, 3) : -1;
+    if (cfg->caller_fd >= 0 && caller_fd < 0) { perror("cincta: caller pidfd"); return 125; }
+    if (caller_alive(caller_fd) != 1) {
+        if (caller_fd >= 0) close(caller_fd);
+        struct capabilities caps = {0};
+        return finish(cfg, &caps, "cancelled", "preparation", "original caller exited during preparation",
+                      143, SIGTERM, false, true, true, now_ms());
+    }
     if (prctl(PR_SET_CHILD_SUBREAPER, 1) < 0 || signal_children(false) < 0) {
         close(caller_fd); perror("cincta: recovery setup"); return 125;
     }
@@ -488,8 +500,13 @@ int supervise(const struct config *cfg)
         /* The guardian must observe EOF if CLI dies before D handover. This
          * child must never retain the guardian control-pipe write end. */
         if (cfg->preparation && cfg->preparation->control_fd >= 0) close(cfg->preparation->control_fd);
-        char permit; ssize_t n;
-        do { n = read(control[0], &permit, 1); } while (n < 0 && errno == EINTR);
+        char permit; ssize_t n = 0;
+        struct pollfd launch[] = {{.fd = control[0], .events = POLLIN | POLLHUP},
+                                  {.fd = cfg->caller_fd, .events = POLLIN}};
+        int ready;
+        do { ready = poll(launch, 2, -1); } while (ready < 0 && errno == EINTR);
+        if (ready > 0 && !launch[1].revents && caller_alive(cfg->caller_fd) == 1)
+            do { n = read(control[0], &permit, 1); } while (n < 0 && errno == EINTR);
         if (n != 1 || permit != 'G') {
             if (cfg->preparation && cfg->preparation->status_fd >= 0) {
                 char reply[1024];
@@ -513,13 +530,14 @@ int supervise(const struct config *cfg)
         _exit(monitor_run(cfg, control[0]));
     }
     close(control[0]);
-    bool handover_failed = false;
+    bool handover_failed = false, caller_cancelled = false;
     char handover_error[512] = {0};
     if (cfg->preparation && preparation_handover(cfg->preparation, monitor, handover_error, sizeof(handover_error)) < 0) {
         fprintf(stderr, "cincta: preparation handover: %s\n", handover_error);
         handover_failed = true;
         if (cfg->preparation->control_fd >= 0) { close(cfg->preparation->control_fd); cfg->preparation->control_fd = -1; }
     }
+    if (caller_alive(caller_fd) != 1) { handover_failed = true; caller_cancelled = true; }
     if (!handover_failed) {
         char permit = 'G';
         if (write(control[1], &permit, 1) != 1) handover_failed = true;
@@ -575,5 +593,5 @@ int supervise(const struct config *cfg)
             125, WIFSIGNALED(status) ? WTERMSIG(status) : 0, false, false, clean, recovery);
     }
     result_close();
-    return !handover_failed && WIFEXITED(status) ? WEXITSTATUS(status) : 125;
+    return (!handover_failed || caller_cancelled) && WIFEXITED(status) ? WEXITSTATUS(status) : 125;
 }

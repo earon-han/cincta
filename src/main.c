@@ -337,7 +337,7 @@ int main(int argc, char **argv)
     sigaction(SIGCHLD, &initial, NULL); sigaction(SIGTERM, &initial, NULL);
     sigaction(SIGINT, &initial, NULL); sigaction(SIGHUP, &initial, NULL);
     sigset_t initial_mask; sigemptyset(&initial_mask); sigprocmask(SIG_SETMASK, &initial_mask, NULL);
-    struct config cfg = { .timeout_ms = 30000, .memory_mb = 512,
+    struct config cfg = { .caller_fd = -1, .timeout_ms = 30000, .memory_mb = 512,
         .cpu_seconds = 30, .processes = 256, .nofile = 128,
         .audit_max_bytes = 64 * 1024 * 1024, .audit_max_records = 1000000 };
     char cwd[PATH_MAX];
@@ -367,6 +367,7 @@ int main(int argc, char **argv)
         return 0;
     }
     if (argc < 4 || strcmp(argv[1], "run")) { usage(stderr); return 125; }
+    if (caller_capture(&cfg.caller_fd) < 0) return bad("capture original caller", strerror(errno));
     if (!getcwd(cwd, sizeof(cwd))) return bad("getcwd failed", strerror(errno));
     cfg.cwd = cwd;
     cfg.env[cfg.env_count++] = "PATH=/usr/bin:/bin";
@@ -480,7 +481,7 @@ int main(int argc, char **argv)
             return bad("workspace parent must exist outside source", workspace_parent ? workspace_parent : "/tmp");
         if (workspace_layout_safe(protected, parent) < 0)
             return bad("workspace layout", "parent aliases source, source contains a submount, or mount metadata is unavailable");
-        if (preparation_start(&workspace, &resources, workspace_parent, &guard, error, sizeof(error)) < 0)
+        if (preparation_start(&workspace, &resources, workspace_parent, cfg.caller_fd, &guard, error, sizeof(error)) < 0)
             return bad("preparation guardian", error);
         cfg.preparation = &guard; cfg.resources = resources;
         if (workspace_prepare(workspace_source, preparation_workspace_parent(&guard), workspace_files, workspace_bytes, workspace, error, sizeof(error)) < 0) {
@@ -503,7 +504,7 @@ int main(int argc, char **argv)
         if (cfg.workspace_exec) cfg.rules[cfg.rule_count++] = (struct path_rule){workspace->tree, PATH_RX};
     }
     if (cfg.cgroup_parent && !cfg.preparation) {
-        if (preparation_start(&workspace, &resources, NULL, &guard, error, sizeof(error)) < 0) {
+        if (preparation_start(&workspace, &resources, NULL, cfg.caller_fd, &guard, error, sizeof(error)) < 0) {
             bad("preparation guardian", error); goto done;
         }
         cfg.preparation = &guard; cfg.resources = resources;
@@ -517,6 +518,14 @@ int main(int argc, char **argv)
             if (cfg.rules[i].mode == PATH_RW && realpath(cfg.rules[i].path, canonical) && overlap(canonical, protected)) {
                 bad("writable grant exposes cgroup delegation", cfg.rules[i].path); goto done;
             }
+    /* DNS/NSS can block independently of workspace/cgroup preparation. Keep
+     * an ancestor alive to cancel it when the original caller exits. */
+    if (cfg.network_allowlist && !cfg.preparation) {
+        if (preparation_start(&workspace, &resources, NULL, cfg.caller_fd, &guard, error, sizeof(error)) < 0) {
+            bad("preparation guardian", error); goto done;
+        }
+        cfg.preparation = &guard; cfg.resources = resources;
+    }
     if (cfg.network_allowlist && network_prepare(net_rules, net_count, &cfg.network, error, sizeof(error)) < 0) {
         bad("network policy", error); goto done;
     }
@@ -533,6 +542,9 @@ int main(int argc, char **argv)
     if (cgroup_grants_safe(&cfg) < 0) {
         snprintf(error, sizeof(error), "writable grant exposes a cgroup2 mount or mount metadata is unavailable");
         bad("cgroup isolation", error); goto done;
+    }
+    if (caller_alive(cfg.caller_fd) != 1) {
+        bad("caller exited during preparation", "execution was not started"); code = 143; goto done;
     }
     /* No trusted output is created until all object-identity and mount checks
      * pass. An unsafe output alias must not even create an empty source file. */
@@ -593,5 +605,6 @@ done:;
         code = 125;
     }
     network_destroy(cfg.network); broker_close(&cfg); security_release_policy(&cfg);
+    if (cfg.caller_fd >= 0) close(cfg.caller_fd);
     return code;
 }
