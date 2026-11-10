@@ -1,0 +1,15 @@
+/build/
+/build-*/
+/dist/
+__pycache__/
+*.pyc
+/reports/*
+!/reports/README.md
+!/reports/v02-summary.json
+/.local/
+/实施计划.txt
+/.env
+/.env.*
+!/.env.example
+.DS_Store
+._*

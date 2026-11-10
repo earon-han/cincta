@@ -1,0 +1,370 @@
+{
+  "schema_version": 1,
+  "record_type": "historical_validation_summary",
+  "version": "0.2.0-preview.1",
+  "validation_date": "2026-11-07",
+  "runtime_revision": "eebc7700ea70a6586007b7e38c126a9af88d507f",
+  "test_revision": "eebc7700ea70a6586007b7e38c126a9af88d507f",
+  "functional_counts": {
+    "PASS": 1144,
+    "FAIL": 0,
+    "BLOCKED": 40
+  },
+  "functional_environments": [
+    {
+      "counts": {
+        "PASS": 241,
+        "FAIL": 0,
+        "BLOCKED": 1
+      },
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+      "configuration": "arm64-linux68-vm",
+      "raw_report_sha256": "b06c8c59669ae0fa2f67d3ad89dbc594d2f8e45aeb850101acbe8901674a888a"
+    },
+    {
+      "counts": {
+        "PASS": 222,
+        "FAIL": 0,
+        "BLOCKED": 20
+      },
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+      "configuration": "arm64-linux68-docker",
+      "raw_report_sha256": "b1376c8041c28370ac31db0e6a3494745061dc15ebcefd1781eb9d990931d2b0"
+    },
+    {
+      "counts": {
+        "PASS": 312,
+        "FAIL": 0,
+        "BLOCKED": 0
+      },
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+      "configuration": "arm64-linux70-vm",
+      "raw_report_sha256": "76fb93c5d424097feaebe4288af675177084484aec86e0cd461e02f403601653"
+    },
+    {
+      "counts": {
+        "PASS": 293,
+        "FAIL": 0,
+        "BLOCKED": 19
+      },
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+      "configuration": "arm64-linux70-docker",
+      "raw_report_sha256": "a3b8254e9d9c5d0f02e2f27b1f47dddcaf3feaff6e5f96a6256af2bb3eefa9f7"
+    },
+    {
+      "counts": {
+        "PASS": 9,
+        "FAIL": 0,
+        "BLOCKED": 0
+      },
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+      "configuration": "arm64-linux68-docker-delegated/resources",
+      "raw_report_sha256": "cc56f57238fcf4c100f0d2fa32b2fe5208dda9f09576ada8f9e59976b2802082"
+    },
+    {
+      "counts": {
+        "PASS": 9,
+        "FAIL": 0,
+        "BLOCKED": 0
+      },
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+      "configuration": "arm64-linux70-docker-delegated/resources",
+      "raw_report_sha256": "af982f7c88f57f99e1d478c221cc3a07db4348bf1096479b9990ae77f862b726"
+    },
+    {
+      "counts": {
+        "PASS": 12,
+        "FAIL": 0,
+        "BLOCKED": 0
+      },
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+      "configuration": "arm64-linux68-docker-alias",
+      "raw_report_sha256": "a1535b2ca2c6549548c2f1eee8ad0f268cbee5bee3ac872d06637928c4d0f314"
+    },
+    {
+      "counts": {
+        "PASS": 12,
+        "FAIL": 0,
+        "BLOCKED": 0
+      },
+      "binary_sha256": "e4a33692eefc944b4e500872df9963d5a2610c084b79e0bb65ad82f44a2a9180",
+      "configuration": "arm64-linux70-docker-alias",
+      "raw_report_sha256": "781f5312ed20d360d042c52e9ad4a57bb86db1d0bece6d1361097e72439fadb1"
+    },
+    {
+      "counts": {
+        "PASS": 34,
+        "FAIL": 0,
+        "BLOCKED": 0
+      },
+      "binary_sha256": "04638adbe2cd0a52dd0aaf966d45b03874f64d30138a46964d7c190fd434d461",
+      "configuration": "x86-kernel",
+      "raw_report_sha256": "b6e7c7af6164de22f422b140af42d8c9f773f46ddcfd6b31840eb26515fdab19"
+    }
+  ],
+  "stress_counts": {
+    "PASS": 400,
+    "FAIL": 0,
+    "BLOCKED": 0
+  },
+  "stress": [
+    {
+      "counts": {
+        "PASS": 100,
+        "FAIL": 0,
+        "BLOCKED": 0
+      },
+      "median_ms": 233.8107855,
+      "p95_ms": 324.692627,
+      "configuration": "arm64-linux68-vm/stress",
+      "raw_report_sha256": "a6b8c764175f43552b460715a4a0f9bd4a2e0c66c46d7d843bc4cb7de08669ba"
+    },
+    {
+      "counts": {
+        "PASS": 100,
+        "FAIL": 0,
+        "BLOCKED": 0
+      },
+      "median_ms": 84.516126,
+      "p95_ms": 106.284629,
+      "configuration": "arm64-linux68-docker/stress",
+      "raw_report_sha256": "5c19a713b539ddedf91a6464fa301079228ce40bd07aaf391221729094ebf7e9"
+    },
+    {
+      "counts": {
+        "PASS": 100,
+        "FAIL": 0,
+        "BLOCKED": 0
+      },
+      "median_ms": 253.1107965,
+      "p95_ms": 488.639641,
+      "configuration": "arm64-linux70-vm/stress",
+      "raw_report_sha256": "6d11a7ff78342f6ef46a497643a4ad28184b66550c6972ea123b197bb18513e9"
+    },
+    {
+      "counts": {
+        "PASS": 100,
+        "FAIL": 0,
+        "BLOCKED": 0
+      },
+      "median_ms": 162.52837599999998,
+      "p95_ms": 258.409271,
+      "configuration": "arm64-linux70-docker/stress",
+      "raw_report_sha256": "de7ee866da8ff623bb8926bd364b21c7703c75a53f138f87ae7cf35fa28e6cee"
+    }
+  ],
+  "benchmark_sandbox_samples": 800,
+  "benchmark_direct_samples": 800,
+  "benchmark": [
+    {
+      "sandbox": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 5.1441455000000005,
+        "p95_ms": 22.432298,
+        "max_ms": 38.95828,
+        "phase_median_ms": {
+          "setup": 1.0,
+          "run": 0.0,
+          "cleanup": 0.0
+        }
+      },
+      "direct": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 0.874462,
+        "p95_ms": 3.02847,
+        "max_ms": 6.551443
+      },
+      "configuration": "arm64-linux68-vm/benchmark",
+      "raw_report_sha256": "95e21a577a8a24a579976e73362b016dfae66e08572f9f008c582792f1ae11f1"
+    },
+    {
+      "sandbox": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 4.888624,
+        "p95_ms": 10.939918,
+        "max_ms": 13.190886,
+        "phase_median_ms": {
+          "setup": 1.0,
+          "run": 0.0,
+          "cleanup": 0.0
+        }
+      },
+      "direct": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 1.5377355,
+        "p95_ms": 4.038307,
+        "max_ms": 5.541189
+      },
+      "configuration": "arm64-linux68-vm/concurrent",
+      "raw_report_sha256": "4720e76db020db955c8314858c9f32ec16c6610d0f1ad4b73bd4a2a2daaab27c"
+    },
+    {
+      "sandbox": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 1.0646915,
+        "p95_ms": 1.291839,
+        "max_ms": 2.187342,
+        "phase_median_ms": {
+          "setup": 0.0,
+          "run": 0.0,
+          "cleanup": 0.0
+        }
+      },
+      "direct": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 0.1938965,
+        "p95_ms": 0.271043,
+        "max_ms": 0.685253
+      },
+      "configuration": "arm64-linux68-docker/benchmark",
+      "raw_report_sha256": "b56160a206bf25d3982d9410e2115599995626be05c4120e2dcf23ced461e863"
+    },
+    {
+      "sandbox": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 2.3385095,
+        "p95_ms": 3.570514,
+        "max_ms": 4.925853,
+        "phase_median_ms": {
+          "setup": 1.0,
+          "run": 0.0,
+          "cleanup": 0.0
+        }
+      },
+      "direct": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 1.4080469999999998,
+        "p95_ms": 3.459639,
+        "max_ms": 4.197309
+      },
+      "configuration": "arm64-linux68-docker/concurrent",
+      "raw_report_sha256": "93a606f31a84c33d2dfcea55b25f08374e3782e594464d4278a62ac0804bb9d9"
+    },
+    {
+      "sandbox": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 1.0057705000000001,
+        "p95_ms": 1.791785,
+        "max_ms": 2.893693,
+        "phase_median_ms": {
+          "setup": 1.0,
+          "run": 0.0,
+          "cleanup": 0.0
+        }
+      },
+      "direct": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 0.246817,
+        "p95_ms": 0.422889,
+        "max_ms": 0.828822
+      },
+      "configuration": "arm64-linux70-vm/benchmark",
+      "raw_report_sha256": "25120b329e976dabccc1db183d024043bcf9579b0e35cebf8b7626b13c29a1ab"
+    },
+    {
+      "sandbox": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 7.8195975,
+        "p95_ms": 12.826647,
+        "max_ms": 16.445633,
+        "phase_median_ms": {
+          "setup": 2.0,
+          "run": 2.0,
+          "cleanup": 0.0
+        }
+      },
+      "direct": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 4.24816,
+        "p95_ms": 9.481418,
+        "max_ms": 14.590619
+      },
+      "configuration": "arm64-linux70-vm/concurrent",
+      "raw_report_sha256": "9bd4c323979e905d35f02f0c4d0c9b29cae56081e60f631e7155a7fe8e6f245d"
+    },
+    {
+      "sandbox": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 1.1686079999999999,
+        "p95_ms": 1.37518,
+        "max_ms": 1.773745,
+        "phase_median_ms": {
+          "setup": 0.0,
+          "run": 0.0,
+          "cleanup": 0.0
+        }
+      },
+      "direct": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 0.224595,
+        "p95_ms": 0.270792,
+        "max_ms": 0.969597
+      },
+      "configuration": "arm64-linux70-docker/benchmark",
+      "raw_report_sha256": "60b73854f0dafac10ccd91eb9ba6472365507944fc9d4daaa220cff35efabde9"
+    },
+    {
+      "sandbox": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 4.1042985000000005,
+        "p95_ms": 5.908013,
+        "max_ms": 6.378923,
+        "phase_median_ms": {
+          "setup": 1.0,
+          "run": 1.0,
+          "cleanup": 0.0
+        }
+      },
+      "direct": {
+        "samples": 100,
+        "failures": 0,
+        "median_ms": 1.208143,
+        "p95_ms": 2.274311,
+        "max_ms": 2.830222
+      },
+      "configuration": "arm64-linux70-docker/concurrent",
+      "raw_report_sha256": "33a7e5e5a4c2f434a0ddd7bb07410c3cadb6b83d538da88cac101af1c6379386"
+    }
+  ],
+  "supplementary_counts": {
+    "docker_exec": {
+      "PASS": 6,
+      "FAIL": 0,
+      "BLOCKED": 0
+    },
+    "scratch_delivery": {
+      "PASS": 5,
+      "FAIL": 0,
+      "BLOCKED": 0
+    }
+  },
+  "blocked_reasons": {
+    "old_kernel_strict_abi": 2,
+    "default_docker_no_cgroup_delegation": 12,
+    "default_docker_no_bind_fixtures": 24,
+    "outer_seccomp_prevents_inner_notification_observation": 2
+  },
+  "scope": "Historical measurements of the recorded revisions, not a test run of every later checkout. Counts are checks across configurations, not unique test cases. Supplementary, stress and benchmark samples are separate.",
+  "raw_evidence": "Raw reports and development logs are local artifacts excluded from Git and default distribution packages. Fresh reports are generated by scripts/validate.sh and uploaded separately by CI.",
+  "unverified_platforms": [
+    "native x86_64 hardware",
+    "musl"
+  ],
+  "external_audit": false,
+  "remote_ci_executed": false
+}

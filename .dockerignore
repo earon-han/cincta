@@ -1,0 +1,14 @@
+.git
+build
+build-*
+dist
+**/__pycache__
+reports/*
+!reports/README.md
+!reports/v02-summary.json
+.local
+实施计划.txt
+.env
+.env.*
+.DS_Store
+**/._*

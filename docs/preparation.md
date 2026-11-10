@@ -1,0 +1,45 @@
+# 准备阶段取消与可信交接
+
+工作区复制和cgroup配置发生在业务monitor启动前。CLI若在复制过程中被SIGKILL，单靠执行阶段的monitor无法删除尚未完成的快照。v0.2增加独立、可信的preparation guardian，覆盖这一阶段。
+
+## 明确时间语义
+
+`--timeout-ms` 是执行/monitor阶段的墙钟预算，**不包含**前面的DNS解析、工作区复制、cgroup准备等时间，也不覆盖业务退出后的diff/export和结果fsync。准备耗时由内部preparation_ms累计，再加入结果setup和elapsed；完成阶段处理时间包含在elapsed中，当前phase_ms未单列diff/export。准备阶段受到文件数/字节上限约束；取消或CLI死亡后，由guardian回收已经创建的私有对象。不把这些统计解释成整个启动到导出链路都已受硬超时约束。
+
+## 私有对象的创建归属
+
+使用workspace时，main先验证workspace-parent不在SOURCE内（含bind别名身份），SOURCE内无子mount，挂载元数据可读，再启动guardian。guardian先fork并放入独立进程组，然后**由guardian自身**在指定workspace-parent（默认/tmp）创建0700随机专属容器，保存真实device/inode，再向CLI发送READY。CLI此后把baseline/tree快照建在该容器里面。仅请求cgroup而没有workspace时也使用guardian，建立默认/tmp中的专属空容器并在结束时删除。
+
+不能仅根据某目录的名字前缀、UID、权限或ctime猜测创建归属。即使CLI死亡发生在`mkdtemp`创建快照目录后、`workspace_ctx.prepared`写入前，guardian仍可从自己亲手创建并固定身份的外层容器安全清理其内容。递归删除使用目录FD和NOFOLLOW，不跟随复制中或任务产生的外部符号链接，也不会扫描或删除相邻的同UID目录。
+
+cgroup也由guardian执行配置RPC，创建后先保存身份再ACK。这样CLI死在cgroup `mkdir`与共享ctx标记之间时，仍有存活的创建者负责收尾。guardian不会猜测某个PID前缀的cgroup是否归本次运行，也不会修改外层委派或全局控制器。
+
+## RPC与交接
+
+CLI与guardian之间使用CLOEXEC管道，固定小消息均小于PIPE_BUF；大块配置位于共享mmap请求槽，并通过release/acquire提交。workspace_ctx、resource_ctx也在共享mmap中，因此monitor/CLI恢复路径看到同一份身份与完成状态。
+
+消息包括：R请求cgroup配置，D向已创建的monitor移交，F正常结束准备监管。D到达后guardian确认monitor身份、ACK并退出。CLI检查ACK并实际wait回收guardian后，才向monitor发送G，允许它启动业务。handover失败一律不放行业务。
+
+如果CLI死于fork monitor与发D之间，monitor只会看见控制EOF，不会启动payload；guardian仍负责准备对象。若D已缓冲而CLI随后死亡，guardian先排空控制管道，再处理pidfd死亡/EOF，避免把已经移交的快照误删。monitor的EOF恢复路径等待guardian status管道真正EOF后，再根据共享ctx做幂等清理，避免两套清理同时猜测PID归属。
+
+正常执行完成后，monitor/CLI删除已确认为空的专属容器。`--workspace-keep`或失败后显式保留的诊断快照会连同外层0700容器保留，不会被handover误删。正常提前错误时，CLI先清理未移交快照和cgroup，再F结束guardian并unmap本进程的共享ctx。
+
+## FD、信号与依赖
+
+guardian仅保留自己的控制读端、status写端、CLI pidfd及标准流，关闭其他继承FD。它在supervise创建执行控制管道之前启动，因而不会持有将来CLI死亡检测所需的控制写端。main先补齐0/1/2，保证策略、result、audit和监管FD不落入业务会继承的标准槽位。
+
+guardian使用独立PGID并忽略意外终端取消信号，CLI仍可因SIGINT/SIGTERM/SIGHUP终止，guardian随后通过pidfd/EOF执行清理。RPC写入把SIGPIPE转换为可检查错误；继承忽略SIGCHLD时也会恢复可等待的子进程语义。
+
+依赖真实Linux pidfd、procfs、fork、共享匿名mmap、close_range和普通文件系统；这些均早于本项目最低内核提供。没有root、特权容器或user namespace要求。cgroup正例仍依赖明确委派，默认未委派环境应明确拒绝树级配置。
+
+guardian自身若在创建容器成功、身份登记和READY尚未完成的极小窗口被强杀，CLI无法安全猜测一个路径是否确实由它创建，因此不能保证该窗口绝无残留。READY之后的guardian单独故障可由存活CLI根据已确认身份回收空容器，本套件的guardian-death用例覆盖的是这一阶段。guardian与CLI同时被强杀、不可中断的内核/存储操作、宿主断电等场景也不作固定时间清理保证。不能用准备取消的回收测试宣称整个启动链路已获得端到端硬超时。
+
+实测入口：`python3 tests/preparation_test.py --binary build/cincta --report reports/preparation.json`。该测试实际观察512MiB源文件被复制到一半时杀死CLI/控制者，检查私有目录和guardian进程消失，同时验证源数据、外部链接目标和相邻目录保持不变。另以SIGSTOP固定guardian，在D已缓冲且控制者退出后恢复它，确认monitor仍拥有快照并负责清理。控制者退出会使已停止的独立进程组成为孤儿组，Linux可先自动发送SIGHUP/SIGCONT；因此测试允许随后显式SIGCONT发现进程已退出，但仍必须取得monitor确认交接成功的标记、两个进程实际消失、私有目录删除和源数据不变的全部证据，不以ESRCH本身判定成功。[进程退出时的孤儿进程组处理](https://sourceware.org/glibc/manual/latest/html_node/Termination-Internals.html)
+
+测试还覆盖handover、keep、准备失败及READY后的guardian异常，报告保存测试、二进制和源文件SHA256以对应实际运行版本。`--module-only`只运行模块部分，不可冒充完整CLI验收。
+
+## P10：原调用方在准备阶段退出
+
+CLI在解析运行任务及任何复制/DNS/cgroup准备前固定原调用进程的pidfd，重父化不能重新定义caller。guardian同时观察CLI与原caller；原caller死亡时用固定CLI pidfd发SIGKILL，并等CLI实际退出后才删除准备对象，避免复制/删除并发。启动前无副作用signal0探测确认外层允许pidfd_send_signal。D交接和ACK前caller死亡优先于缓冲命令；CLI、monitor及payload的启动屏障还会复核原caller。纯DNS准备也有guardian，未使用的空容器在D前删除。
+
+该身份是捕获到的父进程TGID，不是创建线程，线程退出不取消仍存活的调用进程。PID namespace没有可见父进程（getppid=0）时显式不绑定，包括PID1及部分docker exec子进程，仍由runtime信号控制；结果protections.caller_bound=false且unsupported列明原因。尚未创建结果文件的准备阶段取消可无JSON；守护者会清理已登记的准备对象。初次capture之前已经重父化的原始创建者无法由内核ppid反推，承诺从CLI启动捕获的身份开始。

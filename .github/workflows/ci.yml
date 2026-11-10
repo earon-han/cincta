@@ -1,0 +1,50 @@
+name: linux
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tests/build_release_test.py
+      - run: python3 tests/package_test.py
+      - run: make check
+      - run: make test-all TEST_LABEL=ci-native
+      - run: make BUILD=build-static STATIC=1
+      - run: sh scripts/package.sh build-static/cincta
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-${{ matrix.runner }}
+          path: |
+            reports/
+            dist/*
+  docker:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build --target test -t cincta-test .
+      - name: Default-security Docker acceptance
+        run: |
+          docker run --name cincta-ci --cap-drop ALL --security-opt no-new-privileges cincta-test
+      - name: Collect Docker reports
+        if: always()
+        run: |
+          status=0
+          mkdir -p reports || status=1
+          docker logs cincta-ci > reports/docker.log 2>&1 || status=1
+          docker cp cincta-ci:/src/reports/. reports/ > reports/docker-copy.log 2>&1 || status=1
+          docker inspect cincta-ci --format '{"image":"{{.Image}}","user":"{{.Config.User}}","privileged":{{.HostConfig.Privileged}},"cap_drop":{{json .HostConfig.CapDrop}},"security_opt":{{json .HostConfig.SecurityOpt}},"apparmor":"{{.AppArmorProfile}}","exit_code":{{.State.ExitCode}}}' > reports/docker-security.json 2> reports/docker-inspect.log || status=1
+          docker rm -f cincta-ci || status=1
+          exit "$status"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: docker-default-security
+          path: reports/
