@@ -23,7 +23,7 @@ make
 make check
 make test                         # 八套独立实核测试，报告不覆盖历史证据
 make test-legacy TESTFLAGS="--mode compat"  # 只运行原有基础回归
-make BUILD=build-static STATIC=1  # 独立静态交付产物
+make STATIC=1                    # 独立静态交付产物，默认build-static目录
 ./build-static/cincta probe
 ```
 
@@ -82,10 +82,12 @@ sh scripts/package.sh build-static/cincta
 
 PASS、FAIL、BLOCKED 分开记录。容器使用宿主内核；全系统 QEMU 可以运行真实目标架构内核，但必须标明仿真，不能叫作硬件原生测试。CI 配置存在不表示远端 CI 已运行。
 
-- [详细实施计划](docs/implementation-plan-v02.md) · [任务台账](docs/progress.md)
 - [设计与威胁模型](docs/design.md) · [独立设计审查](docs/v02-design-review.md)
+- [按进程阅读初始化、文件/网络访问及USER_NOTIF时序图](docs/sequence-diagrams.md)
 - [使用及结果契约](docs/usage.md) · [依赖](docs/dependencies.md) · [验证记录](docs/validation.md)
 - [最终代码审查](docs/final-code-review.md) · [逐项修复台账](docs/review-resolutions-v02.md)
 - [通用 Agent 示例](examples/agent.py) · [参考研究](docs/research.md) · [变更记录](CHANGELOG.md)
 
-许可证：[Apache-2.0](LICENSE)。独立实现，没有引入 Sandlock 源码或其运行依赖。
+原始测试日志和本地开发资料不进入Git或默认交付包；验证摘要见[验证记录](docs/validation.md)，报告生成与保存方式见[报告说明](reports/README.md)。
+
+许可证：[MIT](LICENSE)。

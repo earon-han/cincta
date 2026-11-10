@@ -10,6 +10,8 @@ jobs:
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
+      - run: python3 tests/build_release_test.py
+      - run: python3 tests/package_test.py
       - run: make BUILD=build-static STATIC=1 check
       - run: BUILD=build-static sh scripts/validate.sh release-candidate
       - run: sh scripts/package.sh build-static/cincta

@@ -8,7 +8,7 @@
 
 构建机需要 Linux、make、Python3、gzip、cpio、curl、timeout、qemu-system-x86_64，以及 `x86_64-linux-gnu-gcc` 和相应静态 libc/Linux UAPI 开发文件。普通 x86_64 构建机也可以把 `CINCTA_X86_CC=cc`。
 
-本次环境是本地 Lima `jiuwen-lite` 内的 Ubuntu24.04/aarch64，采用 QEMU8.2.2 TCG。官方 Alpine3.23 netboot 文件来自：
+历史验证的构建宿主为Ubuntu24.04/aarch64，采用QEMU8.2.2 TCG。官方 Alpine3.23 netboot 文件来自：
 
 - `https://dl-cdn.alpinelinux.org/alpine/v3.23/releases/x86_64/netboot/vmlinuz-virt`
 - `https://dl-cdn.alpinelinux.org/alpine/v3.23/releases/x86_64/netboot/initramfs-virt`
@@ -59,9 +59,9 @@ sh scripts/package.sh /tmp/cincta-x86-vm/build/cincta
 
 `CINCTA_PACKAGE_ARCH` 必须与二进制 ELF64 的 `e_machine` 相符；错误架构在打包前拒绝。交叉打包必须明确提供 `CINCTA_PACKAGE_VERSION`，并与 `include/cincta.h` 中的版本一致。脚本不执行异架构二进制，包内 `PACKAGE_INFO` 记录目标架构、构建机架构和版本来源；实际被测二进制身份以报告 SHA256 为准。原生打包不传这两个参数时，仍通过原生程序的 `--version` 读取版本。
 
-导出的源码目录没有 `.git` 时，`CINCTA_SOURCE_REVISION` 必须由导出者提供实际提交号，并核对包内 `SOURCE_SHA256`。`SOURCE_REVISION` 表示本次打包所用源码与文档的提交；`BINARY_SOURCE_REVISION` 表示二进制构建、受测核心对应的提交，默认与前者相同，也可通过 `CINCTA_BINARY_SOURCE_REVISION` 显式记录。只更新测试、文档和交付证据后重新打包既有受测二进制时，应分别记录这两个来源，并确认核心源文件指纹一致；不能把显式版本号当成构建来源验证。
+导出的源码目录没有 `.git` 时，`CINCTA_SOURCE_REVISION` 必须由导出者提供实际提交号，并核对包内 `SOURCE_SHA256`。`SOURCE_REVISION` 表示本次打包所用源码与文档的提交；`BINARY_SOURCE_REVISION` 表示二进制构建、受测核心对应的提交，未提供时为unknown，可通过 `CINCTA_BINARY_SOURCE_REVISION` 显式声明，并在PACKAGE_INFO中标为caller-declaration。只更新测试、文档和交付证据后重新打包既有受测二进制时，应分别记录这两个来源，并确认核心源文件指纹一致；不能把显式版本号当成构建来源验证。
 
-二进制包也包含原始《实施计划.txt》，`SOURCE_SHA256` 纳入该文件。包内 `BINARY_SHA256` 使用相对文件名 `cincta`，解包并进入包根目录后可直接执行 `sha256sum -c BINARY_SHA256` 核对实际程序。`SOURCE_SHA256` 对应打包时的源文件内容，应在相同来源的完整源码树中核对，不能在仅含程序、文档和示例的二进制包中校验未附带的 C 源码。打包本身不替代测试，也不把前一开发轮的二进制算作最终源码产物。
+默认交付包不包含本地开发计划、进度台账和原始运行报告。包内 `BINARY_SHA256` 使用相对文件名 `cincta`，解包并进入包根目录后可直接执行 `sha256sum -c BINARY_SHA256` 核对实际程序。`SOURCE_SHA256` 对应包内所附公开源码、测试、构建文件和文档，可直接在解包根目录核对。打包本身不替代测试，也不把前一开发轮的二进制算作最终源码产物。
 
 此轻量 guest 不运行 Docker，也没有完整发行版应用、长期压力或硬件性能结论。TCG 时钟/调度性能不作为产品暖启动预算依据。
 
@@ -70,3 +70,5 @@ sh scripts/package.sh /tmp/cincta-x86-vm/build/cincta
 扩展套件首轮曾报告31 PASS/1 FAIL：CLI SIGKILL返回137正确，但夹具未确认后代清理，旧夹具没有输出PID/结果细分诊断。随后八次完整boot均为32 PASS/0 FAIL；这些重复开发数据保存在 `reports/v02-x86-development-repeats/`，不能混入最终验收总数。
 
 复核发现夹具只等待PID文件存在，可能在业务已创建文件、尚未写入PID时读到空字符串并把它解析为0。已改为等待完整、带换行的正PID；新增一个延迟写PID的确定性夹具回归，并在超时用例中独立检查实际PID从procfs消失。最新34项开发轮通过。该修正证明夹具现在不会把空文件当PID；早期失败缺少细分证据，不据此捏造已经确认的产品故障根因。
+
+原始串口、构建和逐项报告是本地或CI单独保存的运行工件，不再随Git提交或默认二进制包分发；公开汇总见[验证说明](validation.md)。上述指纹对应历史冻结版，不是后来每次构建的固定输出。

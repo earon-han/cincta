@@ -1,12 +1,12 @@
 CC ?= cc
 PREFIX ?= /usr/local
 DESTDIR ?=
-BUILD ?= build
+STATIC ?= 0
+BUILD ?= $(if $(filter 1,$(STATIC)),build-static,build)
 CPPFLAGS += -Iinclude
 CFLAGS ?= -O2 -g
 CFLAGS += -std=c17 -Wall -Wextra -Wpedantic -Werror -fstack-protector-strong -fPIE
 LDFLAGS += -Wl,-z,relro,-z,now,-z,noexecstack
-STATIC ?= 0
 ifeq ($(STATIC),1)
 LDFLAGS += -static
 else
@@ -15,20 +15,41 @@ endif
 SOURCES := $(wildcard src/*.c)
 OBJECTS := $(patsubst src/%.c,$(BUILD)/%.o,$(SOURCES))
 
-.PHONY: all clean test test-all test-legacy check install package benchmark
+.PHONY: all clean test test-all test-legacy check install package benchmark FORCE
 all: $(BUILD)/cincta $(BUILD)/adversary
 
 $(BUILD):
 	mkdir -p $@
 
-$(BUILD)/%.o: src/%.c include/cincta.h | $(BUILD)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -MMD -MP -c $< -o $@
+# Record effective compiler/linker options even when callers reuse BUILD.
+# Keep the stamp unchanged for identical settings so incremental builds work.
+$(BUILD)/.build-config: export CONFIG_CC := $(CC)
+$(BUILD)/.build-config: export CONFIG_CPPFLAGS := $(CPPFLAGS)
+$(BUILD)/.build-config: export CONFIG_CFLAGS := $(CFLAGS)
+$(BUILD)/.build-config: export CONFIG_LDFLAGS := $(LDFLAGS)
+$(BUILD)/.build-config: export CONFIG_STATIC := $(STATIC)
+$(BUILD)/.build-config: FORCE | $(BUILD)
+	@printf '%s\n' "CC=$$CONFIG_CC" "CPPFLAGS=$$CONFIG_CPPFLAGS" "CFLAGS=$$CONFIG_CFLAGS" "LDFLAGS=$$CONFIG_LDFLAGS" "STATIC=$$CONFIG_STATIC" > $@.tmp
+	@cmp -s $@.tmp $@ && rm $@.tmp || mv $@.tmp $@
 
-$(BUILD)/cincta: $(OBJECTS)
-	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
+FORCE:
 
-$(BUILD)/adversary: tests/adversary.c | $(BUILD)
-	$(CC) $(CPPFLAGS) $(CFLAGS) $< $(LDFLAGS) -o $@
+# Compare saved settings per output as well as timestamps: older make versions
+# can observe the same timestamp for two builds that switch options quickly.
+$(BUILD)/%.o: src/%.c include/cincta.h $(BUILD)/.build-config FORCE | $(BUILD)
+	@if [ ! -f $@ ] || ! cmp -s $(BUILD)/.build-config $@.config || [ -n "$(filter-out FORCE $(BUILD)/.build-config,$?)" ]; then \
+	  $(CC) $(CPPFLAGS) $(CFLAGS) -MMD -MP -c $< -o $@ && cp $(BUILD)/.build-config $@.config; \
+	fi
+
+$(BUILD)/cincta: $(OBJECTS) $(BUILD)/.build-config FORCE
+	@if [ ! -f $@ ] || ! cmp -s $(BUILD)/.build-config $@.config || [ -n "$(filter-out FORCE $(BUILD)/.build-config,$?)" ]; then \
+	  $(CC) $(CFLAGS) $(OBJECTS) $(LDFLAGS) -o $@ && cp $(BUILD)/.build-config $@.config; \
+	fi
+
+$(BUILD)/adversary: tests/adversary.c $(BUILD)/.build-config FORCE | $(BUILD)
+	@if [ ! -f $@ ] || ! cmp -s $(BUILD)/.build-config $@.config || [ -n "$(filter-out FORCE $(BUILD)/.build-config,$?)" ]; then \
+	  $(CC) $(CPPFLAGS) $(CFLAGS) $< $(LDFLAGS) -o $@ && cp $(BUILD)/.build-config $@.config; \
+	fi
 
 ifneq ($(strip $(TESTFLAGS)),)
 # Backwards compatibility: TESTFLAGS targets the original suite only.
@@ -50,8 +71,9 @@ check: all
 benchmark: all
 	python3 scripts/benchmark.py --binary $(BUILD)/cincta
 
-package: all
-	sh scripts/package.sh $(BUILD)/cincta
+package:
+	$(MAKE) BUILD=build-release STATIC=1 all
+	sh scripts/package.sh build-release/cincta
 
 install: $(BUILD)/cincta
 	install -d $(DESTDIR)$(PREFIX)/bin

@@ -11,6 +11,12 @@ binary=${CINCTA_BINARY:-$build/cincta}
 helper=${CINCTA_HELPER:-$build/adversary}
 reports=${CINCTA_REPORT_DIR:-reports/v02-$label}
 mkdir -p "$reports"
+# Only discard this dispatcher's known outputs; preserve unrelated user files.
+# A crashed suite must never inherit a previous run's successful JSON.
+for name in probe summary legacy workspace-module preparation output-boundaries network independent file-audit resources; do
+  rm -f -- "$reports/$name.json"
+done
+rm -rf -- "$reports/independent-artifacts"
 failed=0
 run_suite() {
   "$@"

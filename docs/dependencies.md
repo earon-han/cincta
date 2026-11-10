@@ -60,4 +60,6 @@ metadata只支持固定rw根内由当前UID拥有的普通文件/目录：chmod�
 
 完整套件需要Python3标准库和C编译器（工作区ctypes适配、网络线程探针和文件审计探针）。Docker验证另外需要daemon/镜像来源；不是二进制运行依赖。全系统QEMU可验证目标架构的真实内核，但须标为TCG/仿真；qemu-user不能替代Landlock/seccomp验证。
 
-分发包包含CLI、文档、示例、许可证、SOURCE_REVISION、SOURCE_SHA256、BINARY_INFO及SHA256。没有.git的导出源码打包需显式CINCTA_SOURCE_REVISION。远端CI、推送、发布和外部审计必须实际完成才声明。
+构建与发布流程的额外回归使用Git（临时仓库、干净/脏树检查）及binutils/readelf（真实ELF静态/动态检查）。CI和Docker构建环境需提供这些工具；它们不是cincta运行依赖。入口为`python3 tests/build_release_test.py`和`python3 tests/package_test.py`。
+
+分发包包含静态CLI、公开源码与构建/测试文件、文档、示例、许可证、精选验证摘要及来源/SHA256信息，不包含本地计划和原始运行报告。Git工作树必须干净；没有.git的导出源码打包需显式提供完整40位CINCTA_SOURCE_REVISION。二进制来源未提供时为unknown；显式CINCTA_BINARY_SOURCE_REVISION仅记录调用方声明，不能当作验证。远端CI、推送、发布和外部审计必须实际完成才声明。

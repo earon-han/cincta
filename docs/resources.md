@@ -40,7 +40,7 @@ sudo sh scripts/validate_delegated_docker.sh IMAGE EXISTING_PARENT NEW_REPORT_DI
 
 `EXISTING_PARENT`必须是已委派给非root UID/GID的cgroup v2目录，已有`manager`子组，并已启用cpu、memory、pids控制器；parent和`manager/cgroup.procs`须允许该委派UID迁移任务。脚本核对这些前提，不创建委派、不启用controller、不更改已有cgroup所有权。它以委派UID/GID启动独立容器，使用`--cgroupns=host`和仅该委派子树的RW挂载，把本次容器的宿主PID迁移到已有manager后才放行测试。容器保持内置seccomp、docker-default AppArmor、`--cap-drop ALL`和no-new-privileges；缺少这些策略时拒绝验证。
 
-脚本只创建新的报告目录并为其设置委派UID/GID，结束时移除本次创建的容器，保存测试JSON、容器日志、实际安全配置、启动器哈希和退出码。开发验证已实际得到9 PASS、0 FAIL、0 BLOCKED，证据为[委派Docker资源报告](../reports/v02-delegated-docker-launcher-development/resources.json)及同目录部署记录；最终组合版本仍以统一验证报告为准。
+脚本只创建新的报告目录并为其设置委派UID/GID，结束时移除本次创建的容器，保存测试JSON、容器日志、实际安全配置、启动器哈希和退出码。开发验证已实际得到9 PASS、0 FAIL、0 BLOCKED，证据为[验证范围](validation.md)及同目录部署记录；最终组合版本仍以统一验证报告为准。
 
 ## 统计与清理
 

@@ -10,11 +10,11 @@ sha256sum -c BINARY_SHA256
 install -Dm755 cincta "$HOME/.local/bin/cincta"
 ```
 
-x86_64使用对应架构文件名。SOURCE_REVISION对应配套源码包，BINARY_SOURCE_REVISION对应实际受测核心；在配套源码根目录可用包内SOURCE_SHA256核对源码和证据。二进制包包含离线文档、示例及原始验证报告。
+x86_64使用对应架构文件名。包中附公开源码、构建脚本、测试、离线文档、示例和历史验证摘要；进入包根目录可用`sha256sum -c SOURCE_SHA256`核对所附源文件，不包含本地开发计划或原始运行报告。SOURCE_REVISION记录干净Git来源或导出者声明；BINARY_SOURCE_REVISION未提供时为unknown，不能由源码HEAD推定二进制来源。PACKAGE_INFO区分来源取得方式，显式声明也不等于构建验证。
 
 ## 安装和能力探测
 
-源码静态交付：`make BUILD=build-static STATIC=1`；安装：`make BUILD=build-static install PREFIX=$HOME/.local`。动态构建`make`需要兼容libc；静态启动器仍不包含业务程序自己的loader/库。下载包先在同目录校验SHA256，再安装对应架构。完整环境要求见 [dependencies.md](dependencies.md)。
+源码静态交付：`make STATIC=1`默认使用build-static目录；安装：`make BUILD=build-static STATIC=1 install PREFIX=$HOME/.local`。动态构建`make`默认使用build目录，需要兼容libc。`make package`另在build-release目录构建静态产物，Git工作树须干净；打包拒绝有ELF解释器的动态程序。静态启动器仍不包含业务程序自己的loader/库。下载包先在同目录校验SHA256，再安装对应架构。完整环境要求见 [dependencies.md](dependencies.md)。
 
 先运行`cincta probe`，检查schema_version、landlock_abi、landlock_errno、seccomp、seccomp_errno、strict_supported、compat_supported。缺少能力时probe仍可返回0，消费者必须检查字段。probe只验证基础原语；动态broker、metadata和资源会在请求时再次验证，失败不执行业务。
 
@@ -158,6 +158,6 @@ SIGTERM/SIGINT/SIGHUP取消CLI；运行阶段用pidfd/signalfd/timerfd监视业�
 
 业务终止后，可信记账最多有50ms收尾，delivery_pending未归零必须报告审计失败。发出SIGKILL或成为僵尸不代表完成回收。快照复制等准备耗时计入elapsed/setup，但当前--timeout-ms预算从monitor开始，复制不计入该墙钟预算。准备guard用于未移交monitor前的CLI异常退出清理；其最终覆盖与实测以验证报告为准，不把它说成硬全流程墙钟限制。
 
-`make test`默认六套独立测试；非空TESTFLAGS沿用legacy入口，明确只运行基础套件。`make test-all TEST_LABEL=linux-vm`强制完整验证。委派正例在已正确入组的launcher中设置`CINCTA_CGROUP_PARENT=/delegated/path`。报告位于reports/v02-标签，历史证据不覆盖。通用框架无关示例见 [agent.py](../examples/agent.py)。
+`make test`默认八套独立测试；非空TESTFLAGS沿用legacy入口，明确只运行基础套件。`make test-all TEST_LABEL=linux-vm`强制完整验证。委派正例在已正确入组的launcher中设置`CINCTA_CGROUP_PARENT=/delegated/path`。报告位于reports/v02-标签，是本地生成文件，不进入Git或默认交付包；需要留档时单独保存整个报告目录。通用框架无关示例见 [agent.py](../examples/agent.py)。
 
 调用方按CLI启动时可见的父进程TGID绑定。当前PID namespace隐藏父进程时（如部分docker exec/PID1），结果protections.caller_bound=false，并列出caller_lifetime_unavailable_in_pid_namespace；此时由容器runtime信号控制取消，不能声称自动观察外部调用方退出。
